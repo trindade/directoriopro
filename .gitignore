@@ -15,4 +15,5 @@
 /vendor/symfony
 /vendor/twig
 /app/config/parameters.ini
+.vimrc
 .DS_Store

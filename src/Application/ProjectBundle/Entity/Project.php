@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Application\ProjectBundle\Entity\Project
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ProjectRespository")
  */
 class Project
 {
@@ -88,7 +88,7 @@ class Project
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -108,7 +108,7 @@ class Project
     /**
      * Get user_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserId()
     {
@@ -128,7 +128,7 @@ class Project
     /**
      * Get category_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getCategoryId()
     {
@@ -148,7 +148,7 @@ class Project
     /**
      * Get type
      *
-     * @return integer 
+     * @return integer
      */
     public function getType()
     {
@@ -168,7 +168,7 @@ class Project
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -188,7 +188,7 @@ class Project
     /**
      * Get body
      *
-     * @return text 
+     * @return text
      */
     public function getBody()
     {
@@ -208,7 +208,7 @@ class Project
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -228,7 +228,7 @@ class Project
     /**
      * Get youtube_url
      *
-     * @return string 
+     * @return string
      */
     public function getYoutubeUrl()
     {
@@ -248,7 +248,7 @@ class Project
     /**
      * Get date
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDate()
     {
@@ -268,7 +268,7 @@ class Project
     /**
      * Get visits
      *
-     * @return integer 
+     * @return integer
      */
     public function getVisits()
     {
