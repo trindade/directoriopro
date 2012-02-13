@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Application\CityBundle\Entity\Country
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CountryRepository")
  */
 class Country
 {
@@ -38,7 +38,7 @@ class Country
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -48,7 +48,7 @@ class Country
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -58,7 +58,7 @@ class Country
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
