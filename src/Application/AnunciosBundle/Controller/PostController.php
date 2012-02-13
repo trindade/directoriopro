@@ -425,9 +425,8 @@ class PostController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('ApplicationAnunciosBunle:Post')
+        $entities = $em->getRepository('ApplicationAnunciosBundle:Post')
           ->search($search, $category_id, $location, $type);
-          //$qb->getQuery()->getResult();
 
         //$twig = $this->container->get('twig');
         //$twig->addExtension(new \Twig_Extensions_Extension_Text);
