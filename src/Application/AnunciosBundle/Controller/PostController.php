@@ -80,7 +80,7 @@ class PostController extends Controller
       $category_id = $request->query->get('c',0);
       $page = $request->query->get('page',1);
 
-      $query = $em->getRepository('ApplicationBundle:Post')->getPostsDQL($category_id);
+      $query = $em->getRepository('ApplicationAnunciosBundle:Post')->getPostsDQL($category_id);
 
       $adapter = new DoctrineORMAdapter($query);
 
