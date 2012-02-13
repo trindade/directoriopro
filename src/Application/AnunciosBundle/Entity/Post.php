@@ -1,5 +1,5 @@
-<?php 
- 
+<?php
+
 namespace Application\AnunciosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Application\AnunciosBundle\Entity\Post
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PostRepository")
  */
-class Post	    
+class Post
 {
     /**
      * @var integer $id
@@ -146,7 +146,7 @@ class Post
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -166,7 +166,7 @@ class Post
     /**
      * Get user_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserId()
     {
@@ -186,7 +186,7 @@ class Post
     /**
      * Get type
      *
-     * @return integer 
+     * @return integer
      */
     public function getType()
     {
@@ -206,7 +206,7 @@ class Post
     /**
      * Get category_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getCategoryId()
     {
@@ -226,7 +226,7 @@ class Post
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -246,7 +246,7 @@ class Post
     /**
      * Get body
      *
-     * @return text 
+     * @return text
      */
     public function getBody()
     {
@@ -266,7 +266,7 @@ class Post
     /**
      * Get date
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDate()
     {
@@ -286,7 +286,7 @@ class Post
     /**
      * Get featured
      *
-     * @return integer 
+     * @return integer
      */
     public function getFeatured()
     {
@@ -306,7 +306,7 @@ class Post
     /**
      * Get visible
      *
-     * @return integer 
+     * @return integer
      */
     public function getVisible()
     {
@@ -326,7 +326,7 @@ class Post
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -346,7 +346,7 @@ class Post
     /**
      * Get price
      *
-     * @return string 
+     * @return string
      */
     public function getPrice()
     {
@@ -366,7 +366,7 @@ class Post
     /**
      * Get location
      *
-     * @return string 
+     * @return string
      */
     public function getLocation()
     {
@@ -386,7 +386,7 @@ class Post
     /**
      * Get city_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getCityId()
     {
@@ -406,7 +406,7 @@ class Post
     /**
      * Get country_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getCountryId()
     {
@@ -426,7 +426,7 @@ class Post
     /**
      * Get visits
      *
-     * @return integer 
+     * @return integer
      */
     public function getVisits()
     {
@@ -446,7 +446,7 @@ class Post
     /**
      * Get company
      *
-     * @return integer 
+     * @return integer
      */
     public function getCompany()
     {
@@ -466,7 +466,7 @@ class Post
     /**
      * Get interested
      *
-     * @return integer 
+     * @return integer
      */
     public function getInterested()
     {
@@ -486,7 +486,7 @@ class Post
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
