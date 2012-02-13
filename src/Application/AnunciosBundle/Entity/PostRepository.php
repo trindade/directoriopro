@@ -61,6 +61,16 @@ class PostRepository extends EntityRepository
         }
     }
 
+    /**
+     * search
+     *
+     * @param mixed $search
+     * @param int $category_id
+     * @param mixed $location
+     * @param nt $type
+     * @access public
+     * @return Doctrine\Common\ArrayCollection
+     */
     public function search($search, $category_id, $location, $type)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -74,6 +84,6 @@ class PostRepository extends EntityRepository
         if ( $location ) $qb->andWhere("p.location = :location")->setParameter('location', $location);
         if ( $type ) $qb->andWhere('p.type = :type')->setParameter('type', $type);
 
-        return $qb->getResult();
+        return $qb->getQuery()->getResult();
     }
 }
