@@ -104,6 +104,8 @@
 
 <ul class="nav pull-right">
 	{% if app.session.get('name') %}
+		
+		<script>mpq.name_tag("{{ app.session.get('name') }}");</script>
 
 		
 		<li class="dropdown">
