@@ -1066,8 +1066,8 @@ class EventController extends Controller
 		
 		$users = array();
 		if( $users_aux ){
-			foreach( $users_aux as $user ){
-				$users[ $user->getCategoryId() ][] = $user;
+			foreach( $users_aux as $user_aux ){
+				$users[ $user_aux->getCategoryId() ][] = $user_aux;
 			}
 		}
 		
