@@ -429,6 +429,16 @@ input.xlarge{width:170px}
 	if( document.location.href.indexOf('updated') != -1 ){
 		$('#new_badge').delay(500).slideDown();
 	}
+	
+	
+	if( document.location.href.indexOf('#fblogin') != -1 ){
+		mpq.track("facebook connect complete");
+		
+	}else if( document.location.href.indexOf('#register') != -1 ){
+		mpq.track("register complete");
+	}
+	
+	
 
 	$('#btn_close').click(function(){
 		$('#new_badge').hide();
