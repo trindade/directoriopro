@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Application\UserBundle\Entity;
 
@@ -8,11 +8,12 @@ define('AVATAR_GRAVATAR',0);
 define('AVATAR_TWITTER',1);
 define('AVATAR_FACEBOOK',2);
 
-/**  
+/**
  * Application\UserBundle\Entity\User
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\UserBundle\Entity\UserRepository")
+ *
  */
 class User
 {
@@ -315,7 +316,7 @@ class User
     /**
      * Get id
      *
-     * @return intger 
+     * @return intger
      */
     public function getId()
     {
@@ -335,7 +336,7 @@ class User
     /**
      * Get admin
      *
-     * @return smallint 
+     * @return smallint
      */
     public function getAdmin()
     {
@@ -355,7 +356,7 @@ class User
     /**
      * Get facebook_id
      *
-     * @return bigint 
+     * @return bigint
      */
     public function getFacebookId()
     {
@@ -375,7 +376,7 @@ class User
     /**
      * Get category_id
      *
-     * @return smallint 
+     * @return smallint
      */
     public function getCategoryId()
     {
@@ -395,7 +396,7 @@ class User
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -415,7 +416,7 @@ class User
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -435,7 +436,7 @@ class User
     /**
      * Get pass
      *
-     * @return string 
+     * @return string
      */
     public function getPass()
     {
@@ -455,7 +456,7 @@ class User
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -475,7 +476,7 @@ class User
     /**
      * Get body
      *
-     * @return text 
+     * @return text
      */
     public function getBody()
     {
@@ -495,7 +496,7 @@ class User
     /**
      * Get location
      *
-     * @return string 
+     * @return string
      */
     public function getLocation()
     {
@@ -515,7 +516,7 @@ class User
     /**
      * Get date
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDate()
     {
@@ -535,7 +536,7 @@ class User
     /**
      * Get date_login
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDateLogin()
     {
@@ -555,7 +556,7 @@ class User
     /**
      * Get votes
      *
-     * @return integer 
+     * @return integer
      */
     public function getVotes()
     {
@@ -575,7 +576,7 @@ class User
     /**
      * Get visits
      *
-     * @return integer 
+     * @return integer
      */
     public function getVisits()
     {
@@ -595,7 +596,7 @@ class User
     /**
      * Get is freelance
      *
-     * @return integer 
+     * @return integer
      */
     public function getFreelance()
     {
@@ -615,7 +616,7 @@ class User
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -635,7 +636,7 @@ class User
     /**
      * Get linkedin_url
      *
-     * @return string 
+     * @return string
      */
     public function getLinkedinUrl()
     {
@@ -655,7 +656,7 @@ class User
     /**
      * Get twitter_url
      *
-     * @return string 
+     * @return string
      */
     public function getTwitterUrl()
     {
@@ -675,7 +676,7 @@ class User
     /**
      * Get forrst_url
      *
-     * @return string 
+     * @return string
      */
     public function getForrstUrl()
     {
@@ -695,7 +696,7 @@ class User
     /**
      * Get github_url
      *
-     * @return string 
+     * @return string
      */
     public function getGithubUrl()
     {
@@ -715,7 +716,7 @@ class User
     /**
      * Get dribbble_url
      *
-     * @return string 
+     * @return string
      */
     public function getDribbbleUrl()
     {
@@ -735,7 +736,7 @@ class User
     /**
      * Get flickr_url
      *
-     * @return string 
+     * @return string
      */
     public function getFlickrUrl()
     {
@@ -755,7 +756,7 @@ class User
     /**
      * Get youtube_url
      *
-     * @return string 
+     * @return string
      */
     public function getYoutubeUrl()
     {
@@ -765,7 +766,7 @@ class User
     /**
      * Get stackoverflow_url
      *
-     * @return string 
+     * @return string
      */
     public function getStackoverflowUrl()
     {
@@ -795,7 +796,7 @@ class User
     /**
      * Get vimeo_url
      *
-     * @return string 
+     * @return string
      */
     public function getVimeoUrl()
     {
@@ -815,7 +816,7 @@ class User
     /**
      * Get delicious_url
      *
-     * @return string 
+     * @return string
      */
     public function getDeliciousUrl()
     {
@@ -835,13 +836,13 @@ class User
     /**
      * Get pinboard_url
      *
-     * @return string 
+     * @return string
      */
     public function getPinboardUrl()
     {
         return $this->pinboard_url;
     }
-    
+
     /**
      * Set itunes_url
      *
@@ -855,13 +856,13 @@ class User
     /**
      * Get itunes_url
      *
-     * @return string 
+     * @return string
      */
     public function getItunesUrl()
     {
         return $this->itunes_url;
     }
-    
+
     /**
      * Set android_url
      *
@@ -875,7 +876,7 @@ class User
     /**
      * Get android_url
      *
-     * @return string 
+     * @return string
      */
     public function getAndroidUrl()
     {
@@ -895,7 +896,7 @@ class User
     /**
      * Get chrome_url
      *
-     * @return string 
+     * @return string
      */
     public function getChromeUrl()
     {
@@ -916,7 +917,7 @@ class User
     /**
      * Get masterbranch_url
      *
-     * @return string 
+     * @return string
      */
     public function getMasterbranchUrl()
     {
@@ -936,7 +937,7 @@ class User
     /**
      * Get ref_id
      *
-     * @return string 
+     * @return string
      */
     public function getRefId()
     {
@@ -956,7 +957,7 @@ class User
     /**
      * Get can_contact
      *
-     * @return string 
+     * @return string
      */
     public function getCanContact()
     {
@@ -976,7 +977,7 @@ class User
     /**
      * Get total_logins
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotalLogins()
     {
@@ -996,7 +997,7 @@ class User
     /**
      * Get avatar_type
      *
-     * @return integer 
+     * @return integer
      */
     public function getAvatarType()
     {
@@ -1008,27 +1009,27 @@ class User
      */
     public function setIp()
     {
-		// http://roshanbh.com.np/2007/12/getting-real-ip-address-in-php.html
-	    if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
-	    {
-	      $ip=$_SERVER['HTTP_CLIENT_IP'];
-	    }
-	    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
-	    {
-	      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
-	    }
-	    else
-	    {
-	      $ip=$_SERVER['REMOTE_ADDR'];
-	    }
-	
+        // http://roshanbh.com.np/2007/12/getting-real-ip-address-in-php.html
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+        {
+          $ip=$_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+        {
+          $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+          $ip=$_SERVER['REMOTE_ADDR'];
+        }
+
         $this->ip = $ip;
     }
 
     /**
      * Get ip
      *
-     * @return integer 
+     * @return integer
      */
     public function getIp()
     {
@@ -1048,7 +1049,7 @@ class User
     /**
      * Get unemployed
      *
-     * @return smallint 
+     * @return smallint
      */
     public function getUnemployed()
     {
@@ -1068,13 +1069,13 @@ class User
     /**
      * Get country_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getCountryId()
     {
         return $this->country_id;
     }
-    
+
     /**
      * Set city_id
      *
@@ -1088,7 +1089,7 @@ class User
     /**
      * Get city_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getCityId()
     {
@@ -1108,7 +1109,7 @@ class User
     /**
      * Get search_team
      *
-     * @return integer 
+     * @return integer
      */
     public function getSearchTeam()
     {
@@ -1128,7 +1129,7 @@ class User
     /**
      * Get newsletter
      *
-     * @return integer 
+     * @return integer
      */
     public function getNewsletter()
     {
@@ -1148,7 +1149,7 @@ class User
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -1158,50 +1159,51 @@ class User
     /**
      * Get gravatar id
      *
-     * @return string 
+     * @return string
      */
-	public function getGravatarId(){
-		return md5( $this->getEmail() );
-	}
+    public function getGravatarId()
+    {
+        return md5( $this->getEmail() );
+    }
 
     /**
      * Get avatar from gravatar
      *
-     * @return string 
+     * @return string
      */
     public function getAvatar($size = 'normal')
     {
-		switch( $size ){
-			case 'mini':
-				$size_int = 38;
-				$size_fb = 'small';
-				break;
-				
-			case 'normal':
-				$size_int = 50;
-				$size_fb = 'square';
-				break;
-				
-			case 'bigger':
-				$size_int = 80;
-				$size_fb = 'normal';
-				break;
-		}
+        switch ( $size ) {
+            case 'mini':
+                $size_int = 38;
+                $size_fb = 'small';
+                break;
 
-		switch( $this->getAvatarType() ){
-			case AVATAR_TWITTER:
-				$url = 'http://api.twitter.com/1/users/profile_image/' . $this->getTwitterUrl() . '?size=' . $size;
-				break;
-				
-			case AVATAR_FACEBOOK:
-				$url = 'http://graph.facebook.com/' . $this->getFacebookId() . '/picture?type=' . $size_fb;
-				break;
-				
-			default:
-				$url = "http://www.gravatar.com/avatar/" . $this->getGravatarId() . "?s=" . $size_int . '&d=http://dir.betabeers.com/bundles/applicationanuncios/images/default_avatar.png';
-				break;
-		}
-	
+            case 'normal':
+                $size_int = 50;
+                $size_fb = 'square';
+                break;
+
+            case 'bigger':
+                $size_int = 80;
+                $size_fb = 'normal';
+                break;
+        }
+
+        switch ( $this->getAvatarType() ) {
+            case AVATAR_TWITTER:
+                $url = 'http://api.twitter.com/1/users/profile_image/' . $this->getTwitterUrl() . '?size=' . $size;
+                break;
+
+            case AVATAR_FACEBOOK:
+                $url = 'http://graph.facebook.com/' . $this->getFacebookId() . '/picture?type=' . $size_fb;
+                break;
+
+            default:
+                $url = "http://www.gravatar.com/avatar/" . $this->getGravatarId() . "?s=" . $size_int . '&d=http://dir.betabeers.com/bundles/applicationanuncios/images/default_avatar.png';
+                break;
+        }
+
         return $url;
     }
 
@@ -1209,11 +1211,11 @@ class User
     /**
      * Get short name
      *
-     * @return string 
+     * @return string
      */
     public function getShortName()
     {
-		return current(explode(' ', $this->getName()));
-	}
+        return current(explode(' ', $this->getName()));
+    }
 
 }

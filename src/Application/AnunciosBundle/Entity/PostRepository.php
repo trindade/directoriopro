@@ -86,4 +86,24 @@ class PostRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+
+    /**
+     * findVisible
+     *
+     * @param int $max
+     * @access public
+     * @return Doctrine\Common\ArrayCollection
+     */
+    public function findVisible($max = 20)
+    {
+
+        return $this->em->createQueryBuilder()
+           ->add('select', 'p')
+           ->add('from', 'ApplicationAnunciosBundle:Post p')
+           ->add('where', 'p.visible = 1')
+           ->add('orderBy', 'p.id DESC')
+           ->setMaxResults($max)->getQuery()->getResult();
+    }
+
 }
