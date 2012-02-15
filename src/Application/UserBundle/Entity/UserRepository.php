@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  * @subpackage Entity
  * @author Eduardo Gulias <me@egulias.com>
  */
-class UserRepository extends EntityRespository
+class UserRepository extends EntityRepository
 {
     /**
      * findByEmailAndPsw

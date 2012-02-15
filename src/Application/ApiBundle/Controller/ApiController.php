@@ -97,16 +97,8 @@ class ApiController extends Controller
         $request = $this->getRequest();
         $callback = $request->query->get('callback');
 
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $qb = $em->createQueryBuilder()
-           ->add('select', 'p')
-           ->add('from', 'ApplicationAnunciosBundle:Post p')
-           ->add('where', 'p.visible = 1')
-           ->add('orderBy', 'p.id DESC')
-           ->setMaxResults(20);
-
-        $entities = $qb->getQuery()->getResult();
+        $entities = $this->getDoctrine()->getEntityManager()->getRepository('ApplicationAnunciosBundle:Post')
+            ->findVisible();
 
         $jobs = array();
         foreach ( $entities as $entity ) {
@@ -114,7 +106,8 @@ class ApiController extends Controller
                 'id' => $entity->getId(),
                 'title' => $entity->getTitle(),
                 'text' => nl2br( $entity->getBody() ),
-                'url' => $this->get('router')->generate('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true)
+                'url' => $this->get('router')
+                    ->generate('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true)
             );
         }
 
