@@ -399,7 +399,7 @@ class UserController extends Controller
 				if( !$pass ) $pass = md5( $entity->getDate()->format('Y-m-d H:i:s') );
 				setcookie("login", $entity->getId() . ':' . $pass, ( time() + 3600 * 24 * 31 ), "/");
 				
-	            return $this->redirect($this->generateUrl('user_edit', array('id' => $entity->getId())));
+	            return $this->redirect( $this->generateUrl('user_edit', array('id' => $entity->getId())) . '#register' );
 	        }
 		}
 
@@ -677,7 +677,7 @@ class UserController extends Controller
 				$user->setAvatarType(AVATAR_FACEBOOK);
 				$user->setSlug( getSlug( $user->getName() ) );
 				
-				$url = $this->generateUrl('user_edit');
+				$url = $this->generateUrl('user_edit') . '#fblogin';
 				
 			}else{
 				

@@ -69,4 +69,15 @@ class PageController extends Controller
     {
 		return array();
 	}
+	
+    /**
+     * users
+     *
+     * @Route("/users", name="page_users")
+     * @Template()
+     */
+    public function usersAction()
+    {
+		return array();
+	}
 }

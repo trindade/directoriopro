@@ -1,0 +1,114 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Opiniones sobre betabeers" %}
+
+
+{% block sidebar %}
+
+<b>Secciones</b><br/><br/>
+<ul>
+	<li><a href="{{ path('page_success') }}">Casos de éxito</a></li>
+	<li><a href="{{ path('page_faq') }}">Preguntas frecuentes</a></li>
+	<li><a href="{{ path('page_about') }}">Acerca de</a></li>
+	<li><a href="{{ path('page_opensource') }}">Open source</a></li>
+	<li><a href="{{ path('page_thanks') }}">Colaboradores</a></li>
+	<li><a href="{{ path('page_users') }}">Opiniones</a></li>
+</ul>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<style>
+.comments{background:#efefef;padding:15px;height:90px;margin-bottom:15px}
+	.comments div{display:none}
+	.comments div.active{display:block}
+
+.avatars{margin-bottom:15px}
+	.avatars img{width:50px;height:50px;margin:0 5px 5px;border:2px white solid}
+	.avatars a.active img{border:2px red solid}
+</style>
+
+
+
+<h1>Opiniones sobre betabeers</h1>
+
+<div class="comments">
+
+	<div id="comment_1" class="active">
+	Lo que más me gusta de betabeers es la capacidad de generar conversaciones muy serias sobre nuestro campo profesional en un ambiente muy poco serio y distendido, lo que proporciona una mayor confianza y acercamiento entre grandes profesionales, que en otros círculos no se da debido a la "distancia" entre ponentes y asistentes.
+	<br/><a href="http://dir.betabeers.com/user/jose-manuel-lucas-543/">José Manuel Lucas</a>
+	</div>
+
+	<div id="comment_2">
+	El dinamismo, los proyectos que se presentan. Conocer gente de mi sector.
+	<br/><a href="http://dir.betabeers.com/user/luis-diaz-del-dedo-184/">Luis Díaz del Dedo</a>
+	</div>
+	
+	<div id="comment_3">
+	Reunión con desarrolladores web con un nivel muy muy bueno
+	<br/><a href="http://dir.betabeers.com/user/jesus-perez-villegas-358/">Jesús Pérez Villegas</a>
+	</div>
+	
+	<div id="comment_4">
+	Me ha dado energias para emprender. He conocido a muchos profesionales realmente cualificados, así como los proyectos que llevan a cabo.
+	<br/><a href="http://dir.betabeers.com/user/jose-vicente-sogorb-moron-210/">José Vicente Sogorb</a>
+	</div>
+	
+	<div id="comment_5">
+	Las charlas técnicas son muy útiles y sirven como introducción a dichos temas. Así me inicié en los emuladores de android para hacer apps ;-)
+	<br/><a href="http://dir.betabeers.com/user/carlos-pena-gonzalez-122/">Carlos Peña González</a><br/>
+	</div>
+	
+	<div id="comment_6">
+	Me gusta:
+	- las cañas con networking
+	- compartir hallazgos (libros, herramientas, hacks)
+	- poder ofertar y recibir ofertas de trabajo freelance
+	- aportar y recibir ayuda de otros en los problemas tecnológicos
+	- estar enterado de eventos/cursos
+	<br/><a href="http://dir.betabeers.com/user/javier-miguel-479/">Javier Miguel</a><br/>
+	</div>
+	
+	<div id="comment_7">
+	Encontrarme con desarrolladores de alto nivel que tienen inquietudes y están deseosos de aprender más
+	<br/><a href="http://dir.betabeers.com/user/alex-andreu-sanchez-475/">Alex Andreu Sanchez</a>
+	</div>
+
+	<div id="comment_8">
+	He conocido a gente muy interesate, proyectos buenos y me encontré en un ambiente genial. Me gusta del evento que tiene un ambiente distendido y que la gente en general participa y aporta cosas
+	<br/><a href="http://dir.betabeers.com/user/christian-oliveira-105/">Christian Oliveira</a>
+	</div>
+	
+</div>
+
+<div class="avatars">
+	<a href="#" onmouseover="showComment(1)" id="avatar_1" class="active"><img src="http://api.twitter.com/1/users/profile_image/jmlweb?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(2)" id="avatar_2"><img src="http://api.twitter.com/1/users/profile_image/luisdiazdeldedo?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(3)" id="avatar_3"><img src="http://api.twitter.com/1/users/profile_image/jesusemi84?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(4)" id="avatar_4"><img src="http://api.twitter.com/1/users/profile_image/joviwap?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(5)" id="avatar_5"><img src="http://api.twitter.com/1/users/profile_image/wopper?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(6)" id="avatar_6"><img src="http://api.twitter.com/1/users/profile_image/javiermiguelg?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(7)" id="avatar_7"><img src="http://api.twitter.com/1/users/profile_image/alex_andreu?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(8)" id="avatar_8"><img src="http://api.twitter.com/1/users/profile_image/christian_wilde?size=bigger"/></a>
+</div>
+
+<a href="https://docs.google.com/spreadsheet/viewform?formkey=dDZ0dG9vUnYtbGk1UGdqRHBZeUFmcXc6MQ#gid=0" target="_blank" style="display:block;text-align:center;font-size:16px;font-weight:bold">¡Envía tu opinión sobre betabeers!</a>
+
+
+<script>
+function showComment(id){
+	$('.comments div').removeClass('active');
+	$('#comment_' + id).addClass('active');
+	$('.avatars a').removeClass('active');
+	$('#avatar_' + id).addClass('active');
+}
+</script>
+
+
+
+
+{% endblock %}
+

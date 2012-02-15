@@ -1,7 +1,7 @@
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 {% form_theme form 'ApplicationAnunciosBundle:Form:fields.html.twig' %}
 
-{% block title "Registrarme" %}
+{% block title "Registrate" %}
 
 {% block sidebar %}
 
@@ -14,7 +14,7 @@
 
 {% block content %}
 
-<h1>Registrarme</h1>
+<h1>Registrate</h1>
 
 
 
@@ -24,8 +24,6 @@
 
 	{{ form_row(form.email, { 'label': 'Email' }) }}
 	{{ form_row(form.pass, { 'label': 'Contraseña' }) }}
-	
-	<br/>
 	
 	<div class="control-group">
 		<label>Perfil</label>
