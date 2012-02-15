@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Application\EventBundle\Entity\Event
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\EventBundle\Entity\EventRepository")
  */
 class Event
 {
@@ -145,7 +145,7 @@ class Event
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -165,7 +165,7 @@ class Event
     /**
      * Get user_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserId()
     {
@@ -185,7 +185,7 @@ class Event
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -205,7 +205,7 @@ class Event
     /**
      * Get body
      *
-     * @return text 
+     * @return text
      */
     public function getBody()
     {
@@ -225,7 +225,7 @@ class Event
     /**
      * Get address
      *
-     * @return text 
+     * @return text
      */
     public function getAddress()
     {
@@ -252,7 +252,7 @@ class Event
     /**
      * Get date
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDate()
     {
@@ -272,7 +272,7 @@ class Event
     /**
      * Get date_start
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDateStart()
     {
@@ -292,7 +292,7 @@ class Event
     /**
      * Get date_end
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDateEnd()
     {
@@ -312,7 +312,7 @@ class Event
     /**
      * Get date_update
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDateUpdate()
     {
@@ -332,7 +332,7 @@ class Event
     /**
      * Get featured
      *
-     * @return integer 
+     * @return integer
      */
     public function getFeatured()
     {
@@ -352,7 +352,7 @@ class Event
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -372,7 +372,7 @@ class Event
     /**
      * Get location
      *
-     * @return string 
+     * @return string
      */
     public function getLocation()
     {
@@ -392,7 +392,7 @@ class Event
     /**
      * Get city_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getCityId()
     {
@@ -412,7 +412,7 @@ class Event
     /**
      * Get country_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getCountryId()
     {
@@ -432,7 +432,7 @@ class Event
     /**
      * Get visits
      *
-     * @return integer 
+     * @return integer
      */
     public function getVisits()
     {
@@ -452,7 +452,7 @@ class Event
     /**
      * Get users
      *
-     * @return integer 
+     * @return integer
      */
     public function getUsers()
     {
@@ -472,7 +472,7 @@ class Event
     /**
      * Get hashtag
      *
-     * @return string 
+     * @return string
      */
     public function getHashtag()
     {
@@ -492,7 +492,7 @@ class Event
     /**
      * Get resources
      *
-     * @return text 
+     * @return text
      */
     public function getResources()
     {
@@ -512,7 +512,7 @@ class Event
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -522,7 +522,7 @@ class Event
     /**
      * Get pretty date
      *
-     * @return string 
+     * @return string
      */
     public function getPrettyDate( $format = '%A %e %B %Y' )
     {
@@ -532,7 +532,7 @@ class Event
     /**
      * Get google calendar date start
      *
-     * @return string 
+     * @return string
      */
     public function getGDateStart()
     {
@@ -542,7 +542,7 @@ class Event
     /**
      * Get google calendar date end
      *
-     * @return string 
+     * @return string
      */
     public function getGDateEnd()
     {
