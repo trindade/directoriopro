@@ -31,4 +31,20 @@ class EventRepository extends EntityRepository
             ->add('orderBy', 'e.date_start ASC')
             ->setMaxResults($max)->getQuery()->getResult();
     }
+
+    /**
+     * findEventsByUser
+     *
+     * @param int $user_id
+     * @access public
+     * @return Doctrine\Common\ArrayCollection
+     */
+    public function findEventsByUser($user_id)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'u')
+            ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
+            ->andWhere('u.id = eu.user_id')
+            ->andWhere('eu.event_id = :id')->setParameter('id', intval($user_id))->getQuery()->getResult();
+    }
 }

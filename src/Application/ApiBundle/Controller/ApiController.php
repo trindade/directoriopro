@@ -124,18 +124,15 @@ class ApiController extends Controller
      */
     public function eventusersAction($id)
     {
-        $categories = array("Todos", "Programador frontend", "Programador backend", "Programador apps móvil", "Blogger", "Community manager", "Marketing", "SEO", "Diseñador", "Usabilidad", "Sysadmin", "Traductor", "Betatester", "Otros", "Maquetador");
+        $categories = array("Todos", "Programador frontend", "Programador backend",
+            "Programador apps móvil", "Blogger", "Community manager", "Marketing", "SEO",
+            "Diseñador", "Usabilidad", "Sysadmin", "Traductor", "Betatester", "Otros", "Maquetador");
 
         $request = $this->getRequest();
         $callback = $request->query->get('callback');
 
-        $em = $this->getDoctrine()->getEntityManager();
-        $qb = $em->createQueryBuilder();
-        $qb->add('select', 'u')
-           ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
-           ->andWhere('u.id = eu.user_id')
-           ->andWhere('eu.event_id = :id')->setParameter('id', $id);
-        $entities = $qb->getQuery()->getResult();
+        $entities = $this->getDoctrine()->getEntityManager()->getRepository('ApplicationEventsBundle:Event')
+            ->findEventsByUser($id);
         $users = array();
         foreach ( $entities as $entity ) {
             $users[] = array(

@@ -88,6 +88,13 @@ class PostRepository extends EntityRepository
     }
 
 
+    /**
+     * findVisible
+     *
+     * @param int $max
+     * @access public
+     * @return Doctrine\Common\ArrayCollection
+     */
     public function findVisible($max = 20)
     {
 
