@@ -32,7 +32,7 @@ class ApiController extends Controller
         $pass = $request->query->get('pass');
 
         $user = $this->getDoctrine()->getEntityManager()->getRepository('ApplicationUserBundle:User')
-            ->findByEmailAndPsw($email, $psw);
+            ->findByEmailAndPsw($email, $pass);
         if ( $user ) {
 
             $url = $user->getUrl();
@@ -131,7 +131,7 @@ class ApiController extends Controller
         $request = $this->getRequest();
         $callback = $request->query->get('callback');
 
-        $entities = $this->getDoctrine()->getEntityManager()->getRepository('ApplicationEventsBundle:Event')
+        $entities = $this->getDoctrine()->getEntityManager()->getRepository('ApplicationEventBundle:Event')
             ->findEventsByUser($id);
         $users = array();
         foreach ( $entities as $entity ) {

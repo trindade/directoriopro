@@ -22,7 +22,7 @@ class UserRepository extends EntityRepository
      * @access public
      * @return Application\UserBundle\Entity\User
      */
-    public function findByEmailAndPsw($email, $psw)
+    public function findByEmailAndPsw($email, $pass)
     {
 
         $query = $this->_em->createQuery("SELECT u FROM ApplicationUserBundle:User u
