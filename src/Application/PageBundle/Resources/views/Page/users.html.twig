@@ -22,7 +22,7 @@
 {% block content %}
 
 <style>
-.comments{background:#efefef;padding:15px;height:90px;margin-bottom:15px}
+.comments{background:#efefef;padding:15px;min-height:90px;margin-bottom:15px}
 	.comments div{display:none}
 	.comments div.active{display:block}
 
@@ -34,6 +34,21 @@
 
 
 <h1>Opiniones sobre betabeers</h1>
+
+
+<div class="avatars">
+	<a href="#" onmouseover="showComment(1)" id="avatar_1" class="active"><img src="http://api.twitter.com/1/users/profile_image/jmlweb?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(2)" id="avatar_2"><img src="http://api.twitter.com/1/users/profile_image/luisdiazdeldedo?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(3)" id="avatar_3"><img src="http://api.twitter.com/1/users/profile_image/jesusemi84?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(4)" id="avatar_4"><img src="http://api.twitter.com/1/users/profile_image/joviwap?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(5)" id="avatar_5"><img src="http://api.twitter.com/1/users/profile_image/wopper?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(6)" id="avatar_6"><img src="http://api.twitter.com/1/users/profile_image/javiermiguelg?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(7)" id="avatar_7"><img src="http://api.twitter.com/1/users/profile_image/alex_andreu?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(8)" id="avatar_8"><img src="http://api.twitter.com/1/users/profile_image/christian_wilde?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(9)" id="avatar_9"><img src="http://api.twitter.com/1/users/profile_image/povedica?size=bigger"/></a>
+	<a href="#" onmouseover="showComment(10)" id="avatar_10"><img src="http://api.twitter.com/1/users/profile_image/thanos_malkav?size=bigger"/></a>
+</div>
+
 
 <div class="comments">
 
@@ -82,20 +97,22 @@
 	<br/><a href="http://dir.betabeers.com/user/christian-oliveira-105/">Christian Oliveira</a>
 	</div>
 	
+	<div id="comment_9">
+	Aprender, descubrir, compartir, crear y disfrutar de unas cañitas, rodeados de una comunidad como Betabeers es una suerte. Deberían crearse más iniciativas como ésta. Felicidades ;-)
+	<br/><a href="http://dir.betabeers.com/user/pablo-poveda-389/">Pablo Poveda Ortega</a>
+	</div>
+	
+	<div id="comment_10">
+	Betabeers es sin duda alguna el lugar ideal para conocer gente relacionada con el mundo emprendedor, pero sobre todo, con el mundo de los de arrolladores web, móvil, etc.
+	Además, el ambiente distendido que se respira seas asistente o ponente anima mucho a repetir la asistencia ya que nunca se sabe donde puedes encontrar a tu futuro socio o persona que te pueda ayudar en tu actividad profesional.
+	En este sentido, es evidente que Betabeers te abre las puertas profesionalmente a un espectro amplio tanto de visiones empresariales, como de tecnologías y conocimientos actuales, lo que nunca está de más.
+	<br/><a href="http://dir.betabeers.com/user/daniel-gallego-vico-250/">Daniel Gallego Vico</a>
+	</div>
+	
 </div>
 
-<div class="avatars">
-	<a href="#" onmouseover="showComment(1)" id="avatar_1" class="active"><img src="http://api.twitter.com/1/users/profile_image/jmlweb?size=bigger"/></a>
-	<a href="#" onmouseover="showComment(2)" id="avatar_2"><img src="http://api.twitter.com/1/users/profile_image/luisdiazdeldedo?size=bigger"/></a>
-	<a href="#" onmouseover="showComment(3)" id="avatar_3"><img src="http://api.twitter.com/1/users/profile_image/jesusemi84?size=bigger"/></a>
-	<a href="#" onmouseover="showComment(4)" id="avatar_4"><img src="http://api.twitter.com/1/users/profile_image/joviwap?size=bigger"/></a>
-	<a href="#" onmouseover="showComment(5)" id="avatar_5"><img src="http://api.twitter.com/1/users/profile_image/wopper?size=bigger"/></a>
-	<a href="#" onmouseover="showComment(6)" id="avatar_6"><img src="http://api.twitter.com/1/users/profile_image/javiermiguelg?size=bigger"/></a>
-	<a href="#" onmouseover="showComment(7)" id="avatar_7"><img src="http://api.twitter.com/1/users/profile_image/alex_andreu?size=bigger"/></a>
-	<a href="#" onmouseover="showComment(8)" id="avatar_8"><img src="http://api.twitter.com/1/users/profile_image/christian_wilde?size=bigger"/></a>
-</div>
 
-<a href="https://docs.google.com/spreadsheet/viewform?formkey=dDZ0dG9vUnYtbGk1UGdqRHBZeUFmcXc6MQ#gid=0" target="_blank" style="display:block;text-align:center;font-size:16px;font-weight:bold">¡Envía tu opinión sobre betabeers!</a>
+<div style="text-align:center"><a href="https://docs.google.com/spreadsheet/viewform?formkey=dDZ0dG9vUnYtbGk1UGdqRHBZeUFmcXc6MQ#gid=0" class="btn btn-primary" target="_blank">¡Envía tu opinión sobre betabeers!</a></div>
 
 
 <script>
