@@ -18,6 +18,9 @@ class PlaceType extends AbstractType
             ->add('city_id')
             ->add('country_id')
             ->add('price')
+            ->add('phone')
+            ->add('twitter')
+            ->add('email')
         ;
     }
 

@@ -112,6 +112,27 @@ class Place
      */
     private $user_id;
 
+    /**
+     * @var integer $phone
+     *
+     * @ORM\Column(name="phone", type="integer", nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var integer $twitter
+     *
+     * @ORM\Column(name="twitter", type="string", length=20, nullable=true)
+     */
+    private $twitter;
+
+
+    /**
+     * @var string $email
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    private $email;
 
     /**
      * Get id
@@ -383,6 +404,67 @@ class Place
     public function getUserId()
     {
         return $this->user_id;
+    }
+
+
+    /**
+     * Set phone
+     *
+     * @param integer $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return integer 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set twitter
+     *
+     * @param string $twitter
+     */
+    public function setTwitter($twitter)
+    {
+        $this->twitter = $twitter;
+    }
+
+    /**
+     * Get twitter
+     *
+     * @return string 
+     */
+    public function getTwitter()
+    {
+        return $this->twitter;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
 }

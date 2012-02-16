@@ -102,12 +102,19 @@
 		<li><a href="#users" data-toggle="tab" id="tab_users">{{ entity.users }} apuntados</a></li>
 	{% endif %}
 	<li><a href="#map" data-toggle="tab" id="tab_map">Mapa</a></li>
+	{% if entity.twitter %}
+		<li><a href="#tweets" data-toggle="tab" id="tab_tweets">Tweets</a></li>
+	{% endif %}
 </ul>
 
 <div class="tab-content">
 
 <div class="tab-pane active" id="info">
-	{% if entity.price %}Precio: {{ entity.price }}<br/><br/>{% endif %}
+	{% if entity.price %}Precio: {{ entity.price }} &nbsp; &nbsp; &nbsp;{% endif %}
+	{% if entity.phone %}Telefono: {{ entity.phone }} &nbsp; &nbsp; &nbsp;{% endif %}
+	
+	<br/><br/>
+	
 	<pre>{{ entity.body }}</pre>
 	<br/>
 	<p>Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}">{{ user.name }}</a> el {{ entity.date|date('d/m/Y') }} - {{ entity.visits }} visitas</p>
@@ -139,6 +146,8 @@
 	<div id="map_canvas" style="width:500px;height:300px"></div>
 </div>
 
+<div class="tab-pane" id="tweets"></div>
+
 </div>
 
 {% endblock %}
@@ -156,5 +165,42 @@
 	$('#tab_map').click(function(){
 		getMap();
 	});
+	
+	
+	{% if entity.twitter %}
+	$('#tab_tweets').click(function(){
+		if( $('#tweets').html() == '' ){
+			$("#tweets").html( 'cargando...' );
+			
+			
+			$.ajax({
+				dataType: 'jsonp',
+				success: function(data){
+					html = '<ul>';
+					if( data.length ){
+					    $.each(data, function(i,item){
+
+					      html += '<li>' + replaceURLWithHTMLLinks( item.text ) + '<br/><br/></li>';
+
+					    });
+						html += '</ul>';
+						
+						$("#tweets").html(html);
+
+
+					}else{
+						$('#tweets').html('sin resultados');
+					}
+				},
+				type: 'GET',
+				url: 'https://api.twitter.com/1/statuses/user_timeline.json?include_entities=false&include_rts=false&count=10&screen_name={{ entity.twitter }}'
+			});
+			
+			
+			
+
+		}
+	});
+	{% endif %}
 	
 {% endblock %}
