@@ -98,7 +98,7 @@ class PostRepository extends EntityRepository
     public function findVisible($max = 20)
     {
 
-        return $this->em->createQueryBuilder()
+        return $this->_em->createQueryBuilder()
            ->add('select', 'p')
            ->add('from', 'ApplicationAnunciosBundle:Post p')
            ->add('where', 'p.visible = 1')
