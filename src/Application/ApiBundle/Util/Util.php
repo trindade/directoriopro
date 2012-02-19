@@ -2,8 +2,25 @@
 
 namespace Application\ApiBundle\Util;
 
+/**
+ * Utility class
+ *
+ * @package ApiBundle
+ * @subpackage Util
+ * @author Eduardo Gulias <me@egulias.com>
+ */
 class Util
 {
+    /**
+     * Slug generation method slugify
+     *
+     * @param string $str
+     * @param array $replace
+     * @param string $delimiter
+     * @static
+     * @access public
+     * @return string
+     */
     static public function slugify($str, array $replace = array(), $delimiter='-')
     {
         $r = array(' con ', ' de ', ' para ', ' y ', ' en ', ' of ');

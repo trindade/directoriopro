@@ -379,12 +379,12 @@ class EventController extends Controller
         $m_end = $request->request->get('m_end');
         $date_start = $entity->getDateStart();
         $date_end = $entity->getDateEnd();
-        $entity->setDateStart(  new \DateTime( $date_start->format('Y-m-d') . ' ' . $h_start . ":" . $m_start . ':00' ) );
-        $entity->setDateEnd(  new \DateTime( $date_end->format('Y-m-d') . ' ' . $h_end . ":" . $m_end . ':00' ) );
-        $entity->setDateUpdate( new \DateTime( '0000-00-00 00:00:00' ) );
+        $entity->setDateStart(new \DateTime( $date_start->format('Y-m-d') . ' ' . $h_start . ":" . $m_start . ':00' ) );
+        $entity->setDateEnd(new \DateTime( $date_end->format('Y-m-d') . ' ' . $h_end . ":" . $m_end . ':00' ) );
+        $entity->setDateUpdate(new \DateTime( '0000-00-00 00:00:00' ) );
 
         if ($form->isValid()) {
-            $entity->setSlug(Util::slugify( $entity->getTitle() . ' ' . $entity->getPrettyDate('%e %B %Y')));
+            $entity->setSlug(Util::slugify($entity->getTitle() . ' ' . $entity->getPrettyDate('%e %B %Y')));
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
