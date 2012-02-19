@@ -16,68 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 class PageController extends Controller
 {
     /**
-     * faq
+     * static page
      *
-     * @Route("/faq", name="page_faq")
-     * @Template()
+     * @Route("/{id}/", name="page_static")
      */
-    public function faqAction()
+    public function staticAction($id)
     {
-		return array();
-	}
-	
-    /**
-     * about
-     *
-     * @Route("/about", name="page_about")
-     * @Template()
-     */
-    public function aboutAction()
-    {
-		return array();
-	}
-	
-    /**
-     * opensource
-     *
-     * @Route("/opensource", name="page_opensource")
-     * @Template()
-     */
-    public function opensourceAction()
-    {
-		return array();
-	}
-	
-    /**
-     * thanks
-     *
-     * @Route("/thanks", name="page_thanks")
-     * @Template()
-     */
-    public function thanksAction()
-    {
-		return array();
-	}
-	
-    /**
-     * success
-     *
-     * @Route("/success", name="page_success")
-     * @Template()
-     */
-    public function successAction()
-    {
-		return array();
-	}
-	
-    /**
-     * users
-     *
-     * @Route("/users", name="page_users")
-     * @Template()
-     */
-    public function usersAction()
-    {
-		return array();
+        $respuesta = $this->render('ApplicationPageBundle:Page:'.$id.'.html.twig');
+        return $respuesta;
 	}
 }
