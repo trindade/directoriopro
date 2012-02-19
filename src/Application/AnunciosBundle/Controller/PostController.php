@@ -25,8 +25,6 @@ use Application\ApiBundle\Util\Util;
 
 define('CAT_OTHER',9);
 
-
-
 /**
  * Post controller.
  *
