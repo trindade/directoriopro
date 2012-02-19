@@ -43,7 +43,7 @@ class ProjectController extends Controller
 
         $q = $this->getDoctrine()
           ->getEntityManager()
-          ->getRepository('ApplicationBundle:Project')
+          ->getRepository('ApplicationProjectBundle:Project')
           ->getProjectsDQL($type,$category_id);
 
         $adapter = new DoctrineORMAdapter($q);

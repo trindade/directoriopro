@@ -8,8 +8,8 @@ use Doctrine\ORM\EntityRespository;
  * ProjectRepository
  *
  * @uses EntityRepository
- * @package ApplicationBundle
- * @subpackage Project
+ * @package ProjectBundle
+ * @subpackage Entity
  * @author Eduardo Gulias <me@egulias.com>
  */
 class ProjectRepository extends EntityRepository
