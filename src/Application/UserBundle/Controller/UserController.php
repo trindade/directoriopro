@@ -860,78 +860,93 @@ class UserController extends Controller
      */
     public function recommendAction($id)
     {
-    // esta logueado?
-    $session = $this->getRequest()->getSession();
-    $session_id = $session->get('id');
-    if ( !$session_id ) {
-      return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
-    }
+	    // esta logueado?
+	    $session = $this->getRequest()->getSession();
+	    $session_id = $session->get('id');
+	    if ( !$session_id ) {
+	      return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
+	    }
 
-    // existe usuario?
-        $em = $this->getDoctrine()->getEntityManager();
-    $user = $em->getRepository('ApplicationUserBundle:User')->find($id);
-        if (!$user) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
+	    // existe usuario?
+		$em = $this->getDoctrine()->getEntityManager();
+		$user = $em->getRepository('ApplicationUserBundle:User')->find($id);
+		if (!$user) {
+			throw $this->createNotFoundException('Unable to find User entity.');
+		}
 
-    // me quiero votar a mi mismo?
-    if ( $session_id == $id ) {
-      return $this->redirect($this->generateUrl('user_show', array('id' => $id, 'slug' => $user->getSlug())));
-    }
-
-
-
-    // setear comentario si ya he escrito anteriormente
-    $query = $em->createQuery('SELECT c FROM ApplicationUserBundle:Comment c WHERE c.from_id = :from_id AND c.to_id = :to_id');
-    $query->setMaxResults(1);
-    $query->setParameters(array(
-        'from_id' => $session_id,
-        'to_id' => $id
-    ));
-    $entity = current( $query->getResult() );
-
-    if ( !$entity ) {
-      $entity = new Comment();
-    }
-
-    $form = $this->createForm(new CommentType(), $entity);
-
-    $request = $this->getRequest();
-    if ($request->getMethod() == 'POST') {
-          $form->bindRequest($request);
-
-          if ($form->isValid()) {
+	    // me quiero votar a mi mismo?
+	    if ( $session_id == $id ) {
+	      return $this->redirect($this->generateUrl('user_show', array('id' => $id, 'slug' => $user->getSlug())));
+	    }
 
 
 
+	    // setear comentario si ya he escrito anteriormente
+	    $query = $em->createQuery('SELECT c FROM ApplicationUserBundle:Comment c WHERE c.from_id = :from_id AND c.to_id = :to_id');
+	    $query->setMaxResults(1);
+	    $query->setParameters(array(
+	        'from_id' => $session_id,
+	        'to_id' => $id
+	    ));
+	    $entity = current( $query->getResult() );
 
-        $entity->setFromId( $session_id );
-        $entity->setToId( $user->getId() );
-        $entity->setDate( new \DateTime("now") );
-        $em->persist($entity);
-        $em->flush();
+	    if ( !$entity ) {
+	      $entity = new Comment();
+		  $new = true;
+	    }
 
-        // guardar total recomendaciones
-        $query = $em->createQuery("SELECT COUNT(c) as total FROM ApplicationUserBundle:Comment c WHERE c.to_id = :id");
-        $query->setParameter('id', $id);
-        $votes = current($query->getResult());
+	    $form = $this->createForm(new CommentType(), $entity);
 
-        $user->setVotes( $votes['total'] );
-        $em->persist($user);
-        $em->flush();
+	    $request = $this->getRequest();
+	    if ($request->getMethod() == 'POST') {
+			$form->bindRequest($request);
+			if ($form->isValid()) {
+		        $entity->setFromId( $session_id );
+		        $entity->setToId( $user->getId() );
+		        $entity->setDate( new \DateTime("now") );
+		        $em->persist($entity);
+		        $em->flush();
 
+		        // guardar total recomendaciones
+		        $query = $em->createQuery("SELECT COUNT(c) as total FROM ApplicationUserBundle:Comment c WHERE c.to_id = :id");
+		        $query->setParameter('id', $id);
+		        $votes = current($query->getResult());
 
-        //return $this->redirect($this->generateUrl('user_comments'));
-        $url = $this->generateUrl('user_comment', array('user_id' => $id, 'comment_id' => $entity->getId() ));
-        return $this->redirect($url);
+		        $user->setVotes( $votes['total'] );
+		        $em->persist($user);
+		        $em->flush();
 
-          }
-      }
+				$url = $this->generateUrl('user_comment', array('user_id' => $id, 'comment_id' => $entity->getId() ),true);
+				if( isset( $new ) ){
+		        	// enviar email
+					$user_from = $em->getRepository('ApplicationUserBundle:User')->find($session_id);
+			        $toEmail = $user->getEmail();
+			        $email = $user_from->getEmail();
 
-    return array(
-      'form' => $form->createView(),
-      'user' => $user
-      );
+			        $header = 'From: ' . $email . " \r\n";
+			        $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
+			        $header .= "Mime-Version: 1.0 \r\n";
+			        $header .= "Content-Type: text/html; charset=utf-8";
+
+			        $mensaje = "Haz clic en el siguiente enlace para ver la recomendación<br/>" . " \r\n";
+			        $mensaje .= '<a href="' . $url . '" target="_blank">' . $url . '</a>';
+
+			        $subject = sprintf( "%s te ha recomendado en betabeers", $user_from->getName() );
+			        $result = @mail($toEmail, $subject, $mensaje, $header);
+		
+			        // backup
+			        @mail("gafeman@gmail.com", $subject, $mensaje, $header);
+				}
+	
+				// redirigir al comentario
+		        return $this->redirect($url);
+	          }
+	      }
+
+	    return array(
+	      'form' => $form->createView(),
+	      'user' => $user
+	      );
 
     }
 
@@ -1016,40 +1031,41 @@ class UserController extends Controller
      * User recommendation
      *
      * @Route("/{user_id}/comments/{comment_id}", name="user_comment")
-     * @Template("ApplicationUserBundle:User:comments.html.twig")
+     * @Template("ApplicationUserBundle:User:comment.html.twig")
      */
     public function commentAction($user_id, $comment_id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-    // existe usuario?
-    $user = $em->getRepository('ApplicationUserBundle:User')->find($user_id);
+    	// existe usuario?
+    	$user = $em->getRepository('ApplicationUserBundle:User')->find($user_id);
         if (!$user) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-    // existe comentario?
-    $query = $em->createQuery("SELECT u.name, u.category_id, u.slug, c.id, c.from_id, c.body, c.type, c.date FROM ApplicationUserBundle:User u, ApplicationUserBundle:Comment c WHERE u.id = c.from_id AND c.to_id = :to_id AND c.id = :id ORDER BY c.id DESC");
-    $query->setParameters(array(
-      'id' => $comment_id,
-      'to_id' => $user_id
-    ));
-    $comments = $query->getResult();
+	    // existe comentario?
+	    $query = $em->createQuery("SELECT u.name, u.category_id, u.slug, c.id, c.from_id, c.body, c.type, c.date FROM ApplicationUserBundle:User u, ApplicationUserBundle:Comment c WHERE u.id = c.from_id AND c.to_id = :to_id AND c.id = :id ORDER BY c.id DESC");
+	    $query->setParameters(array(
+	      'id' => $comment_id,
+	      'to_id' => $user_id
+	    ));
+	    $comments = $query->getResult();
         if (!$comments) {
             throw $this->createNotFoundException('Unable to find Comment entity.');
         }
 
-    $query = "SELECT COUNT(c.id) AS total FROM Comment c WHERE c.to_id = " . $user_id;
-    $db = $this->get('database_connection');
-    $result = $db->query($query)->fetch();
-    $total = $result['total'];
+	    $query = "SELECT COUNT(c.id) AS total FROM Comment c WHERE c.to_id = " . $user_id;
+	    $db = $this->get('database_connection');
+	    $result = $db->query($query)->fetch();
+	    $total = $result['total'];
 
-    return array(
-      'user' => $user,
-      'comments' => $comments,
-      'total' => $total
-      );
-  }
+	    return array(
+		  'comment_id' => $comment_id,
+	      'user' => $user,
+	      'comments' => $comments,
+	      'total' => $total
+	      );
+	  }
 
 
 
@@ -1167,7 +1183,7 @@ class UserController extends Controller
         if ( !$token ) $token = md5( $entity->getDate()->format('Y-m-d H:i:s') );
 
         $url = $this->generateUrl('user_forgotpass', array('token' => $token, 'id' => $entity->getId()),true);
-        $mensaje = "Haz clic en el suigiente enlace para cambiar tu contraseña<br/>" . " \r\n";
+        $mensaje = "Haz clic en el siguiente enlace para cambiar tu contraseña<br/>" . " \r\n";
         $mensaje .= '<a href="' . $url . '" target="_blank">' . $url . '</a>';
 
         $subject = "Cambiar contraseña";
