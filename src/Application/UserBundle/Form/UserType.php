@@ -22,6 +22,7 @@ class UserType extends AbstractType
             ->add('twitter_url')
             ->add('forrst_url')
             ->add('github_url')
+            ->add('bitbucket_url')
             ->add('dribbble_url')
             ->add('flickr_url')
             ->add('youtube_url')

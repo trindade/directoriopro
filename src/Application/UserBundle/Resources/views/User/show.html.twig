@@ -79,7 +79,7 @@
 
 
 <script>
-var linkedin_user, dribbble_user, flickr_user, github_user, forrst_user, stackoverflow_user, masterbranch_user, youtube_user, vimeo_user, android_user, itunes_user, chrome_user, twitter_user, delicious_user, pinboard_user;
+var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forrst_user, stackoverflow_user, masterbranch_user, youtube_user, vimeo_user, android_user, itunes_user, chrome_user, twitter_user, delicious_user, pinboard_user;
 </script>
 
 <style>
@@ -127,6 +127,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, forrst_user, stackov
 {% if entity.getForrstUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://forrst.com/people/{{ entity.getForrstUrl() }}"><img src="/bundles/applicationanuncios/images/social/forrst.png" width="26" height="26"/></a> {% endif %}
 
 {% if entity.getGithubUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://github.com/{{ entity.getGithubUrl() }}"><img src="/bundles/applicationanuncios/images/social/github.png" width="26" height="26"/></a> {% endif %}
+{% if entity.getBitbucketUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://bitbucket.org/{{ entity.getBitbucketUrl() }}"><img src="/bundles/applicationanuncios/images/social/bitbucket.png" width="26" height="26"/></a> {% endif %}
 {% if entity.getStackoverflowUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://stackoverflow.com/users/{{ entity.getStackoverflowUrl() }}"><img src="/bundles/applicationanuncios/images/social/stackoverflow.png" width="26" height="26"/></a> {% endif %}
 {% if entity.getMasterbranchUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://www.masterbranch.com/developer/{{ entity.getMasterbranchUrl() }}"><img src="/bundles/applicationanuncios/images/social/masterbranch.png" width="26" height="26"/></a> {% endif %}
 
@@ -159,11 +160,12 @@ var linkedin_user, dribbble_user, flickr_user, github_user, forrst_user, stackov
 		</ul>
 	</li>
 
-	{% if entity.githuburl or entity.stackoverflowurl or entity.masterbranchurl or entity.chromeurl or entity.androidurl or entity.itunesurl %}
+	{% if entity.githuburl or entity.bitbucketurl or entity.stackoverflowurl or entity.masterbranchurl or entity.chromeurl or entity.androidurl or entity.itunesurl %}
 		<li class="dropdown" data-dropdown="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Programador <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li id="tab_github" style="display:none"><a href="#github" data-toggle="tab" onclick="get_github();"><img src="/bundles/applicationanuncios/images/github.png" align="absmiddle"> Github</a></li>
+				<li id="tab_bitbucket" style="display:none"><a href="#bitbucket" data-toggle="tab" onclick="get_bitbucket();"><img src="/bundles/applicationanuncios/images/social/bitbucket.png" width="16" height="16" align="absmiddle"> Bitbucket</a></li>
 				<li id="tab_stackoverflow" style="display:none"><a href="#stackoverflow" data-toggle="tab" onclick="get_stackoverflow();"><img src="/bundles/applicationanuncios/images/stackoverflow.png" align="absmiddle"> Stackoverflow</a></li>
 				<li id="tab_itunes" style="display:none"><a href="#itunes" data-toggle="tab" onclick="get_itunes();"><img src="/bundles/applicationanuncios/images/itunes.png" align="absmiddle"> iPhone / iPad</a></li>
 				<li id="tab_android" style="display:none"><a href="#android" data-toggle="tab" onclick="get_android();"><img src="/bundles/applicationanuncios/images/android.png" align="absmiddle"> Android</a></li>
@@ -261,6 +263,9 @@ var linkedin_user, dribbble_user, flickr_user, github_user, forrst_user, stackov
 		<div id="github_graph"></div>
 		<ul id="github_projects" class="list"></ul>
 	</div>
+	<div class="tab-pane" id="bitbucket">
+		<ul id="bitbucket_projects" class="list"></ul>
+	</div>
 	<div class="tab-pane"v id="forrst">
 		<ul id="forrst_list" class="unstyled"></ul>
 	</div>
@@ -335,6 +340,11 @@ var linkedin_user, dribbble_user, flickr_user, github_user, forrst_user, stackov
 	{% if entity.githuburl %}
 		github_user = '{{ entity.githuburl }}';
 		$('#tab_github').show();
+	{% endif %}
+	
+	{% if entity.bitbucketurl %}
+		bitbucket_user = '{{ entity.bitbucketurl }}';
+		$('#tab_bitbucket').show();
 	{% endif %}
 
 	{% if entity.forrsturl %}

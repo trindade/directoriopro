@@ -154,6 +154,35 @@ function get_github(){
 	}
 }
 
+
+/* github */
+
+var bitbucket_load = false;
+
+function get_bitbucket(){
+	if( !bitbucket_load ){
+		$('#loader').show();
+		bitbucket_load = true;
+		$.ajax({
+			//data: options,
+			dataType: 'jsonp',
+			success: function(data){
+				$('#loader').hide();
+				
+				if( data.repositories.length ){
+				    $.each(data.repositories, function(i,item){
+				      $('<li><a href="' + item.website + '" target="_blank">' + item.name + '</a><br/>' + item.description + '</li>').appendTo("#bitbucket_projects");
+				    });
+				}else{
+					$('#bitbucket').html('no se han encontrado proyectos');
+				}
+			},
+			type: 'GET',
+			url: 'https://api.bitbucket.org/1.0/users/' + bitbucket_user
+		});
+	}
+}
+
 /* youtube */
 
 
@@ -483,6 +512,9 @@ function networks_tooltip(){
 				break;
 			case ( id.indexOf('masterbranch') > -1 ):
 				tooltip = 'masterbranch.com/developer/USUARIO';
+				break;
+			case ( id.indexOf('bitbucket') > -1 ):
+				tooltip = 'bitbucket.org/USUARIO';
 				break;
 		}
 		

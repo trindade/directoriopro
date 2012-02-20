@@ -160,6 +160,13 @@ class User
     private $github_url;
 
     /**
+     * @var string $bitbucket_url
+     *
+     * @ORM\Column(name="bitbucket_url", type="string", length=255, nullable=true)
+     */
+    private $bitbucket_url;
+
+    /**
      * @var string $dribbble_url
      *
      * @ORM\Column(name="dribbble_url", type="string", length=255, nullable=true)
@@ -701,6 +708,26 @@ class User
     public function getGithubUrl()
     {
         return $this->github_url;
+    }
+
+    /**
+     * Set bitbucket_url
+     *
+     * @param string $bitbucketUrl
+     */
+    public function setBitbucketUrl($bitbucketUrl)
+    {
+        $this->bitbucket_url = $bitbucketUrl;
+    }
+
+    /**
+     * Get bitbucket_url
+     *
+     * @return string
+     */
+    public function getBitbucketUrl()
+    {
+        return $this->bitbucket_url;
     }
 
     /**
