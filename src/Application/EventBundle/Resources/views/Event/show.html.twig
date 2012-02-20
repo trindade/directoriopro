@@ -175,7 +175,7 @@
 			<div id="coll{{ loop.index }}" class="accordion-body collapse">
 				<div class="accordion-inner">
 					{% for user in users_cat  %}
-						<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}" style="float:left;margin:0 10px 10px 0;width:240px"><img src="{{ user.getAvatar('normal') }}" width="24" height="24" style="width:24px;height:24px" align="absmiddle"/> {{ user.getName() }}</a>
+						<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}" style="float:left;margin:0 10px 10px 0;width:240px"><img src="{{ user.getAvatar('normal') }}" width="24" height="24" style="width:24px;height:24px" align="absmiddle"/> {{ user.getName() }} {% if user.searchteam %}<img src="{{ asset('bundles/applicationanuncios/images/search.png') }}" width="13" height="13" align="absmiddle"/>{% endif %}{% if user.freelance %}<img src="{{ asset('bundles/applicationanuncios/images/freelance.png') }}" width="13" height="13" align="absmiddle"/>{% endif %}{% if user.unemployed %}<img src="{{ asset('bundles/applicationanuncios/images/trabajo.png') }}" width="13" height="13" align="absmiddle"/>{% endif %}</a>
 					{% endfor %}
 				</div>
 			</div>
