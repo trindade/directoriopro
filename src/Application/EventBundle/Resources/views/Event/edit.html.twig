@@ -14,7 +14,6 @@ TEXTAREA.xlarge{width:430px}
 
 .dates input{width:80px}
 .dates select{width:60px}
-#application_eventbundle_eventtype_resources{height:70px}
 </style>
 
 {% if app.session.get('id') %}
@@ -87,9 +86,7 @@ TEXTAREA.xlarge{width:430px}
 
 	{{ form_row(edit_form.hashtag, { 'label': 'Hashtag' }) }}
 	
-	<div id="old" style="display:none">
-		{{ form_row(edit_form.resources, { 'label': 'Recursos' }) }}
-	</div>
+
 
 	<div class="form-actions">
 		<button type="submit" class="btn btn-primary">Guardar cambios</button> &nbsp;
@@ -118,9 +115,7 @@ autoGeo();
 $( ".dates input" ).datepicker({ firstDay: 1 });
 
 
-{% if pasado %}
-	$('#old').show();
-{% endif %}
+
 
 
 {% endblock %}

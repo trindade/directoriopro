@@ -119,69 +119,6 @@ class EventController extends Controller
     }
 
 
-    /**
-     * Lists all Event entities resources.
-     *
-     * @Route("/resources/", name="event_resources")
-     * @Template()
-     */
-    public function resourcesAction()
-    {
-
-        $request = $this->getRequest();
-        $page = $request->query->get('page');
-        if ( !$page ) $page = 1;
-
-        $em = $this->getDoctrine()->getEntityManager();
-
-
-
-        $query = $em->createQueryBuilder();
-        $query->add('select', 'e')
-           ->add('from', 'ApplicationEventBundle:Event e')
-           ->andWhere('e.date_update != :date')->setParameter('date', '0000-00-00 00:00:00')
-           ->add('orderBy', 'e.date_update DESC');
-
-
-        $adapter = new DoctrineORMAdapter($query);
-
-        $pagerfanta = new Pagerfanta($adapter);
-        $pagerfanta->setMaxPerPage(10); // 10 by default
-        $maxPerPage = $pagerfanta->getMaxPerPage();
-
-        $pagerfanta->setCurrentPage($page); // 1 by default
-        $entities = $pagerfanta->getCurrentPageResults();
-        $routeGenerator = function($page) {//, $category_id
-            $url = '?page='.$page;
-            return $url;
-        };
-
-        $view = new DefaultView();
-        $html = $view->render($pagerfanta, $routeGenerator);//, array('category_id' => (int)$category_id)
-
-
-        if ( $entities ) {
-            $total = count($entities);
-            $date_now = false;
-
-            for ( $i = 0; $i < $total; $i++ ) {
-
-                $date_current = $entities[$i]->getDateStart()->format('Y-m-d');
-                if ( $date_now != $date_current ) {
-                    $date_now = $date_current;
-                    $entities[$i]->date_now = $entities[$i]->getPrettyDate();
-                }else{
-                    $entities[$i]->date_now = false;
-                }
-
-
-            }
-        }
-
-
-
-        return array('pager' => $html, 'entities' => $entities);
-    }
 
 
     /**
@@ -381,7 +318,7 @@ class EventController extends Controller
         $date_end = $entity->getDateEnd();
         $entity->setDateStart(new \DateTime( $date_start->format('Y-m-d') . ' ' . $h_start . ":" . $m_start . ':00' ) );
         $entity->setDateEnd(new \DateTime( $date_end->format('Y-m-d') . ' ' . $h_end . ":" . $m_end . ':00' ) );
-        $entity->setDateUpdate(new \DateTime( '0000-00-00 00:00:00' ) );
+
 
         if ($form->isValid()) {
             $entity->setSlug(Util::slugify($entity->getTitle() . ' ' . $entity->getPrettyDate('%e %B %Y')));
@@ -500,10 +437,6 @@ class EventController extends Controller
                 $entity->setDateEnd(  new \DateTime( $date_end->format('Y-m-d') . ' ' . $h_end . ":" . $m_end . ':00' ) );
 
 
-                $date_update = $entity->getDateUpdate()->format('Y-m-d H:i:s');
-                if ( $date_update == '-0001-11-30 00:00:00' && $entity->getResources() ) {
-                    $entity->setDateUpdate( new \DateTime("now") );
-                }
 
 
                 if ($editForm->isValid()) {
@@ -820,37 +753,6 @@ class EventController extends Controller
     }
 
 
-    /**
-     * Feed Resources Event entities.
-     *
-     * @Route("/resources/feed", name="event_resources_feed", defaults={"_format"="xml"})
-     * @Template()
-     */
-    public function resourcesFeedAction()
-    {
-
-        $em = $this->getDoctrine()->getEntityManager();
-
-
-
-
-        $query = $em->createQueryBuilder()
-           ->add('select', 'e')
-           ->add('from', 'ApplicationEventBundle:Event e')
-           ->andWhere('e.date_update != :date')->setParameter('date', '0000-00-00 00:00:00')
-           ->add('orderBy', 'e.date_update DESC')
-           ->setMaxResults(10);
-
-
-        $entities = $query->getQuery()->getResult();
-
-
-
-        //$twig = $this->container->get('twig');
-        //$twig->addExtension(new \Twig_Extensions_Extension_Text);
-
-        return array('entities' => $entities);
-    }
 
 
     /**

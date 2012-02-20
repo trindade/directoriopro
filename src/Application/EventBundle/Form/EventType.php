@@ -30,7 +30,6 @@ class EventType extends AbstractType
             ->add('city_id')
             ->add('country_id')
             ->add('hashtag')
-            ->add('resources')
             //->add('visits')
 
 
