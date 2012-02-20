@@ -236,6 +236,11 @@
 			});
 		}
 	});
+	
+	
+	if( document.location.href.indexOf('users') != -1 ){
+		$('.tabs a[id=tab_users]').tab('show');
+	}
 
 	
 {% endblock %}
