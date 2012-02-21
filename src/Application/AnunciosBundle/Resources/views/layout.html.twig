@@ -248,20 +248,6 @@ $().ready(function(){
 
 	{% if app.session.get('name') %}
 		mpq.name_tag("{{ app.session.get('id') }}-{{ app.session.get('name') }}");
-	{% else %}
-
-		$("#lnk_login").click(function(){
-			mpq.track("link click login");
-		});
-		
-		$("#lnk_register").click(function(){
-			mpq.track("link click register");
-		});
-		
-		$("#lnk_fblogin").click(function(){
-			mpq.track("link click facebook");
-		});
-
 	{% endif %}
 
 
