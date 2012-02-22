@@ -71,7 +71,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 
 	
 	{% if app.session.get('name') %}
@@ -303,6 +303,14 @@
 			</div>
 		</div>
 		{% else %}
+		
+			<div style="background:#666;margin-bottom:1px;padding:5px;color:#fff">Desarrollo</div>
+			<div class="accordion-group">
+				<div class="accordion-heading group_edit">
+					<a href="http://betabeers.com/new" class="accordion-toggle" target="_blank">¿Qué quieres desarrollar?</a>
+				</div>
+			</div>
+		
 			<div style="margin-top:15px;border:1px #666 dotted;padding:10px;font-size:16px;text-align:center">
 				Para acceder a más recursos sobre diseño y<br/>desarrollo tienes que invitar a <b>{{ total }} personas</b><br/><br/>
 				<a href="{{ path('user_invite') }}" class="btn btn-primary btn-large">Invitar contactos</a>
@@ -310,6 +318,14 @@
 		{% endif %}
 	
 	{% else %}
+	
+		<div style="background:#666;margin-bottom:1px;padding:5px;color:#fff">Desarrollo</div>
+		<div class="accordion-group">
+			<div class="accordion-heading group_edit">
+				<a href="http://betabeers.com/new" class="accordion-toggle" target="_blank">¿Qué quieres desarrollar?</a>
+			</div>
+		</div>
+	
 		<div style="margin-top:15px;border:1px #666 dotted;padding:10px;font-size:16px;text-align:center">
 			Para acceder a más recursos sobre gestión, marketing,<br/>diseño y desarrollo tienes que estar registrado<br/><br/>
 			<a href="{{ path('user_fblogin') }}?back={{ share_url }}" class="btn btn-primary">Entra con facebook</a> &nbsp;
