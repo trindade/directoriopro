@@ -313,7 +313,14 @@ class UserController extends Controller
 
               return $this->redirect($url);
           }
-    }
+    }else{
+		$back = $request->query->get('back');
+	    if ( $back ) {
+	      $session = $this->getRequest()->getSession();
+	      $session->set('back', $back);
+	    }
+
+	}
 
         return array(
             'entity' => $entity,
@@ -388,7 +395,14 @@ class UserController extends Controller
 
               return $this->redirect( $this->generateUrl('user_edit', array('id' => $entity->getId())) . '#register' );
           }
-    }
+    }else{
+		$back = $request->query->get('back');
+	    if ( $back ) {
+	      $session = $this->getRequest()->getSession();
+	      $session->set('back', $back);
+	    }
+	
+	}
 
         return array(
             'entity' => $entity,
@@ -620,10 +634,15 @@ class UserController extends Controller
      */
     public function fbloginAction()
     {
+	
+	$request = $this->getRequest();
+	$back = $request->query->get('back');
+    if ( $back ) {
+      $session = $this->getRequest()->getSession();
+      $session->set('back', $back);
+    }
 
     require __DIR__ . '/../../../../vendor/facebook/examples/example.php';
-
-    $request = $this->getRequest();
 
     // login ok ?
     if ( isset( $user_profile['id'] ) ) {
