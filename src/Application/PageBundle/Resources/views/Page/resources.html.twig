@@ -233,7 +233,7 @@
 			</div>
 		</div>
 	</div>
-	{% if total < 0 %}
+	{% if total < 1 %}
 	
 		<div class="accordion-group">
 			<div class="accordion-heading group_edit">
@@ -304,7 +304,7 @@
 		</div>
 		{% else %}
 			<div style="margin-top:15px;border:1px #666 dotted;padding:10px;font-size:16px;text-align:center">
-				Para acceder a recursos sobre diseño y<br/>desarrollo tienes que invitar a <b>{{ total }} personas</b><br/><br/>
+				Para acceder a más recursos sobre diseño y<br/>desarrollo tienes que invitar a <b>{{ total }} personas</b><br/><br/>
 				<a href="{{ path('user_invite') }}" class="btn btn-primary btn-large">Invitar contactos</a>
 			</div>
 		{% endif %}
