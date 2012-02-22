@@ -180,7 +180,7 @@
 			<div id="coll{{ loop.index }}" class="accordion-body collapse">
 				<div class="accordion-inner">
 					{% for user in users_cat  %}
-						<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}" style="float:left;margin:0 10px 10px 0;width:240px"><img src="/bundles/applicationanuncios/images/search{% if !user.searchteam %}2{% endif %}.png" width="13" height="13" align="absmiddle"/><img src="/bundles/applicationanuncios/images/freelance{% if !user.freelance %}2{% endif %}.png" width="13" height="13" align="absmiddle"/><img src="/bundles/applicationanuncios/images/trabajo{% if !user.unemployed %}2{% endif %}.png" width="13" height="13" align="absmiddle"/> <img src="{{ user.getAvatar('normal') }}" width="24" height="24" style="width:24px;height:24px" align="absmiddle"/> {{ user.getName()|truncate(21) }}</a>
+						<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}" style="float:left;margin:0 10px 10px 0;width:240px"><img src="/bundles/applicationanuncios/images/search{% if !user.searchteam %}2{% endif %}.png" width="13" height="13" align="absmiddle"/><img src="/bundles/applicationanuncios/images/freelance{% if !user.freelance %}2{% endif %}.png" width="13" height="13" align="absmiddle"/><img src="/bundles/applicationanuncios/images/trabajo{% if !user.unemployed %}2{% endif %}.png" width="13" height="13" align="absmiddle"/> <img src="{{ user.getAvatar('normal') }}" width="24" height="24" style="width:24px;height:24px" align="absmiddle"/> {{ user.name|truncate(21) }}</a>
 					{% endfor %}
 				</div>
 			</div>
