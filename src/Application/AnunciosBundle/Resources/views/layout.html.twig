@@ -19,7 +19,10 @@
 	<title>{% block title %}{% endblock %} - {{sitename}}</title>
 
 	<meta name="google-site-verification" content="ggl4xKpndqsKTfoDqWE6jVaDAv2g_PRj1UIM64fs5Pc" />
+	
+	<!-- START FB META -->
 	<meta property="og:image" content="http://dir.betabeers.com/bundles/applicationanuncios/images/betalogo.png" />
+	<!-- END FB META -->
 	
 	{% if canonical_url is defined %}
 		<link rel="canonical" href="{{ canonical_url }}"/>
@@ -73,6 +76,7 @@
 			<li><a href="{{ path('user_comments_all') }}">Recomendaciones</a></li>
             <li class="divider"></li>
 			<li><a href="{{ path('test') }}">Tests</a></li>
+			<li><a href="{{ path('page_resources') }}">Recursos</a></li>
           </ul>
         </li>
 

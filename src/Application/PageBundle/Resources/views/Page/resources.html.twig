@@ -1,0 +1,334 @@
+{% set share_url = url('page_static', { 'id': 'resources' }) %}
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Recursos para startups" %}
+
+
+{% block sidebar %}
+
+<b>Compartir</b><br/><br/>
+
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-lang="es">Twittear</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<br/><br/>
+
+<script src="http://platform.linkedin.com/in.js" type="text/javascript"></script>
+<script type="IN/Share" data-counter="right"></script>
+
+
+<br/><br/>
+
+<iframe src="http://www.facebook.com/plugins/like.php?href={{ share_url }}&amp;send=false&amp;layout=button_count&amp;width=200&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
+
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+<h1>Recursos para startups</h1>
+
+
+<!-- in-->
+<div class="accordion" id="accordion">
+
+
+	<div style="background:#666;margin-bottom:1px;padding:5px;color:#fff">Gestión</div>
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll9">Gestion de proyectos</a>
+		</div>
+		<div id="coll9" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://teambox.com/">Teambox</a></li>
+					<li><a href="http://www.pivotaltracker.com/">Pivotal Tracker</a></li>
+					<li><a href="http://www.basecamphq.com/">Basecamp</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll1">Documentación</a>
+		</div>
+		<div id="coll1" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://docs.google.com/">Google docs</a></li>
+					<li><a href="http://evernote.com/">Evernote</a></li>
+					<li><a href="http://wufoo.com/">wufoo</a></li>
+					<li><a href="http://www.delicious.com/">Delicious</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+
+	
+	{% if app.session.get('name') %}
+	
+	
+
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll16">Compartir ficheros</a>
+		</div>
+		<div id="coll16" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://dropbox.com">Dropbox</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll18">Presentaciones</a>
+		</div>
+		<div id="coll18" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://prezi.com">Prezi</a></li>
+					<li><a href="http://slideshare.net/">Slideshare</a></li>
+					<li><a href="http://speakerdeck.com/">Speakerdeck.com</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll11">Feedback</a>
+		</div>
+		<div id="coll11" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://uservoice.com">Uservoice</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div style="background:#666;margin-bottom:1px;padding:5px;color:#fff">Marketing</div>
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll19">Estudio de mercado</a>
+		</div>
+		<div id="coll19" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://www.google.com/trends/">Google trends</a></li>
+					<li><a href="http://www.google.com/insights/search/">Google Insights</a></li>
+					<li><a href="http://es.semrush.com/es/">SEMRush</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll13">Social media</a>
+		</div>
+		<div id="coll13" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://hootsuite.com">Hootsuite</a></li>
+					<li><a href="http://socialbro.com">SocialBro</a></li>
+					<li><a href="http://bufferapp.com">Buffer</a></li>
+					<li><a href="http://followeye.com">Followeye</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll10">Listas de correo</a>
+		</div>
+		<div id="coll10" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://mailchimp.com/">Mailchimp</a></li>
+					<li><a href="http://www.madmimi.com/">Madmimi</a></li>
+					<li><a href="http://aws.amazon.com/es/ses/">Amazon Simple Email Service</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll6">Estadísticas</a>
+		</div>
+		<div id="coll6" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://www.google.com/analytics/">Analytics</a></li>
+					<li><a href="http://getclicky.com/">Clicky</a></li>
+					<li><a href="http://www.kissmetrics.com/">Kissmetrics</a></li>
+					<li><a href="http://mixpanel.com">Mixpanel</a></li>
+					<li><a href="http://www.mopapp.com">Mopapp</a></li>
+					<li><a href="http://crazyegg.com">Crazyegg</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll12">Publicidad</a>
+		</div>
+		<div id="coll12" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://adwords.google.es/">Adwords</a></li>
+					<li><a href="http://www.facebook.com/advertising/">Facebook ads</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll14">Afiliados</a>
+		</div>
+		<div id="coll14" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://www.geazen.es/">Geazen</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div style="background:#666;margin-bottom:1px;padding:5px;color:#fff">Diseño</div>
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll8">Landing pages</a>
+		</div>
+		<div id="coll8" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://launchrock.com/">Launchrock</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="accordion-group">
+		<div class="accordion-heading group_edit">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll15">Plantillas</a>
+		</div>
+		<div id="coll15" class="accordion-body collapse">
+			<div class="accordion-inner">
+				<ul>
+					<li><a href="http://themeforest.net/">Themeforest</a></li>
+					<li><a href="http://www.woothemes.com/">Woothemes</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	{% if total < 0 %}
+	
+		<div class="accordion-group">
+			<div class="accordion-heading group_edit">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll7">Prototipos</a>
+			</div>
+			<div id="coll7" class="accordion-body collapse">
+				<div class="accordion-inner">
+					<ul>
+						<li><a href="https://gomockingbird.com/">Web</a></li>
+						<li><a href="http://yeblon.com/androidmockup/">Android</a></li>
+						<li><a href="http://bit.ly/oOyXHx">iPhone</a></li>
+						<li><a href="http://keynotekungfu.com/">iPad</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading group_edit">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll5">Iconos</a>
+			</div>
+			<div id="coll5" class="accordion-body collapse">
+				<div class="accordion-inner">
+					<ul>
+						<li><a href="http://www.silkiconfinder.com/">Silk</a></li>
+						<li><a href="http://iconfinder.net/">Iconfinder</a></li>
+						<li><a href="http://glyphicons.com/">Glyphicons</a></li>
+						<li><a href="http://www.iconshock.com/iphone-icons/">Shock Iphone Icons</a></li>
+						<li><a href="http://metro.windowswiki.info/">Metro icons</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+		<div style="background:#666;margin-bottom:1px;padding:5px;color:#fff">Desarrollo</div>
+
+		<div class="accordion-group">
+			<div class="accordion-heading group_edit">
+				<a href="http://betabeers.com/new" class="accordion-toggle" target="_blank">¿Qué quieres desarrollar?</a>
+			</div>
+		</div>
+
+		<div class="accordion-group">
+			<div class="accordion-heading group_edit">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll4">Foros de ayuda</a>
+			</div>
+			<div id="coll4" class="accordion-body collapse">
+				<div class="accordion-inner">
+					<ul>
+						<li><a href="http://www.forosdelweb.com">Foros del web</a></li>
+						<li><a href="http://stackoverflow.com">Stackoverflow (inglés)</a></li>
+						<li><a href="http://ayudawordpress.com/foros/">Ayuda Wordpress</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-group">
+			<div class="accordion-heading group_edit">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coll2">Documentación</a>
+			</div>
+			<div id="coll2" class="accordion-body collapse">
+				<div class="accordion-inner">
+					<ul>
+						<li><a href="http://openlibra.com">Openlibra</a></li>
+						<li><a href="http://designshack.co.uk/articles/freebies/weekly-freebies-20-awesome-cheatsheets-for-designers-and-developers/">Cheatsheets</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		{% else %}
+			<div style="margin-top:15px;border:1px #666 dotted;padding:10px;font-size:16px;text-align:center">
+				Para acceder a recursos sobre diseño y<br/>desarrollo tienes que invitar a <b>{{ total }} personas</b><br/><br/>
+				<a href="{{ path('user_invite') }}" class="btn btn-primary btn-large">Invitar contactos</a>
+			</div>
+		{% endif %}
+	
+	{% else %}
+		<div style="margin-top:15px;border:1px #666 dotted;padding:10px;font-size:16px;text-align:center">
+			Para acceder a más recursos sobre gestión, marketing,<br/>diseño y desarrollo tienes que estar registrado<br/><br/>
+			<a href="{{ path('user_fblogin') }}?back={{ share_url }}" class="btn btn-primary">Entra con facebook</a> &nbsp;
+			<a href="{{ path('user_welcome') }}?back={{ share_url }}" class="btn">Registrate</a> &nbsp;
+			<a href="{{ path('user_login') }}?back={{ share_url }}" style="font-size:14px">Ya tengo cuenta</a>
+		</div>
+	{% endif %}
+
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block script_load %}
+
+	$(".accordion").collapse().css('height','auto');
+
+{% endblock %}
