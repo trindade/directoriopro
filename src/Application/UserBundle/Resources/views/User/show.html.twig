@@ -8,6 +8,12 @@
 
 {% block sidebar %}
 
+
+
+
+
+
+
 	{% if app.session.get('id') != entity.id %}
 		{% include "ApplicationAnunciosBundle:Form:contact.html.twig" %}
 		<a href="{{ path('user_recommend', { 'id': entity.id }) }}" class="btn">Recomendar</a>
@@ -17,27 +23,37 @@
 	<br/>
 	
 	
+	{% if entity.votes %}
 	
-	
-	{% if entity.votes or related_users %}
-	
-		{% if entity.votes %}
-			<div class="alert" style="padding:14px 0;width:179px;text-align:center;">
+		<div class="alert" style="padding:8px 0;width:179px;margin-bottom:15px;text-align:center">
 			<a href="{{ path('user_comments', { 'id': entity.id }) }}" style="color:black">
-				Recomendaciones
-				<b style="font-size:80px;display:block;text-align:center;line-height:80px">{{ entity.votes }}</b>
+				<b>{{ entity.votes }}</b> Recomendaciones
 			</a>
-			</div>
-		{% endif %}
+			
+			
+			{% if badges %}
+				<br/>
+			    {% for badge in badges %}
+					<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy" style="float:left;margin:11px 0 0 11px"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40"/></a>
+			    {% endfor %}
+				<br class="clear"/>
+			{% endif %}
+			
+			
+		</div>
+
+	{% endif %}
 	
-		{% if related_users %}
-			<b>Relacionados</b><br/><br/>
-		    {% for entity in related_users %}
-				<img src="{{ entity.getAvatar('mini') }}" width="35" height="35" style="float:left;margin-right:13px"/>
-		           <a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a><br class="clear"/><br/>
-		    {% endfor %}
-		{% endif %}
-	{% else %}
+
+
+	
+	
+
+
+
+	
+	
+	
 
 		<b>Compartir</b><br/><br/>
 	
@@ -53,7 +69,7 @@
 
 		<iframe src="http://www.facebook.com/plugins/like.php?href={{ share_url }}&amp;send=false&amp;layout=button_count&amp;width=200&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
 
-	{% endif %}
+
 
 
 
@@ -63,7 +79,7 @@
 
 {% block content %}
 
-
+<!--
 {% if app.session.get('name') == null %}
 	<div class="alert" style="font-size: 17px;">
 	
@@ -76,7 +92,7 @@
 	
 	</div>
 {% endif %}
-
+-->
 
 <script>
 var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forrst_user, stackoverflow_user, masterbranch_user, youtube_user, vimeo_user, android_user, itunes_user, chrome_user, twitter_user, delicious_user, pinboard_user;
@@ -92,53 +108,27 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
   <li><a href="{{ path('user_search') }}?c={{ entity.categoryid }}">{{ categories[ entity.categoryid ] }}</a></li>
 </ul>
 
-<div style="margin-bottom:15px;padding:12px;padding-bottom:11px;background:#000 url('/bundles/applicationanuncios/images/bgprofile.png') no-repeat left top;color:white;font-size:15px">
+<div style="font-size:15px;padding-bottom:15px">
 
 
+	
 
-<img src="{{ entity.getAvatar('bigger') }}" width="100" height="100" style="width:100px;height:100px;float:left;margin-right:15px"/>
+<img src="{{ entity.getAvatar('bigger') }}" style="width:75px;height:75px;float:left;margin-right:15px"/>
+
+<!--width:410px;overflow:hidden;-->
 
 
-<h1 style="margin-bottom:5px;color:white;font-size:35px;width:410px;overflow:hidden;height:37px"><div style="width:800px">{{ entity.name }}</div></h1>
+<h1 style="margin-bottom:0;font-size:25px;"><div style="width:800px">{{ entity.name }}</div></h1>
 <div style="padding-bottom:10px">
-{{ categories[ entity.categoryid ] }} en {{ entity.location }} 
-{% if entity.freelance %}
-	<span class="freelance">&#149; freelance</span>
-{% endif %}
+{{ categories[ entity.categoryid ] }}
+
+
+<br/>{{ entity.location }} 
 </div>
 
 
 
-<!--<span class="date">registrado desde {{ entity.date|date('d/m/Y') }} - {{ entity.visits }} visitas</span>-->
 
-
-
-
-
-
-
-
-<!--{% if entity.url %}<a rel="nofollow,noindex" target="_blank" href="{{ entity.url }}">Portafolio</a>{% endif %}-->
-{% if entity.getTwitterUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://twitter.com/{{ entity.getTwitterUrl() }}"><img src="/bundles/applicationanuncios/images/social/twitter.png" width="26" height="26"/></a> {% endif %}
-{% if entity.getLinkedinUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://es.linkedin.com/in/{{ entity.getLinkedinUrl() }}"><img src="/bundles/applicationanuncios/images/social/linkedin.png" width="26" height="26"/></a> {% endif %}
-
-{% if entity.getFlickrUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.flickr.com/photos/{{ entity.getFlickrUrl() }}"><img src="/bundles/applicationanuncios/images/social/flickr.png" width="26" height="26"/></a> {% endif %}
-{% if entity.getDribbbleUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://dribbble.com/{{ entity.getDribbbleUrl() }}"><img src="/bundles/applicationanuncios/images/social/dribbble.png" width="26" height="26"/></a> {% endif %}
-{% if entity.getForrstUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://forrst.com/people/{{ entity.getForrstUrl() }}"><img src="/bundles/applicationanuncios/images/social/forrst.png" width="26" height="26"/></a> {% endif %}
-
-{% if entity.getGithubUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://github.com/{{ entity.getGithubUrl() }}"><img src="/bundles/applicationanuncios/images/social/github.png" width="26" height="26"/></a> {% endif %}
-{% if entity.getBitbucketUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://bitbucket.org/{{ entity.getBitbucketUrl() }}"><img src="/bundles/applicationanuncios/images/social/bitbucket.png" width="26" height="26"/></a> {% endif %}
-{% if entity.getStackoverflowUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://stackoverflow.com/users/{{ entity.getStackoverflowUrl() }}"><img src="/bundles/applicationanuncios/images/social/stackoverflow.png" width="26" height="26"/></a> {% endif %}
-{% if entity.getMasterbranchUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://www.masterbranch.com/developer/{{ entity.getMasterbranchUrl() }}"><img src="/bundles/applicationanuncios/images/social/masterbranch.png" width="26" height="26"/></a> {% endif %}
-
-{% if entity.getYoutubeUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.youtube.com/{{ entity.getYoutubeUrl() }}"><img src="/bundles/applicationanuncios/images/social/youtube.png" width="26" height="26"/></a> {% endif %}
-{% if entity.getVimeoUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://vimeo.com/{{ entity.getVimeoUrl() }}"><img src="/bundles/applicationanuncios/images/social/vimeo.png" width="26" height="26"/></a> {% endif %}
-
-{% if entity.getDeliciousUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://delicious.com/{{ entity.getDeliciousUrl() }}"><img src="/bundles/applicationanuncios/images/social/delicious.png" width="26" height="26"/></a> {% endif %}
-{% if entity.getPinboardUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://pinboard.in/u:{{ entity.getPinboardUrl() }}"><img src="/bundles/applicationanuncios/images/social/pinboard.png" width="26" height="26"/></a> {% endif %}
-
-
-<br class="clear"/>
 
 </div>
 
@@ -148,7 +138,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 
 <ul id="tabs" class="nav nav-tabs">
-	<li class="dropdown" data-dropdown="dropdown">
+	<li class="dropdown active" data-dropdown="dropdown">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Información <b class="caret"></b></a>
 		<ul class="dropdown-menu">
 			<li><a href="#info" data-toggle="tab"><img src="/bundles/applicationanuncios/images/portafolio.png" align="absmiddle"> Descripción</a></li>
@@ -157,6 +147,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 				<li id="tab_delicious" style="display:none"><a href="#delicious" data-toggle="tab" onclick="get_delicious();"><img src="/bundles/applicationanuncios/images/delicious.png" align="absmiddle"> Delicious</a></li>
 				<li id="tab_pinboard" style="display:none"><a href="#pinboard" data-toggle="tab" onclick="get_pinboard();"><img src="/bundles/applicationanuncios/images/pinboard.png" align="absmiddle"> Pinboard</a></li>
 			{% endif %}
+			{% if entity.url %}<li><a href="{{ entity.url }}" target="_blank"><img src="/bundles/applicationanuncios/images/portafolio.png" align="absmiddle"> Portafolio</a></li>{% endif %}
 		</ul>
 	</li>
 
@@ -224,17 +215,38 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 	<div class="tab-pane active" id="info">
 
 
-		{% if badges %}
-			<div style="background:#E0F2FF;margin-top:-10px;padding-bottom:5px;margin-bottom:10px">
-				<img src="{{ asset('bundles/applicationanuncios/images/badges/trofeo.png') }}" width="40" height="40" style="float:left;margin:11px 0 0 11px"/>
-			    {% for badge in badges %}
-					<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy" style="float:left;margin:11px 0 0 11px"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40"/></a>
-			    {% endfor %}
-				<br class="clear"/>
+		{% if entity.searchteam or entity.freelance or entity.unemployed %}
+			<div class="alert" style="padding:10px;">
+				{% if entity.searchteam %}<img src="{{ asset('bundles/applicationanuncios/images/search.png') }}" width="13" height="13" align="absmiddle"/> Busca equipo &nbsp; &nbsp; {% endif %}
+				{% if entity.freelance %}<img src="{{ asset('bundles/applicationanuncios/images/freelance.png') }}" width="13" height="13" align="absmiddle"/> Freelance &nbsp; &nbsp; {% endif %}
+				{% if entity.unemployed %}<img src="{{ asset('bundles/applicationanuncios/images/trabajo.png') }}" width="13" height="13" align="absmiddle"/> Abierto a ofertas laborales{% endif %}
 			</div>
 		{% endif %}
 
+		
+		
+		<!--
+		{% if entity.getTwitterUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://twitter.com/{{ entity.getTwitterUrl() }}"><img src="/bundles/applicationanuncios/images/social/twitter.png" width="26" height="26"/></a> {% endif %}
+		{% if entity.getLinkedinUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://es.linkedin.com/in/{{ entity.getLinkedinUrl() }}"><img src="/bundles/applicationanuncios/images/social/linkedin.png" width="26" height="26"/></a> {% endif %}
 
+		{% if entity.getFlickrUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.flickr.com/photos/{{ entity.getFlickrUrl() }}"><img src="/bundles/applicationanuncios/images/social/flickr.png" width="26" height="26"/></a> {% endif %}
+		{% if entity.getDribbbleUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://dribbble.com/{{ entity.getDribbbleUrl() }}"><img src="/bundles/applicationanuncios/images/social/dribbble.png" width="26" height="26"/></a> {% endif %}
+		{% if entity.getForrstUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://forrst.com/people/{{ entity.getForrstUrl() }}"><img src="/bundles/applicationanuncios/images/social/forrst.png" width="26" height="26"/></a> {% endif %}
+
+		{% if entity.getGithubUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://github.com/{{ entity.getGithubUrl() }}"><img src="/bundles/applicationanuncios/images/social/github.png" width="26" height="26"/></a> {% endif %}
+		{% if entity.getBitbucketUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://bitbucket.org/{{ entity.getBitbucketUrl() }}"><img src="/bundles/applicationanuncios/images/social/bitbucket.png" width="26" height="26"/></a> {% endif %}
+		{% if entity.getStackoverflowUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://stackoverflow.com/users/{{ entity.getStackoverflowUrl() }}"><img src="/bundles/applicationanuncios/images/social/stackoverflow.png" width="26" height="26"/></a> {% endif %}
+		{% if entity.getMasterbranchUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://www.masterbranch.com/developer/{{ entity.getMasterbranchUrl() }}"><img src="/bundles/applicationanuncios/images/social/masterbranch.png" width="26" height="26"/></a> {% endif %}
+
+		{% if entity.getYoutubeUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.youtube.com/{{ entity.getYoutubeUrl() }}"><img src="/bundles/applicationanuncios/images/social/youtube.png" width="26" height="26"/></a> {% endif %}
+		{% if entity.getVimeoUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://vimeo.com/{{ entity.getVimeoUrl() }}"><img src="/bundles/applicationanuncios/images/social/vimeo.png" width="26" height="26"/></a> {% endif %}
+
+		{% if entity.getDeliciousUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://delicious.com/{{ entity.getDeliciousUrl() }}"><img src="/bundles/applicationanuncios/images/social/delicious.png" width="26" height="26"/></a> {% endif %}
+		{% if entity.getPinboardUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://pinboard.in/u:{{ entity.getPinboardUrl() }}"><img src="/bundles/applicationanuncios/images/social/pinboard.png" width="26" height="26"/></a> {% endif %}
+		
+		<br/><br/>
+		
+		-->
 
 		{% if entity.body %}
 			<pre>{{ entity.body}}</pre>
@@ -243,6 +255,31 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 		{% endif %}
 
 
+
+
+		{% if related_users %}
+			<br/>
+			<b>Perfiles relacionados</b><br/><br/>
+		    {% for entity in related_users %}
+				<div style="width:190px;height:55px;overflow:hidden;float:left;">
+					<img src="{{ entity.getAvatar('mini') }}" align="absmiddle" style="width:37px;height:37px;float:left;margin-right:7px"/>
+	           		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a><br/>
+					{{ categories[ entity.categoryid ] }}
+				</div>
+		    {% endfor %}
+		{% endif %}
+
+		{% if team_users %}
+			<br/>
+			<b>Perfiles relacionados</b><br/><br/>
+		    {% for entity in team_users %}
+				<div style="width:190px;height:55px;overflow:hidden;float:left;">
+					<img src="{{ entity.getAvatar('mini') }}" align="absmiddle" style="width:37px;height:37px;float:left;margin-right:7px"/>
+	           		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a><br/>
+					{{ categories[ entity.categoryid ] }}
+				</div>
+		    {% endfor %}
+		{% endif %}
 
 
 
@@ -260,8 +297,8 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 		<ul class="thumbnails" id="flickr_big"><li></li></ul>
 	</div>
 	<div class="tab-pane" id="github">
-		<div id="github_graph"></div>
-		<ul id="github_projects" class="list"></ul>
+		<div id="github_graph" style="float:right"></div>
+		<ul id="github_projects" class="list" style="float:left;width:300px"></ul>
 	</div>
 	<div class="tab-pane" id="bitbucket">
 		<ul id="bitbucket_projects" class="list"></ul>
@@ -282,10 +319,10 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 		<div id="vimeo_big"></div>
 	</div>
 	<div class="tab-pane"v id="android">
-		<ul id="android_list"></ul>
+		<div id="android_list"></div>
 	</div>
 	<div class="tab-pane" id="itunes">
-		<ul id="itunes_list"></ul>
+		<div id="itunes_list"></div>
 	</div>
 	<div class="tab-pane" id="chrome">
 		<ul id="chrome_list"></ul>

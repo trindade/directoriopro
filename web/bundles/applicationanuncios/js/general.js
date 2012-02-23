@@ -128,8 +128,12 @@ function get_github(){
 							github_langs_values[item.language] = 1;
 						  }
 					  }
+					
+					  html = '<li><a href="' + item.url + '" target="_blank">' + item.name;
+					  if( item.language ) html += ' (' + item.language + ')';
+					  html += '</a></li>';
 
-				      $('<li><a href="' + item.url + '" target="_blank">' + item.name + ' (' + item.language + ')</a><br/>' + item.description + '</li>').appendTo("#github_projects");
+				      $(html).appendTo("#github_projects"); //<br/>' + item.description + '
 
 				    });
 					
@@ -141,7 +145,7 @@ function get_github(){
 					}
 					
 					
-					url = 'https://chart.googleapis.com/chart?cht=p&chd=t:' + github_langs_values_aux.join(',') + '&chs=300x150&chl=' + github_langs.join('|');
+					url = 'https://chart.googleapis.com/chart?cht=p&chd=t:' + github_langs_values_aux.join(',') + '&chs=220x150&chl=' + github_langs.join('|');
 					$('#github_graph').html('<img src="' + url + '"/>');
 					
 				}else{
@@ -556,7 +560,7 @@ function get_chrome(){
 	
 	*/
 	
-	$('#chrome').html('<div style="text-align:center"><a href="https://chrome.google.com/webstore/search?q=' + chrome_user + '" target="_blank">Ver extensiones de chrome</a></div>');
+	$('#chrome').html('<a href="https://chrome.google.com/webstore/search?q=' + chrome_user + '" target="_blank" style="font-size:14px;text-align:center;font-weight:bold;display:block;padding:20px 0">Ver extensiones de chrome</a>');
 }
 
 
@@ -574,8 +578,11 @@ function get_android(){
 				$('#loader').hide();
 				if( data.length ){
 				    $.each(data, function(i,item){
-				      $('<div style="float:left;width:250px;padding-right:20px;height:70px"><a href="' + item.url + '" target="_blank"><img src="' + item.icon + '" width="50" height="50" align="middle" style="float:left;margin-right:10px"/> ' + item.title + '</a><br/>' + item.text + '</div>').appendTo("#android_list");
+				      $('<a href="' + item.url + '" target="_blank" rel="popover" data-content="' + item.text + '" data-original-title="' + item.title + '"><img src="' + item.icon + '" style="width:80px;height:80px;margin:0 10px 10px 0"/>').appendTo("#android_list");
 				    });
+				
+				
+					$('#android [rel=popover]').popover({placement:'bottom',animation:false});
 
 				}else{
 					$('#android').html('no se han encontrado aplicaciones');
@@ -635,8 +642,11 @@ function get_itunes(){
 				$('#loader').hide();
 				if( data.length ){
 				    $.each(data, function(i,item){
-				      $('<div style="float:left;width:250px;padding:0 20px 20px 0"><a href="' + item.url + '" target="_blank"><img src="' + item.icon + '" width="50" height="50" align="middle" style="margin-right:10px"/> ' + item.title + '</a></div>').appendTo("#itunes_list");
+				      $('<a href="' + item.url + '" target="_blank" rel="popover" data-content="no disponible" data-original-title="' + item.title + '"><img src="' + item.icon + '" style="width:80px;height:80px;margin:0 10px 10px 0"/>').appendTo("#itunes_list");
 				    });
+
+
+					$('#itunes_list [rel=popover]').popover({placement:'bottom',animation:false});
 
 				}else{
 					$('#itunes').html('no se han encontrado aplicaciones');
@@ -690,7 +700,7 @@ function get_forrst(){
 				
 				if( data.resp.posts.length ){
 				    $.each(data.resp.posts, function(i,item){
-					  image = item.snaps ? '<img src="' + item.snaps.large_url + '" width="60" height="60" class="pull-right"/>' : false;
+					  image = '';//item.snaps ? '<img src="' + item.snaps.large_url + '" width="60" height="60" class="pull-right"/>' : false;
 				      $('<li><a href="' + item.post_url + '" target="_blank">' + image + item.title + '</a><br/>' + item.description + '<br class="clear"/><br/></li>').appendTo("#forrst_list");
 				    });
 

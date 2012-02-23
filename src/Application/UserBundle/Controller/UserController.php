@@ -1407,22 +1407,33 @@ class UserController extends Controller
     $total_users = $result['total'];
 
 
-    $query = $em->createQuery("SELECT u FROM ApplicationUserBundle:User u WHERE u.category_id = :category_id AND u.id != :id AND u.body IS NOT NULL ORDER BY u.date_login DESC");
-    $query->setParameter('category_id', $entity->getCategoryId());
-    $query->setParameter('id', $id);
-    $query->setMaxResults(5);
+    $query = $em->createQuery("SELECT u FROM ApplicationUserBundle:User u WHERE u.category_id = :category_id AND u.id != :id AND u.body IS NOT NULL ORDER BY u.date_login DESC")
+    	->setParameter('category_id', $entity->getCategoryId())
+    	->setParameter('id', $id)
+    	->setMaxResults(5);
     $related_users = $query->getResult();
 
+
+	
+	if( $entity->getSearchTeam() ){
+	    $query = $em->createQuery("SELECT u FROM ApplicationUserBundle:User u WHERE u.category_id != :category_id AND u.search_team = 1 AND u.id != :id AND u.body IS NOT NULL ORDER BY u.date_login DESC")
+	    ->setParameter('category_id', $entity->getCategoryId())
+	    ->setParameter('id', $id)
+	    ->setMaxResults(6);
+	    $team_users = $query->getResult();
+	}else{
+		$team_users = array();
+	}
 
 
     $badges = $em->createQuery("SELECT t FROM ApplicationTestBundle:Test t, ApplicationTestBundle:TestUser tu WHERE t.id = tu.test_id AND tu.user_id = :id ORDER BY tu.date ASC")
         ->setParameter('id', $id)
-        ->setMaxResults(5)
+        ->setMaxResults(6)
         ->getResult();
 
 
-        return array(
-            'entity'       => $entity,
+    return array(
+      'entity'       => $entity,
       'contact_form' => $contact_form_html,
       //'comments'     => $comments,
       //'total_work' => $total_work,
@@ -1430,6 +1441,7 @@ class UserController extends Controller
       //'total_like' => $total_like,
       'total_users' => $total_users,
       'related_users' => $related_users,
+	  'team_users' => $team_users,
       'badges' => $badges
       );
     }
