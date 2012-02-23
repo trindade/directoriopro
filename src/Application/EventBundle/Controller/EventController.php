@@ -693,7 +693,7 @@ class EventController extends Controller
            ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
            ->add('groupBy', 'c.id')
            ->add('orderBy', 'total DESC')
-           ->setMaxResults(13);
+           ->setMaxResults(12);
         $cities = $qb->getQuery()->getResult();
 
 

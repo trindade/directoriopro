@@ -4,15 +4,15 @@
 {% block title %}Profesionales en {{ city.name }}, {{ country.name }}{% endblock %}
 
 {% block sidebar %}
-	<a href="{{ path('user_register') }}" class="btn primary" style="font-weight:bold;font-size:20px;margin-top:15px">Registrarte</a>
+	<a href="{{ path('user_register') }}" class="btn btn-large btn-primary">Registrarte</a>
 	<br/>
 
-	<b>Filtrar por categoría</b><br/>
+	<b>Filtrar por categoría</b><br/><br/>
+	<ul>
 	{% for category in categories %}
-		<a href="{{ path('user_city', { 'id': city.id }) }}?c={{loop.index0}}">{{category}}</a>
+		<li><a href="{{ path('user_city', { 'id': city.id }) }}?c={{loop.index0}}">{{category}}</a></li>
 	{% endfor %}
-
-	<br/><br/>
+	</ul>
 
 
 {% endblock %}

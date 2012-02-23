@@ -133,6 +133,7 @@ class UserController extends Controller
     $query->add('select', 'u')
        ->add('from', 'ApplicationUserBundle:User u')
        ->andWhere('u.city_id = :city_id')->setParameter('city_id', $id)
+       ->andWhere("u.body != ''")
        ->add('orderBy', 'u.id DESC');
 
     // categoria?
