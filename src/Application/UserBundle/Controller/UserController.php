@@ -94,7 +94,7 @@ class UserController extends Controller
       //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
 
-        return array('entities' => $entities, 'pager' => $html, 'nav_user' => 1, 'users_ref' => $users_ref);
+        return array('category_id' => $category_id, 'entities' => $entities, 'pager' => $html, 'nav_user' => 1, 'users_ref' => $users_ref);
 
     }
 
@@ -813,6 +813,16 @@ class UserController extends Controller
      */
     public function welcomeAction()
     {
+	
+	
+    // esta logueado?
+    $session = $this->getRequest()->getSession();
+    $session_id = $session->get('id');
+    if ( $session_id ) {
+		return $this->redirect( $this->generateUrl('post') );
+	}
+	
+	
     $request = $this->getRequest();
     $ref_id = $request->query->get('ref_id');
     $back = $request->query->get('back');
@@ -822,21 +832,22 @@ class UserController extends Controller
           $entity = $em->getRepository('ApplicationUserBundle:User')->find($ref_id);
 
       if ( $entity ) {
-        $session = $this->getRequest()->getSession();
+        
         $session->set('ref_id', $ref_id);
       }
     }
     if ( $back ) {
-      $session = $this->getRequest()->getSession();
+      
       $session->set('back', $back);
     }
 
     // estadisticas de usuarios
+    /*
     $query = "SELECT COUNT(u.id) AS total, u.category_id FROM User u GROUP BY u.category_id ORDER BY total DESC";
     $db = $this->get('database_connection');
         $categories = $db->fetchAll($query);
 
-    /*
+
     // ultimos usuarios
     $query = "SELECT u FROM ApplicationUserBundle:User u ORDER BY u.id DESC";
     $users = $this->get('doctrine')->getEntityManager()
@@ -845,7 +856,7 @@ class UserController extends Controller
                 ->getResult();
     */
 
-        return array('categories_aux' => $categories);//, 'users' => $users
+        return array();//'categories_aux' => $categories, 'users' => $users
     }
 
 

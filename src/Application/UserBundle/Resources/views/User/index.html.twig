@@ -48,12 +48,12 @@
 </ul>
 
 
+{% if category_id == '' %}
+
 <div class="alert" style="margin-bottom:20px">
 <b style="display:block;margin-bottom:10px;font-weight:bold">Ranking semanal de personas que más invitan</b>
 
 {% if users_ref %}
-
-
 
 	{% for user in users_ref %}
 		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}" data-original-title="<b>{{ categories[ user.category_id ] }}</b><br/>{{ user.name }}" rel="twipsy" style="float:left;margin-right:5px"><span style="position:absolute;margin-top:20px;padding:0 5px;background:red;color:white;font-size:10px">{{ user.total }}</span><img src="
@@ -74,6 +74,8 @@
 
 <br class="clear"/>
 </div>
+
+{% endif %}
 
 
 {% if entities %}
