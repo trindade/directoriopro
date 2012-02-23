@@ -1,5 +1,3 @@
-
-
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
@@ -11,9 +9,11 @@
         <parameter key="anuncios_bundle.session.class">Application\AnunciosBundle\EventListener\LoginControlListener</parameter>
     </parameters>
 
-    <service id="kernel.listener.session_request_listener" class="%anuncios_bundle.session.class%">
-      <tag name="kernel.event_listener" event="kernel.request"  method="onKernelRequest" class="%anuncios_bundle.session.class%"
-        priorty="125"/>
-    </service>
+    <services>
+      <service id="kernel.listener.session_request_listener" class="%anuncios_bundle.session.class%">
+        <tag name="kernel.event_listener" event="kernel.request"  method="onKernelRequest" class="%anuncios_bundle.session.class%"
+          priorty="125"/>
+      </service>
+    </services>
 </container>
 
