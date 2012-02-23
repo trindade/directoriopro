@@ -117,13 +117,11 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 <!--width:410px;overflow:hidden;-->
 
-
 <div style="float:right;font-size:13px">
 	{% if entity.searchteam %}<div style="padding-bottom:5px"><img src="{{ asset('bundles/applicationanuncios/images/search.png') }}" width="13" height="13" align="absmiddle"/> Busca equipo</div>{% endif %}
 	{% if entity.freelance %}<div style="padding-bottom:5px"><img src="{{ asset('bundles/applicationanuncios/images/freelance.png') }}" width="13" height="13" align="absmiddle"/> Freelance</div>{% endif %}
 	{% if entity.unemployed %}<div style="padding-bottom:5px"><img src="{{ asset('bundles/applicationanuncios/images/trabajo.png') }}" width="13" height="13" align="absmiddle"/> Abierto a ofertas laborales</div>{% endif %}
 </div>
-
 
 <h1 style="margin-bottom:0;font-size:25px;">{{ entity.name }}</h1>
 <div style="padding-bottom:10px">
@@ -213,15 +211,8 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 <div class="tab-content">
 
+	<div class="tab-pane active" id="info">	
 
-
-
-
-
-
-	<div class="tab-pane active" id="info">
-		
-		
 		<!--
 		{% if entity.getTwitterUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://twitter.com/{{ entity.getTwitterUrl() }}"><img src="/bundles/applicationanuncios/images/social/twitter.png" width="26" height="26"/></a> {% endif %}
 		{% if entity.getLinkedinUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://es.linkedin.com/in/{{ entity.getLinkedinUrl() }}"><img src="/bundles/applicationanuncios/images/social/linkedin.png" width="26" height="26"/></a> {% endif %}
@@ -268,7 +259,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 		{% if team_users %}
 			<br class="clear"/><br/>
-			<b>Perfiles relacionados</b><br/><br/>
+			<b>Personas que buscan equipo</b><br/><br/>
 		    {% for entity in team_users %}
 				<div style="width:190px;height:55px;overflow:hidden;float:left;">
 					<img src="{{ entity.getAvatar('mini') }}" align="absmiddle" style="width:37px;height:37px;float:left;margin-right:7px"/>
