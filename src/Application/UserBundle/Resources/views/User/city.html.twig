@@ -1,7 +1,7 @@
 {% set nav_user = 1 %}
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-{% block title %}Profesionales en {{ city.name }}, {{ country.name }}{% endblock %}
+{% block title %}{% if category_id != '' %}{{ categories[category_id] }}{% else %}Profesionales{% endif %} en {{ city.name }}, {{ country.name }}{% endblock %}
 
 {% block sidebar %}
 	<a href="{{ path('user_register') }}" class="btn btn-large btn-primary">Registrarte</a>
@@ -30,7 +30,7 @@
   <li class="active"><a href="{{ path('user') }}">{{ city.name }}, {{ country.name }}</a></li>
 </ul>
 
-<h1>Profesionales en {{ city.name }}, {{ country.name }}</h1>
+<h1>{% if category_id != '' %}{{ categories[category_id] }}{% else %}Profesionales{% endif %} en {{ city.name }}, {{ country.name }}</h1>
 
 
 

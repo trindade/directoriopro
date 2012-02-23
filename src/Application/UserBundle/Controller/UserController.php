@@ -160,17 +160,7 @@ class UserController extends Controller
     $view = new DefaultView();
     $html = $view->render($pagerfanta, $routeGenerator, array('category_id' => (int)$category_id));
 
-
-
-
-
-
-
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
-
-
-        return array('city' => $city, 'country' => $country, 'entities' => $entities, 'pager' => $html);
+        return array('category_id' => $category_id, 'city' => $city, 'country' => $country, 'entities' => $entities, 'pager' => $html);
 
     }
 
