@@ -13,6 +13,7 @@
       <service id="kernel.listener.session_request_listener" class="%anuncios_bundle.session.class%">
         <tag name="kernel.event_listener" event="kernel.request"  method="onKernelRequest" class="%anuncios_bundle.session.class%"
           priorty="125"/>
+          <argument type="service" id="doctrine.orm.default_entity_manager" strict="true" />
       </service>
     </services>
 </container>
