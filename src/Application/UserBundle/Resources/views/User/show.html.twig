@@ -234,12 +234,12 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 		{% else %}
 			<pre>El usuario todavía no ha completado su descripción :(</pre>
 		{% endif %}
-
+		
+		<br/>
 
 
 
 		{% if related_users %}
-			<br/>
 			<b>Perfiles relacionados</b><br/><br/>
 		    {% for entity in related_users %}
 				<div style="width:190px;height:55px;overflow:hidden;float:left;">
@@ -248,10 +248,10 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 					{{ categories[ entity.categoryid ] }}
 				</div>
 		    {% endfor %}
+			<br class="clear"/><br/>
 		{% endif %}
 
 		{% if team_users %}
-			<br class="clear"/><br/>
 			<b>Personas que buscan equipo</b><br/><br/>
 		    {% for entity in team_users %}
 				<div style="width:190px;height:55px;overflow:hidden;float:left;">
