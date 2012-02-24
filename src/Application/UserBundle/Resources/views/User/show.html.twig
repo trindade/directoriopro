@@ -34,7 +34,7 @@
 			{% if badges %}
 				<br/>
 			    {% for badge in badges %}
-					<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy" style="float:left;margin:11px 0 0 11px"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40"/></a>
+					<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin:11px 11px 0 0"/></a>
 			    {% endfor %}
 				<br class="clear"/>
 			{% endif %}
