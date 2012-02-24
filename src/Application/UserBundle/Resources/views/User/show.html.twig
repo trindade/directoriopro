@@ -250,7 +250,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 			<b>Perfiles relacionados</b><br/><br/>
 		    {% for entity in related_users %}
 				<div style="width:190px;height:55px;overflow:hidden;float:left;">
-					<img src="{{ entity.getAvatar('mini') }}" align="absmiddle" style="width:37px;height:37px;float:left;margin-right:7px"/>
+					<img src="{{ entity.getAvatar('mini') }}" align="absmiddle" style="width:34px;height:34px;float:left;margin-right:7px"/>
 	           		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a><br/>
 					{{ categories[ entity.categoryid ] }}
 				</div>
@@ -262,7 +262,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 			<b>Personas que buscan equipo</b><br/><br/>
 		    {% for entity in team_users %}
 				<div style="width:190px;height:55px;overflow:hidden;float:left;">
-					<img src="{{ entity.getAvatar('mini') }}" align="absmiddle" style="width:37px;height:37px;float:left;margin-right:7px"/>
+					<img src="{{ entity.getAvatar('mini') }}" align="absmiddle" style="width:34px;height:34px;float:left;margin-right:7px"/>
 	           		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a><br/>
 					{{ categories[ entity.categoryid ] }}
 				</div>

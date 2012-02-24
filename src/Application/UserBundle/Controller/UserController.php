@@ -1416,7 +1416,7 @@ class UserController extends Controller
 
 	
 	if( $entity->getSearchTeam() ){
-	    $query = $em->createQuery("SELECT u FROM ApplicationUserBundle:User u WHERE u.category_id != :category_id AND u.search_team = 1 AND u.id != :id AND u.body IS NOT NULL ORDER BY u.date_login DESC")
+	    $query = $em->createQuery("SELECT u FROM ApplicationUserBundle:User u WHERE u.category_id != :category_id AND u.category_id != 13 AND u.search_team = 1 AND u.id != :id AND u.body IS NOT NULL ORDER BY u.date_login DESC")
 	    ->setParameter('category_id', $entity->getCategoryId())
 	    ->setParameter('id', $id)
 	    ->setMaxResults(6);
