@@ -108,14 +108,12 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
   <li><a href="{{ path('user_search') }}?c={{ entity.categoryid }}">{{ categories[ entity.categoryid ] }}</a></li>
 </ul>
 
-<div style="font-size:15px;padding-bottom:15px">
+<div style="font-size:15px;padding-bottom:5px">
 
 
 	
 
-<img src="{{ entity.getAvatar('bigger') }}" style="width:75px;height:75px;float:left;margin-right:15px"/>
-
-<!--width:410px;overflow:hidden;-->
+<img src="{{ entity.getAvatar('bigger') }}" style="width:65px;height:65px;float:left;margin-right:15px"/>
 
 <div style="float:right;font-size:13px">
 	{% if entity.searchteam %}<div style="padding-bottom:5px"><img src="{{ asset('bundles/applicationanuncios/images/search.png') }}" width="13" height="13" align="absmiddle"/> Busca equipo</div>{% endif %}
@@ -124,15 +122,10 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 </div>
 
 <h1 style="margin-bottom:0;font-size:25px;">{{ entity.name }}</h1>
-<div style="padding-bottom:10px">
-{{ categories[ entity.categoryid ] }}
+<div style="padding-bottom:10px">{{ entity.location }}</div>
 
 
-<br/>{{ entity.location }} 
-</div>
-
-
-
+<br class="clear"/>
 
 
 </div>
