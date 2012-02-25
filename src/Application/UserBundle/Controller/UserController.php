@@ -815,17 +815,50 @@ class UserController extends Controller
     {
 	
 	
-    // esta logueado?
-    $session = $this->getRequest()->getSession();
+      $request = $this->getRequest();
+      $em = $this->getDoctrine()->getEntityManager();
+
+		$back = $request->query->get('back');
+
+      // esta logueado?
+      $session = $request->getSession();
     $session_id = $session->get('id');
     if ( $session_id ) {
 		return $this->redirect( $this->generateUrl('post') );
 	}
+
+      $cookie_login = $request->cookies->get('login');
+      if ( !$session_id && $cookie_login ) {
+        $cookie_login_info = explode(':',$cookie_login);
+        $user = $em->getRepository('ApplicationUserBundle:User')->find($cookie_login_info[0]);
+
+        $pass = $user->getPass();
+        if ( !$pass ) $pass = md5( $user->getDate()->format('Y-m-d H:i:s') );
+
+
+        if ( $cookie_login_info[1] == $pass ) {
+          $session = $this->getRequest()->getSession();
+          $session->set('id', $user->getId());
+          $session->set('name', $user->getShortName());
+          $session->set('slug', $user->getSlug());
+          $session->set('admin', $user->getAdmin());
+
+		  if( !$back ){
+				return $this->redirect( $this->generateUrl('post') );
+			}
+        }
+      }
+
+
+
 	
 	
-    $request = $this->getRequest();
+
+	
+	
+    
     $ref_id = $request->query->get('ref_id');
-    $back = $request->query->get('back');
+    
     if ( $ref_id ) {
 
           $em = $this->getDoctrine()->getEntityManager();
@@ -1410,7 +1443,7 @@ class UserController extends Controller
     $query = $em->createQuery("SELECT u FROM ApplicationUserBundle:User u WHERE u.category_id = :category_id AND u.id != :id AND u.body IS NOT NULL ORDER BY u.date_login DESC")
     	->setParameter('category_id', $entity->getCategoryId())
     	->setParameter('id', $id)
-    	->setMaxResults(5);
+    	->setMaxResults(6);
     $related_users = $query->getResult();
 
 

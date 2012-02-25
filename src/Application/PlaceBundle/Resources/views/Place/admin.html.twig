@@ -45,7 +45,7 @@
 					<br/><span class="date">{{ entity.date|date('d/m/Y') }} {% if entity.location %}- {{ entity.location }}{% endif %}</span>
 				</td>
 				<td>{{ entity.visits }}</td>
-				<td nowrap="nowrap"><a href="{{ path('place_edit', { 'id': entity.id }) }}" class="btn">editar</a> <a href="{{ path('place_admin_featured', { 'id': entity.id, 'value': featured }) }}" class="btn {% if entity.featured %}primary{% endif %}">&#9733;</a></td>
+				<td nowrap="nowrap"><a href="{{ path('place_edit', { 'id': entity.id }) }}" class="btn">editar</a> <a href="{{ path('place_admin_featured', { 'id': entity.id, 'value': featured }) }}" class="btn {% if entity.featured %}btn-primary{% endif %}">&#9733;</a></td>
 	        </tr>
 	    {% endfor %}
 	    </tbody>
