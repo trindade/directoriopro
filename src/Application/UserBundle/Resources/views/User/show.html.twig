@@ -244,7 +244,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 		    {% for entity in related_users %}
 				<div style="width:190px;height:55px;overflow:hidden;float:left;">
 					<img src="{{ entity.getAvatar('mini') }}" align="absmiddle" style="width:34px;height:34px;float:left;margin-right:7px"/>
-	           		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a><br/>
+	           		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name|truncate(20) }}</a><br/>
 					{{ categories[ entity.categoryid ] }}
 				</div>
 		    {% endfor %}
@@ -256,7 +256,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 		    {% for entity in team_users %}
 				<div style="width:190px;height:55px;overflow:hidden;float:left;">
 					<img src="{{ entity.getAvatar('mini') }}" align="absmiddle" style="width:34px;height:34px;float:left;margin-right:7px"/>
-	           		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a><br/>
+	           		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name|truncate(20) }}</a><br/>
 					{{ categories[ entity.categoryid ] }}
 				</div>
 		    {% endfor %}
