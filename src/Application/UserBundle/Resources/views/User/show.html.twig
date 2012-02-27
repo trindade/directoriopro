@@ -23,16 +23,18 @@
 	<br/>
 	
 	
-	{% if entity.votes %}
+	{% if entity.votes or badges %}
 	
 		<div class="alert" style="padding:8px 0;width:179px;margin-bottom:15px;text-align:center">
-			<a href="{{ path('user_comments', { 'id': entity.id }) }}" style="color:black">
-				<b>{{ entity.votes }}</b> Recomendaciones
-			</a>
+
+			{% if entity.votes }
+				<a href="{{ path('user_comments', { 'id': entity.id }) }}" style="color:black">
+					<b>{{ entity.votes }}</b> Recomendaciones
+				</a><br/>
+			{% endif %}
 			
 			
 			{% if badges %}
-				<br/>
 			    {% for badge in badges %}
 					<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin:11px 11px 0 0"/></a>
 			    {% endfor %}
