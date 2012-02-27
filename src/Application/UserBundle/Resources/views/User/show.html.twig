@@ -27,7 +27,7 @@
 	
 		<div class="alert" style="padding:8px 0;width:179px;margin-bottom:15px;text-align:center">
 
-			{% if entity.votes }
+			{% if entity.votes %}
 				<a href="{{ path('user_comments', { 'id': entity.id }) }}" style="color:black">
 					<b>{{ entity.votes }}</b> Recomendaciones
 				</a><br/>
