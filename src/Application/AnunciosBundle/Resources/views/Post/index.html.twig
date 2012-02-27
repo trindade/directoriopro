@@ -146,19 +146,3 @@
 
 {% endblock %}
 
-
-
-{% block script_load %}
-
-{% if home %}
-	
-  var uvOptions = {};
-  (function() {
-    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/EJ9MNe5mnqsdtWENt31fw.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  })();
-
-{% endif %}
-	
-{% endblock %}
