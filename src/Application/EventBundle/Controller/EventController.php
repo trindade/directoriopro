@@ -49,9 +49,6 @@ class EventController extends Controller
            ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d 00:00:00'))
            ->add('orderBy', 'e.featured DESC, e.date_start ASC');
 
-
-
-
         $adapter = new DoctrineORMAdapter($query);
 
         $pagerfanta = new Pagerfanta($adapter);
@@ -68,7 +65,6 @@ class EventController extends Controller
 
         $view = new DefaultView();
         $html = $view->render($pagerfanta, $routeGenerator);//, array('category_id' => (int)$category_id)
-
 
         if ( $entities ) {
             $total = count($entities);

@@ -43,7 +43,6 @@ class PostController extends Controller
       $request = $this->getRequest();
       $em = $this->getDoctrine()->getEntityManager();
 
-
       $category_id = $request->query->get('c',0);
       $page = $request->query->get('page',1);
 
@@ -276,7 +275,7 @@ class PostController extends Controller
             'edit_form'   => $editForm->createView(),
           );
 
-        }else{
+        }else {
           $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()));
           return $this->redirect($url);
         }
@@ -339,7 +338,7 @@ class PostController extends Controller
             'edit_form'   => $editForm->createView(),
           );
 
-        }else{
+        }else {
           $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()));
           return $this->redirect($url);
         }
@@ -368,7 +367,7 @@ class PostController extends Controller
           $em->flush();
 
           $url = $this->generateUrl('post');
-        }else{
+        }else {
           $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()));
 
         }
@@ -506,7 +505,7 @@ class PostController extends Controller
           $em->persist($entity);
           $em->flush();
 
-        }else{
+        }else {
           return new Response("SPAM!");
         }
 
