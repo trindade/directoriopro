@@ -36,13 +36,11 @@
               <a href="{{ path('test_show', { 'id': entity.id }) }}" class="title">{{ entity.title }}</a><br/>
               {{ entity.body|truncate(200) }}
           </div>
-          
+          <br class="clear"/>
+
         </li>
     {% endfor %}
 </ul>
-
-
-
 
 
 {{ pager|raw }}
