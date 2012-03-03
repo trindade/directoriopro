@@ -99,9 +99,11 @@
 		<br/><br/>
 	{% endif %}
 
-	<pre>{{ entity.body|bbcode|raw }}</pre>
+	{{ entity.body|bbcode|raw|nl2br }}
+	
+	<br/><br/>
 
-	<p>Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}">{{ user.name }}</a> el {{ entity.date|date('d/m/Y') }} - {{ entity.visits }} visitas - {{ entity.interested }} interesados</p>
+	Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}">{{ user.name }}</a> el {{ entity.date|date('d/m/Y') }} - {{ entity.visits }} visitas - {{ entity.interested }} interesados
 
 
 	{% if entities %}

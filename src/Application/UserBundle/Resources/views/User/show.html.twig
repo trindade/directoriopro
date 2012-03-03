@@ -232,12 +232,12 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 		-->
 
 		{% if entity.body %}
-			<pre>{{ entity.body}}</pre>
+			{{ entity.body|nl2br}}
 		{% else %}
-			<pre>El usuario todavía no ha completado su descripción :(</pre>
+			El usuario todavía no ha completado su descripción :(
 		{% endif %}
 		
-		<br/>
+		<br/><br/>
 
 
 
