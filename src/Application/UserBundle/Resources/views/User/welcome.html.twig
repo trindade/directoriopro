@@ -47,7 +47,7 @@
 
 {% block content %}
 
-<div class="alert" style="text-align:center;display:none" id="alert">Para seguir tienes que registrarte</div>
+<div class="alert" style="text-align:center;" id="alert">Para seguir tienes que registrarte</div>
 
 
 
@@ -107,7 +107,9 @@
 
 
 {% block script_load %}
+	/*
 	if( document.location.href.indexOf('#alert') > -1 ){
 		$('#alert').fadeIn('slow');
 	}
+	*/
 {% endblock %}
