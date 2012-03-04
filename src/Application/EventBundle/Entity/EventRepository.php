@@ -45,6 +45,28 @@ class EventRepository extends EntityRepository
             ->add('select', 'u')
             ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
             ->andWhere('u.id = eu.user_id')
-            ->andWhere('eu.event_id = :id')->setParameter('id', intval($user_id))->getQuery()->getResult();
+            ->andWhere('eu.user_id = :id')->setParameter('id', intval($user_id))->getQuery()->getResult();
     }
+
+    public function findUsersByEvent($event,$max=12)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'u')
+            ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
+            ->andWhere('u.id = eu.user_id')
+            ->andWhere('eu.event_id = :id')->setParameter('id', $event->getId())
+            ->setMaxResults($max)
+            ->getQuery()->getResults();
+
+    }
+
+    public function findEventsDQL($from, $to = NULL)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'e')
+            ->add('from', 'ApplicationEventBundle:Event e')
+            ->andWhere('e.date_start > :date')->setParameter('date', $from)
+            ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+    }
+
 }

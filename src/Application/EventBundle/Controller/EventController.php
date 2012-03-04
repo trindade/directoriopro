@@ -41,13 +41,7 @@ class EventController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
 
-
-
-        $query = $em->createQueryBuilder();
-        $query->add('select', 'e')
-           ->add('from', 'ApplicationEventBundle:Event e')
-           ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d 00:00:00'))
-           ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+        $query = $em->getRepository('ApplicationEventBundle:Event')->findEventsDQL(date('Y-m-d 00:00:00'));
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -65,6 +59,20 @@ class EventController extends Controller
 
         $view = new DefaultView();
         $html = $view->render($pagerfanta, $routeGenerator);//, array('category_id' => (int)$category_id)
+
+        $date_now = false;
+
+        foreach ($entities as $entitie) {
+            $date_current = $entitie->getDateStart()->format('Y-m-d');
+            $entitie->date_now = false;
+
+            if ( $date_now != $date_current ) {
+                $date_now = $date_current;
+                $entitie->date_now = $entities->getPrettyDate();
+            }
+
+
+        }
 
         if ( $entities ) {
             $total = count($entities);
@@ -965,7 +973,7 @@ class EventController extends Controller
 
         $query = $em->createQuery("SELECT c.name FROM ApplicationCityBundle:Country c WHERE c.code = :code");
         $query->setParameters(array(
-            'code' => $city->getCode()
+            'code' => 51//$city->getCode()
         ));
         $country = current( $query->getResult() );
 
