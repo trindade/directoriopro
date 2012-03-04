@@ -107,4 +107,22 @@ class EventRepository extends EntityRepository
             ->getResult();
     }
 
+    /**
+     * findEventsByCityDQL
+     *
+     * @param \DateTime $date
+     * @param \Application\CityBundle\Entity\City $city
+     * @access public
+     * @return Doctrine DQL
+     */
+    public function findEventsByCityDQL(\DateTime $date, \Application\CityBundle\Entity\City $city)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'e')
+            ->add('from', 'ApplicationEventBundle:Event e')
+            ->andWhere('e.date_start > :date')->setParameter('date', $date->format('Y-m-d'))
+            ->andWhere('e.city_id = :city_id')->setParameter('city_id', $city->getId())
+            ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+    }
+
 }
