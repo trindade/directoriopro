@@ -14,14 +14,18 @@ class RegisterType extends AbstractType
         $builder->add('name')
         		->add('email', 'email')
 				->add('category_id')
+				->add('pass')
+				/*
         		->add('pass', 'repeated', array(
 				           'first_name' => 'password',
 				           'second_name' => 'confirm',
 				           'type' => 'password',
 							'invalid_message' => 'Las contraseñas tienen que coincidir',
 				        ))
+				*/
 				->add('unemployed')		
 				->add('freelance')
+				->add('search_team')
 				->add('location')
 				->add('city_id')
 				->add('country_id');

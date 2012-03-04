@@ -5,9 +5,9 @@
 
 {% block sidebar %}
 
-	<b>Registrate en 1 minuto</b><br/><br/>
+	<!--<b>Conéctate con facebook</b><br/><br/>
 	<a href="{{ path('user_fblogin') }}"><img src="{{ asset('bundles/applicationanuncios/images/fblogin.png') }}"/></a>
-	<iframe src="https://www.facebook.com/plugins/facepile.php?app_id=194718703877738&amp;max_rows=2" scrolling="no" frameborder="0" allowTransparency="true" style="border:none;overflow:hidden; width:190px; height:120px;"></iframe>
+	<iframe src="https://www.facebook.com/plugins/facepile.php?app_id=194718703877738&amp;max_rows=2" scrolling="no" frameborder="0" allowTransparency="true" style="border:none;overflow:hidden; width:190px; height:120px;"></iframe>-->
 
 {% endblock %}
 
@@ -23,7 +23,7 @@
 	{{ form_errors(form) }}
 
 	{{ form_row(form.email, { 'label': 'Email' }) }}
-	{{ form_row(form.pass, { 'label': 'Contraseña' }) }}
+	<div id="pass">{{ form_row(form.pass, { 'label': 'Contraseña', 'type': 'password' }) }}</div>
 	
 	<div class="control-group">
 		<label>Perfil</label>
@@ -56,9 +56,16 @@
 			    <li>
 			      <label for="register_unemployed" class=" required">
 			        <input type="checkbox" {% if entity.getUnemployed() == 1 %}checked="checked"{% endif %} id="register_unemployed" name="register[unemployed]" value="1">
-			        <span>¿Estás buscando trabajo en una empresa?</span>
+			        <span>¿Estás abierto a ofertas laborales?</span>
 			      </label><br/>
 			    </li>
+			
+		        <li>
+		          <label for="register_search_team" class=" required">
+		            <input type="checkbox" {% if entity.getSearchTeam() == 1 %}checked="checked"{% endif %} id="register_search_team" name="register[search_team]" value="1">
+		            <span>¿Estas buscando equipo?</span>
+		          </label><br/>
+		        </li>
 			
 		        <li>
 		          <label for="register_freelance" class=" required">
@@ -88,5 +95,8 @@
 {% block script_load %}
 
 	autoGeo();
+	
+	$('#pass .controls').html('<input type="password" id="register_pass" name="register[pass]" maxlength="255" class="xlarge" rows="9">');
+	$('.form-horizontal > ul').addClass('alert alert-error').css('list-style-type','none');
 	
 {% endblock %}

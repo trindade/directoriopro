@@ -115,9 +115,11 @@
 	
 	<br/><br/>
 	
-	<pre>{{ entity.body }}</pre>
-	<br/>
-	<p>Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}">{{ user.name }}</a> el {{ entity.date|date('d/m/Y') }} - {{ entity.visits }} visitas</p>
+	{{ entity.body|nl2br }}
+	
+	<br/><br/>
+	
+	Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}">{{ user.name }}</a> el {{ entity.date|date('d/m/Y') }} - {{ entity.visits }} visitas
 </div>
 
 <div class="tab-pane" id="users">	

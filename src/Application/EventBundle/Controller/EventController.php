@@ -215,7 +215,7 @@ class EventController extends Controller
                    ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
                    ->andWhere('u.id = eu.user_id')
                    ->andWhere('eu.event_id = :id')->setParameter('id', $entities[$i]->getId())
-                   ->setMaxResults(13);
+                   ->setMaxResults(12);
 
                 $entities[$i]->users_list = $qb->getQuery()->getResult();
             }
@@ -315,6 +315,8 @@ class EventController extends Controller
         $entity->setDateStart(new \DateTime( $date_start->format('Y-m-d') . ' ' . $h_start . ":" . $m_start . ':00' ) );
         $entity->setDateEnd(new \DateTime( $date_end->format('Y-m-d') . ' ' . $h_end . ":" . $m_end . ':00' ) );
 
+        // corregir hashtag
+        $entity->setHashtag( str_replace('#', '', $entity->getHashtag() ) );
 
         if ($form->isValid()) {
             $entity->setSlug(Util::slugify($entity->getTitle() . ' ' . $entity->getPrettyDate('%e %B %Y')));
@@ -432,7 +434,8 @@ class EventController extends Controller
                 $entity->setDateStart(  new \DateTime( $date_start->format('Y-m-d') . ' ' . $h_start . ":" . $m_start . ':00' ) );
                 $entity->setDateEnd(  new \DateTime( $date_end->format('Y-m-d') . ' ' . $h_end . ":" . $m_end . ':00' ) );
 
-
+                // corregir hashtag
+                $entity->setHashtag( str_replace('#', '', $entity->getHashtag() ) );
 
 
                 if ($editForm->isValid()) {
@@ -689,7 +692,7 @@ class EventController extends Controller
            ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
            ->add('groupBy', 'c.id')
            ->add('orderBy', 'total DESC')
-           ->setMaxResults(13);
+           ->setMaxResults(12);
         $cities = $qb->getQuery()->getResult();
 
 

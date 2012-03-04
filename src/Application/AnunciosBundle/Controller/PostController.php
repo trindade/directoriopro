@@ -111,7 +111,7 @@ class PostController extends Controller
           throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        $country = $em->getRepository('ApplicationCityBundle:Country')->findBy(array('code' => $city->getCode()));
+        $country = current( $em->getRepository('ApplicationCityBundle:Country')->findBy(array('code' => $city->getCode())) );
 
         $category_id = $request->query->get('c',0);
 
@@ -133,9 +133,6 @@ class PostController extends Controller
 
         $view = new DefaultView();
         $html = $view->render($pagerfanta, $routeGenerator, array('category_id' => (int)$category_id));
-
-        //$twig = $this->container->get('twig');
-        //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
         return array('city' => $city, 'country' => $country, 'pager' => $html, 'entities' => $entities );
     }

@@ -1,4 +1,4 @@
-{% set static_id = 44 %}
+{% set static_id = 45 %}
 
 {% set categories = ["Todos", "Programador frontend", "Programador backend", "Programador apps móvil", "Blogger", "Community manager", "Marketing", "SEO", "Diseñador", "Usabilidad", "Sysadmin", "Traductor", "Betatester", "Otros", "Maquetador"] %}
 
@@ -58,7 +58,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="/">Betabeers</a>
+        <a class="brand" href="{{ path('post') }}">Betabeers</a>
         <div class="nav-collapse">
 
 <ul class="nav">
@@ -281,6 +281,15 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
+
+/* uservoice */
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/EJ9MNe5mnqsdtWENt31fw.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
 </script>
 
 

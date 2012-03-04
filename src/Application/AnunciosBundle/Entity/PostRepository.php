@@ -47,7 +47,7 @@ class PostRepository extends EntityRepository
      */
     public function getCityPostsDQL($category_id = 0, $city_id)
     {
-        $query = $em->createQueryBuilder();
+        $query = $this->_em->createQueryBuilder();
         $query->add('select', 'p')
             ->add('from', 'ApplicationAnunciosBundle:Post p')
             ->andWhere('p.city_id = :city_id')->setParameter('city_id', intval($city_id))
@@ -59,6 +59,7 @@ class PostRepository extends EntityRepository
             $query->add('where', 'p.category_id = :category_id')->setParameter('category_id', $category_id);
 
         }
+		return $query;
     }
 
     /**

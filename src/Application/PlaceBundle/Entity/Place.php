@@ -94,7 +94,7 @@ class Place
     /**
      * @var string $price
      *
-     * @ORM\Column(name="price", type="string", length=100)
+     * @ORM\Column(name="price", type="string", length=100, nullable=true)
      */
     private $price;
 

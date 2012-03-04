@@ -100,8 +100,9 @@ input.xlarge{width:170px}
 
 <ul class="nav nav-tabs tabs">
 	<li class="active"><a href="#info" data-toggle="tab" style="font-weight:bold">1. Completa tu perfil</a></li>
-	<li><a href="#networks" data-toggle="tab">2. Perfiles</a></li>
-	<li><a href="#options" data-toggle="tab">3. Opciones</a></li>
+	<li><a href="#networks" data-toggle="tab" style="font-weight:bold">2. Perfiles</a></li>
+	<li><a href="#options" data-toggle="tab" style="font-weight:bold">3. Opciones</a></li>
+	<li><a href="#contact" data-toggle="tab">Contacto</a></li>
 </ul>
 
 
@@ -163,8 +164,7 @@ input.xlarge{width:170px}
 		</div>
 		
 		{{ form_row(edit_form.name, { 'label': 'Nombre y apellidos' }) }}
-		{{ form_row(edit_form.email, { 'label': 'Email' }) }}
-		{{ form_row(edit_form.phone, { 'label': 'Telefono' }) }}
+
 
 		<div class="control-group">
 			<label for="application_userbundle_usertype_avatar_type">Avatar</label>
@@ -180,6 +180,7 @@ input.xlarge{width:170px}
 
 	</div>
 
+
 	
 	<div class="tab-pane" id="networks">
 	
@@ -189,8 +190,6 @@ input.xlarge{width:170px}
 
 
 		<div class="accordion" id="accordion2">
-		
-		
 		
 			<div class="accordion-group">
 				<div class="accordion-heading group_edit">
@@ -297,19 +296,13 @@ input.xlarge{width:170px}
 	        <li>
 	          <label for="application_userbundle_usertype_unemployed" class=" required">
 	            <input type="checkbox" {% if entity.getUnemployed() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_unemployed" name="application_userbundle_usertype[unemployed]" value="1">
-	            <span>¿Estás buscando trabajo en una empresa?</span>
+	            <span>¿Estás abierto a ofertas laborales?</span>
 	          </label><br/>
 	        </li>
 	        <li>
 	          <label for="application_userbundle_usertype_freelance" class=" required">
 	            <input type="checkbox" {% if entity.getFreelance() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_freelance" name="application_userbundle_usertype[freelance]" value="1">
 	            <span>¿Eres freelance?</span>
-	          </label><br/>
-	        </li>
-	        <li>
-	          <label for="application_userbundle_usertype_can_contact" class=" required">
-	            <input type="checkbox" {% if entity.getCanContact() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_can_contact" name="application_userbundle_usertype[can_contact]" value="1">
-	            <span>Permitir que contacten conmigo</span>
 	          </label><br/>
 	        </li>
 	        <li>
@@ -337,6 +330,21 @@ input.xlarge{width:170px}
 		</div>
 	
 	
+	</div>
+	
+	<div class="tab-pane" id="contact">		
+		{{ form_row(edit_form.email, { 'label': 'Email' }) }}
+		{{ form_row(edit_form.phone, { 'label': 'Telefono' }) }}
+		
+		<div class="controls">
+		    <ul style="margin-left:0;list-style-type:none">
+	        <li>
+	          <label for="application_userbundle_usertype_can_contact" class=" required">
+	            <input type="checkbox" {% if entity.getCanContact() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_can_contact" name="application_userbundle_usertype[can_contact]" value="1">
+	            <span>Permitir que contacten conmigo</span>
+	          </label>
+			</li>
+		</div>
 	</div>
 	
 	</div>
@@ -398,6 +406,13 @@ input.xlarge{width:170px}
 
 
 {% block script_load %}
+
+
+	$('#application_userbundle_usertype_body')
+		.attr('data-content','<ul><li>¿Quién eres?</li><li>¿A qué te dedicas?</li><li>¿Cual es tu especialidad?</li><li>¿Qué buscas en el directorio?</li></ul>')
+		.attr('data-original-title','Consejo para la descripción')
+		.popover({placement:'left',animation:false});
+
 
 	autoGeo();
 

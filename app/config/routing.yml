@@ -25,7 +25,7 @@ ApplicationCityBundle:
 
 _welcome:
     pattern:  /
-    defaults: { _controller: ApplicationAnunciosBundle:Post:index }
+    defaults: { _controller: ApplicationUserBundle:User:welcome }
 
 ApplicationUserBundle:
     resource: "@ApplicationUserBundle/Controller/"

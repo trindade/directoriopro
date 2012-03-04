@@ -94,7 +94,7 @@ class UserController extends Controller
       //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
 
-        return array('entities' => $entities, 'pager' => $html, 'nav_user' => 1, 'users_ref' => $users_ref);
+        return array('category_id' => $category_id, 'entities' => $entities, 'pager' => $html, 'nav_user' => 1, 'users_ref' => $users_ref);
 
     }
 
@@ -133,6 +133,7 @@ class UserController extends Controller
     $query->add('select', 'u')
        ->add('from', 'ApplicationUserBundle:User u')
        ->andWhere('u.city_id = :city_id')->setParameter('city_id', $id)
+       ->andWhere("u.body != ''")
        ->add('orderBy', 'u.id DESC');
 
     // categoria?
@@ -159,17 +160,7 @@ class UserController extends Controller
     $view = new DefaultView();
     $html = $view->render($pagerfanta, $routeGenerator, array('category_id' => (int)$category_id));
 
-
-
-
-
-
-
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
-
-
-        return array('city' => $city, 'country' => $country, 'entities' => $entities, 'pager' => $html);
+        return array('category_id' => $category_id, 'city' => $city, 'country' => $country, 'entities' => $entities, 'pager' => $html);
 
     }
 
@@ -822,30 +813,74 @@ class UserController extends Controller
      */
     public function welcomeAction()
     {
-    $request = $this->getRequest();
+	
+	
+      $request = $this->getRequest();
+      $em = $this->getDoctrine()->getEntityManager();
+
+		$back = $request->query->get('back');
+
+      // esta logueado?
+      $session = $request->getSession();
+    $session_id = $session->get('id');
+    if ( $session_id ) {
+		return $this->redirect( $this->generateUrl('post') );
+	}
+
+      $cookie_login = $request->cookies->get('login');
+      if ( !$session_id && $cookie_login ) {
+        $cookie_login_info = explode(':',$cookie_login);
+        $user = $em->getRepository('ApplicationUserBundle:User')->find($cookie_login_info[0]);
+
+        $pass = $user->getPass();
+        if ( !$pass ) $pass = md5( $user->getDate()->format('Y-m-d H:i:s') );
+
+
+        if ( $cookie_login_info[1] == $pass ) {
+          $session = $this->getRequest()->getSession();
+          $session->set('id', $user->getId());
+          $session->set('name', $user->getShortName());
+          $session->set('slug', $user->getSlug());
+          $session->set('admin', $user->getAdmin());
+
+		  if( !$back ){
+				return $this->redirect( $this->generateUrl('post') );
+			}
+        }
+      }
+
+
+
+	
+	
+
+	
+	
+    
     $ref_id = $request->query->get('ref_id');
-    $back = $request->query->get('back');
+    
     if ( $ref_id ) {
 
           $em = $this->getDoctrine()->getEntityManager();
           $entity = $em->getRepository('ApplicationUserBundle:User')->find($ref_id);
 
       if ( $entity ) {
-        $session = $this->getRequest()->getSession();
+        
         $session->set('ref_id', $ref_id);
       }
     }
     if ( $back ) {
-      $session = $this->getRequest()->getSession();
+      
       $session->set('back', $back);
     }
 
     // estadisticas de usuarios
+    /*
     $query = "SELECT COUNT(u.id) AS total, u.category_id FROM User u GROUP BY u.category_id ORDER BY total DESC";
     $db = $this->get('database_connection');
         $categories = $db->fetchAll($query);
 
-    /*
+
     // ultimos usuarios
     $query = "SELECT u FROM ApplicationUserBundle:User u ORDER BY u.id DESC";
     $users = $this->get('doctrine')->getEntityManager()
@@ -854,7 +889,7 @@ class UserController extends Controller
                 ->getResult();
     */
 
-        return array('categories_aux' => $categories);//, 'users' => $users
+        return array();//'categories_aux' => $categories, 'users' => $users
     }
 
 
@@ -1405,22 +1440,33 @@ class UserController extends Controller
     $total_users = $result['total'];
 
 
-    $query = $em->createQuery("SELECT u FROM ApplicationUserBundle:User u WHERE u.category_id = :category_id AND u.id != :id AND u.body IS NOT NULL ORDER BY u.date_login DESC");
-    $query->setParameter('category_id', $entity->getCategoryId());
-    $query->setParameter('id', $id);
-    $query->setMaxResults(5);
+    $query = $em->createQuery("SELECT u FROM ApplicationUserBundle:User u WHERE u.category_id = :category_id AND u.id != :id AND u.body IS NOT NULL ORDER BY u.date_login DESC")
+    	->setParameter('category_id', $entity->getCategoryId())
+    	->setParameter('id', $id)
+    	->setMaxResults(6);
     $related_users = $query->getResult();
 
+
+	
+	if( $entity->getSearchTeam() ){
+	    $query = $em->createQuery("SELECT u FROM ApplicationUserBundle:User u WHERE u.category_id != :category_id AND u.category_id != 13 AND u.search_team = 1 AND u.id != :id AND u.body IS NOT NULL ORDER BY u.date_login DESC")
+	    ->setParameter('category_id', $entity->getCategoryId())
+	    ->setParameter('id', $id)
+	    ->setMaxResults(6);
+	    $team_users = $query->getResult();
+	}else{
+		$team_users = array();
+	}
 
 
     $badges = $em->createQuery("SELECT t FROM ApplicationTestBundle:Test t, ApplicationTestBundle:TestUser tu WHERE t.id = tu.test_id AND tu.user_id = :id ORDER BY tu.date ASC")
         ->setParameter('id', $id)
-        ->setMaxResults(5)
+        ->setMaxResults(6)
         ->getResult();
 
 
-        return array(
-            'entity'       => $entity,
+    return array(
+      'entity'       => $entity,
       'contact_form' => $contact_form_html,
       //'comments'     => $comments,
       //'total_work' => $total_work,
@@ -1428,6 +1474,7 @@ class UserController extends Controller
       //'total_like' => $total_like,
       'total_users' => $total_users,
       'related_users' => $related_users,
+	  'team_users' => $team_users,
       'badges' => $badges
       );
     }
