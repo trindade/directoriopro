@@ -48,6 +48,14 @@ class EventRepository extends EntityRepository
             ->andWhere('eu.user_id = :id')->setParameter('id', intval($user_id))->getQuery()->getResult();
     }
 
+    /**
+     * findUsersByEvent
+     *
+     * @param Application\EventBundle\Entity\Event $event
+     * @param int $max
+     * @access public
+     * @return Doctrine\Common\ArrayCollection
+     */
     public function findUsersByEvent($event,$max=12)
     {
         return $this->_em->createQueryBuilder()
@@ -56,16 +64,24 @@ class EventRepository extends EntityRepository
             ->andWhere('u.id = eu.user_id')
             ->andWhere('eu.event_id = :id')->setParameter('id', $event->getId())
             ->setMaxResults($max)
-            ->getQuery()->getResults();
+            ->getQuery()->getResult();
 
     }
 
-    public function findEventsDQL($from, $to = NULL)
+    /**
+     * findEventsDQL
+     *
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @access public
+     * @return Doctrine DQL
+     */
+    public function findEventsDQL(\DateTime $from, $to = NULL)
     {
         return $this->_em->createQueryBuilder()
             ->add('select', 'e')
             ->add('from', 'ApplicationEventBundle:Event e')
-            ->andWhere('e.date_start > :date')->setParameter('date', $from)
+            ->andWhere('e.date_start > :date')->setParameter('date', $from->format('Y-m-d'))
             ->add('orderBy', 'e.featured DESC, e.date_start ASC');
     }
 

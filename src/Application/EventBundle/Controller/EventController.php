@@ -41,7 +41,8 @@ class EventController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
 
-        $query = $em->getRepository('ApplicationEventBundle:Event')->findEventsDQL(date('Y-m-d 00:00:00'));
+        $repo = $em->getRepository('ApplicationEventBundle:Event');
+        $query = $repo->findEventsDQL(new \DateTime('now'));
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -68,39 +69,11 @@ class EventController extends Controller
 
             if ( $date_now != $date_current ) {
                 $date_now = $date_current;
-                $entitie->date_now = $entities->getPrettyDate();
+                $entitie->date_now = $entitie->getPrettyDate();
             }
 
-
+            $entitie->users_list = $repo->findUsersByEvent($entitie);
         }
-
-        if ( $entities ) {
-            $total = count($entities);
-            $date_now = false;
-
-            for ( $i = 0; $i < $total; $i++ ) {
-
-                $date_current = $entities[$i]->getDateStart()->format('Y-m-d');
-                if ( $date_now != $date_current ) {
-                    $date_now = $date_current;
-                    $entities[$i]->date_now = $entities[$i]->getPrettyDate();
-                }else{
-                    $entities[$i]->date_now = false;
-                }
-
-                $qb = $em->createQueryBuilder();
-                $qb->add('select', 'u')
-                   ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
-                   ->andWhere('u.id = eu.user_id')
-                   ->andWhere('eu.event_id = :id')->setParameter('id', $entities[$i]->getId())
-                   ->setMaxResults(12);
-                $query = $qb->getQuery();
-                $entities[$i]->users_list = $query->getResult();
-            }
-        }
-
-
-
 
         $qb = $em->createQueryBuilder();
         $qb->add('select', 'COUNT(e.id) AS total, c.name, c.id')
