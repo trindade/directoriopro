@@ -71,32 +71,13 @@ class EventController extends Controller
                 $date_now = $date_current;
                 $entitie->date_now = $entitie->getPrettyDate();
             }
-
             $entitie->users_list = $repo->findUsersByEvent($entitie);
         }
 
-        $qb = $em->createQueryBuilder();
-        $qb->add('select', 'COUNT(e.id) AS total, c.name, c.id')
-           ->add('from', 'ApplicationEventBundle:Event e, ApplicationCityBundle:City c')
-           ->andWhere('e.city_id = c.id')
-           ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
-           ->add('groupBy', 'c.id')
-           ->add('orderBy', 'total DESC')
-           ->setMaxResults(13);
-        $cities = $qb->getQuery()->getResult();
-
-
-
-
-
-        //$twig = $this->container->get('twig');
-        //$twig->addExtension(new \Twig_Extensions_Extension_Text);
+        $cities = $repo->findEventCities(new \DateTime('now'));
 
         return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
     }
-
-
-
 
     /**
      * Lists all Event entities by city.

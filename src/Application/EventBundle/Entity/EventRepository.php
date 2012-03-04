@@ -64,8 +64,8 @@ class EventRepository extends EntityRepository
             ->andWhere('u.id = eu.user_id')
             ->andWhere('eu.event_id = :id')->setParameter('id', $event->getId())
             ->setMaxResults($max)
-            ->getQuery()->getResult();
-
+            ->getQuery()
+            ->getResult();
     }
 
     /**
@@ -83,6 +83,28 @@ class EventRepository extends EntityRepository
             ->add('from', 'ApplicationEventBundle:Event e')
             ->andWhere('e.date_start > :date')->setParameter('date', $from->format('Y-m-d'))
             ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+    }
+
+    /**
+     * findEventCities
+     *
+     * @param \DateTime $date
+     * @param int $max
+     * @access public
+     * @return Doctrine\Common\ArrayCollection
+     */
+    public function findEventCities(\DateTime $date, $max=13)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'COUNT(e.id) AS total, c.name, c.id')
+            ->add('from', 'ApplicationEventBundle:Event e, ApplicationCityBundle:City c')
+            ->andWhere('e.city_id = c.id')
+            ->andWhere('e.date_start > :date')->setParameter('date', $date->format('Y-m-d'))
+            ->add('groupBy', 'c.id')
+            ->add('orderBy', 'total DESC')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
     }
 
 }
