@@ -45,6 +45,84 @@ class EventRepository extends EntityRepository
             ->add('select', 'u')
             ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
             ->andWhere('u.id = eu.user_id')
-            ->andWhere('eu.event_id = :id')->setParameter('id', intval($user_id))->getQuery()->getResult();
+            ->andWhere('eu.user_id = :id')->setParameter('id', intval($user_id))->getQuery()->getResult();
     }
+
+    /**
+     * findUsersByEvent
+     *
+     * @param Application\EventBundle\Entity\Event $event
+     * @param int $max
+     * @access public
+     * @return Doctrine\Common\ArrayCollection
+     */
+    public function findUsersByEvent($event,$max=12)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'u')
+            ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
+            ->andWhere('u.id = eu.user_id')
+            ->andWhere('eu.event_id = :id')->setParameter('id', $event->getId())
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * findEventsDQL
+     *
+     * @param \DateTime $from
+     * @param \DateTime $to
+     * @access public
+     * @return Doctrine DQL
+     */
+    public function findEventsDQL(\DateTime $from, $to = NULL)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'e')
+            ->add('from', 'ApplicationEventBundle:Event e')
+            ->andWhere('e.date_start > :date')->setParameter('date', $from->format('Y-m-d'))
+            ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+    }
+
+    /**
+     * findEventCities
+     *
+     * @param \DateTime $date
+     * @param int $max
+     * @access public
+     * @return Doctrine\Common\ArrayCollection
+     */
+    public function findEventCities(\DateTime $date, $max=13)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'COUNT(e.id) AS total, c.name, c.id')
+            ->add('from', 'ApplicationEventBundle:Event e, ApplicationCityBundle:City c')
+            ->andWhere('e.city_id = c.id')
+            ->andWhere('e.date_start > :date')->setParameter('date', $date->format('Y-m-d'))
+            ->add('groupBy', 'c.id')
+            ->add('orderBy', 'total DESC')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * findEventsByCityDQL
+     *
+     * @param \DateTime $date
+     * @param \Application\CityBundle\Entity\City $city
+     * @access public
+     * @return Doctrine DQL
+     */
+    public function findEventsByCityDQL(\DateTime $date, \Application\CityBundle\Entity\City $city)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'e')
+            ->add('from', 'ApplicationEventBundle:Event e')
+            ->andWhere('e.date_start > :date')->setParameter('date', $date->format('Y-m-d'))
+            ->andWhere('e.city_id = :city_id')->setParameter('city_id', $city->getId())
+            ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+    }
+
 }

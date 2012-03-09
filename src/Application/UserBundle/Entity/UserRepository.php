@@ -33,4 +33,24 @@ class UserRepository extends EntityRepository
         ));
         return $query->getSingleResult();
     }
+
+    /**
+     * findUsersByCity
+     *
+     * @param \Application\CityBundle\Entity\City $city
+     * @param int $max
+     * @access public
+     * @return \Doctrine\Common\ArrayCollection
+     */
+    public function findUsersByCity(\Application\CityBundle\Entity\City $city, $max = 10)
+    {
+        return $this->_em->createQueryBuilder()
+            ->add('select', 'u')
+            ->add('from', 'ApplicationUserBundle:User u')
+            ->andWhere('u.city_id = :id')->setParameter('id', $city->getId())
+            ->add('orderBy', 'u.date_login DESC')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
+    }
 }

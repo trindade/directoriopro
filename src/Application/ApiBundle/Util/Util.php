@@ -35,4 +35,30 @@ class Util
 
         return $clean;
     }
+
+    /**
+     * eventsDetailsGenerator
+     *
+     * @param array $events
+     * @param \Doctrine\ORM\EntityRepository $repo
+     * @static
+     * @access public
+     * @return array
+     */
+    static public function eventsDetailsGenerator(array $events, \Application\EventBundle\Entity\EventRepository $repo )
+    {
+        $date_now = false;
+
+        foreach ($events as $event) {
+            $date_current = $event->getDateStart()->format('Y-m-d');
+            $event->date_now = false;
+
+            if ( $date_now != $date_current ) {
+                $date_now = $date_current;
+                $event->date_now = $event->getPrettyDate();
+            }
+            $event->users_list = $repo->findUsersByEvent($event);
+        }
+        return $events;
+    }
 }

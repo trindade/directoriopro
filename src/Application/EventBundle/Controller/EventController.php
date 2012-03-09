@@ -41,13 +41,8 @@ class EventController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
 
-
-
-        $query = $em->createQueryBuilder();
-        $query->add('select', 'e')
-           ->add('from', 'ApplicationEventBundle:Event e')
-           ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d 00:00:00'))
-           ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+        $repo = $em->getRepository('ApplicationEventBundle:Event');
+        $query = $repo->findEventsDQL(new \DateTime('now'));
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -66,56 +61,12 @@ class EventController extends Controller
         $view = new DefaultView();
         $html = $view->render($pagerfanta, $routeGenerator);//, array('category_id' => (int)$category_id)
 
-        if ( $entities ) {
-            $total = count($entities);
-            $date_now = false;
+        $entities = Util::eventsDetailsGenerator($entities, $repo);
 
-            for ( $i = 0; $i < $total; $i++ ) {
-
-                $date_current = $entities[$i]->getDateStart()->format('Y-m-d');
-                if ( $date_now != $date_current ) {
-                    $date_now = $date_current;
-                    $entities[$i]->date_now = $entities[$i]->getPrettyDate();
-                }else{
-                    $entities[$i]->date_now = false;
-                }
-
-                $qb = $em->createQueryBuilder();
-                $qb->add('select', 'u')
-                   ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
-                   ->andWhere('u.id = eu.user_id')
-                   ->andWhere('eu.event_id = :id')->setParameter('id', $entities[$i]->getId())
-                   ->setMaxResults(12);
-                $query = $qb->getQuery();
-                $entities[$i]->users_list = $query->getResult();
-            }
-        }
-
-
-
-
-        $qb = $em->createQueryBuilder();
-        $qb->add('select', 'COUNT(e.id) AS total, c.name, c.id')
-           ->add('from', 'ApplicationEventBundle:Event e, ApplicationCityBundle:City c')
-           ->andWhere('e.city_id = c.id')
-           ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
-           ->add('groupBy', 'c.id')
-           ->add('orderBy', 'total DESC')
-           ->setMaxResults(13);
-        $cities = $qb->getQuery()->getResult();
-
-
-
-
-
-        //$twig = $this->container->get('twig');
-        //$twig->addExtension(new \Twig_Extensions_Extension_Text);
+        $cities = $repo->findEventCities(new \DateTime('now'));
 
         return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
     }
-
-
-
 
     /**
      * Lists all Event entities by city.
@@ -125,39 +76,19 @@ class EventController extends Controller
      */
     public function cityAction($id)
     {
-
         $request = $this->getRequest();
-        $page = $request->query->get('page');
-        if ( !$page ) $page = 1;
+        $page = $request->query->get('page',1);
 
         $em = $this->getDoctrine()->getEntityManager();
+        $eventRepo = $em->getRepository('ApplicationEventBundle:Event');
 
-        $city = $em->getRepository('ApplicationCityBundle:City')->find($id);
-
-        if (!$city) {
+        if (!$city = $em->getRepository('ApplicationCityBundle:City')->find($id)) {
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
+        $country = $em->getRepository('ApplicationCityBundle:Country')->findOneBy(array('code'=>$city->getCode()));
 
-
-        $query = $em->createQuery("SELECT c.name FROM ApplicationCityBundle:Country c WHERE c.code = :code");
-        $query->setParameters(array(
-            'code' => $city->getCode()
-        ));
-        $country = current( $query->getResult() );
-
-
-
-
-        $query = $em->createQueryBuilder();
-        $query->add('select', 'e')
-           ->add('from', 'ApplicationEventBundle:Event e')
-           ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
-           ->andWhere('e.city_id = :city_id')->setParameter('city_id', $id)
-           ->add('orderBy', 'e.featured DESC, e.date_start ASC');
-
-
-
+        $query = $eventRepo->findEventsByCityDQL(new \DateTime('now'), $city);
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -176,64 +107,16 @@ class EventController extends Controller
         $view = new DefaultView();
         $html = $view->render($pagerfanta, $routeGenerator);//, array('category_id' => (int)$category_id)
 
-        $users = false;
+        $users = array();
         if ( $page == 1 ) {
-            $qb = $em->createQueryBuilder();
-            $qb->add('select', 'u')
-               ->add('from', 'ApplicationUserBundle:User u')
-               ->andWhere('u.city_id = :id')->setParameter('id', $id)
-               ->add('orderBy', 'u.date_login DESC')
-               ->setMaxResults(10);
-
-            $query = $qb->getQuery();
-            $users = $query->getResult();
+            $users = $em->getRepository('ApplicationUserBundle:User')->findUsersByCity($city);
             //shuffle( $users );
             //$users = array_splice($users, 0, 7);
         }
 
+        $entities = Util::eventsDetailsGenerator($entities, $eventRepo);
 
-
-
-
-        if ( $entities ) {
-            $total = count($entities);
-            $date_now = false;
-
-
-            for ( $i = 0; $i < $total; $i++ ) {
-
-                $date_current = $entities[$i]->getPrettyDate();
-                if ( $date_now != $date_current ) {
-                    $date_now = $date_current;
-                    $entities[$i]->date_now = $date_current;
-                }else{
-                    $entities[$i]->date_now = false;
-                }
-
-                $qb = $em->createQueryBuilder();
-                $qb->add('select', 'u')
-                   ->add('from', 'ApplicationUserBundle:User u, ApplicationEventBundle:EventUser eu')
-                   ->andWhere('u.id = eu.user_id')
-                   ->andWhere('eu.event_id = :id')->setParameter('id', $entities[$i]->getId())
-                   ->setMaxResults(12);
-
-                $entities[$i]->users_list = $qb->getQuery()->getResult();
-            }
-        }
-
-
-        $qb = $em->createQueryBuilder();
-        $qb->add('select', 'COUNT(e.id) AS total, c.name, c.id')
-           ->add('from', 'ApplicationEventBundle:Event e, ApplicationCityBundle:City c')
-           ->andWhere('e.city_id = c.id')
-           ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
-           ->add('groupBy', 'c.id')
-           ->add('orderBy', 'total DESC')
-           ->setMaxResults(13);
-        $cities = $qb->getQuery()->getResult();
-
-        //$twig = $this->container->get('twig');
-        //$twig->addExtension(new \Twig_Extensions_Extension_Text);
+        $cities = $eventRepo->findEventCities(new \DateTime('now'));
 
         return array('cities' => $cities, 'city' => $city, 'country' => $country, 'pager' => $html, 'entities' => $entities, 'users' => $users);
     }
@@ -962,7 +845,7 @@ class EventController extends Controller
 
         $query = $em->createQuery("SELECT c.name FROM ApplicationCityBundle:Country c WHERE c.code = :code");
         $query->setParameters(array(
-            'code' => $city->getCode()
+            'code' => 51//$city->getCode()
         ));
         $country = current( $query->getResult() );
 
