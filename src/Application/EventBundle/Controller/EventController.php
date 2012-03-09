@@ -1019,16 +1019,8 @@ class EventController extends Controller
         $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
 
-
-
-        $query = $em->createQueryBuilder();
-        $query->add('select', 'e')
-           ->add('from', 'ApplicationEventBundle:Event e')
-           ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d 00:00:00'))
-           ->add('orderBy', 'e.featured DESC, e.date_start ASC')
-           ->andWhere('e.hashtag = :hashtag')->setParameter('hashtag', 'betabeers');
-        $entities = $query->getQuery()->getResult();
-
+        $entities = $em->createQuery("SELECT e FROM ApplicationEventBundle:Event e WHERE e.title LIKE 'betabeers%' ORDER BY e.date ASC")
+            ->getResult();
 
         return array('entities' => $entities );
     }
