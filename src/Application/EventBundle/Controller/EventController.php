@@ -1016,7 +1016,8 @@ class EventController extends Controller
         $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->createQuery("SELECT e FROM ApplicationEventBundle:Event e WHERE e.title LIKE 'betabeers%' AND e.date_end > NOW() ORDER BY e.date ASC")
+        $entities = $em->createQuery("SELECT e FROM ApplicationEventBundle:Event e WHERE e.title LIKE 'betabeers%' AND e.date_end > :date ORDER BY e.date ASC")
+            ->setParameter('date', date('Y-m-d 00:00:00'))
             ->getResult();
 
         return array('entities' => $entities );
