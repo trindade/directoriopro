@@ -383,7 +383,7 @@ class PostController extends Controller
     public function searchAction()
     {
         $request = $this->getRequest();
-        $search = $request->query->get('q');
+        $search = strip_tags( $request->query->get('q') );
         $category_id = $request->query->get('c');
         $type = (int)$request->query->get('t');
         $location = $request->query->get('location');
@@ -393,10 +393,7 @@ class PostController extends Controller
         $entities = $em->getRepository('ApplicationAnunciosBundle:Post')
           ->search($search, $category_id, $location, $type);
 
-        //$twig = $this->container->get('twig');
-        //$twig->addExtension(new \Twig_Extensions_Extension_Text);
-
-        return array('entities' => $entities, 'form_category' =>$category_id, 'form_type' => $type);
+        return array('entities' => $entities, 'form_category' =>$category_id, 'form_type' => $type, 'search' => $search);
     }
 
     /**

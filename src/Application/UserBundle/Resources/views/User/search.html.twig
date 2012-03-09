@@ -20,14 +20,17 @@
 
 
 
-<ul class="breadcrumb">
-  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
-  <li><a href="{{ path('user') }}">Profesionales</a> <span class="divider">/</span></li>
-  <li class="active">Buscar</li>
-</ul>
-
-
 <h1>Buscar profesionales</h1>
+
+<form>
+	<input name="q" value="{{ search }}"/> <input type="submit" value="Buscar" class="btn"/>
+</form>
+
+<ul class="nav nav-tabs">
+	<li><a href="{{ path('post_search') }}?q={{ search }}">Empleo</a></li>
+	<li class="active"><a href="{{ path('user_search') }}?q={{ search }}">Profesionales</a></li>
+	<li><a href="{{ path('event_search') }}?q={{ search }}">Eventos</a></li>
+</ul>
 
 {% if entities %}
 	<ul style="list-style-type:none;margin:0;padding:0;width:480px">

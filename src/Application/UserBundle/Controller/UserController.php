@@ -521,24 +521,21 @@ class UserController extends Controller
      */
     public function searchAction()
     {
-    $request = $this->getRequest();
-    $search = $request->query->get('q');
+      $request = $this->getRequest();
+      $search = strip_tags( $request->query->get('q') );
 
-        $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getEntityManager();
 
-    $qb = $em->createQueryBuilder()
-       ->add('select', 'u')
-       ->add('from', 'ApplicationUserBundle:User u')
-       ->add('where', "u.name like '%".$search."%' or u.body like '%".$search."%'")
-       ->add('orderBy', 'u.id DESC');
+      $qb = $em->createQueryBuilder()
+         ->add('select', 'u')
+         ->add('from', 'ApplicationUserBundle:User u')
+         ->add('where', "u.name like '%".$search."%' or u.body like '%".$search."%'")
+         ->add('orderBy', 'u.id DESC');
 
-    $query = $qb->getQuery();
-    $entities = $query->getResult();
+      $query = $qb->getQuery();
+      $entities = $query->getResult();
 
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
-
-        return array('entities' => $entities);
+      return array('entities' => $entities, 'search' => $search);
     }
 
 

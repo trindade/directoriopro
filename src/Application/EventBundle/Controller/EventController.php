@@ -670,7 +670,7 @@ class EventController extends Controller
     public function searchAction()
     {
         $request = $this->getRequest();
-        $search = $request->query->get('q');
+        $search = strip_tags( $request->query->get('q') );
 
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -696,10 +696,7 @@ class EventController extends Controller
         $cities = $qb->getQuery()->getResult();
 
 
-        //$twig = $this->container->get('twig');
-        //$twig->addExtension(new \Twig_Extensions_Extension_Text);
-
-        return array('entities' => $entities, 'cities' => $cities);
+        return array('entities' => $entities, 'cities' => $cities, 'search' => $search);
     }
 
     /**
@@ -1019,7 +1016,7 @@ class EventController extends Controller
         $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->createQuery("SELECT e FROM ApplicationEventBundle:Event e WHERE e.title LIKE 'betabeers%' ORDER BY e.date ASC")
+        $entities = $em->createQuery("SELECT e FROM ApplicationEventBundle:Event e WHERE e.title LIKE 'betabeers%' AND e.date_end > NOW() ORDER BY e.date ASC")
             ->getResult();
 
         return array('entities' => $entities );
