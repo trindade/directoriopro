@@ -845,7 +845,7 @@ class EventController extends Controller
 
         $query = $em->createQuery("SELECT c.name FROM ApplicationCityBundle:Country c WHERE c.code = :code");
         $query->setParameters(array(
-            'code' => 51//$city->getCode()
+            'code' => $city->getCode()
         ));
         $country = current( $query->getResult() );
 
@@ -870,7 +870,6 @@ class EventController extends Controller
             $em->persist($entity);
             $em->flush();
         }
-
 
         return array(
             'city'        => $city,
