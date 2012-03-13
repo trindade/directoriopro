@@ -1,16 +1,34 @@
-<h1>Forum creation</h1>
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+{% form_theme form 'ApplicationAnunciosBundle:Form:fields.html.twig' %}
 
-<form action="{{ path('forum_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+{% block title "Nuevo foro" %}
+
+{% block content %}
+
+<style>
+TEXTAREA.xlarge{width:430px}
+</style>
+
+
+<h1>Nuevo foro</h1>
+
+<form class="form-horizontal" action="{{ path('forum_create') }}" method="post" {{ form_enctype(form) }}>
+
+    {{ form_errors(form) }}
+    
+    {{ form_row(form.title, { 'label': 'Titulo' }) }}
+    {{ form_row(form.body, { 'label': 'Descripción' }) }}
+        
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary" style="width:150px">Guardar cambios</button>
+    </div>
+    
+    {{ form_row(form._token) }}
+
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('forum') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+{% endblock %}
+
+{% block script_load %}
+    $('.form-horizontal input:first').focus();
+{% endblock %}

@@ -1,22 +1,43 @@
-<h1>Forum edit</h1>
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+{% form_theme edit_form 'ApplicationAnunciosBundle:Form:fields.html.twig' %}
 
-<form action="{{ path('forum_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+{% block title "Editar foro" %}
+
+{% block content %}
+
+<style>
+TEXTAREA.xlarge{width:430px}
+</style>
+
+
+
+<h1>Editar foro</h1>
+
+<form class="form-horizontal" action="{{ path('forum_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+    {{ form_errors(edit_form) }}
+    
+    {{ form_row(edit_form.title, { 'label': 'Titulo' }) }}
+
+    {{ form_row(edit_form.body, { 'label': 'Descripción' }) }}
+    
+    <div class="form-actions">
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Guardar cambios</button> &nbsp;
+        <a href="{{ path('forum_show', { 'id': entity.id, 'slug': entity.slug }) }}" class="btn">Cancelar</a> &nbsp;
+    
+        {% if app.session.get('admin') %}   
+            <a href="{{ path('forum_delete', { 'id': entity.id }) }}" class="btn btn-danger pull-right">Eliminar</a>
+        {% endif %}
+    
+    </div>
+    
+    {{ form_row(edit_form._token) }}
+
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('forum') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('forum_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+{% endblock %}
+
+{% block script_load %}
+    $('.form-horizontal input:first').focus();    
+{% endblock %}

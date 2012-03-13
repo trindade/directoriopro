@@ -107,23 +107,15 @@ class ForumController extends Controller
         $page = $request->query->get('page');
         if ( !$page ) $page = 1;
 
-        //$em = $this->getDoctrine()->getEntityManager();
-
 
 
         $query = $em->createQueryBuilder();
         $query->add('select', 't')
            ->add('from', 'ApplicationForumBundle:Thread t')
+           ->add('where', 't.forum_id = :forum_id')->setParameter('forum_id', $id)
            ->add('orderBy', 't.date DESC'); //date_edit
 
-        // categoria?
-        $category_id = $request->query->get('c');
-        if ( $category_id ) {
-           $query->add('where', 't.forum_id = :forum_id')->setParameter('forum_id', $category_id);
-
-        }
-
-
+        
         $adapter = new DoctrineORMAdapter($query);
 
         $pagerfanta = new Pagerfanta($adapter);
@@ -132,13 +124,13 @@ class ForumController extends Controller
 
         $pagerfanta->setCurrentPage($page); // 1 by default
         $threads = $pagerfanta->getCurrentPageResults();
-        $routeGenerator = function($page, $category_id) {
+        $routeGenerator = function($page, $id) {
           $url = '?page='.$page;
-          if ( $category_id ) $url .= '&c=' . $category_id;
+          if ( $id ) $url .= '&c=' . $id;
             return $url;
         };
         $view = new DefaultView();
-        $html = $view->render($pagerfanta, $routeGenerator, array('category_id' => (int)$category_id));
+        $html = $view->render($pagerfanta, $routeGenerator, array('category_id' => $id));
 
 
 
@@ -203,11 +195,15 @@ class ForumController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
+
+            $slug = $entity->getTitle();
+            $entity->setSlug(Util::slugify($slug));
+
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('forum_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('forum_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug())));
             
         }
 

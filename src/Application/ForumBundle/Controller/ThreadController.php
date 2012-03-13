@@ -294,6 +294,12 @@ class ThreadController extends Controller
               $em->flush();
 
 
+              // contar forum total threads
+              $forum->setThreads($forum->getThreads() - 1 );
+              $em->persist($forum);
+              $em->flush();
+
+
               // borrar respuestas
               $query = $em->createQueryBuilder();
               $query->add('select', 'r')

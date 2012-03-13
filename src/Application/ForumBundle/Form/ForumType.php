@@ -14,7 +14,7 @@ class ForumType extends AbstractType
             ->add('body')
             //->add('visits')
             //->add('threads')
-            ->add('slug')
+            //->add('slug')
         ;
     }
 

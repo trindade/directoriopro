@@ -18,15 +18,19 @@
 
 <h1>{{ entity.title }}</h1>
 
-<ul>
-{% for thread in threads %}
-    <li><a href="{{ path('thread_show', { 'id': thread.id, 'slug': thread.slug }) }}">{{ thread.title }}</a></li>
-{% endfor %}
-</ul>
+{{ entity.body }}<br/><br/>
 
+{% if threads %}
+	<ul>
+	{% for thread in threads %}
+	    <li><a href="{{ path('thread_show', { 'id': thread.id, 'slug': thread.slug }) }}">{{ thread.title }}</a></li>
+	{% endfor %}
+	</ul>
 
+	{{ pager|raw }}
 
-
-{{ pager|raw }}
+{% else %}
+	No se han encontrado temas
+{% endif %}
 
 {% endblock %}

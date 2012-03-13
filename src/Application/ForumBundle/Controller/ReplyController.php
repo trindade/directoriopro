@@ -201,13 +201,21 @@ class ReplyController extends Controller
         $user_id = $session->get('id');
         $admin = $session->get('admin');
 
+        $thread = $em->getRepository('ApplicationForumBundle:Thread')->find( $entity->getThreadId() );
+
         if ( ( $entity->getUserId() == $user_id ) || $admin ) {
 
-          $em->remove($entity);
-          $em->flush();
+            $em->remove($entity);
+            $em->flush();
+
+            // contar forum total replies
+            $thread->setReplies($thread->getReplies() - 1 );
+            $em->persist($thread);
+            $em->flush();
+
         }
         
-        $thread = $em->getRepository('ApplicationForumBundle:Thread')->find( $entity->getThreadId() );
+        
         return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug())));
         
     }

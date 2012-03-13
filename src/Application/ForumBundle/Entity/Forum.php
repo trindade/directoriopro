@@ -29,9 +29,9 @@ class Forum
     private $title;
 
     /**
-     * @var string $body
+     * @var text $body
      *
-     * @ORM\Column(name="body", type="string", length=255)
+     * @ORM\Column(name="body", type="text")
      */
     private $body;
 
@@ -45,7 +45,7 @@ class Forum
     /**
      * @var string $slug
      *
-     * @ORM\Column(name="slug", type="string", length=100)
+     * @ORM\Column(name="slug", type="string", length=255, nullable=true)
      */
     private $slug;
 
@@ -83,7 +83,7 @@ class Forum
     /**
      * Set body
      *
-     * @param string $body
+     * @param text $body
      */
     public function setBody($body)
     {
@@ -93,7 +93,7 @@ class Forum
     /**
      * Get body
      *
-     * @return string 
+     * @return text 
      */
     public function getBody()
     {
