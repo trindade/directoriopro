@@ -1,0 +1,47 @@
+
+
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Buscar foro" %}
+
+{% block sidebar %}
+	
+
+
+	
+
+{% endblock %}
+
+{% block content %}
+
+
+<h1>Buscar foro</h1>
+
+<form>
+	<input name="q" value="{{ search }}"/> <input type="submit" value="Buscar" class="btn"/>
+</form>
+
+
+
+<ul class="nav nav-tabs">
+	<li><a href="{{ path('post_search') }}?q={{ search }}">Empleo</a></li>
+	<li><a href="{{ path('user_search') }}?q={{ search }}">Profesionales</a></li>
+	<li><a href="{{ path('event_search') }}?q={{ search }}">Eventos</a></li>
+	<li class="active"><a href="{{ path('thread_search') }}?q={{ search }}">Foro</a></li>
+</ul>
+
+
+{% if entities %}
+
+<ul>
+{% for entity in entities %}
+	<li><a href="{{ path('thread_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a></li>
+{% endfor %}
+</ul>
+
+
+{% else %}
+	sin resultados, prueba con otra busqueda
+{% endif %}
+
+{% endblock %}

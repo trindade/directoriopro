@@ -1,3 +1,8 @@
+ApplicationForumBundle:
+    resource: "@ApplicationForumBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ApplicationTestBundle:
     resource: "@ApplicationTestBundle/Controller/"
     type:     annotation

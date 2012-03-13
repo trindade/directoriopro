@@ -1,0 +1,53 @@
+<h1>Reply</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Body</th>
+            <td>{{ entity.body }}</td>
+        </tr>
+        <tr>
+            <th>Thread_id</th>
+            <td>{{ entity.threadid }}</td>
+        </tr>
+        <tr>
+            <th>User_id</th>
+            <td>{{ entity.userid }}</td>
+        </tr>
+        <tr>
+            <th>Votes</th>
+            <td>{{ entity.votes }}</td>
+        </tr>
+        <tr>
+            <th>Spam</th>
+            <td>{{ entity.spam }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('reply') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('reply_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('reply_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

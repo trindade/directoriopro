@@ -1,0 +1,72 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Administrar temas" %}
+
+
+{% block sidebar %}
+
+	<a href="{{ path('thread_new') }}" class="btn btn-large btn-primary">Publicar anuncio</a>
+
+	<b>Categorías</b><br/><br/>
+	<ul>
+	{% for category in categories_aux %}
+		<li><a href="{{ path('thread_admin') }}?c={{ category.forum_id }}"><b>{{ category.total }}</b> &nbsp;{{ category.title }}</a></li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<h1>Administrar temas</h1>
+
+
+
+{% if entities %}
+
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Anuncio</th>
+				<th>Visitas</th>
+				<th>Respuestas</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+	    {% for entity in entities %}
+
+			{% if entity.featured == 1 %}
+				{% set featured = 'NULL' %}
+			{% else %}
+				{% set featured = 1 %}
+			{% endif %}
+		
+	        <tr>
+				<td>
+					<a href="{{ path('thread_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a>
+					<br/><span class="date">{{ entity.date|date('d/m/Y') }}</span>
+				</td>
+				<td>{{ entity.visits }}</td>
+				<td>{{ entity.replies }}</td>
+				<td nowrap="nowrap">
+					<a href="{{ path('thread_edit', { 'id': entity.id }) }}" class="btn">editar</a> 
+					<a href="{{ path('thread_admin_featured', { 'id': entity.id, 'value': featured }) }}" class="btn {% if entity.featured %}btn-primary{% endif %}">&#9733;</a>
+					
+				</td>
+	        </tr>
+	    {% endfor %}
+	    </tbody>
+	</table>
+	{{ pager|raw }}
+{% else %}
+	sin resultados, prueba con otra busqueda
+{% endif %}
+
+
+
+
+{% endblock %}

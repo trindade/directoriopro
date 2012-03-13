@@ -1,0 +1,48 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+{% form_theme edit_form 'ApplicationAnunciosBundle:Form:fields.html.twig' %}
+
+{% block title "Editar respuesta" %}
+
+{% block content %}
+
+<style>
+TEXTAREA.xlarge{width:430px}
+</style>
+
+
+
+<h1>Editar respuesta</h1>
+
+<form class="form-horizontal" action="{{ path('reply_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+
+
+
+    {{ form_errors(edit_form) }}
+    
+    {{ form_row(edit_form.body, { 'label': 'Descripción' }) }}
+    
+    <div class="hide">{{ form_row(edit_form.thread_id, { 'label': 'Thread_id' }) }}</div>
+
+
+    
+    <div class="form-actions">
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Guardar cambios</button> &nbsp;
+        <a href="{{ path('thread_show', { 'id': thread.id, 'slug': thread.slug }) }}" class="btn">Cancelar</a> &nbsp;
+    
+        {% if app.session.get('admin') %}   
+            <a href="{{ path('reply_delete', { 'id': entity.id }) }}" class="btn btn-danger pull-right">Eliminar</a>
+        {% endif %}
+    
+    </div>
+    
+    {{ form_row(edit_form._token) }}
+
+</form>
+
+{% endblock %}
+
+{% block script_load %}
+    $('.form-horizontal textarea:first').focus();
+{% endblock %}

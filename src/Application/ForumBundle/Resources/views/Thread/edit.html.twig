@@ -1,0 +1,50 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+{% form_theme edit_form 'ApplicationAnunciosBundle:Form:fields.html.twig' %}
+
+{% block title "Editar tema" %}
+
+{% block content %}
+
+<style>
+TEXTAREA.xlarge{width:430px}
+</style>
+
+
+
+<h1>Editar tema</h1>
+
+<form class="form-horizontal" action="{{ path('thread_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+
+
+
+    {{ form_errors(edit_form) }}
+
+    {{ form_row(edit_form.title, { 'label': 'Titulo' }) }}
+    
+    {{ form_row(edit_form.body, { 'label': 'Descripción' }) }}
+    
+    <div class="hide">{{ form_row(edit_form.forum_id, { 'label': 'Forum_id' }) }}</div>
+
+
+    
+    <div class="form-actions">
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Guardar cambios</button> &nbsp;
+        <a href="{{ path('thread_show', { 'id': entity.id, 'slug': entity.slug }) }}" class="btn">Cancelar</a> &nbsp;
+    
+        {% if app.session.get('admin') %}   
+            <a href="{{ path('thread_delete', { 'id': entity.id }) }}" class="btn btn-danger pull-right">Eliminar</a>
+        {% endif %}
+    
+    </div>
+    
+    {{ form_row(edit_form._token) }}
+
+</form>
+
+{% endblock %}
+
+{% block script_load %}
+    $('.form-horizontal input:first').focus();
+{% endblock %}

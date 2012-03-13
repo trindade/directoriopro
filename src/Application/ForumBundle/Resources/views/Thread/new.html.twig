@@ -1,0 +1,50 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+{% form_theme form 'ApplicationAnunciosBundle:Form:fields.html.twig' %}
+
+{% block title "Publicar tema" %}
+
+{% block content %}
+
+<h1>Publicar tema</h1>
+
+<style>
+TEXTAREA.xlarge{width:430px}
+</style>
+
+
+
+<form action="{{ path('thread_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }}>
+
+	{{ form_errors(form) }}
+
+	{{ form_row(form.title, { 'label': 'Titulo' }) }}
+	
+	{{ form_row(form.body, { 'label': 'Descripción' }) }}
+
+	<div class="control-group">
+		<label class="control-label">Foro</label>
+		<div class="controls">
+			<select id="application_forumbundle_threadtype_forum_id" name="application_forumbundle_threadtype[forum_id]">
+				{% for forum in forums %}
+					<option value="{{forum.id}}" {% if forum.id == id %}selected="selected"{% endif %}>{{forum.title}}</a>
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+
+    <div class="form-actions">
+       <button type="submit" class="btn btn-primary" style="width:150px">Publicar</button>
+     </div>
+
+
+	{{ form_row(form._token) }}
+
+</form>
+
+
+
+{% endblock %}
+
+{% block script_load %}
+	$('.form-horizontal input:first').focus();
+{% endblock %}

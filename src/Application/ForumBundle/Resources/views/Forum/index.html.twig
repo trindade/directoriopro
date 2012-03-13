@@ -1,0 +1,47 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Foro" %}
+
+{% block sidebar %}
+    <a href="{{ path('thread_new') }}" class="btn btn-large btn-primary">Nuevo tema</a>
+
+    <br/><br/>
+    <b>Foros</b>
+    <br/><br/>
+    <ul>
+    {% for entity in forums %}
+        <li>
+            <a href="{{ path('forum_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a> ({{ entity.threads }})
+        </li>
+    {% endfor %}
+    </url>
+
+{% endblock %}
+
+{% block content %}
+
+
+<ul class="breadcrumb">
+  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
+  <li><a href="{{ path('forum') }}">Foro</a></li>
+</ul>
+
+<h1>Foro</h1>
+
+
+
+<ul>
+{% for entity in entities %}
+    <li>
+        <a href="{{ path('thread_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+
+
+
+
+{{ pager|raw }}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title entity.title %}
+
+{% block sidebar %}
+
+	<a href="{{ path('thread_new') }}?id={{ entity.id }}" class="btn btn-large btn-primary">Nuevo tema</a>
+
+{% endblock %}
+
+{% block content %}
+
+<ul class="breadcrumb">
+  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
+  <li><a href="{{ path('forum') }}">Foro</a> <span class="divider">/</span></li>
+  <li>{{ entity.title }}</li>
+</ul>
+
+<h1>{{ entity.title }}</h1>
+
+<ul>
+{% for thread in threads %}
+    <li><a href="{{ path('thread_show', { 'id': thread.id, 'slug': thread.slug }) }}">{{ thread.title }}</a></li>
+{% endfor %}
+</ul>
+
+
+
+
+{{ pager|raw }}
+
+{% endblock %}

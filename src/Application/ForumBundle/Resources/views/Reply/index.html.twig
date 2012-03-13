@@ -1,0 +1,47 @@
+<h1>Reply list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Body</th>
+            <th>Thread_id</th>
+            <th>User_id</th>
+            <th>Votes</th>
+            <th>Spam</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('reply_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.body }}</td>
+            <td>{{ entity.threadid }}</td>
+            <td>{{ entity.userid }}</td>
+            <td>{{ entity.votes }}</td>
+            <td>{{ entity.spam }}</td>
+            <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('reply_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('reply_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('reply_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

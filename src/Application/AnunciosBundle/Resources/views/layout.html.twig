@@ -62,6 +62,9 @@
         <div class="nav-collapse">
 
 <ul class="nav">
+
+		
+
 		<li>
 			<a href="{{ path('post') }}">Empleo</a>
 
@@ -96,9 +99,10 @@
 <form class="navbar-search pull-left" action="{{ path('post_search') }}" id="form_search">
   <input type="text" name="q" id="query" class="search-query span2" placeholder="Buscar" autocomplete="off">
 	<div id="menu_options">
-		<a href="#" onclick="$('#form_search').attr('action','{{ path('post') }}search').submit()">Buscar Empleos</a>
-		<a href="#" onclick="$('#form_search').attr('action','{{ path('user') }}search').submit()">Buscar Profesionales</a>
-		<a href="#" onclick="$('#form_search').attr('action','{{ path('event') }}search').submit()">Buscar Eventos</a>
+		<a href="#" onclick="$('#form_search').attr('action','{{ path('post_search') }}').submit()">Buscar Empleos</a>
+		<a href="#" onclick="$('#form_search').attr('action','{{ path('user_search') }}').submit()">Buscar Profesionales</a>
+		<a href="#" onclick="$('#form_search').attr('action','{{ path('event_search') }}').submit()">Buscar Eventos</a>
+		
 	</div>
 </form>
 
@@ -128,6 +132,7 @@
 					<li><a href="{{ path('user_admin') }}">Administrar usuarios</a></li>
 					<li><a href="{{ path('event_admin') }}">Administrar eventos</a></li>
 					<li><a href="{{ path('place_admin') }}">Administrar espacios</a></li>
+					<li><a href="{{ path('thread_admin') }}">Administrar temas</a></li>
 				{% endif %}
 				<li class="divider"></li>
 				<li><a href="{{ path('user_logout') }}">Salir</a></li>
