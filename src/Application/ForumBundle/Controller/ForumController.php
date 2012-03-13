@@ -278,10 +278,14 @@ class ForumController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
+
+            $slug = $entity->getTitle();
+            $entity->setSlug(Util::slugify($slug));
+
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('forum_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('forum_show', array('id' => $id, 'slug' => $entity->getSlug())));
         }
 
         return array(
