@@ -63,7 +63,9 @@
 
 <ul class="nav">
 
-		
+		<li>
+			<a href="{{ path('forum') }}">Foro</a>
+		</li>
 
 		<li>
 			<a href="{{ path('post') }}">Empleo</a>
@@ -102,7 +104,7 @@
 		<a href="#" onclick="$('#form_search').attr('action','{{ path('post_search') }}').submit()">Buscar Empleos</a>
 		<a href="#" onclick="$('#form_search').attr('action','{{ path('user_search') }}').submit()">Buscar Profesionales</a>
 		<a href="#" onclick="$('#form_search').attr('action','{{ path('event_search') }}').submit()">Buscar Eventos</a>
-		
+		<a href="#" onclick="$('#form_search').attr('action','{{ path('thread_search') }}').submit()">Buscar Foro</a>
 	</div>
 </form>
 
