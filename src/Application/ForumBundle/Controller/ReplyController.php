@@ -93,6 +93,9 @@ class ReplyController extends Controller
 
         if ($form->isValid()) {
 
+            // limpiar html
+            $entity->setBody( strip_tags( $entity->getBody() ) );
+
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
@@ -101,6 +104,9 @@ class ReplyController extends Controller
             $em = $this->getDoctrine()->getEntityManager();
             $thread = $em->getRepository('ApplicationForumBundle:Thread')->find( $entity->getThreadId() );
             $thread->setReplies($thread->getReplies() + 1 );
+
+            // actualizar fecha
+            $thread->setDateUpdate( new \DateTime("now") );
             $em->persist($thread);
             $em->flush();
 
@@ -177,7 +183,7 @@ class ReplyController extends Controller
 
         $thread = $em->getRepository('ApplicationForumBundle:Thread')->find( $entity->getThreadId() );
 
-        if ( ( $entity->getUserId() == $user_id ) || $admin ) {            
+        if ( ( $entity->getUserId() == $user_id ) || $admin ) {
 
             $editForm   = $this->createForm(new ReplyType(), $entity);
             
@@ -187,6 +193,11 @@ class ReplyController extends Controller
             $editForm->bindRequest($request);
 
             if ($editForm->isValid()) {
+
+
+                // limpiar html
+                $entity->setBody( strip_tags( $entity->getBody() ) );
+
                 $em->persist($entity);
                 $em->flush();
 
@@ -198,7 +209,7 @@ class ReplyController extends Controller
                 'edit_form'   => $editForm->createView(),
                 
             );
-            
+
         }else{
 
             return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug(), 'forum_id' => $thread->getForumId())));

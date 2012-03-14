@@ -50,7 +50,7 @@ class ForumController extends Controller
     $query = $em->createQueryBuilder();
     $query->add('select', 't')
        ->add('from', 'ApplicationForumBundle:Thread t')
-       ->add('orderBy', 't.featured DESC, t.id DESC');
+       ->add('orderBy', 't.featured DESC, t.date_update DESC');
 
 
     // categoria?
@@ -117,7 +117,7 @@ class ForumController extends Controller
         $query->add('select', 't')
            ->add('from', 'ApplicationForumBundle:Thread t')
            ->add('where', 't.forum_id = :forum_id')->setParameter('forum_id', $id)
-           ->add('orderBy', 't.date DESC'); //date_edit
+           ->add('orderBy', 't.featured DESC, t.date_update DESC');
 
         
         $adapter = new DoctrineORMAdapter($query);

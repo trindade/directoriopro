@@ -74,7 +74,9 @@ Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }
 
       <br/>
 
-      <a href="{{ path('reply_edit', { 'id': reply.id }) }}" class="pull-right">editar</a>
+      {% if reply.user.id == app.session.get('id') or app.session.get('admin') == 1 %}
+        <a href="{{ path('reply_edit', { 'id': reply.id }) }}" class="pull-right">editar</a>
+      {% endif %}
 
       <a href="{{ path('user_show', { 'id': reply.user.id, 'slug': reply.user.slug }) }}">{{ reply.user.name }}</a> - {{ reply.date|date('d/m/Y') }}
 
@@ -89,7 +91,7 @@ Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }
 </div>
 
 
-{% if user.id == app.session.get('id') %}
+{% if app.session.get('id') %}
 <form action="{{ path('reply_create') }}" method="post" class="form_reply" {{ form_enctype(form) }}>
 
     {{ form_row(form.body, { 'label': 'Respuesta' }) }}

@@ -33,7 +33,8 @@
 <ul>
 {% for entity in entities %}
     <li>
-        <a href="{{ path('thread_show', { 'id': entity.id, 'slug': entity.slug, 'forum_id': entity.forumid }) }}">{{ entity.title }}</a>
+        <a href="{{ path('thread_show', { 'id': entity.id, 'slug': entity.slug, 'forum_id': entity.forumid }) }}">{{ entity.title }}</a><br/>
+        {{ entity.replies }} respuestas<br/><br/>
     </li>
     {% endfor %}
 </ul>

@@ -5,13 +5,17 @@
 
 {% block content %}
 
-<h1>Publicar tema</h1>
+
 
 <style>
 TEXTAREA.xlarge{width:430px}
 </style>
 
+<h1>Publicar tema</h1>
 
+<div class="alert">
+<b>Imporante:</b> antes de iniciar un tema en el foro, usa primero el buscador por si alguién ha escrito algo relacionado y no duplicar contenidos
+</div>
 
 <form action="{{ path('thread_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }}>
 

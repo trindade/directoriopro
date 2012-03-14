@@ -96,10 +96,15 @@ class ThreadController extends Controller
         $user_id = $session->get('id');
         $entity->setUserId( $user_id );
         $entity->setDate( new \DateTime("now") );
+        $entity->setDateUpdate( new \DateTime("now") );
 
         
 
         if ($form->isValid()) {
+
+            // limpiar html
+            $entity->setTitle( strip_tags( $entity->getTitle() ) );
+            $entity->setBody( strip_tags( $entity->getBody() ) );
 
             $slug = $entity->getTitle();
             $entity->setSlug(Util::slugify($slug));
@@ -141,14 +146,25 @@ class ThreadController extends Controller
             throw $this->createNotFoundException('Unable to find Thread entity.');
         }
 
-        $editForm = $this->createForm(new ThreadType(), $entity);
-        
+        $session = $this->getRequest()->getSession();
+        $user_id = $session->get('id');
+        $admin = $session->get('admin');
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+        if ( ( $entity->getUserId() == $user_id ) || $admin ) {
+
+
+            $editForm = $this->createForm(new ThreadType(), $entity);
             
-        );
+
+            return array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                
+            );
+
+        }else{
+            return $this->redirect($this->generateUrl('thread_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug(), 'forum_id' => $entity->getForumId())));
+        }
     }
 
     /**
@@ -183,6 +199,10 @@ class ThreadController extends Controller
             $editForm->bindRequest($request);
 
             if ($editForm->isValid()) {
+
+                // limpiar html
+                $entity->setTitle( strip_tags( $entity->getTitle() ) );
+                $entity->setBody( strip_tags( $entity->getBody() ) );
 
                 $slug = $entity->getTitle();
                 $entity->setSlug(Util::slugify($slug));
@@ -264,6 +284,35 @@ class ThreadController extends Controller
         return $this->redirect($url);
     }
 
+
+    /**
+     * Search Thread entities.
+     *
+     * @Route("/search", name="thread_search")
+     * @Template()
+     */
+    public function searchAction()
+    {
+        $request = $this->getRequest();
+        $search = strip_tags( $request->query->get('q') );
+
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $qb->add('select', 't')
+           ->add('from', 'ApplicationForumBundle:Thread t')
+           ->add('orderBy', 't.featured DESC, t.date_update DESC');
+
+        if ( $search ) $qb->andWhere("( t.body LIKE '%".$search."%' OR t.title LIKE '%".$search."%' )");
+
+        $entities = $qb->getQuery()->getResult();
+
+
+        
+
+
+        return array('entities' => $entities, 'search' => $search);
+    }
 
     /**
      * Admin Thread entities.
@@ -356,33 +405,5 @@ class ThreadController extends Controller
 
 
 
-    /**
-     * Search Thread entities.
-     *
-     * @Route("/search", name="thread_search")
-     * @Template()
-     */
-    public function searchAction()
-    {
-        $request = $this->getRequest();
-        $search = strip_tags( $request->query->get('q') );
-
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $qb = $em->createQueryBuilder();
-        $qb->add('select', 't')
-           ->add('from', 'ApplicationForumBundle:Thread t')
-           ->add('orderBy', 't.featured DESC, t.date DESC');
-
-        if ( $search ) $qb->andWhere("( t.body LIKE '%".$search."%' OR t.title LIKE '%".$search."%' )");
-
-        $entities = $qb->getQuery()->getResult();
-
-
-        
-
-
-        return array('entities' => $entities, 'search' => $search);
-    }
 
 }

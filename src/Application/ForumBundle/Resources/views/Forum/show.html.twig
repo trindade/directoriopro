@@ -23,7 +23,10 @@
 {% if threads %}
 	<ul>
 	{% for thread in threads %}
-	    <li><a href="{{ path('thread_show', { 'id': thread.id, 'slug': thread.slug, 'forum_id': thread.forumid }) }}">{{ thread.title }}</a></li>
+	    <li>
+	    	<a href="{{ path('thread_show', { 'id': thread.id, 'slug': thread.slug, 'forum_id': thread.forumid }) }}">{{ thread.title }}</a><br/>
+        {{ thread.replies }} respuestas<br/><br/>
+	    </li>
 	{% endfor %}
 	</ul>
 

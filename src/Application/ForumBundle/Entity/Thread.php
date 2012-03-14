@@ -85,6 +85,13 @@ class Thread
     private $date;
 
     /**
+     * @var datetime $date_update
+     *
+     * @ORM\Column(name="date_update", type="datetime")
+     */
+    private $date_update;
+
+    /**
      * @var integer $featured
      *
      * @ORM\Column(name="featured", type="integer")
@@ -279,6 +286,26 @@ class Thread
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set date_update
+     *
+     * @param datetime $date
+     */
+    public function setDateUpdate($dateUpdate)
+    {
+        $this->date_update = $dateUpdate;
+    }
+
+    /**
+     * Get date_update
+     *
+     * @return datetime 
+     */
+    public function getDateUpdate()
+    {
+        return $this->date_update;
     }
 
     /**
