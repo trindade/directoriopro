@@ -92,9 +92,19 @@ Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }
 
 
 {% if app.session.get('id') %}
+
+<b>Respuesta</b> &nbsp; <a href="#" onclick="$('#rules').slideToggle('fast');return false">Normas</a>
+<div id="rules" class="alert hide">
+  <ul>
+    <li>Evita respuestas que no aporten valor a la discusión, por ejemplo decir sólo "gracias" para evitar largas cadenas de mensajes.</li>
+    <li>No esta permitido poner código HTML pero se permite poner enlaces.</li>
+    <li>Como máximo se permiten 3 enlaces en una respuesta para evitar spam.</li>
+  </ul>
+</div>
+
 <form action="{{ path('reply_create') }}" method="post" class="form_reply" {{ form_enctype(form) }}>
 
-    {{ form_row(form.body, { 'label': 'Respuesta' }) }}
+    {{ form_row(form.body, { 'label': ' ' }) }}
 
     {{ form_row(form._token) }}
 
