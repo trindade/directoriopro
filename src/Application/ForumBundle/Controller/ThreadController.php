@@ -290,34 +290,7 @@ class ThreadController extends Controller
     }
 
 
-    /**
-     * Search Thread entities.
-     *
-     * @Route("/search", name="thread_search")
-     * @Template()
-     */
-    public function searchAction()
-    {
-        $request = $this->getRequest();
-        $search = strip_tags( $request->query->get('q') );
 
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $qb = $em->createQueryBuilder();
-        $qb->add('select', 't')
-           ->add('from', 'ApplicationForumBundle:Thread t')
-           ->add('orderBy', 't.featured DESC, t.date_update DESC');
-
-        if ( $search ) $qb->andWhere("( t.body LIKE '%".$search."%' OR t.title LIKE '%".$search."%' )");
-
-        $entities = $qb->getQuery()->getResult();
-
-
-        
-
-
-        return array('entities' => $entities, 'search' => $search);
-    }
 
     /**
      * Admin Thread entities.
