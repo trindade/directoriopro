@@ -11,7 +11,7 @@
     <ul>
     {% for entity in forums %}
         <li>
-            <a href="{{ path('forum_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a> ({{ entity.threads }})
+            <a href="{{ path('forum_show', { 'id': entity.id }) }}">{{ entity.title }}</a> ({{ entity.threads }})
         </li>
     {% endfor %}
     </url>
@@ -33,7 +33,7 @@
 <ul>
 {% for entity in entities %}
     <li>
-        <a href="{{ path('thread_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a>
+        <a href="{{ path('thread_show', { 'id': entity.id, 'slug': entity.slug, 'forum_id': entity.forumid }) }}">{{ entity.title }}</a>
     </li>
     {% endfor %}
 </ul>

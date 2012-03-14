@@ -29,7 +29,7 @@ TEXTAREA.xlarge{width:430px}
     <div class="form-actions">
 
         <button type="submit" class="btn btn-primary" style="width:150px">Guardar cambios</button> &nbsp;
-        <a href="{{ path('thread_show', { 'id': thread.id, 'slug': thread.slug }) }}" class="btn">Cancelar</a> &nbsp;
+        <a href="{{ path('thread_show', { 'id': thread.id, 'slug': thread.slug, 'forum_id': thread.forumid }) }}" class="btn">Cancelar</a> &nbsp;
     
         {% if app.session.get('admin') %}   
             <a href="{{ path('reply_delete', { 'id': entity.id }) }}" class="btn btn-danger pull-right">Eliminar</a>

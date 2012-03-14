@@ -12,6 +12,10 @@ use Application\ForumBundle\Form\ForumType;
 // thread
 use Application\ForumBundle\Entity\Thread;
 
+// reply, thread_show
+use Application\ForumBundle\Entity\Reply;
+use Application\ForumBundle\Form\ReplyType;
+
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\View\DefaultView;
@@ -87,10 +91,10 @@ class ForumController extends Controller
     /**
      * Finds and displays a Forum entity.
      *
-     * @Route("/{slug}-{id}/", requirements={"slug" = "[a-z0-9\-]+", "id" = "^\d+$"}, name="forum_show")
+     * @Route("/f{id}/", name="forum_show")
      * @Template()
      */
-    public function showAction($slug, $id)
+    public function showAction($id)
     {
         $request = $this->getRequest();
         $em = $this->getDoctrine()->getEntityManager();
@@ -131,14 +135,6 @@ class ForumController extends Controller
         };
         $view = new DefaultView();
         $html = $view->render($pagerfanta, $routeGenerator, array('category_id' => $id));
-
-
-
-
-
-
-
-        
 
 
         return array(
@@ -196,14 +192,11 @@ class ForumController extends Controller
 
         if ($form->isValid()) {
 
-            $slug = $entity->getTitle();
-            $entity->setSlug(Util::slugify($slug));
-
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('forum_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug())));
+            return $this->redirect($this->generateUrl('forum_show', array('id' => $entity->getId())));
             
         }
 
@@ -279,13 +272,10 @@ class ForumController extends Controller
 
         if ($editForm->isValid()) {
 
-            $slug = $entity->getTitle();
-            $entity->setSlug(Util::slugify($slug));
-
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('forum_show', array('id' => $id, 'slug' => $entity->getSlug())));
+            return $this->redirect($this->generateUrl('forum_show', array('id' => $id)));
         }
 
         return array(
@@ -322,6 +312,66 @@ class ForumController extends Controller
 
         return $this->redirect( $this->generateUrl('forum') );
 
+    }
+
+
+    /**
+     * Finds and displays a Thread entity.
+     *
+     * @Route("/f{forum_id}/{slug}-{id}/", requirements={"forum_id" = "^\d+$", "slug" = "[a-z0-9\-]+", "id" = "^\d+$"}, name="thread_show")
+     * @Template("ApplicationForumBundle:Thread:show.html.twig")
+     */
+    public function threadShowAction($forum_id, $slug, $id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entity = $em->getRepository('ApplicationForumBundle:Thread')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Thread entity.');
+        }
+
+        $query = $em->createQueryBuilder();
+        $query->add('select', 'r')
+           ->add('from', 'ApplicationForumBundle:Reply r')
+           ->andWhere('r.thread_id = :id')->setParameter('id', $id)
+           ->add('orderBy', 'r.id ASC');
+        $replies = $query->getQuery()->getResult();
+
+        // obtener usuarios
+        $total = count( $replies );
+        for( $i = 0; $i < $total; $i++ ){
+            $user_id = $replies[$i]->getUserId();
+            $replies[$i]->user = $em->getRepository('ApplicationUserBundle:User')->find( $user_id );
+        }
+
+        
+        // forum
+        $forum = $em->getRepository('ApplicationForumBundle:Forum')->find($entity->getForumId());
+
+        // form
+        $reply = new Reply();
+        $reply->setThreadId($id);
+        $form  = $this->createForm(new ReplyType(), $reply);
+
+        // es diferente usuario, visitas + 1
+        $session = $this->getRequest()->getSession();
+        $session_id = $session->get('id');
+        if ( $session_id != $entity->getUserId() ) {
+          $entity->setVisits($entity->getVisits() + 1 );
+          $em->persist($entity);
+          $em->flush();
+        }
+
+        $user = $em->getRepository('ApplicationUserBundle:User')->find($entity->getUserId());
+
+        return array(
+            'entity' => $entity,
+            'forum' => $forum,
+            'replies' => $replies,
+            'form'   => $form->createView(),
+            'user' => $user
+        );
     }
 
 }

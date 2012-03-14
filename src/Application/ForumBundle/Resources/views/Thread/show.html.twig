@@ -1,4 +1,4 @@
-{% set share_url = url('thread_show', { 'id': entity.id, 'slug': entity.slug }) %}
+{% set share_url = url('thread_show', { 'id': entity.id, 'slug': entity.slug, 'forum_id': entity.forumid }) %}
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
 {% block title entity.title %}
@@ -42,7 +42,7 @@
 <ul class="breadcrumb">
   <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
   <li><a href="{{ path('forum') }}">Foro</a> <span class="divider">/</span></li>
-  <li><a href="{{ path('forum_show', { 'id': forum.id, 'slug': forum.slug }) }}">{{ forum.title }}</a></li>
+  <li><a href="{{ path('forum_show', { 'id': forum.id }) }}">{{ forum.title }}</a></li>
 </ul>
 
 
@@ -70,16 +70,13 @@ Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }
 
     <div style="background:#fff;padding:10px;margin-top:15px">
 
-      <div class="pull-right">
-        <a href="{{ path('user_show', { 'id': reply.user.id, 'slug': reply.user.slug }) }}">{{ reply.user.name }}</a><br/>
-        {{ reply.date|date('d/m/Y') }}<br/>
-        <a href="{{ path('reply_edit', { 'id': reply.id }) }}">editar</a>
-      </div>
-
-      
       <div class="body">{{ reply.body|nl2br }}</div>
 
-      <br class="clear"/>
+      <br/>
+
+      <a href="{{ path('reply_edit', { 'id': reply.id }) }}" class="pull-right">editar</a>
+
+      <a href="{{ path('user_show', { 'id': reply.user.id, 'slug': reply.user.slug }) }}">{{ reply.user.name }}</a> - {{ reply.date|date('d/m/Y') }}
 
     </div>
       

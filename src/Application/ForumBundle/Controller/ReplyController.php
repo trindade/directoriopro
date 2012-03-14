@@ -104,7 +104,7 @@ class ReplyController extends Controller
             $em->persist($thread);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug())));
+            return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug(), 'forum_id' => $thread->getForumId())));
             
         }
 
@@ -130,16 +130,27 @@ class ReplyController extends Controller
             throw $this->createNotFoundException('Unable to find Reply entity.');
         }
 
-        $editForm = $this->createForm(new ReplyType(), $entity);
-        
-
         $thread = $em->getRepository('ApplicationForumBundle:Thread')->find( $entity->getThreadId() );
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'thread'      => $thread,
-        );
+        $session = $this->getRequest()->getSession();
+        $user_id = $session->get('id');
+        $admin = $session->get('admin');
+
+        if ( ( $entity->getUserId() == $user_id ) || $admin ) {
+
+            $editForm = $this->createForm(new ReplyType(), $entity);
+
+            return array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                'thread'      => $thread,
+            );
+
+        }else{
+
+            return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug(), 'forum_id' => $thread->getForumId())));
+        }
+
     }
 
     /**
@@ -159,27 +170,39 @@ class ReplyController extends Controller
             throw $this->createNotFoundException('Unable to find Reply entity.');
         }
 
-        $editForm   = $this->createForm(new ReplyType(), $entity);
-        
 
-        $request = $this->getRequest();
+        $session = $this->getRequest()->getSession();
+        $user_id = $session->get('id');
+        $admin = $session->get('admin');
 
-        $editForm->bindRequest($request);
+        $thread = $em->getRepository('ApplicationForumBundle:Thread')->find( $entity->getThreadId() );
 
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+        if ( ( $entity->getUserId() == $user_id ) || $admin ) {            
 
-            $thread = $em->getRepository('ApplicationForumBundle:Thread')->find( $entity->getThreadId() );
-
-            return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug())));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            $editForm   = $this->createForm(new ReplyType(), $entity);
             
-        );
+
+            $request = $this->getRequest();
+
+            $editForm->bindRequest($request);
+
+            if ($editForm->isValid()) {
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug(), 'forum_id' => $thread->getForumId())));
+            }
+
+            return array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                
+            );
+            
+        }else{
+
+            return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug(), 'forum_id' => $thread->getForumId())));
+        }
     }
 
     /**
@@ -216,7 +239,7 @@ class ReplyController extends Controller
         }
         
         
-        return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug())));
+        return $this->redirect($this->generateUrl('thread_show', array('id' => $thread->getId(), 'slug' => $thread->getSlug(), 'forum_id' => $thread->getForumId())));
         
     }
 

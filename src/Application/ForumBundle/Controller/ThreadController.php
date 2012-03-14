@@ -42,64 +42,6 @@ class ThreadController extends Controller
         return array('entities' => $entities);
     }
 
-    /**
-     * Finds and displays a Thread entity.
-     *
-     * @Route("/{slug}-{id}/", requirements={"slug" = "[a-z0-9\-]+", "id" = "^\d+$"}, name="thread_show")
-     * @Template()
-     */
-    public function showAction($slug, $id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('ApplicationForumBundle:Thread')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Thread entity.');
-        }
-
-        $query = $em->createQueryBuilder();
-        $query->add('select', 'r')
-           ->add('from', 'ApplicationForumBundle:Reply r')
-           ->andWhere('r.thread_id = :id')->setParameter('id', $id)
-           ->add('orderBy', 'r.id ASC');
-        $replies = $query->getQuery()->getResult();
-
-        // obtener usuarios
-        $total = count( $replies );
-        for( $i = 0; $i < $total; $i++ ){
-            $user_id = $replies[$i]->getUserId();
-            $replies[$i]->user = $em->getRepository('ApplicationUserBundle:User')->find( $user_id );
-        }
-
-        
-        // forum
-        $forum = $em->getRepository('ApplicationForumBundle:Forum')->find($entity->getForumId());
-
-        // form
-        $reply = new Reply();
-        $reply->setThreadId($id);
-        $form  = $this->createForm(new ReplyType(), $reply);
-
-        // es diferente usuario, visitas + 1
-        $session = $this->getRequest()->getSession();
-        $session_id = $session->get('id');
-        if ( $session_id != $entity->getUserId() ) {
-          $entity->setVisits($entity->getVisits() + 1 );
-          $em->persist($entity);
-          $em->flush();
-        }
-
-        $user = $em->getRepository('ApplicationUserBundle:User')->find($entity->getUserId());
-
-        return array(
-            'entity' => $entity,
-            'forum' => $forum,
-            'replies' => $replies,
-            'form'   => $form->createView(),
-            'user' => $user
-        );
-    }
 
     /**
      * Displays a form to create a new Thread entity.
@@ -173,7 +115,7 @@ class ThreadController extends Controller
             $em->flush();
 
 
-            return $this->redirect($this->generateUrl('thread_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug())));
+            return $this->redirect($this->generateUrl('thread_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug(), 'forum_id' => $entity->getForumId())));
             
         }
 
@@ -248,7 +190,7 @@ class ThreadController extends Controller
                 $em->persist($entity);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('thread_show', array('id' => $id, 'slug' => $entity->getSlug())));
+                return $this->redirect($this->generateUrl('thread_show', array('id' => $id, 'slug' => $entity->getSlug(), 'forum_id' => $entity->getForumId())));
             }
 
             return array(
@@ -258,7 +200,7 @@ class ThreadController extends Controller
             );
         }else{
 
-            $url = $this->generateUrl('thread_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()));
+            $url = $this->generateUrl('thread_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug(), 'forum_id' => $entity->getForumId()));
             return $this->redirect($url);
         }
     }
