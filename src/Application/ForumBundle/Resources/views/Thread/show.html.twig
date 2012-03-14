@@ -112,5 +112,11 @@ Publicado por <a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }
 
 
 {% block script_load %}
-  $('#body').html( replaceURLWithHTMLLinks( $('#body').html() ) );
+
+
+  $('.body').each(function (i) {
+    $(this).html( replaceURLWithHTMLLinks( $(this).html() ) );
+  });
+
+
 {% endblock %}
