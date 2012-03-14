@@ -86,15 +86,20 @@ class ThreadController extends Controller
      */
     public function createAction()
     {
+
+        $session = $this->getRequest()->getSession();
+        $session_id = $session->get('id');
+        if ( !$session_id ) {
+            return $this->redirect($this->generateUrl('forum'));
+        }
+
         $entity  = new Thread();
         $request = $this->getRequest();
         $form    = $this->createForm(new ThreadType(), $entity);
         $form->bindRequest($request);
 
         // rellenar campos que faltan
-        $session = $this->getRequest()->getSession();
-        $user_id = $session->get('id');
-        $entity->setUserId( $user_id );
+        $entity->setUserId( $session_id );
         $entity->setDate( new \DateTime("now") );
         $entity->setDateUpdate( new \DateTime("now") );
 
