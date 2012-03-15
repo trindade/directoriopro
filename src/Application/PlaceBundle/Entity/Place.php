@@ -73,14 +73,14 @@ class Place
     /**
      * @var integer $country_id
      *
-     * @ORM\Column(name="country_id", type="integer")
+     * @ORM\Column(name="country_id", type="integer", nullable=true)
      */
     private $country_id;
 
     /**
      * @var integer $visits
      *
-     * @ORM\Column(name="visits", type="integer")
+     * @ORM\Column(name="visits", type="integer", nullable=true)
      */
     private $visits = 0;
 

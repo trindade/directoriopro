@@ -30,14 +30,24 @@
 
 
 
-<ul>
+
 {% for entity in entities %}
-    <li>
+    <div style="padding:10px;border-top:1px #efefef solid;{% if entity.featured != 1 and loop.index is divisibleby(2) %}background:#F6F6F6{% endif %}" {% if entity.featured == 1 %}class="featured"{% endif %}>
+
+        <div style="color:#666;float:left;text-align:center;font-size:10px;padding:0 20px 0 0">
+            <b style="font-size:20px">{{ entity.replies }}</b><br/>
+            respuestas
+        </div>
+        <div style="color:#666;float:left;text-align:center;font-size:10px;padding:0 20px 0 0">
+            <b style="font-size:20px">{{ entity.visits }}</b><br/>
+            visitas
+        </div>
+        <span class="pull-right date">{{ entity.date|date('d/m/Y') }}</span>
         <a href="{{ path('thread_show', { 'id': entity.id, 'slug': entity.slug, 'forum_id': entity.forumid }) }}">{{ entity.title }}</a><br/>
-        {{ entity.replies }} respuestas<br/><br/>
-    </li>
+        <br class="clear"/>
+    </div>
     {% endfor %}
-</ul>
+
 
 
 
