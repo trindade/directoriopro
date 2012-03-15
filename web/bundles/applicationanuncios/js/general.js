@@ -364,7 +364,7 @@ function get_stackoverflow(){
 
 						  if( !stackoverflow_reputation ) stackoverflow_reputation = item.owner.reputation;
 
-					      html += '<li><a href="http://stackoverflow.com' + item.answer_comments_url + '" target="_blank">' + item.title.replace(/\</g,'&lt;').replace(/\>/g,'&gt;') + '</a></li>';
+					      html += '<li><a href="http://stackoverflow.com/questions/' + item.answer_id + '" target="_blank">' + item.title.replace(/\</g,'&lt;').replace(/\>/g,'&gt;') + '</a></li>';
 						  if( i == 4 ) return false;
 					    });
 						html += '</ul>';
