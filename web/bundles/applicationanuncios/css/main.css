@@ -148,8 +148,8 @@ div.error ul{list-style-type:none;display:inline;float:auto}
 
 
 /* anuncios destacados */
-LI.featured{background:#FEFBF3}
-  LI.featured A.title{color:#FF9933}
+.featured{background:#FEFBF3}
+  .featured A.title{color:#FF9933}
   
 
 /* jquery ui */
@@ -162,4 +162,3 @@ LI.featured{background:#FEFBF3}
 
 
 .alert{color:black}
-
