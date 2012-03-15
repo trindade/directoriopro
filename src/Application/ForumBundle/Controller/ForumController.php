@@ -43,7 +43,7 @@ class ForumController extends Controller
 
       $category_id = $request->query->get('c',0);
       $page = $request->query->get('page',1);
-      $filter = $request->query->get('filter',0);
+      $filter = $request->query->get('filter');
       if( $filter != 'noreply' ) $filter = 'latest';
 
       //$query = $em->getRepository('ApplicationAnunciosBundle:Post')->getPostsDQL($category_id);
@@ -58,12 +58,12 @@ class ForumController extends Controller
     // categoria?
     //$category_id = $request->query->get('c');
     if ( $category_id ) {
-       $query->add('where', 't.category_id = :category_id')->setParameter('category_id', $category_id);
+       $query->andWhere('t.category_id = :category_id')->setParameter('category_id', $category_id);
 
     }
 
     if ( $filter == 'noreply' ) {
-       $query->add('where', 't.replies = 0');
+       $query->andWhere('t.replies = 0');
 
     }
 
