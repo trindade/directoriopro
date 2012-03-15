@@ -11,7 +11,7 @@ $data = array();
 
 $urls = array(
 	'chrome' => 'https://chrome.google.com/webstore/search?q=',
-	'android' => 'https://market.android.com/developer?pub=',
+	'android' => 'https://play.google.com/store/apps/developer?id=',
 	'masterbranch' => 'https://www.masterbranch.com/developer/',
 	'itunes' => 'http://www.appannie.com/company/',
 	'linkedin' => 'http://es.linkedin.com/in/'
@@ -48,7 +48,7 @@ if( $html ){
 					$link = $item->find('a[class=title]',0);
 					if( $link ){
 						$data[] = array(
-							'url' => 'https://market.android.com' . $link->attr['href'],
+							'url' => 'https://play.google.com' . $link->attr['href'],
 							'title' => $link->innertext,
 							'text' => $item->find('p[class=snippet-content]',0)->innertext,
 							'icon' => $item->find('img',0)->attr['src']

@@ -296,7 +296,7 @@ function get_twitterstatus(){
 				
 			},
 			type: 'GET',
-			url: 'https://api.twitter.com/1/statuses/user_timeline.json?include_entities=false&include_rts=false&count=10&screen_name=' + twitter_user
+			url: 'https://twitter.com/status/user_timeline/' + twitter_user + '.json?count=10&exclude_replies=true&trim_user=true&include_rts=false&cache=true'
 		});
 	}
 }
@@ -336,7 +336,7 @@ function get_stackoverflow(){
 					
 					  stackoverflow_tags = stackoverflow_tags.concat(item.tags);
 					
-				      html += '<li><a href="http://stackoverflow.com' + item.question_answers_url + '" target="_blank">' + item.title.replace(/\</g,'&lt;').replace(/\>/g,'&gt;') + '</a></li>';
+				      html += '<li><a href="http://stackoverflow.com/questions/' + item.answer_id + '" target="_blank">' + item.title.replace(/\</g,'&lt;').replace(/\>/g,'&gt;') + '</a></li>';
 					  if( i == 4 ) return false;
 				    });
 					html += '</ul>';
