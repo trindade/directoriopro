@@ -26,7 +26,19 @@
   <li><a href="{{ path('forum') }}">Foro</a></li>
 </ul>
 
-<h1>Foro</h1>
+{% if filter == 'latest' %}
+    <h1>Foro</h1>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{{ path('forum') }}">Últimos temas</a></li>
+        <li><a href="{{ path('forum') }}?filter=noreply">Sin respuesta</a></li>
+    </ul>
+{% else %}
+    <h1>Temas sin respuesta</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="{{ path('forum') }}">Últimos temas</a></li>
+        <li class="active"><a href="{{ path('forum') }}?filter=noreply">Sin respuesta</a></li>
+    </ul>
+{% endif %}
 
 
 
