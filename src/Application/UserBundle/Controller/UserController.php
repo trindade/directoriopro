@@ -529,8 +529,17 @@ class UserController extends Controller
       $qb = $em->createQueryBuilder()
          ->add('select', 'u')
          ->add('from', 'ApplicationUserBundle:User u')
-         ->add('where', "u.name like '%".$search."%' or u.body like '%".$search."%'")
          ->add('orderBy', 'u.id DESC');
+
+      if( strpos( $search, '@' ) > 1 ){
+        $qb->add('where', "u.email = :search")->setParameter('search', $search);
+
+      }else if( $search[0] == '@' ){
+        $qb->add('where', "u.twitter_url = :search")->setParameter('search', str_replace( '@', '', $search ) );
+
+      }else{
+        $qb->add('where', "u.name like '%".$search."%' or u.body like '%".$search."%'");
+      }
 
       $query = $qb->getQuery();
       $entities = $query->getResult();
