@@ -162,3 +162,8 @@ div.error ul{list-style-type:none;display:inline;float:auto}
 
 
 .alert{color:black}
+
+
+/* mailcheck */
+#did-you-mean {display:none;}
+#did-you-mean a span {text-decoration:underline;}
