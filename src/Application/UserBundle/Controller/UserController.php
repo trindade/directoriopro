@@ -544,6 +544,12 @@ class UserController extends Controller
       $query = $qb->getQuery();
       $entities = $query->getResult();
 
+      if( count( $entities ) == 1 ){
+        $user = $entities[0];
+        $url = $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()));
+        return $this->redirect();
+      }
+
       return array('entities' => $entities, 'search' => $search);
     }
 
