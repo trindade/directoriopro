@@ -547,7 +547,7 @@ class UserController extends Controller
       if( count( $entities ) == 1 ){
         $user = $entities[0];
         $url = $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()));
-        return $this->redirect();
+        return $this->redirect( $url );
       }
 
       return array('entities' => $entities, 'search' => $search);
