@@ -219,7 +219,7 @@
 
 
 {% if share_url is defined %}
-	<div id="share_bar" style="display:none;position:fixed;bottom:0;z-index:99;width:160px;right:0;border:1px #CCC solid;border-bottom:0">
+	<div id="share_bar" style="position:fixed;bottom:0;z-index:99;width:160px;right:0;border:1px #CCC solid;border-bottom:0">
 		<div style="padding:15px 20px;background:#FEFBF3">
 			
 			<span style="position:relative;top:-5px;padding-right:15px;font-weight:bold">Compartir</span>
@@ -289,7 +289,7 @@ $().ready(function(){
 	if( !mobile ){  
 		$('#sidebar').css('position','fixed').css('width','190px');
 	
-
+		/*
 		if( $('#share_bar').size() ){
 
 			$(window).bind('scroll', function(){
@@ -297,7 +297,9 @@ $().ready(function(){
 					$('#share_bar').fadeIn('slow');
 				}
 			});
+			
 		}
+		*/
 
 	}
 
