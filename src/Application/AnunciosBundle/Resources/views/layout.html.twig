@@ -214,7 +214,30 @@
 	
 	
 
+
 </div>
+
+
+{% if share_url is defined %}
+	<div id="share_bar" style="display:none;background:red;position:fixed;bottom:0;z-index:99;width:860px;left:50%;margin-left:-430px;border:1px #CCC solid;border-bottom:0">
+		<div style="padding:15px 20px;text-align:center;background:#FEFBF3">
+			
+			<span style="position:relative;top:-5px;padding-right:15px;font-weight:bold">Compartir</span>
+
+			<div style="display:inline;width:100px;overflow-x:hidden">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-lang="es">Twittear</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			</div>
+
+			<iframe src="http://www.facebook.com/plugins/like.php?href={{ share_url }}&amp;send=false&amp;layout=button_count&amp;width=200&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:110px; height:21px;" allowTransparency="true"></iframe>
+
+			<script src="http://platform.linkedin.com/in.js" type="text/javascript"></script>
+			<script type="IN/Share" data-counter="right"></script>
+
+
+		</div>
+	</div>
+{% endif %}
 
 
 
@@ -262,6 +285,17 @@ $().ready(function(){
 	var mobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));  
 	if( !mobile ){  
 		$('#sidebar').css('position','fixed').css('width','190px');
+	}
+
+	if( $('#share_bar').size() ){
+
+		$(window).bind('scroll', function(){
+			if( $(this).scrollTop() > 200 ){
+				$('#share_bar').fadeIn('slow');
+			}else{
+				$('#share_bar').hide();
+			}
+		});
 	}
 
 	
