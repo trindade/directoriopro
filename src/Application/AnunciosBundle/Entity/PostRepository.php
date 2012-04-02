@@ -78,7 +78,8 @@ class PostRepository extends EntityRepository
         $qb->add('select', 'p')
           ->add('from', 'ApplicationAnunciosBundle:Post p')
           ->add('where', 'p.visible = 1')
-          ->add('orderBy', 'p.featured DESC, p.id DESC');
+          ->add('orderBy', 'p.featured DESC, p.id DESC')
+          ->setMaxResults(20);
 
         if ( $search ) $qb->andWhere("( p.body LIKE '%".$search."%' OR p.title LIKE '%".$search."%' )");
         if ( $category_id ) $qb->andWhere('p.category_id = :category_id')->setParameter('category_id', $category_id);
