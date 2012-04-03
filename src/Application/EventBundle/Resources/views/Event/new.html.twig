@@ -56,7 +56,7 @@ TEXTAREA.xlarge{width:430px}
 		<div class="control-group">
 			<label for="application_eventbundle_eventtype_date_start" class=" required">Fecha inicio</label>
 			<div class="controls">
-				<input type="text" id="application_eventbundle_eventtype_date_start" name="application_eventbundle_eventtype[date_start]" required="required"    class="xlarge" rows="9" value="" /> &nbsp;
+				<input type="text" id="application_eventbundle_eventtype_date_start" name="application_eventbundle_eventtype[date_start]" required="required"    class="xlarge" rows="9" value="{{ date_start }}" /> &nbsp;
 				<select name="h_start">
 				{% for i in hours %}
 					<option value="{{ i }}">{{ i }}</option>
@@ -73,7 +73,7 @@ TEXTAREA.xlarge{width:430px}
 		<div class="control-group">
 			<label for="application_eventbundle_eventtype_date_end" class=" required">Fecha fin</label>
 			<div class="controls">
-				<input type="text" id="application_eventbundle_eventtype_date_end" name="application_eventbundle_eventtype[date_end]" required="required"    class="xlarge" rows="9" value="" /> &nbsp;
+				<input type="text" id="application_eventbundle_eventtype_date_end" name="application_eventbundle_eventtype[date_end]" required="required"    class="xlarge" rows="9" value="{{ date_end }}" /> &nbsp;
 				<select name="h_end">
 				{% for i in hours %}
 					<option value="{{ i }}">{{ i }}</option>

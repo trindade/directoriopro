@@ -155,6 +155,29 @@ class EventController extends Controller
         }
 
         $entity = new Event();
+
+
+        $request = $this->getRequest();
+        $ical = $request->query->get('ical');
+        $date_start = $date_end = false;
+        
+        if( $ical ){
+            $data = explode("\r\n", file_get_contents( $ical ));
+            foreach( $data as $item ){
+                if( strstr( $item, 'SUMMARY') ) $entity->setTitle( str_replace('SUMMARY;CHARSET=utf-8:','',$item) );
+                else if( strstr( $item, 'LOCATION') ) $entity->setLocation( current(explode(', ', str_replace('LOCATION;CHARSET=utf-8:','',$item))) );
+                else if( strstr( $item, 'DESCRIPTION') ) $entity->setBody( str_replace('DESCRIPTION:','',$item) );
+                else if( strstr( $item, 'DTSTART') ){
+                    $date = str_replace('DTSTART;VALUE=DATE:','',$item);
+                    $date_start =  substr($date, 6,2) . '-' . substr($date, 4,2) . '-' . substr($date, 0,4);
+                }
+                else if( strstr( $item, 'DTEND') ){
+                    $date = str_replace('DTEND;VALUE=DATE:','',$item);
+                    $date_end =  substr($date, 6,2) . '-' . substr($date, 4,2) . '-' . substr($date, 0,4);
+                }
+            }
+        }
+
         $form   = $this->createForm(new EventType(), $entity);
 
         return array(
@@ -162,7 +185,9 @@ class EventController extends Controller
             'form'   => $form->createView(),
             'hours'   => array('07','08','09','10','11','12','13','14','15','16','17','18','19','20',
                                 '21','22','23','00','01','02','03','04','05','06'),
-            'minutes'=> array('00','10','20','30','40','50')
+            'minutes'=> array('00','10','20','30','40','50'),
+            'date_start' => $date_start,
+            'date_end' => $date_end
         );
     }
 
