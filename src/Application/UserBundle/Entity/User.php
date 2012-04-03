@@ -125,6 +125,13 @@ class User
     private $visits = 0;
 
     /**
+     * @var integer $visits_google
+     *
+     * @ORM\Column(name="visits_google", type="integer", nullable=true)
+     */
+    private $visits_google = 0;
+
+    /**
      * @var tinyint $freelance
      *
      * @ORM\Column(name="freelance", type="integer", nullable=true)
@@ -615,6 +622,26 @@ class User
     public function getVisits()
     {
         return $this->visits;
+    }
+
+    /**
+     * Set visits_google
+     *
+     * @param integer $visits_google
+     */
+    public function setVisitsGoogle($visitsGoogle)
+    {
+        $this->visits_google = $visitsGoogle;
+    }
+
+    /**
+     * Get visits_google
+     *
+     * @return integer
+     */
+    public function getVisitsGoogle()
+    {
+        return $this->visits_google;
     }
 
     /**
