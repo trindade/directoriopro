@@ -1,0 +1,25 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Emails" %}
+
+{% block content %}
+
+<h1>Emails</h1>
+
+<form action="{{ path('event_emails') }}">
+	ID evento o hashtag: 
+	<input name="q" value="{{ search }}"/> 
+	<input type="submit" value="Buscar"/>
+</form>
+{% if entities %}
+
+	{% for entity in entities %}
+		{{ entity.email }}<br/>
+	{% endfor %}
+
+{% else %}
+	Sin resultados
+{% endif %}
+
+
+{% endblock %}
