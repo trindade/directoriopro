@@ -124,6 +124,10 @@
 					<li><a href="{{ path('event_admin') }}">Administrar eventos</a></li>
 					<li><a href="{{ path('place_admin') }}">Administrar espacios</a></li>
 					<li><a href="{{ path('thread_admin') }}">Administrar temas</a></li>
+					<li class="divider"></li>
+					<li><a href="{{ path('event_emails') }}">Emails eventos</a></li>
+				{% elseif app.session.get('moderator') %}
+					<li><a href="{{ path('event_emails') }}">Emails eventos</a></li>
 				{% endif %}
 				<li class="divider"></li>
 				<li><a href="{{ path('user_logout') }}">Salir</a></li>

@@ -915,7 +915,7 @@ class EventController extends Controller
     {
 
         $session = $this->getRequest()->getSession();
-        $can_edit = ( $session->get('moderator') OR $session->get('admin') );
+        $can_edit = ( $session->get('admin') OR $session->get('moderator') );
         if ( !$can_edit ) {
             return $this->redirect('/');
         }
