@@ -14,7 +14,6 @@ use Application\UserBundle\Form\ContactType;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\HttpFoundation\Request;
 
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -65,26 +64,7 @@ class PostController extends Controller
       $view = new DefaultView();
       $html = $view->render($pagerfanta, $routeGenerator, array('category_id' => (int)$category_id));
 
-    /*
-      $users = false;
-    if ( $page == 1 ) {
-      $qb = $em->createQueryBuilder();
-      $qb->add('select', 'u')
-        ->add('from', 'ApplicationUserBundle:User u')
-        ->add('where', 'u.freelance = 1')
-        ->andWhere("u.body != ''")
-        ->add('orderBy', 'u.date_login DESC')
-        ->setMaxResults(14);
 
-      $query = $qb->getQuery();
-      $users = $query->getResult();
-      shuffle( $users );
-      $users = array_splice($users, 0, 7);
-    }
-     */
-
-      //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
 
       $home = (!$category_id && $page == 1);
@@ -212,7 +192,6 @@ class PostController extends Controller
         $user_id = $session->get('id');
         $entity->setUserId( $user_id );
         $entity->setDate( new \DateTime("now") );
-        //$entity->setFeatured( 0 );
 
 
         if ($form->isValid()) {
@@ -231,6 +210,11 @@ class PostController extends Controller
           }
 
           $entity->setSlug(Util::slugify($slug));
+
+
+          // bug corregir location
+          $post = $form->getData();
+          $this->fixLocation(&$post, &$entity, &$em);
 
           $em->persist($entity);
           $em->flush();
@@ -298,7 +282,7 @@ class PostController extends Controller
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-
+        $location = $entity->getLocation();
         $session = $this->getRequest()->getSession();
         $user_id = $session->get('id');
         $admin = $session->get('admin');
@@ -325,6 +309,12 @@ class PostController extends Controller
             }
 
             $entity->setSlug(Util::slugify($slug));
+
+            // bug corregir location
+            $post = $editForm->getData();
+            if( $post->getLocation() != $location ){
+              $this->fixLocation(&$post, &$entity, &$em);
+            }
 
             $em->persist($entity);
             $em->flush();
@@ -423,21 +413,13 @@ class PostController extends Controller
        $qb->andWhere('p.category_id = :category_id')->setParameter('category_id', $category_id);
     }
 
-    // tipo?
-    /*
-    $type = (int)$request->query->get('t');
-    if ( $type ) {
-       $qb->andWhere('p.type = :type')->setParameter('type', $type);
-    }
-    */
+    
 
     $query = $qb->getQuery();
     $entities = $query->getResult();
 
 
 
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
         return array('entities' => $entities, 'form_category' =>$category_id);
     }
@@ -552,7 +534,6 @@ class PostController extends Controller
     $query = $em->createQueryBuilder();
     $query->add('select', 'p')
        ->add('from', 'ApplicationAnunciosBundle:Post p')
-       //->add('where', 'p.type = 0')
        ->add('orderBy', 'p.featured DESC, p.id DESC');
 
     // categoria?
@@ -585,8 +566,6 @@ class PostController extends Controller
         $categories = $db->fetchAll($query);
 
 
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
         return array('categories_aux' => $categories, 'pager' => $html, 'entities' => $entities);
     }
@@ -878,8 +857,7 @@ class PostController extends Controller
     $threads = simplexml_load_file('https://groups.google.com/group/beta-beers/feed/rss_v2_0_topics.xml');
     $threads = $threads->channel->item;
 
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
+
 
     return array('city' => $city, 'country' => $country, 'events' => $events, 'events2' => $events2, 'posts' => $posts, 'users' => $users, 'threads' => $threads );
   }
@@ -911,8 +889,6 @@ class PostController extends Controller
     $entities = $query->getQuery()->getResult();
 
 
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
 
         return array('entities' => $entities );
@@ -952,7 +928,7 @@ class PostController extends Controller
       $em->persist($entities[$i]);
       $em->flush();
 
-      //echo $entities[$i]->getSlug(),'<br>';
+      
     }
     die();
   }
@@ -1020,7 +996,6 @@ class PostController extends Controller
           'user'         => $user,
           'contact_form' => $contact_form_html,
           'entities'     => $entities
-          //'users'        => $users
         );
     }
 
@@ -1046,5 +1021,19 @@ class PostController extends Controller
 
         return array('entities' => $entities);
     }
+
+
+    function fixLocation( $post, $entity, $em ){        
+      $location = $post->getLocation();
+      if( $location ){
+        $query = $em->createQuery("SELECT c1.id AS cit_id, c2.id AS cou_id, c1.name AS city, c2.name AS country FROM ApplicationCityBundle:City c1, ApplicationCityBundle:Country c2 WHERE c1.code = c2.code AND c1.name = :city ORDER BY c1.name ASC, c1.population DESC");
+        $city = current( $query->setParameter('city', $location)->setMaxResults(1)->getResult() );
+        if( $city ){
+          $entity->setCityId( $city['cit_id'] );
+          $entity->setCountryId( $city['cou_id'] );
+          $entity->setLocation( $city['city'] . ', ' . $city['country'] );
+        }
+      }
+  }
 
 }

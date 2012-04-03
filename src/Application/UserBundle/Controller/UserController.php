@@ -90,9 +90,6 @@ class UserController extends Controller
         $users_ref = $db->fetchAll($query);
 
 
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
-
 
         return array('category_id' => $category_id, 'entities' => $entities, 'pager' => $html, 'nav_user' => 1, 'users_ref' => $users_ref);
 
@@ -208,8 +205,6 @@ class UserController extends Controller
     $html = $view->render($pagerfanta, $routeGenerator, array('category_id' => (int)$category_id));
 
 
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
         return array('entities' => $entities, 'pager' => $html, 'nav_user' => 1);
     }
@@ -334,22 +329,22 @@ class UserController extends Controller
 
 
         $request = $this->getRequest();
-    if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST') {
 
-      $form->bindRequest($request);
+          $form->bindRequest($request);
 
-      // existe usuario?
-      $em = $this->getDoctrine()->getEntityManager();
-      $post = $form->getData();
-      $user = $em->getRepository('ApplicationUserBundle:User')->findOneBy(array('email' => $post->getEmail()));
+          // existe usuario?
+          $em = $this->getDoctrine()->getEntityManager();
+          $post = $form->getData();
+          $user = $em->getRepository('ApplicationUserBundle:User')->findOneBy(array('email' => $post->getEmail()));
 
-      if ( $user ) {
-              $error_text = "El email ya esta registrado";
-              $form->addError( new SymfonyForm\FormError( $error_text ));
-      }else if ( strlen( $post->getPass() ) < 6 ) {
-              $error_text = "El password tiene que tener como minimo 6 caracteres";
-              $form->addError( new SymfonyForm\FormError( $error_text ));
-      }
+          if ( $user ) {
+                  $error_text = "El email ya esta registrado";
+                  $form->addError( new SymfonyForm\FormError( $error_text ));
+          }else if ( strlen( $post->getPass() ) < 6 ) {
+                  $error_text = "El password tiene que tener como minimo 6 caracteres";
+                  $form->addError( new SymfonyForm\FormError( $error_text ));
+          }
 
           if ($form->isValid()) {
 
@@ -371,8 +366,11 @@ class UserController extends Controller
         $entity->setIp();
         $entity->setSlug(Util::slugify($entity->getName()));
 
-              $em->persist($entity);
-              $em->flush();
+        // bug corregir location
+        $this->fixLocation(&$post, &$entity, &$em);
+
+        $em->persist($entity);
+        $em->flush();
 
         // autologin?
         $session->set('id', $entity->getId());
@@ -389,7 +387,7 @@ class UserController extends Controller
               return $this->redirect( $this->generateUrl('user_edit', array('id' => $entity->getId())) . '#register' );
           }
     }else{
-		$back = $request->query->get('back');
+		  $back = $request->query->get('back');
 	    if ( $back ) {
 	      $session = $this->getRequest()->getSession();
 	      $session->set('back', $back);
@@ -426,9 +424,13 @@ class UserController extends Controller
 
         $entity = $em->getRepository('ApplicationUserBundle:User')->find($id);
 
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
+
+
+        $location = $entity->getLocation();
 
 
     $token = $entity->getPass();
@@ -478,8 +480,14 @@ class UserController extends Controller
 
         $entity->setSlug(Util::slugify($entity->getName()));
 
-              $em->persist($entity);
-              $em->flush();
+        // bug corregir location
+        if( $post->getLocation() != $location ){
+
+          $this->fixLocation(&$post, &$entity, &$em);
+        }
+
+        $em->persist($entity);
+        $em->flush();
 
         $session->set('name', $entity->getShortName());
         $session->set('slug', $entity->getSlug());
@@ -585,7 +593,7 @@ class UserController extends Controller
 
 
         $values = $form->getData();
-        //var_dump($values);
+        
 
         $toEmail = $entity->getEmail();
 
@@ -693,17 +701,7 @@ class UserController extends Controller
       }else{
 
 
-        /*
-        $cookieGuest = array(
-            'name'  => 'mycookie',
-            'value' => 'testval',
-            'path'  => '/',
-            'time'  => time() + 3600 * 24 * 7
-        );
-        $cookie = new Cookie($cookieGuest['name'], $cookieGuest['value'], $cookieGuest['time'], $cookieGuest['path']);
-        $request->cookies->set('cookie_name', 'cookie val', (time()+3600*24*31),  );
-        print_r( $request->cookies );
-        */
+ 
 
         // cookie
         $pass = $user->getPass();
@@ -843,30 +841,6 @@ class UserController extends Controller
 		    return $this->redirect( $this->generateUrl('post') );
       }
 
-      /*
-      $cookie_login = $request->cookies->get('login');
-      if ( !$session_id && $cookie_login ) {
-        $cookie_login_info = explode(':',$cookie_login);
-        $user = $em->getRepository('ApplicationUserBundle:User')->find($cookie_login_info[0]);
-
-        $pass = $user->getPass();
-        if ( !$pass ) $pass = md5( $user->getDate()->format('Y-m-d H:i:s') );
-
-
-        if ( $cookie_login_info[1] == $pass ) {
-          $session = $this->getRequest()->getSession();
-          $session->set('id', $user->getId());
-          $session->set('name', $user->getShortName());
-          $session->set('slug', $user->getSlug());
-          $session->set('admin', $user->getAdmin());
-          $session->set('moderator', $user->getModerator());
-
-		  if( !$back ){
-				return $this->redirect( $this->generateUrl('post') );
-			}
-        }
-      }
-      */
 
 
 
@@ -893,22 +867,9 @@ class UserController extends Controller
         $session->set('back', $back);
       }
 
-    // estadisticas de usuarios
-    /*
-    $query = "SELECT COUNT(u.id) AS total, u.category_id FROM User u GROUP BY u.category_id ORDER BY total DESC";
-    $db = $this->get('database_connection');
-        $categories = $db->fetchAll($query);
 
 
-    // ultimos usuarios
-    $query = "SELECT u FROM ApplicationUserBundle:User u ORDER BY u.id DESC";
-    $users = $this->get('doctrine')->getEntityManager()
-                ->createQuery($query)
-          ->setMaxResults(5)
-                ->getResult();
-    */
-
-        return array();//'categories_aux' => $categories, 'users' => $users
+        return array();
     }
 
 
@@ -1065,8 +1026,7 @@ class UserController extends Controller
     $html = $view->render($pagerfanta, $routeGenerator);
 
 
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
+
 
         return array('entities' => $entities, 'pager' => $html, 'nav_user' => 1);
   }
@@ -1334,9 +1294,6 @@ class UserController extends Controller
         $categories = $db->fetchAll($query);
 
 
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
-
         return array('categories_aux' => $categories, 'pager' => $html, 'entities' => $entities);
     }
 
@@ -1358,7 +1315,7 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
     $query = $em->createQuery("SELECT c1.id AS cit_id, c2.id AS cou_id, c1.name AS city, c2.name AS country FROM ApplicationCityBundle:City c1, ApplicationCityBundle:Country c2 WHERE c1.code = c2.code AND c1.name LIKE '" . $city . "%' ORDER BY c1.name ASC, c1.population DESC");
-    //$query->setParameter('name', $city);
+  
     $query->setMaxResults(5);
     $cities = $query->getResult();
 
@@ -1407,9 +1364,6 @@ class UserController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
-
-    //$twig = $this->container->get('twig');
-      //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
 
 
@@ -1496,10 +1450,6 @@ class UserController extends Controller
     return array(
       'entity'       => $entity,
       'contact_form' => $contact_form_html,
-      //'comments'     => $comments,
-      //'total_work' => $total_work,
-      //'total_wannawork' => $total_wannawork,
-      //'total_like' => $total_like,
       'total_users' => $total_users,
       'related_users' => $related_users,
 	  'team_users' => $team_users,
@@ -1507,5 +1457,18 @@ class UserController extends Controller
       );
     }
 
+
+    function fixLocation( $post, $entity, $em ){        
+        $location = $post->getLocation();
+        if( $location ){
+          $query = $em->createQuery("SELECT c1.id AS cit_id, c2.id AS cou_id, c1.name AS city, c2.name AS country FROM ApplicationCityBundle:City c1, ApplicationCityBundle:Country c2 WHERE c1.code = c2.code AND c1.name = :city ORDER BY c1.name ASC, c1.population DESC");
+          $city = current( $query->setParameter('city', $location)->setMaxResults(1)->getResult() );
+          if( $city ){
+            $entity->setCityId( $city['cit_id'] );
+            $entity->setCountryId( $city['cou_id'] );
+            $entity->setLocation( $city['city'] . ', ' . $city['country'] );
+          }
+        }
+    }
 
 }

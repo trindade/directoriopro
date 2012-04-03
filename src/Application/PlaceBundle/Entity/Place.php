@@ -66,7 +66,7 @@ class Place
     /**
      * @var integer $city_id
      *
-     * @ORM\Column(name="city_id", type="integer")
+     * @ORM\Column(name="city_id", type="integer", nullable=true)
      */
     private $city_id;
 

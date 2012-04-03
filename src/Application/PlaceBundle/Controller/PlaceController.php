@@ -312,6 +312,12 @@ class PlaceController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+
+
+			// bug corregir location
+			$post = $form->getData();
+        	$this->fixLocation(&$post, &$entity, &$em);
+
             $em->persist($entity);
             $em->flush();
 
@@ -379,7 +385,8 @@ class PlaceController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Place entity.');
         }
-
+        
+        $location = $entity->getLocation();
 		$session = $this->getRequest()->getSession();
 		$user_id = $session->get('id');
 		$admin = $session->get('admin');
@@ -394,6 +401,14 @@ class PlaceController extends Controller
 	        $editForm->bindRequest($request);
 
 	        if ($editForm->isValid()) {
+
+
+				// bug corregir location
+				$post = $editForm->getData();
+				if( $post->getLocation() != $location ){
+        			$this->fixLocation(&$post, &$entity, &$em);
+        		}
+
 	            $em->persist($entity);
 	            $em->flush();
 
@@ -614,4 +629,19 @@ class PlaceController extends Controller
 
 
     }
+
+
+    function fixLocation( $post, $entity, $em ){        
+        $location = $post->getLocation();
+        if( $location ){
+          $query = $em->createQuery("SELECT c1.id AS cit_id, c2.id AS cou_id, c1.name AS city, c2.name AS country FROM ApplicationCityBundle:City c1, ApplicationCityBundle:Country c2 WHERE c1.code = c2.code AND c1.name = :city ORDER BY c1.name ASC, c1.population DESC");
+          $city = current( $query->setParameter('city', $location)->setMaxResults(1)->getResult() );
+          if( $city ){
+            $entity->setCityId( $city['cit_id'] );
+            $entity->setCountryId( $city['cou_id'] );
+            $entity->setLocation( $city['city'] . ', ' . $city['country'] );
+          }
+        }
+    }
+
 }

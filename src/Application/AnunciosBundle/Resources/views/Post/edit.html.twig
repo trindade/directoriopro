@@ -40,14 +40,8 @@ TEXTAREA.xlarge{width:430px}
 	{{ form_row(edit_form.title, { 'label': 'Titulo' }) }}
 
 	{{ form_row(edit_form.body, { 'label': 'Descripción' }) }}
-	
-	{{ form_row(edit_form.company, { 'label': 'Empresa' }) }}
-	
+
 	{{ form_row(edit_form.email, { 'label': 'Email' }) }}
-	
-	<div id="price">
-		{{ form_row(edit_form.price, { 'label': 'Sueldo' }) }}
-	</div>
 
 	<div id="geo">
 	{{ form_row(edit_form.location, { 'label': 'Localidad' }) }}
@@ -56,8 +50,10 @@ TEXTAREA.xlarge{width:430px}
 		{{ form_row(edit_form.city_id, { 'label': 'city' }) }}
 	</div>
 	</div>
+	
+	{{ form_row(edit_form.company, { 'label': 'Empresa' }) }}
 
-
+	{{ form_row(edit_form.price, { 'label': 'Sueldo' }) }}
 
 
 	

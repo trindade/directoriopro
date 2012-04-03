@@ -38,15 +38,9 @@ TEXTAREA.xlarge{width:430px}
 	{{ form_row(form.title, { 'label': 'Titulo' }) }}
 	
 	{{ form_row(form.body, { 'label': 'Descripción' }) }}
-	
-	{{ form_row(form.company, { 'label': 'Empresa' }) }}
-	
+
 	{{ form_row(form.email, { 'label': 'Email' }) }}
-	
-	<div id="price">
-		{{ form_row(form.price, { 'label': 'Sueldo' }) }}
-	</div>
-	
+
 	<div id="geo">
 	{{ form_row(form.location, { 'label': 'Localidad' }) }}
 	<div class="hide">
@@ -54,7 +48,10 @@ TEXTAREA.xlarge{width:430px}
 		{{ form_row(form.city_id, { 'label': 'city' }) }}
 	</div>
 	</div>
-
+	
+	{{ form_row(form.company, { 'label': 'Empresa' }) }}
+	
+	{{ form_row(form.price, { 'label': 'Sueldo' }) }}
 
     <div class="form-actions">
        <button type="submit" class="btn btn-primary" style="width:150px">Publicar</button>
