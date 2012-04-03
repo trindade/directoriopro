@@ -11,14 +11,17 @@
 	<input name="q" value="{{ search }}"/> 
 	<input type="submit" value="Buscar"/>
 </form>
-{% if entities %}
 
-	{% for entity in entities %}
-		{{ entity.email }}<br/>
-	{% endfor %}
+{% if search %}
+	{% if entities %}
 
-{% else %}
-	Sin resultados
+		{% for entity in entities %}
+			{{ entity.email }}<br/>
+		{% endfor %}
+
+	{% else %}
+		Sin resultados
+	{% endif %}
 {% endif %}
 
 
