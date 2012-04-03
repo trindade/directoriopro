@@ -287,6 +287,7 @@ class UserController extends Controller
         $session->set('name', $user->getShortName());
         $session->set('slug', $user->getSlug());
         $session->set('admin', $user->getAdmin());
+        $session->set('moderator', $user->getModerator());
 
         // cookie
         $pass = $user->getPass();
@@ -378,6 +379,7 @@ class UserController extends Controller
         $session->set('name', $entity->getName());
         $session->set('slug', $entity->getSlug());
         $session->set('admin', $entity->getAdmin());
+        $session->set('moderator', $entity->getModerator());
 
         // cookie
         $pass = $entity->getPass();
@@ -752,6 +754,7 @@ class UserController extends Controller
       $session->set('name', $user->getShortName());
       $session->set('slug', $user->getSlug());
       $session->set('admin', $user->getAdmin());
+      $session->set('moderator', $user->getModerator());
 
 
     }else{
@@ -776,6 +779,7 @@ class UserController extends Controller
     $session->set('name',null);
     $session->set('slug', null);
     $session->set('admin',null);
+    $session->set('moderator', null);
 
 
     setcookie("login", false, ( time() - 3600 ), "/");
@@ -834,11 +838,12 @@ class UserController extends Controller
 
       // esta logueado?
       $session = $request->getSession();
-    $session_id = $session->get('id');
-    if ( $session_id ) {
-		return $this->redirect( $this->generateUrl('post') );
-	}
+      $session_id = $session->get('id');
+      if ( $session_id ) {
+		    return $this->redirect( $this->generateUrl('post') );
+      }
 
+      /*
       $cookie_login = $request->cookies->get('login');
       if ( !$session_id && $cookie_login ) {
         $cookie_login_info = explode(':',$cookie_login);
@@ -854,12 +859,14 @@ class UserController extends Controller
           $session->set('name', $user->getShortName());
           $session->set('slug', $user->getSlug());
           $session->set('admin', $user->getAdmin());
+          $session->set('moderator', $user->getModerator());
 
 		  if( !$back ){
 				return $this->redirect( $this->generateUrl('post') );
 			}
         }
       }
+      */
 
 
 
@@ -869,22 +876,22 @@ class UserController extends Controller
 	
 	
     
-    $ref_id = $request->query->get('ref_id');
-    
-    if ( $ref_id ) {
-
-          $em = $this->getDoctrine()->getEntityManager();
-          $entity = $em->getRepository('ApplicationUserBundle:User')->find($ref_id);
-
-      if ( $entity ) {
-        
-        $session->set('ref_id', $ref_id);
-      }
-    }
-    if ( $back ) {
+      $ref_id = $request->query->get('ref_id');
       
-      $session->set('back', $back);
-    }
+      if ( $ref_id ) {
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $entity = $em->getRepository('ApplicationUserBundle:User')->find($ref_id);
+
+        if ( $entity ) {
+          
+          $session->set('ref_id', $ref_id);
+        }
+      }
+      if ( $back ) {
+        
+        $session->set('back', $back);
+      }
 
     // estadisticas de usuarios
     /*

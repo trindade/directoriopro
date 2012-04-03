@@ -48,6 +48,7 @@ class LoginControlListener
                 $session->set('name', $user->getShortName());
                 $session->set('slug', $user->getSlug());
                 $session->set('admin', $user->getAdmin());
+                $session->set('moderator', $user->getModerator());
             }
         }
     }

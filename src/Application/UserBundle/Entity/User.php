@@ -34,6 +34,13 @@ class User
     private $admin;
 
     /**
+     * @var smallint $moderator
+     *
+     * @ORM\Column(name="moderator", type="smallint", nullable=true)
+     */
+    private $moderator;
+
+    /**
      * @var bigint $facebook_id
      *
      * @ORM\Column(name="facebook_id", type="bigint", nullable=true)
@@ -348,6 +355,26 @@ class User
     public function getAdmin()
     {
         return $this->admin;
+    }
+
+    /**
+     * Set moderator
+     *
+     * @param smallint $moderator
+     */
+    public function setModerator($moderator)
+    {
+        $this->moderator = $moderator;
+    }
+
+    /**
+     * Get moderator
+     *
+     * @return smallint
+     */
+    public function getModerator()
+    {
+        return $this->moderator;
     }
 
     /**
