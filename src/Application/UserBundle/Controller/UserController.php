@@ -1424,6 +1424,10 @@ class UserController extends Controller
         $entity->setVisitsGoogle($entity->getVisitsGoogle() + 1 );
       }
 
+      if( stristr($_SERVER['HTTP_REFERER'],'/user/search') ){
+        $entity->setVisitsFinder($entity->getVisitsFinder() + 1 );
+      }
+
       $em->persist($entity);
       $em->flush();
     }

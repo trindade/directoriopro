@@ -132,6 +132,13 @@ class User
     private $visits_google = 0;
 
     /**
+     * @var integer $visits_finder
+     *
+     * @ORM\Column(name="visits_finder", type="integer", nullable=true)
+     */
+    private $visits_finder = 0;
+
+    /**
      * @var tinyint $freelance
      *
      * @ORM\Column(name="freelance", type="integer", nullable=true)
@@ -642,6 +649,26 @@ class User
     public function getVisitsGoogle()
     {
         return $this->visits_google;
+    }
+
+    /**
+     * Set visits_finder
+     *
+     * @param integer $visits_finder
+     */
+    public function setVisitsFinder($visitsFinder)
+    {
+        $this->visits_finder = $visitsFinder;
+    }
+
+    /**
+     * Get visits_finder
+     *
+     * @return integer
+     */
+    public function getVisitsFinder()
+    {
+        return $this->visits_finder;
     }
 
     /**
