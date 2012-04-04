@@ -135,13 +135,6 @@ class Place
     private $email;
 
     /**
-     * @var integer $betabeers
-     *
-     * @ORM\Column(name="betabeers", type="integer", nullable=true)
-     */
-    private $betabeers;
-
-    /**
      * Get id
      *
      * @return integer 
@@ -475,24 +468,5 @@ class Place
     }
 
 
-    /**
-     * Set betabeers
-     *
-     * @param string $betabeers
-     */
-    public function setBetabeers($betabeers)
-    {
-        $this->betabeers = $betabeers;
-    }
-
-    /**
-     * Get betabeers
-     *
-     * @return string 
-     */
-    public function getBetabeers()
-    {
-        return $this->betabeers;
-    }
 
 }

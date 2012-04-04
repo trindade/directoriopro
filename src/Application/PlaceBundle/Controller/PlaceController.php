@@ -43,12 +43,12 @@ class PlaceController extends Controller
 		$query = $em->createQueryBuilder();
 		$query->add('select', 'p')
 		   ->add('from', 'ApplicationPlaceBundle:Place p')
-		   ->add('orderBy', 'p.featured DESC, p.id DESC');
+		   ->add('orderBy', 'p.id DESC');
 		
 
 		$filter = $request->query->get('filter');
-		if ( $filter == 'betabeers' ) {
-			$query->andWhere('p.betabeers = 1');
+		if ( $filter == 'featured' ) {
+			$query->andWhere('p.featured = 1');
     	}
 
 		

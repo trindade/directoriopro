@@ -31,7 +31,7 @@
 
 <ul class="nav nav-tabs">
     <li {% if filter == false %}class="active"{% endif %}><a href="{{ path('place') }}">Listado</a></li>
-    <li {% if filter == 'betabeers' %}class="active"{% endif %}><a href="{{ path('place') }}?filter=betabeers">Centro betabeers</a></li>
+    <li {% if filter == 'featured' %}class="active"{% endif %}><a href="{{ path('place') }}?filter=featured">Centro betabeers</a></li>
 </ul>
 
 
@@ -39,7 +39,7 @@
     {% for entity in entities %}
         <li style="margin-bottom:20px;" {% if entity.featured == 1 %}class="featured"{% endif %}">
 
-        	{% if entity.betabeers %}
+        	{% if entity.featured %}
         		<img src="{{ asset('bundles/applicationanuncios/images/betacoworking.png') }}" width="50" height="50" data-original-title="Centro betabeers" rel="twipsy" style="float:right;margin-left:5px"/>
         	{% endif %}
 

@@ -39,7 +39,7 @@
     {% for entity in entities %}
         <li style="margin-bottom:20px;" {% if entity.featured == 1 %}class="featured"{% endif %}">
 
-        	{% if entity.betabeers %}
+        	{% if entity.featured %}
         		<img src="{{ asset('bundles/applicationanuncios/images/betacoworking.png') }}" width="50" height="50" data-original-title="Centro betabeers" rel="twipsy" style="float:right;margin-left:5px"/>
         	{% endif %}
 
