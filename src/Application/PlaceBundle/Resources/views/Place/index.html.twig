@@ -1,6 +1,6 @@
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-
+{% block title "Espacios coworking" %}
 
 
 {% block sidebar %}
@@ -20,22 +20,18 @@
 
 {% block content %}
 
+<ul class="breadcrumb">
+  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
+  <li class="active">Espacios coworking</li>
+</ul>
 
+<h1>Espacios coworking</h1>
 
 {% if filter == 'featured' %}
-
-	{% block title "Centros betabeers" %}
-
-	<ul class="breadcrumb">
-	  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
-	  <li><a href="{{ path('place') }}">Espacios coworking</a> <span class="divider">/</span></li>
-	  <li class="active">Centros betabeers</li>
-	</ul>
-
-	<h1>Centros betabeers</h1>
+	
 	<ul class="nav nav-tabs">
 	    <li><a href="{{ path('place') }}">Listado</a></li>
-	    <li class="active"><a href="{{ path('place') }}?filter=featured">Centro betabeers</a></li>
+	    <li class="active"><a href="{{ path('place') }}?filter=featured">Centros betabeers</a></li>
 	</ul>
 
 	Los siguientes centros alojan betabeers una reunión mensual de desarrolladores web y apps que se celebra por toda España.<br/><br/>
@@ -44,18 +40,10 @@
 	<br/><br/>
 
 {% else %}
-
-	{% block title "Espacios coworking" %}
-
-	<ul class="breadcrumb">
-	  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
-	  <li class="active">Espacios coworking</li>
-	</ul>
-
-	<h1>Espacios coworking</h1>
+	
 	<ul class="nav nav-tabs">
 	    <li class="active"><a href="{{ path('place') }}">Listado</a></li>
-	    <li><a href="{{ path('place') }}?filter=featured">Centro betabeers</a></li>
+	    <li><a href="{{ path('place') }}?filter=featured">Centros betabeers</a></li>
 	</ul>
 {% endif %}
 
