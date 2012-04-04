@@ -43,7 +43,6 @@ class PlaceController extends Controller
 		$query = $em->createQueryBuilder();
 		$query->add('select', 'p')
 		   ->add('from', 'ApplicationPlaceBundle:Place p')
-		   //->add('where', 'p.type != 2')
 		   ->add('orderBy', 'p.featured DESC, p.id DESC');
 		
 
@@ -85,9 +84,6 @@ class PlaceController extends Controller
 		}
 
 
-
-	 	//$twig = $this->container->get('twig'); 
-	    //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 	
 	
 
@@ -103,7 +99,7 @@ class PlaceController extends Controller
 
 
 
-        return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
+        return array('cities' => $cities, 'pager' => $html, 'entities' => $entities, 'filter' => $filter);
     }
 
 
@@ -186,8 +182,6 @@ class PlaceController extends Controller
 		$cities = $qb->getQuery()->getResult();
 
 
-	 	//$twig = $this->container->get('twig'); 
-	    //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
         return array('cities' => $cities, 'city' => $city, 'country' => $country, 'pager' => $html, 'entities' => $entities );
     }
@@ -513,7 +507,6 @@ class PlaceController extends Controller
 		$entities = $pagerfanta->getCurrentPageResults();
 		$routeGenerator = function($page) {//, $category_id
 			$url = '?page='.$page;
-			//if( $category_id ) $url .= '&c=' . $category_id;
 		    return $url;
 		};
 
@@ -522,12 +515,7 @@ class PlaceController extends Controller
 		
 		
 		
-	
-        //$em = $this->getDoctrine()->getEntityManager();
-        //$entities = $em->getRepository('ApplicationEventBundle:Event')->findAll();
 
-	 	//$twig = $this->container->get('twig'); 
-	    //$twig->addExtension(new \Twig_Extensions_Extension_Text);
 
         return array('pager' => $html, 'entities' => $entities);
     }

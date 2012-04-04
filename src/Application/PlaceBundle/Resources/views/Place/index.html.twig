@@ -30,8 +30,8 @@
 
 
 <ul class="nav nav-tabs">
-    <li class="active"><a href="{{ path('place') }}">Listado</a></li>
-    <li><a href="{{ path('place') }}?filter=betabeers">Centro betabeers</a></li>
+    <li {% if filter == false %}class="active"{% endif %}><a href="{{ path('place') }}">Listado</a></li>
+    <li {% if filter == 'betabeers' %}class="active"{% endif %}><a href="{{ path('place') }}?filter=betabeers">Centro betabeers</a></li>
 </ul>
 
 
