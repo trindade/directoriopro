@@ -35,6 +35,12 @@
 <ul>
     {% for entity in entities %}
         <li style="margin-bottom:20px;" {% if entity.featured == 1 %}class="featured"{% endif %}">
+
+        	{% if entity.betabeers %}
+        		<img src="{{ asset('bundles/applicationanuncios/images/betacoworking.png') }}" width="50" height="50" data-original-title="Centro betabeers" rel="twipsy" style="float:right;margin-left:5px"/>
+        	{% endif %}
+        	
+
             <a href="{{ path('place_show', { 'id': entity.id }) }}" class="title">{{ entity.title }}</a> 
 			{% if entity.price %}<span style="color:#3C0;padding-left:10px">{{ entity.price }}</span>{% endif %}
 

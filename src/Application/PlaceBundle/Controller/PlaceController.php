@@ -47,6 +47,11 @@ class PlaceController extends Controller
 		   ->add('orderBy', 'p.featured DESC, p.id DESC');
 		
 
+		$filter = $request->query->get('filter');
+		if ( $filter == 'betabeers' ) {
+			$query->andWhere('p.betabeers = 1');
+    	}
+
 		
         $adapter = new DoctrineORMAdapter($query);
 
