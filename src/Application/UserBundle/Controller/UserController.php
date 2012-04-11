@@ -1374,12 +1374,14 @@ class UserController extends Controller
     if ( $session_id != $entity->getId() ) {
       $entity->setVisits($entity->getVisits() + 1 );
 
-      if( stristr($_SERVER['HTTP_REFERER'],'google') ){
-        $entity->setVisitsGoogle($entity->getVisitsGoogle() + 1 );
-      }
+      if( isset( $_SERVER['HTTP_REFERER'] ) ){
+        if( stristr($_SERVER['HTTP_REFERER'],'google') ){
+          $entity->setVisitsGoogle($entity->getVisitsGoogle() + 1 );
+        }
 
-      if( stristr($_SERVER['HTTP_REFERER'],'/user/search') ){
-        $entity->setVisitsFinder($entity->getVisitsFinder() + 1 );
+        if( stristr($_SERVER['HTTP_REFERER'],'/user/search') ){
+          $entity->setVisitsFinder($entity->getVisitsFinder() + 1 );
+        }
       }
 
       $em->persist($entity);

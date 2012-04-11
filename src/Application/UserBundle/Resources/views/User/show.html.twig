@@ -99,12 +99,12 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
   <li><a href="{{ path('user_search') }}?c={{ entity.categoryid }}">{{ categories[ entity.categoryid ] }}</a></li>
 </ul>
 
-<div style="font-size:15px;padding-bottom:5px">
+<div style="font-size:15px;padding-bottom:15px">
 
 
 	
 
-<img src="{{ entity.getAvatar('bigger') }}" style="width:65px;height:65px;float:left;margin-right:15px"/>
+<img src="{{ entity.getAvatar('bigger') }}" style="width:80px;height:80px;float:left;margin-right:15px"/>
 
 <div style="float:right;font-size:13px">
 	{% if entity.searchteam %}<div style="padding-bottom:5px"><img src="{{ asset('bundles/applicationanuncios/images/search.png') }}" width="13" height="13" align="absmiddle"/> Busca equipo</div>{% endif %}
@@ -115,6 +115,25 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 <h1 style="margin-bottom:0;font-size:25px;">{{ entity.name }}</h1>
 <div style="padding-bottom:10px">{{ entity.location }}</div>
 
+
+{% if entity.getTwitterUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://twitter.com/{{ entity.getTwitterUrl() }}"><img src="/bundles/applicationanuncios/images/social/twitter.png" width="16" height="16"/></a> {% endif %}
+{% if entity.getLinkedinUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://es.linkedin.com/in/{{ entity.getLinkedinUrl() }}"><img src="/bundles/applicationanuncios/images/social/linkedin.png" width="16" height="16"/></a> {% endif %}
+
+{% if entity.getFlickrUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.flickr.com/photos/{{ entity.getFlickrUrl() }}"><img src="/bundles/applicationanuncios/images/social/flickr.png" width="16" height="16"/></a> {% endif %}
+{% if entity.getDribbbleUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://dribbble.com/{{ entity.getDribbbleUrl() }}"><img src="/bundles/applicationanuncios/images/social/dribbble.png" width="16" height="16"/></a> {% endif %}
+{% if entity.getForrstUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://forrst.com/people/{{ entity.getForrstUrl() }}"><img src="/bundles/applicationanuncios/images/social/forrst.png" width="16" height="16"/></a> {% endif %}
+
+{% if entity.getGithubUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://github.com/{{ entity.getGithubUrl() }}"><img src="/bundles/applicationanuncios/images/social/github.png" width="16" height="16"/></a> {% endif %}
+{% if entity.getBitbucketUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://bitbucket.org/{{ entity.getBitbucketUrl() }}"><img src="/bundles/applicationanuncios/images/social/bitbucket.png" width="16" height="16"/></a> {% endif %}
+{% if entity.getStackoverflowUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://stackoverflow.com/users/{{ entity.getStackoverflowUrl() }}"><img src="/bundles/applicationanuncios/images/social/stackoverflow.png" width="16" height="16"/></a> {% endif %}
+{% if entity.getMasterbranchUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://www.masterbranch.com/developer/{{ entity.getMasterbranchUrl() }}"><img src="/bundles/applicationanuncios/images/social/masterbranch.png" width="16" height="16"/></a> {% endif %}
+
+{% if entity.getYoutubeUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.youtube.com/{{ entity.getYoutubeUrl() }}"><img src="/bundles/applicationanuncios/images/social/youtube.png" width="16" height="16"/></a> {% endif %}
+{% if entity.getVimeoUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://vimeo.com/{{ entity.getVimeoUrl() }}"><img src="/bundles/applicationanuncios/images/social/vimeo.png" width="16" height="16"/></a> {% endif %}
+
+{% if entity.getDeliciousUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://delicious.com/{{ entity.getDeliciousUrl() }}"><img src="/bundles/applicationanuncios/images/social/delicious.png" width="16" height="16"/></a> {% endif %}
+{% if entity.getPinboardUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://pinboard.in/u:{{ entity.getPinboardUrl() }}"><img src="/bundles/applicationanuncios/images/social/pinboard.png" width="16" height="16"/></a> {% endif %}
+		
 
 <br class="clear"/>
 
@@ -197,28 +216,8 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 	<div class="tab-pane active" id="info">	
 
-		<!--
-		{% if entity.getTwitterUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://twitter.com/{{ entity.getTwitterUrl() }}"><img src="/bundles/applicationanuncios/images/social/twitter.png" width="26" height="26"/></a> {% endif %}
-		{% if entity.getLinkedinUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://es.linkedin.com/in/{{ entity.getLinkedinUrl() }}"><img src="/bundles/applicationanuncios/images/social/linkedin.png" width="26" height="26"/></a> {% endif %}
 
-		{% if entity.getFlickrUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.flickr.com/photos/{{ entity.getFlickrUrl() }}"><img src="/bundles/applicationanuncios/images/social/flickr.png" width="26" height="26"/></a> {% endif %}
-		{% if entity.getDribbbleUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://dribbble.com/{{ entity.getDribbbleUrl() }}"><img src="/bundles/applicationanuncios/images/social/dribbble.png" width="26" height="26"/></a> {% endif %}
-		{% if entity.getForrstUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://forrst.com/people/{{ entity.getForrstUrl() }}"><img src="/bundles/applicationanuncios/images/social/forrst.png" width="26" height="26"/></a> {% endif %}
 
-		{% if entity.getGithubUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://github.com/{{ entity.getGithubUrl() }}"><img src="/bundles/applicationanuncios/images/social/github.png" width="26" height="26"/></a> {% endif %}
-		{% if entity.getBitbucketUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://bitbucket.org/{{ entity.getBitbucketUrl() }}"><img src="/bundles/applicationanuncios/images/social/bitbucket.png" width="26" height="26"/></a> {% endif %}
-		{% if entity.getStackoverflowUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://stackoverflow.com/users/{{ entity.getStackoverflowUrl() }}"><img src="/bundles/applicationanuncios/images/social/stackoverflow.png" width="26" height="26"/></a> {% endif %}
-		{% if entity.getMasterbranchUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://www.masterbranch.com/developer/{{ entity.getMasterbranchUrl() }}"><img src="/bundles/applicationanuncios/images/social/masterbranch.png" width="26" height="26"/></a> {% endif %}
-
-		{% if entity.getYoutubeUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.youtube.com/{{ entity.getYoutubeUrl() }}"><img src="/bundles/applicationanuncios/images/social/youtube.png" width="26" height="26"/></a> {% endif %}
-		{% if entity.getVimeoUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://vimeo.com/{{ entity.getVimeoUrl() }}"><img src="/bundles/applicationanuncios/images/social/vimeo.png" width="26" height="26"/></a> {% endif %}
-
-		{% if entity.getDeliciousUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://delicious.com/{{ entity.getDeliciousUrl() }}"><img src="/bundles/applicationanuncios/images/social/delicious.png" width="26" height="26"/></a> {% endif %}
-		{% if entity.getPinboardUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://pinboard.in/u:{{ entity.getPinboardUrl() }}"><img src="/bundles/applicationanuncios/images/social/pinboard.png" width="26" height="26"/></a> {% endif %}
-		
-		<br/><br/>
-		
-		-->
 
 		{% if entity.body %}
 			{{ entity.body|nl2br}}

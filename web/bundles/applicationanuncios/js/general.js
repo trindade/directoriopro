@@ -509,7 +509,7 @@ function networks_tooltip(){
 				tooltip = 'appannie.com/company/USUARIO';
 				break;
 			case ( id.indexOf('android') > -1 ):
-				tooltip = 'market.android.com/developer?pub=USUARIO';
+				tooltip = 'play.google.com/store/apps/developer?id=USUARIO';
 				break;
 			case ( id.indexOf('chrome') > -1 ):
 				tooltip = 'chrome.google.com/webstore/search?q=USUARIO';
