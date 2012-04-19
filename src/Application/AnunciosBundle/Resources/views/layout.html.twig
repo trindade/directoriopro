@@ -21,7 +21,7 @@
 	<meta name="google-site-verification" content="ggl4xKpndqsKTfoDqWE6jVaDAv2g_PRj1UIM64fs5Pc" />
 	
 	<!-- START FB META -->
-	<meta property="og:image" content="http://dir.betabeers.com/bundles/applicationanuncios/images/betalogo.png" />
+	<meta property="og:image" content="http://betabeers.com/v2/img/betalogo.png" />
 	<!-- END FB META -->
 	
 	{% if canonical_url is defined %}
@@ -34,8 +34,20 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link rel="stylesheet" href="{{ asset('bundles/applicationanuncios/bootstrap/css/bootstrap.min.css') }}" type="text/css" media="all" />
-	<link rel="stylesheet" href="{{ asset('bundles/applicationanuncios/css/main.css') }}?v={{ static_id }}" type="text/css" media="all" />
+    
+
+
+	
+	<link rel="stylesheet" href="http://betabeers.com/v2/css/bootstrap.min.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="http://betabeers.com/v2/css/general.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="{{ asset('bundles/applicationanuncios/css/main2.css') }}?v={{ static_id }}" type="text/css" media="all" />
+
+
+	
+	
+
+
+	
 	
 	<link rel="alternate" type="application/rss+xml" title="Betabeers jobs" href="http://feeds.feedburner.com/betabeersjobs" />
 	
@@ -49,177 +61,91 @@
 
 
 
-<!-- Navbar -->
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="{{ path('post') }}">Betabeers</a>
-        <div class="nav-collapse">
-
-<ul class="nav">
-
-		<li>
-			<a href="{{ path('forum') }}">Foro</a>
-		</li>
-
-		<li>
-			<a href="{{ path('post') }}">Empleo</a>
-
-		</li>
-
-		<li>
-			<a href="{{ path('user') }}">Profesionales</a>
-		</li>
-
-		<li>
-			<a href="{{ path('event') }}">Eventos</a>
-		</li>
-		
-		<li>
-			<a href="{{ path('place') }}">Coworking</a>
-		</li>
-</ul>
-
-
-
-<form class="navbar-search pull-left" action="{{ path('post_search') }}" id="form_search">
-  <input type="text" name="q" id="query" class="search-query span2" placeholder="Buscar" autocomplete="off">
-	<div id="menu_options">
-		<a href="#" onclick="$('#form_search').attr('action','{{ path('post_search') }}').submit()">Buscar Empleos</a>
-		<a href="#" onclick="$('#form_search').attr('action','{{ path('user_search') }}').submit()">Buscar Profesionales</a>
-		<a href="#" onclick="$('#form_search').attr('action','{{ path('event_search') }}').submit()">Buscar Eventos</a>
-		<a href="#" onclick="$('#form_search').attr('action','{{ path('forum_search') }}').submit()">Buscar Foro</a>
-	</div>
-</form>
-
-
-
-
-
-
-<ul class="nav pull-right">
-	{% if app.session.get('name') %}
-
-		<li class="dropdown">
-		
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> {{ app.session.get('name') }} <b class="caret"></b></a>
-		
-
-			<ul class="dropdown-menu">
-				<li><a href="{{ path('user_show', { 'id': app.session.get('id'), 'slug': app.session.get('slug') }) }}">Perfil</a></li>
-				<li><a href="{{ path('user_invite') }}">Invitar contactos</a></li>
-				<li><a href="{{ path('user_edit') }}">Editar perfil</a></li>
-
-
-				{% if app.session.get('admin') %}
-					<li class="divider"></li>
-					<li><a href="{{ path('post_stats') }}">Estadísticas</a></li>
-					<li><a href="{{ path('post_admin') }}">Administrar anuncios</a></li>
-					<li><a href="{{ path('user_admin') }}">Administrar usuarios</a></li>
-					<li><a href="{{ path('event_admin') }}">Administrar eventos</a></li>
-					<li><a href="{{ path('place_admin') }}">Administrar espacios</a></li>
-					<li><a href="{{ path('thread_admin') }}">Administrar temas</a></li>
-					<li class="divider"></li>
-					<li><a href="{{ path('event_emails') }}">Emails eventos</a></li>
-				{% elseif app.session.get('moderator') %}
-					<li><a href="{{ path('event_emails') }}">Emails eventos</a></li>
-				{% endif %}
-				<li class="divider"></li>
-				<li><a href="{{ path('user_logout') }}">Salir</a></li>
-			</ul>
-	{% else %}
-		
-
-
-
-		<li>
-			<a id="lnk_fblogin" href="{{ path('user_fblogin') }}" class="dropdown-toggle" data-toggle="dropdown" title="Conectate con facebook" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/big_facebook.png') }}" align="absmiddle" width="18" height="18"/></a>
-		</li>
-	
-		<li>
-			<a id="lnk_register" href="{{ path('user_register') }}">Registrate</a>
-		</li>
-
-
-		<li style="margin-right:-30px">
-			<a id="lnk_login" href="{{ path('user_login') }}" class="dropdown-toggle" data-toggle="dropdown">Iniciar sesión</a>
-		</li>
-
-
-		
-		<!-- old version
-		
-		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Iniciar sesión <b class="caret"></b></a>
-			<ul class="dropdown-menu">
-				<li><a href="{{ path('user_welcome') }}">Iniciar sesión</a></li>
-				<li><a href="{{ path('user_fblogin') }}">Entra con facebook</a></li>
-				<li><a href="{{ path('user_register') }}">Registrate</a></li>
-			</ul>
-		</li>
-		
-		-->
-		
-		
-	{% endif %}
-	</li>
-</ul>
-
-
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-
 <div class="container">
-	<div id="content">
-		<div class="row show-grid">
-			<div class="span6">
-				{% block content %}{% endblock %}
-			</div>
-			<div class="span3 filters">
-				<div id="sidebar">
-					{% block sidebar %}{% endblock %}
+
+
+
+	<div class="row">
+		<div class="span9">
+		
+			<!-- inicio -->
+		
+			<nav>
+				<a href="http://betabeers.com">PORTADA</a>
+				<a href="http://betabeers.com/v2/agenda.php">AGENDA</a>
+				<a href="http://betabeers.com/v2/videos.php">VIDEOS</a>
+				<a href="http://dir.betabeers.com" class="sel">DIRECTORIO</a>
+				<a href="http://betabeers.com/v2/club.php">CLUB</a>
+				<br class="clear"/>
+			</nav>
+			
+			
+			
+			<div class="contingut">
+
+
+				<div class="box_menu_dir">
+					<div class="floatR">
+						
+
+						{% if app.session.get('name') %}
+
+							<a href="{{ path('user_show', { 'id': app.session.get('id'), 'slug': app.session.get('slug') }) }}">Perfil</a> 
+							<a href="{{ path('user_logout') }}">Salir</a>
+							
+						{% else %}
+
+							<a id="lnk_fblogin" href="{{ path('user_fblogin') }}" title="Conectate con facebook" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/big_facebook.png') }}" align="absmiddle" width="18" height="18"/></a> 
+							<a id="lnk_register" href="{{ path('user_register') }}">Registrate</a>
+							<a id="lnk_login" href="{{ path('user_login') }}">Iniciar sesión</a>
+							
+						{% endif %}
+
+
+					</div>
+
+					<a href="{{ path('post') }}">Empleo</a>
+					<a href="{{ path('forum') }}">Foro</a>
+					<a href="{{ path('user') }}">Profesionales</a>
+					<a href="{{ path('event') }}">Eventos</a>
+					<a href="{{ path('test') }}">Tests</a>		
+				</div>	
+
+				<div class="box_page">
+
+					<div id="content">
+						<div class="row show-grid">
+							<div class="span6">
+								{% block content %}{% endblock %}
+							</div>
+							<div class="span3 filters">
+								<div id="sidebar">
+									{% block sidebar %}{% endblock %}
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	<div class="footer">
-		<a href="http://mixpanel.com/f/partner" class="pull-right"><img src="http://mixpanel.com/site_media/images/partner/badge_light.png" alt="Real Time Web Analytics"></a>
-		<div class="row show-grid">
-			<div class="span2">
-				Ayuda<br/>
-				<a href="/page/faq/">¿Cómo publicar un anuncio?</a><br/>
-				<a href="/page/success/">Casos de éxito</a><br/>
-			</div>
-			<div class="span2">
-				Información<br/>
-				<a href="/page/about/">Acerca de y contacto</a><br/>
-				<a href="/page/thanks/">Colaboradores</a>
-			</div>
-			<div class="span2">
-				Comunicación<br/>
-				<a href="http://betabeers.com" target="_blank">Blog</a> / 
-				<a href="http://twitter.com/betabeers" target="_blank">Twitter</a> / 
-				<a href="http://facebook.com/betabeers" target="_blank">Facebook</a><br/>
-				<a href="http://betabeers.com/prensa/" target="_blank">Zona de prensa</a>
-			</div>
-		</div>
-	</div>
-	
-	
 
 
+
+
+			</div>
+	
+	
+			<!-- fin -->
+	
+		</div>
+		<div class="span3 sponsors">
+			<iframe src="http://betabeers.com/v2/sponsors.php" width="300" height="250"></iframe>
+		</div>
+	</div>
 </div>
+
+	
+
+
 
 
 {% if share_url is defined %}
@@ -298,17 +224,7 @@ $().ready(function(){
 		},1500);
 		
 	
-		/*
-		if( $('#share_bar').size() ){
 
-			$(window).bind('scroll', function(){
-				if( $(this).scrollTop() > 40 ){
-					$('#share_bar').fadeIn('slow');
-				}
-			});
-
-		}
-		*/
 
 	}
 
@@ -335,6 +251,11 @@ _gaq.push(['_trackPageview']);
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
   })();
 </script>
+
+
+
+
+
 
 
 </body>

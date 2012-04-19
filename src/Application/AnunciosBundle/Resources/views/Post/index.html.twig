@@ -7,18 +7,9 @@
 
 {% block sidebar %}
 
-	<!--
-	<b>Empresas que buscan talento</b><br/>
-	<a href="{{ path('post_search') }}?q=chicisimo"><img src="{{ asset( 'bundles/applicationanuncios/images/companies/chicisimo.png' ) }}"/></a>
-	<a href="{{ path('post_search') }}?q=softonic"><img src="{{ asset( 'bundles/applicationanuncios/images/companies/softonic.png' ) }}"/></a>
-	<a href="{{ path('post_search') }}?q=idealista"><img src="{{ asset( 'bundles/applicationanuncios/images/companies/idealista.png' ) }}"/></a>
-	<a href="{{ path('post_search') }}?q=11870"><img src="{{ asset( 'bundles/applicationanuncios/images/companies/11870.png' ) }}"/></a>
+
 
 	
-
-	<br/><br/>-->
-
-	<b>Categorías</b><br/><br/>
 	<ul>
 	{% for category in categories %}
 		{% if loop.index0 != 0 and loop.index0 != 13 %}
@@ -68,10 +59,10 @@
 <div style="padding: 6px 0 9px 16px;border-top: 1px #efefef solid;background:#F6F6F6">
 	<a href="{{ path('post') }}?c=2" style="color:black;margin-right:20px">Backend</a>
 	<a href="{{ path('post') }}?c=1" style="color:black;margin-right:20px">Frontend</a>
-	<a href="{{ path('post') }}?c=3" style="color:black;margin-right:20px">Programador apps</a>
+	<a href="{{ path('post') }}?c=3" style="color:black;margin-right:20px">Apps</a>
 	<a href="{{ path('post') }}?c=8" style="color:black;margin-right:20px">Diseñador</a>
-	<a href="{{ path('post_internship') }}" style="font-weight:bold;color:black;margin-right:20px">Prácticas</a>
-	<a href="{{ path('post_search') }}?t=1" style="font-weight:bold;color:black;margin-right:20px">Freelance</a>
+	<a href="{{ path('post_internship') }}" style="color:black;margin-right:20px">Prácticas</a>
+	<a href="{{ path('post_search') }}?t=1" style="color:black;margin-right:20px">Freelance</a>
 </div>
 
 
