@@ -85,13 +85,13 @@
 
 
 				<div class="box_menu_dir">
-					<div class="floatR">
+					<div style="float:right;margin-top:-5px;margin-right:15px;font-size:14px">
 						
 
 						{% if app.session.get('name') %}
 
 							<div class="btn-group">
-								<button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">{{ app.session.get('name') }} <span class="caret"></span></button>
+								<button class="btn dropdown-toggle" data-toggle="dropdown">{{ app.session.get('name') }} <span class="caret"></span></button>
 								<ul class="dropdown-menu">
 									<li><a href="{{ path('user_show', { 'id': app.session.get('id'), 'slug': app.session.get('slug') }) }}">Perfil</a></li>
 									<li><a href="{{ path('user_invite') }}">Invitar contactos</a></li>
