@@ -2,13 +2,16 @@
 {% set nav_post = 1 %}
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-{% block title "Bolsa de empleo 2.0" %}
+{% block title "Ofertas de empleo" %}
 
 
 {% block sidebar %}
 
 
+	<a href="/page/faq/">¿Cómo publicar un anuncio?</a><br/>
+	<a href="/page/success/">Casos de éxito</a>
 
+	<br/><br/>
 	
 	<ul>
 	{% for category in categories %}
@@ -32,20 +35,10 @@
 
 
 
-
-<!--
-<div style="float:right;margin-top:13px;padding:7px;background:#DDF4FB">
-	<a href="{{ path('post_feed') }}" style="background:url('{{ asset( 'bundles/applicationanuncios/images/rss.png' ) }}') no-repeat left center;padding-left:20px;font-weight:bold;color:black">Recibir ofertas de empleo</a><br/>
-	<a href="http://feedburner.google.com/fb/a/mailverify?uri=betabeersjobs&amp;loc=en_US">Subscribe to Beetabeers Jobs by Email</a>
-	<form style="padding-top:8px;margin-bottom:0" action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=betabeersjobs', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><input placeholder="Tu email" type="text" style="width:100px" name="email"/> <input type="hidden" value="betabeersjobs" name="uri"/><input type="hidden" name="loc" value="es_ES"/><input type="submit" value="Apuntarme" class="btn" /></form>
-</div>
--->
-
-
 <a href="{{ path('post_new') }}" class="btn btn-large btn-primary" style="float:right;margin-top:30px;font-weight:bold;font-size:20px;">Publicar empleo</a>
 
 <div style="float:left;">
-	<h1>Bolsa de empleo 2.0</h1>
+	<h1>Ofertas de empleo</h1>
 	<form action="{{ path('post_search') }}">
 		<input name="q" placeholder="Posicíón, keyword o empresa" style="width:250"/> <input value="Buscar" type="submit" class="btn" style="font-weight:bold"/>
 	</form>
