@@ -107,7 +107,7 @@ UL.list LI{clear:both;margin-bottom:10px}
   .navbar-search .search-query{border:0;}
 
 #menu_options{z-index:99;position:absolute;background:#fff;color:white;width:210px;display:none;border:1px #AFAFAF solid;-webkit-box-shadow:1px 1px 4px #888;box-shadow:1px 1px 4px #888;-moz-box-shadow:1px 1px 4px #888}
-	#menu_options a{color:#0063DC;display:block;padding:10px;border-bottom:1px #ccc solid}
+	#menu_options a{font-size:14px;color:#0063DC;display:block;padding:10px;border-bottom:1px #ccc solid}
 		#menu_options a:hover{background:#C3DDFF;text-decoration:none}
 
 
