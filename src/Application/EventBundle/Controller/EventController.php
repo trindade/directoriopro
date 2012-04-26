@@ -185,7 +185,7 @@ class EventController extends Controller
             if( $event ){
                 $entity->setTitle( $event->getTitle() );
                 $entity->setLocation( $event->getLocation() );
-                $entity->setHashtag( $entity->getHashtag() );
+                $entity->setHashtag( $event->getHashtag() );
             }
         }
 
