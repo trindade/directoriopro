@@ -181,11 +181,22 @@ class EventController extends Controller
         // new date
         $hashtag = $request->query->get('hashtag');
         if( $hashtag ){
-            $event = $em->getRepository('ApplicationEventBundle:Event')->findOneBy(array('hashtag'=>$hashtag));
+            $em = $this->getDoctrine()->getEntityManager();
+            $qb = $em->createQueryBuilder();
+            $qb->add('select', 'e')
+               ->add('from', 'ApplicationEventBundle:Event e')
+               ->where('e.hashtag = :hashtag')->setParameter('hashtag', $hashtag)
+               ->add('orderBy', 'e.date_end DESC, e.id DESC')
+               ->setMaxResults(1);
+            $event = current( $qb->getQuery()->getResult() );
+
             if( $event ){
                 $entity->setTitle( $event->getTitle() );
+                $entity->setAddress( $event->getAddress() );
                 $entity->setLocation( $event->getLocation() );
                 $entity->setHashtag( $event->getHashtag() );
+                $entity->setCityId( $event->getCityId() );
+                $entity->setCountryId( $event->getCountryId() );
             }
         }
 
