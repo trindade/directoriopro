@@ -156,7 +156,7 @@ class EventController extends Controller
 
         $entity = new Event();
 
-
+        // ical
         $request = $this->getRequest();
         $ical = $request->query->get('ical');
         $date_start = $date_end = false;
@@ -175,6 +175,17 @@ class EventController extends Controller
                     $date = str_replace('DTEND;VALUE=DATE:','',$item);
                     $date_end =  substr($date, 6,2) . '-' . substr($date, 4,2) . '-' . substr($date, 0,4);
                 }
+            }
+        }
+
+        // new date
+        $hashtag = $request->query->get('hashtag');
+        if( $hashtag ){
+            $event = $em->getRepository('ApplicationEventBundle:Event')->findOneBy(array('hashtag'=>$hashtag));
+            if( $event ){
+                $entity->setTitle( $event->getTitle() );
+                $entity->setLocation( $event->getLocation() );
+                $entity->setHashtag( $entity->getHashtag() );
             }
         }
 
