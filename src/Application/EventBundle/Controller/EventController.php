@@ -610,7 +610,7 @@ class EventController extends Controller
            //->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
            ->add('orderBy', 'e.featured DESC, e.date_start DESC');
 
-        if ( $search ) $qb->andWhere("( e.body LIKE '%".$search."%' OR e.title LIKE '%".$search."%' )");
+        if ( $search ) $qb->andWhere("( e.body LIKE '%".$search."%' OR e.title LIKE '%".$search."%' OR e.hashtag LIKE '%".$search."%' )");
 
         $entities = $qb->getQuery()->getResult();
 
