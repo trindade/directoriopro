@@ -8,7 +8,7 @@
 }
 
 /* content wrap fix */
-#content .span6{width:570px}
+#content .span6{width:535px}
 
 PRE{background:white;border:0;padding:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;}
 .filters a.btn, .filters button.btn{width:179px;text-align:center;padding-left:0;padding-right:0;margin-bottom:15px}
