@@ -89,7 +89,27 @@
 
 
 				<div class="box_menu_dir">
-					<div style="float:right;margin-right:15px;font-size:14px">
+					
+
+					<a href="{{ path('post') }}">Empleo</a>
+					<a href="{{ path('forum') }}">Foro</a>
+					<a href="{{ path('user') }}">Profesionales</a>
+					<a href="{{ path('event') }}">Eventos</a>
+					<a href="{{ path('test') }}">Tests</a>		
+
+
+
+					<form class="navbar-search" action="{{ path('post_search') }}" id="form_search">
+					  <input type="text" name="q" id="query" class="search-query span2" placeholder="Buscar" autocomplete="off">
+						<div id="menu_options">
+							<a href="#" onclick="$('#form_search').attr('action','{{ path('post_search') }}').submit()">Buscar Empleos</a>
+							<a href="#" onclick="$('#form_search').attr('action','{{ path('user_search') }}').submit()">Buscar Profesionales</a>
+							<a href="#" onclick="$('#form_search').attr('action','{{ path('event_search') }}').submit()">Buscar Eventos</a>
+							<a href="#" onclick="$('#form_search').attr('action','{{ path('forum_search') }}').submit()">Buscar Foro</a>
+						</div>
+					</form>
+
+					<div class="user_menu">
 						
 
 						{% if app.session.get('name') %}
@@ -131,24 +151,6 @@
 
 
 					</div>
-
-					<a href="{{ path('post') }}">Empleo</a>
-					<a href="{{ path('forum') }}">Foro</a>
-					<a href="{{ path('user') }}">Profesionales</a>
-					<a href="{{ path('event') }}">Eventos</a>
-					<a href="{{ path('test') }}">Tests</a>		
-
-
-
-					<form class="navbar-search" action="{{ path('post_search') }}" id="form_search">
-					  <input type="text" name="q" id="query" class="search-query span2" placeholder="Buscar" autocomplete="off">
-						<div id="menu_options">
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('post_search') }}').submit()">Buscar Empleos</a>
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('user_search') }}').submit()">Buscar Profesionales</a>
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('event_search') }}').submit()">Buscar Eventos</a>
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('forum_search') }}').submit()">Buscar Foro</a>
-						</div>
-					</form>
 
 
 				</div>	
