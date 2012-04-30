@@ -88,16 +88,52 @@
 			<div class="contingut">
 
 
-				<div class="box_menu_dir">
-					<div style="float:right;margin-right:15px;font-size:14px">
-						
 
-						{% if app.session.get('name') %}
 
-							<div class="btn-group">
-								<button class="btn dropdown-toggle" data-toggle="dropdown">{{ app.session.get('name') }} <span class="caret"></span></button>
-								<ul class="dropdown-menu">
-									<li><a href="{{ path('user_show', { 'id': app.session.get('id'), 'slug': app.session.get('slug') }) }}">Perfil</a></li>
+				<div class="navbar">
+				    <div class="navbar-inner">
+				      <div class="container">
+				        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				          <span class="icon-bar"></span>
+				          <span class="icon-bar"></span>
+				          <span class="icon-bar"></span>
+				        </a>
+				        <div class="nav-collapse">
+				          <ul class="nav">
+
+				            <li><a href="{{ path('post') }}">Empleo</a></li>
+							<li><a href="{{ path('forum') }}">Foro</a></li>
+							<li><a href="{{ path('user') }}">Profesionales</a></li>
+							<li><a href="{{ path('event') }}">Eventos</a></li>
+							<li><a href="{{ path('test') }}">Tests</a></li>
+
+
+				          </ul>
+				          
+
+
+							<form class="navbar-search pull-left" action="{{ path('post_search') }}" id="form_search">
+							  <input type="text" name="q" id="query" class="search-query span2" placeholder="Buscar" autocomplete="off">
+								<div id="menu_options">
+									<a href="#" onclick="$('#form_search').attr('action','{{ path('post_search') }}').submit()">Buscar Empleos</a>
+									<a href="#" onclick="$('#form_search').attr('action','{{ path('user_search') }}').submit()">Buscar Profesionales</a>
+									<a href="#" onclick="$('#form_search').attr('action','{{ path('event_search') }}').submit()">Buscar Eventos</a>
+									<a href="#" onclick="$('#form_search').attr('action','{{ path('forum_search') }}').submit()">Buscar Foro</a>
+								</div>
+							</form>
+
+
+
+				          <ul class="nav pull-right">
+
+
+							{% if app.session.get('name') %}
+
+
+					            <li class="dropdown">
+					              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.session.get('name') }} <b class="caret"></b></a>
+					              <ul class="dropdown-menu">
+					                <li><a href="{{ path('user_show', { 'id': app.session.get('id'), 'slug': app.session.get('slug') }) }}">Perfil</a></li>
 									<li><a href="{{ path('user_invite') }}">Invitar contactos</a></li>
 									<li><a href="{{ path('user_edit') }}">Editar perfil</a></li>
 
@@ -117,41 +153,31 @@
 									{% endif %}
 									<li class="divider"></li>
 									<li><a href="{{ path('user_logout') }}">Salir</a></li>
-								</ul>
-							</div>
+					              </ul>
+					            </li>
+								
+							{% else %}
 
-							
-						{% else %}
-
-							<a id="lnk_fblogin" href="{{ path('user_fblogin') }}" title="Conectate con facebook" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/big_facebook.png') }}" align="absmiddle" width="18" height="18"/></a> 
-							<a id="lnk_register" href="{{ path('user_register') }}">Registrate</a>
-							<a id="lnk_login" href="{{ path('user_login') }}">Iniciar sesión</a>
-							
-						{% endif %}
+								<!--<a id="lnk_fblogin" href="{{ path('user_fblogin') }}" title="Conectate con facebook" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/big_facebook.png') }}" align="absmiddle" width="18" height="18"/></a> 
+								<a id="lnk_register" href="{{ path('user_register') }}">Registrate</a>
+								<a id="lnk_login" href="{{ path('user_login') }}">Iniciar sesión</a>-->
 
 
-					</div>
+								<li><a id="lnk_login" href="{{ path('user_login') }}">Iniciar sesión</a></li>
+								
+							{% endif %}
 
-					<a href="{{ path('post') }}">Empleo</a>
-					<a href="{{ path('forum') }}">Foro</a>
-					<a href="{{ path('user') }}">Profesionales</a>
-					<a href="{{ path('event') }}">Eventos</a>
-					<a href="{{ path('test') }}">Tests</a>		
+				          </ul>
 
 
 
-					<form class="navbar-search" action="{{ path('post_search') }}" id="form_search">
-					  <input type="text" name="q" id="query" class="search-query span2" placeholder="Buscar" autocomplete="off">
-						<div id="menu_options">
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('post_search') }}').submit()">Buscar Empleos</a>
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('user_search') }}').submit()">Buscar Profesionales</a>
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('event_search') }}').submit()">Buscar Eventos</a>
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('forum_search') }}').submit()">Buscar Foro</a>
-						</div>
-					</form>
+				        </div><!-- /.nav-collapse -->
+				      </div>
+				    </div><!-- /navbar-inner -->
+				  </div><!-- /navbar -->
 
 
-				</div>	
+
 
 				<div class="box_page">
 
