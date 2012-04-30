@@ -8,10 +8,10 @@
 }
 
 /* content wrap fix */
-#content .span6{width:535px}
+/*#content .span6{width:535px}.filters{margin-left:20px;width:200px}*/
 
 PRE{background:white;border:0;padding:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;}
-.filters a.btn, .filters button.btn{width:179px;text-align:center;padding-left:0;padding-right:0;margin-bottom:15px}
+.filters a.btn, .filters button.btn{width:100%;text-align:center;padding-left:0;padding-right:0;margin-bottom:15px}/*179px*/
 
 
 /* other */
@@ -32,7 +32,7 @@ A.title{font-size:20px}
 .users{background:url('../images/portafolio.png') no-repeat left center;padding-left:20px;font-weight:bold;color:#33CC00;margin-left:10px}
 
 
-.filters{margin-left:20px;width:200px}
+
 
 	
 
