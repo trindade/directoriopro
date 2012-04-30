@@ -99,15 +99,7 @@
 
 
 
-					<form class="navbar-search" action="{{ path('post_search') }}" id="form_search">
-					  <input type="text" name="q" id="query" class="search-query span2" placeholder="Buscar" autocomplete="off">
-						<div id="menu_options">
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('post_search') }}').submit()">Buscar Empleos</a>
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('user_search') }}').submit()">Buscar Profesionales</a>
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('event_search') }}').submit()">Buscar Eventos</a>
-							<a href="#" onclick="$('#form_search').attr('action','{{ path('forum_search') }}').submit()">Buscar Foro</a>
-						</div>
-					</form>
+
 
 					<div class="user_menu">
 						
@@ -143,14 +135,25 @@
 							
 						{% else %}
 
-							<a id="lnk_fblogin" href="{{ path('user_fblogin') }}" title="Conectate con facebook" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/big_facebook.png') }}" align="absmiddle" width="18" height="18"/></a> 
-							<a id="lnk_register" href="{{ path('user_register') }}">Registrate</a>
+							<!--<a id="lnk_fblogin" href="{{ path('user_fblogin') }}" title="Conectate con facebook" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/big_facebook.png') }}" align="absmiddle" width="18" height="18"/></a> 
+							<a id="lnk_register" href="{{ path('user_register') }}">Registrate</a>-->
 							<a id="lnk_login" href="{{ path('user_login') }}">Iniciar sesión</a>
 							
 						{% endif %}
 
 
 					</div>
+
+
+					<form class="navbar-search" action="{{ path('post_search') }}" id="form_search">
+					  <input type="text" name="q" id="query" class="search-query span2" placeholder="Buscar" autocomplete="off">
+						<div id="menu_options">
+							<a href="#" onclick="$('#form_search').attr('action','{{ path('post_search') }}').submit()">Buscar Empleos</a>
+							<a href="#" onclick="$('#form_search').attr('action','{{ path('user_search') }}').submit()">Buscar Profesionales</a>
+							<a href="#" onclick="$('#form_search').attr('action','{{ path('event_search') }}').submit()">Buscar Eventos</a>
+							<a href="#" onclick="$('#form_search').attr('action','{{ path('forum_search') }}').submit()">Buscar Foro</a>
+						</div>
+					</form>
 
 
 				</div>	
