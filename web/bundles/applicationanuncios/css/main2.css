@@ -95,13 +95,12 @@ UL.list LI{clear:both;margin-bottom:10px}
 /* redesign topbar */
 .navbar .brand{color:#F30;padding-left:0;}
 
-#query{width:50px;/*background-color:#fff;margin-top:1px;border: 1px solid #666;background-image:url('../images/icon_search.png');background-repeat:no-repeat;background-position:10px center;color:#000;-webkit-border-radius:14px;border-radius:14px;padding:4px 9px 4px 30px;*/}
-#query:focus{width:135px}
+/*#query{width:50px;}
+#query:focus{width:135px}*/
 
 
 /* buscador */
-.navbar-search{float:none;display:inline;}
-  .navbar-search .search-query{border:0;}
+.navbar-search{top:7px}
 
 #menu_options{z-index:99;position:absolute;background:#fff;color:white;width:210px;display:none;border:1px #AFAFAF solid;-webkit-box-shadow:1px 1px 4px #888;box-shadow:1px 1px 4px #888;-moz-box-shadow:1px 1px 4px #888}
 	#menu_options a{font-size:14px;color:#0063DC;display:block;padding:10px;border-bottom:1px #ccc solid}
