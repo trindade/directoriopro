@@ -7,6 +7,9 @@
 
 {% block sidebar %}
 
+	<a href="{{ path('post_new') }}" class="btn btn-large btn-primary">Publicar empleo</a>
+
+	<br/>
 
 	<a href="/page/faq/" style="font-weight:bold">¿Cómo publicar anuncio?</a>
 
@@ -34,14 +37,14 @@
 
 
 
-<a href="{{ path('post_new') }}" class="btn btn-large btn-primary" style="float:right;margin-top:30px;font-weight:bold;font-size:20px;">Publicar empleo</a>
 
-<div style="float:left;">
-	<h1>Ofertas de empleo</h1>
-	<form action="{{ path('post_search') }}">
-		<input name="q" placeholder="Posicíón, keyword o empresa" style="width:250"/> <input value="Buscar" type="submit" class="btn" style="font-weight:bold"/>
-	</form>
-</div>
+
+
+<h1>Ofertas de empleo</h1>
+<form action="{{ path('post_search') }}">
+	<input name="q" placeholder="Posicíón, keyword o empresa" style="width:250"/> <input value="Buscar" type="submit" class="btn" style="font-weight:bold"/>
+</form>
+
 
 
 <br class="clear"/>
