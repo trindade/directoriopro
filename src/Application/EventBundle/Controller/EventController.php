@@ -69,6 +69,48 @@ class EventController extends Controller
     }
 
     /**
+     * Lists all Event entities.
+     *
+     * @Route("/archive/", name="event_archive")
+     * @Template()
+     */
+    public function archiveAction()
+    {
+
+        $request = $this->getRequest();
+        $page = $request->query->get('page');
+        if ( !$page ) $page = 1;
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $repo = $em->getRepository('ApplicationEventBundle:Event');
+        $query = $repo->findEventsDQL(false, new \DateTime('now'));
+
+        $adapter = new DoctrineORMAdapter($query);
+
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(10); // 10 by default
+        $maxPerPage = $pagerfanta->getMaxPerPage();
+
+        $pagerfanta->setCurrentPage($page); // 1 by default
+        $entities = $pagerfanta->getCurrentPageResults();
+        $routeGenerator = function($page) {//, $category_id
+            $url = '?page='.$page;
+            //if( $category_id ) $url .= '&c=' . $category_id;
+            return $url;
+        };
+
+        $view = new DefaultView();
+        $html = $view->render($pagerfanta, $routeGenerator);//, array('category_id' => (int)$category_id)
+
+        $entities = Util::eventsDetailsGenerator($entities, $repo);
+
+        $cities = $repo->findEventCities(new \DateTime('now'));
+
+        return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
+    }
+
+    /**
      * Lists all Event entities by city.
      *
      * @Route("/city/{id}", name="event_city")

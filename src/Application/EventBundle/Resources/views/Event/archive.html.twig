@@ -1,7 +1,7 @@
 {% set nav_event = 1 %}
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-{% block title "Eventos" %}
+{% block title "Eventos pasados" %}
 
 
 {% block sidebar %}
@@ -38,12 +38,12 @@
   <li class="active">Eventos</li>
 </ul>
 
-<h1>Eventos</h1>
+<h1>Eventos pasados</h1>
 
 <ul class="nav nav-tabs">
-	<li class="active"><a href="{{ path('event') }}">Desarrollo en general</a></li>
+	<li><a href="{{ path('event') }}">Desarrollo en general</a></li>
 	<li><a href="{{ path('event_search') }}?q=betabeers">Próximos Betabeers</a></li>
-	<li><a href="{{ path('event_archive') }}">Eventos pasados</a></li>
+	<li><a href="{{ path('event_archive') }}" class="active">Eventos pasados</a></li>
 </ul>
 
 

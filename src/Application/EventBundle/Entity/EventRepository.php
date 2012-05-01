@@ -78,11 +78,19 @@ class EventRepository extends EntityRepository
      */
     public function findEventsDQL(\DateTime $from, $to = NULL)
     {
-        return $this->_em->createQueryBuilder()
+        $query = $this->_em->createQueryBuilder()
             ->add('select', 'e')
-            ->add('from', 'ApplicationEventBundle:Event e')
-            ->andWhere('e.date_start > :date')->setParameter('date', $from->format('Y-m-d'))
-            ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+            ->add('from', 'ApplicationEventBundle:Event e');
+
+        if( $from ){
+            $query->andWhere('e.date_start > :date')->setParameter('date', $from->format('Y-m-d'))
+                  ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+        }else if( $to ){
+            $query->andWhere('e.date_start < :date')->setParameter('date', $to->format('Y-m-d'))
+                  ->add('orderBy', 'e.date_start DESC');
+        }
+
+        return $query;
     }
 
     /**
