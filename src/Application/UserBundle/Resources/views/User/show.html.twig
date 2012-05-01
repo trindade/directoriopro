@@ -63,10 +63,10 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 
 <style>
-#widget_contact .btn-large{font-size:14px;padding:5px 14px}
+#widget_contact .btn-large{font-size:14px;padding:5px 14px;width:100%;margin-bottom:15px}
 </style>
 
-<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 125px;" id="widget_contact">
+<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 120px;" id="widget_contact">
 
 	{% include "ApplicationAnunciosBundle:Form:contact.html.twig" %}
 
@@ -86,7 +86,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 	
 </div>
 
-<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 125px;">
+<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 120px;">
 	<a href="{{ path('test') }}" class="btn" style="display:block">Ver retos</a>
 
 	<br/>
@@ -99,11 +99,11 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 	{% endif %}
 </div>
 
-<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 125px;">
+<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 120px;">
 	<a href="{{ path('user_recommend', { 'id': entity.id }) }}" class="btn" style="display:block">Recomendar</a>
 	
 	<div style="text-align:center">
-	<b style="font-size:50px;display:block;padding:10px 0;text-align:center">
+	<b style="font-size:50px;display:block;padding:25px 0 5px 0;text-align:center">
 	{% if entity.votes %}
 		{{ entity.votes }}
 	{% else %}
