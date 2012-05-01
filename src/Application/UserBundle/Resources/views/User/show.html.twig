@@ -96,7 +96,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 			<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
 	    {% endfor %}
 		
-	{% else: %}
+	{% else %}
 
 		<a href="{{ path('test_show', { 'id': 2 }) }}" data-original-title="Ponente taller betabeers" rel="twipsy" style="opacity:0.5"><img src="/bundles/applicationanuncios/images/badges/2.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
 	    <a href="{{ path('test_show', { 'id': 3 }) }}" data-original-title="Presentar proyecto betabeers" rel="twipsy" style="opacity:0.5"><img src="/bundles/applicationanuncios/images/badges/3.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
