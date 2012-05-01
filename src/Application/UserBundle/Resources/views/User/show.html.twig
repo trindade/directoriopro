@@ -112,11 +112,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 <img src="{{ entity.getAvatar('bigger') }}" style="width:80px;height:80px;float:left;margin-right:15px"/>
 
-<div style="float:right;font-size:13px">
-	{% if entity.searchteam %}<div style="padding-bottom:5px"><img src="{{ asset('bundles/applicationanuncios/images/search.png') }}" width="13" height="13" align="absmiddle"/> Busca equipo</div>{% endif %}
-	{% if entity.freelance %}<div style="padding-bottom:5px"><img src="{{ asset('bundles/applicationanuncios/images/freelance.png') }}" width="13" height="13" align="absmiddle"/> Freelance</div>{% endif %}
-	{% if entity.unemployed %}<div style="padding-bottom:5px"><img src="{{ asset('bundles/applicationanuncios/images/trabajo.png') }}" width="13" height="13" align="absmiddle"/> Abierto a ofertas laborales</div>{% endif %}
-</div>
+
 
 <h1 style="margin-bottom:0;font-size:25px;">{{ entity.name }}</h1>
 <div style="padding-bottom:10px">{{ entity.location }}</div>
@@ -149,6 +145,58 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 
 
+<div style="background:#F0F0F0;padding:8px;width:200px;float:left;margin-right:20px">
+
+	{% include "ApplicationAnunciosBundle:Form:contact.html.twig" %}
+
+	<br/>
+
+	{% if entity.freelance %}
+		<img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Trabajos freelance<br/>
+	{% endif %}
+
+	{% if entity.unemployed %}
+		<img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Ofertas de empleo<br/>
+	{% endif %}
+
+	{% if entity.searchteam %}
+		<img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Busca equipo
+	{% endif %}
+	
+</div>
+
+<div style="background:#F0F0F0;padding:8px;width:200px;float:left;margin-right:20px">
+	<a href="{{ path('test') }}" class="btn">Ver retos</a>
+
+	<br/>
+	
+	{% if badges %}
+	    {% for badge in badges %}
+			<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin:11px 11px 0 0"/></a>
+	    {% endfor %}
+		<br class="clear"/>
+	{% endif %}
+</div>
+
+<div style="background:#F0F0F0;padding:8px;width:200px;float:left;margin-right:20px">
+	<a href="{{ path('user_recommend', { 'id': entity.id }) }}" class="btn">Recomendar</a>
+
+	<br/>
+	
+	<b style="font-size:50px">
+	{% if entity.votes %}
+		{{ entity.votes }}
+	{% else %}
+		0
+	{% endif %}
+	</b>
+	
+	<br/>
+
+	Recomendaciones
+</div>
+
+<br class="clear"/>
 
 
 <ul id="tabs" class="nav nav-tabs">
