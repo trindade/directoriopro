@@ -482,7 +482,7 @@ class Event
      */
     public function getGDateStart()
     {
-        return date( 'Ymd\THis\Z', ( strtotime( $this->getDateStart()->format('Y-m-d H:i:s') ) - 3600 ) );
+        return date( 'Ymd\THis\Z', ( strtotime( $this->getDateStart()->format('Y-m-d H:i:s') ) - 7200 ) );
     }
 
     /**
@@ -492,7 +492,7 @@ class Event
      */
     public function getGDateEnd()
     {
-        return date( 'Ymd\THis\Z', ( strtotime( $this->getDateEnd()->format('Y-m-d H:i:s') ) - 3600 ) );
+        return date( 'Ymd\THis\Z', ( strtotime( $this->getDateEnd()->format('Y-m-d H:i:s') ) - 7200 ) );
     }
 
 }
