@@ -76,7 +76,7 @@ class EventRepository extends EntityRepository
      * @access public
      * @return Doctrine DQL
      */
-    public function findEventsDQL(\DateTime $from, $to = NULL)
+    public function findEventsDQL($from, $to = NULL)
     {
         $query = $this->_em->createQueryBuilder()
             ->add('select', 'e')
