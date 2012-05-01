@@ -63,7 +63,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 
 <style>
-#widget_contact .btn-large{font-size:14px;padding:5px 14px;width:100%;margin-bottom:15px}
+#widget_contact .btn{font-size:14px;padding:5px 14px;width:100%;margin-bottom:15px}
 </style>
 
 <div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 120px;" id="widget_contact">
@@ -95,8 +95,15 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 	    {% for badge in badges %}
 			<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
 	    {% endfor %}
-		<br class="clear"/>
+		
+	{% else: %}
+
+		<a href="{{ path('test_show', { 'id': 2 }) }}" data-original-title="Ponente taller betabeers" rel="twipsy" style="opacity:0.5"><img src="/bundles/applicationanuncios/images/badges/2.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
+	    <a href="{{ path('test_show', { 'id': 3 }) }}" data-original-title="Presentar proyecto betabeers" rel="twipsy" style="opacity:0.5"><img src="/bundles/applicationanuncios/images/badges/3.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
+	    <a href="{{ path('test_show', { 'id': 1 }) }}" data-original-title="Test PHP" rel="twipsy" style="opacity:0.5"><img src="/bundles/applicationanuncios/images/badges/4.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
+
 	{% endif %}
+	<br class="clear"/>
 </div>
 
 <div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 120px;">
@@ -299,6 +306,9 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 {% endblock %}
 
 {% block script_load %}
+
+	$('#btn_contact').removeClass('btn-primary').removeClass('btn-large');
+
 	$('.tabs').tabs();
 	
 	
