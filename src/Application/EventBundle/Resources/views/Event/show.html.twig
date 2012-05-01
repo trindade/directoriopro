@@ -95,7 +95,9 @@
 <ul class="breadcrumb">
   <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
   <li><a href="{{ path('event') }}">Eventos</a> <span class="divider">/</span></li>
-  <li><a href="{{ path('event_city', { 'id': entity.getCityId() }) }}">{{ city.getName() }}, {{ country.name }}</a></li>
+  {% if city %}
+  	<li><a href="{{ path('event_city', { 'id': entity.getCityId() }) }}">{{ city.getName() }}, {{ country.name }}</a></li>
+  {% endif %}
 </ul>
 
 

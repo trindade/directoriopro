@@ -887,15 +887,14 @@ class EventController extends Controller
 
 
 
+        $city_id = $entity->getCityId();
 
-        $city = $em->getRepository('ApplicationCityBundle:City')->find( $entity->getCityId() );
-
-        $query = $em->createQuery("SELECT c.name FROM ApplicationCityBundle:Country c WHERE c.code = :code");
-        $query->setParameters(array(
-            'code' => $city->getCode()
-        ));
-        $country = current( $query->getResult() );
-
+        if( $city_id ){
+            $city = $em->getRepository('ApplicationCityBundle:City')->find( $city_id );
+            $country = $em->getRepository('ApplicationCityBundle:Country')->findOneBy(array('code'=>$city->getCode()));
+        }else{
+            $city = $country = false;
+        }
 
 
 
