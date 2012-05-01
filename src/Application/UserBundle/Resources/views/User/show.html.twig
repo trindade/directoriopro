@@ -54,23 +54,6 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 <div style="padding-bottom:10px">{{ entity.location }}</div>
 
 
-{% if entity.getTwitterUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://twitter.com/{{ entity.getTwitterUrl() }}"><img src="/bundles/applicationanuncios/images/social/twitter.png" width="16" height="16"/></a> {% endif %}
-{% if entity.getLinkedinUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://es.linkedin.com/in/{{ entity.getLinkedinUrl() }}"><img src="/bundles/applicationanuncios/images/social/linkedin.png" width="16" height="16"/></a> {% endif %}
-
-{% if entity.getFlickrUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.flickr.com/photos/{{ entity.getFlickrUrl() }}"><img src="/bundles/applicationanuncios/images/social/flickr.png" width="16" height="16"/></a> {% endif %}
-{% if entity.getDribbbleUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://dribbble.com/{{ entity.getDribbbleUrl() }}"><img src="/bundles/applicationanuncios/images/social/dribbble.png" width="16" height="16"/></a> {% endif %}
-{% if entity.getForrstUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://forrst.com/people/{{ entity.getForrstUrl() }}"><img src="/bundles/applicationanuncios/images/social/forrst.png" width="16" height="16"/></a> {% endif %}
-
-{% if entity.getGithubUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://github.com/{{ entity.getGithubUrl() }}"><img src="/bundles/applicationanuncios/images/social/github.png" width="16" height="16"/></a> {% endif %}
-{% if entity.getBitbucketUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://bitbucket.org/{{ entity.getBitbucketUrl() }}"><img src="/bundles/applicationanuncios/images/social/bitbucket.png" width="16" height="16"/></a> {% endif %}
-{% if entity.getStackoverflowUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://stackoverflow.com/users/{{ entity.getStackoverflowUrl() }}"><img src="/bundles/applicationanuncios/images/social/stackoverflow.png" width="16" height="16"/></a> {% endif %}
-{% if entity.getMasterbranchUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://www.masterbranch.com/developer/{{ entity.getMasterbranchUrl() }}"><img src="/bundles/applicationanuncios/images/social/masterbranch.png" width="16" height="16"/></a> {% endif %}
-
-{% if entity.getYoutubeUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://www.youtube.com/{{ entity.getYoutubeUrl() }}"><img src="/bundles/applicationanuncios/images/social/youtube.png" width="16" height="16"/></a> {% endif %}
-{% if entity.getVimeoUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://vimeo.com/{{ entity.getVimeoUrl() }}"><img src="/bundles/applicationanuncios/images/social/vimeo.png" width="16" height="16"/></a> {% endif %}
-
-{% if entity.getDeliciousUrl() %}<a rel="nofollow,noindex" target="_blank" href="http://delicious.com/{{ entity.getDeliciousUrl() }}"><img src="/bundles/applicationanuncios/images/social/delicious.png" width="16" height="16"/></a> {% endif %}
-{% if entity.getPinboardUrl() %}<a rel="nofollow,noindex" target="_blank" href="https://pinboard.in/u:{{ entity.getPinboardUrl() }}"><img src="/bundles/applicationanuncios/images/social/pinboard.png" width="16" height="16"/></a> {% endif %}
 		
 
 <br class="clear"/>
@@ -79,9 +62,11 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 </div>
 
 
+<style>
+#widget_contact .btn-large{font-size:14px;padding:5px 14px}
+</style>
 
-
-<div style="background:#F0F0F0;padding:8px;width:200px;float:left;margin-right:20px">
+<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 125px;" id="widget_contact">
 
 	{% include "ApplicationAnunciosBundle:Form:contact.html.twig" %}
 
@@ -101,25 +86,24 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 	
 </div>
 
-<div style="background:#F0F0F0;padding:8px;width:200px;float:left;margin-right:20px">
-	<a href="{{ path('test') }}" class="btn">Ver retos</a>
+<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 125px;">
+	<a href="{{ path('test') }}" class="btn" style="display:block">Ver retos</a>
 
 	<br/>
 	
 	{% if badges %}
 	    {% for badge in badges %}
-			<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin:11px 11px 0 0"/></a>
+			<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
 	    {% endfor %}
 		<br class="clear"/>
 	{% endif %}
 </div>
 
-<div style="background:#F0F0F0;padding:8px;width:200px;float:left;margin-right:20px">
-	<a href="{{ path('user_recommend', { 'id': entity.id }) }}" class="btn">Recomendar</a>
-
-	<br/>
+<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 125px;">
+	<a href="{{ path('user_recommend', { 'id': entity.id }) }}" class="btn" style="display:block">Recomendar</a>
 	
-	<b style="font-size:50px">
+	<div style="text-align:center">
+	<b style="font-size:50px;display:block;padding:10px 0;text-align:center">
 	{% if entity.votes %}
 		{{ entity.votes }}
 	{% else %}
@@ -130,9 +114,11 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 	<br/>
 
 	Recomendaciones
+	</div>
+
 </div>
 
-<br class="clear"/>
+<br class="clear"/><br/>
 
 
 <ul id="tabs" class="nav nav-tabs">
