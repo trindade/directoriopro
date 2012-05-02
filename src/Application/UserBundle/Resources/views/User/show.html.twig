@@ -8,9 +8,10 @@
 
 {% block sidebar %}
 
-	<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @{{ entity.twitterurl }}</a>
-
-	<br/><br/>
+	{% if entity.twitterurl %}
+		<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @{{ entity.twitterurl }}</a>
+		<br/><br/>
+	{% endif %}
 
 	<b>Estadísticas visitas</b>
 	<br/><br/>
