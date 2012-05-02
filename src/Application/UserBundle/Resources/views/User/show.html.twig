@@ -104,9 +104,9 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 	
 	
 
-	<a href="{{ path('user_comments', { 'id': entity.id }) }}" style="color:black;display:block;text-align:center">
+	<a href="{{ path('user_comments', { 'id': entity.id }) }}" style="text-decoration:none;color:black;display:block;text-align:center">
 
-	<b style="font-size:50px;display:block;padding:25px 0 5px 0;text-align:center">
+	<b style="font-size:50px;display:block;padding:25px 0 5px 0;text-align:center;">
 	{% if entity.votes %}
 		{{ entity.votes }}
 	{% else %}
