@@ -12,13 +12,13 @@
 
 	<br/><br/>
 
-	<b>Estadísticas</b>
+	<b>Estadísticas visitas</b>
 	<br/><br/>
-	Visitas: {{ entity.visits }}
-	<br/><br/>
-	Visitas desde buscador: {{ entity.visitsfinder }}
-	<br/><br/>
-	Visitas desde google: {{ entity.visitsgoogle }}
+	Total: {{ entity.visits }}
+	<br/>
+	Buscador: {{ entity.visitsfinder }}
+	<br/>
+	Desde google: {{ entity.visitsgoogle }}
 	
 {% endblock %}
 
@@ -46,7 +46,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 	
 
-<img src="{{ entity.getAvatar('bigger') }}" style="width:80px;height:80px;float:left;margin-right:15px"/>
+<img src="{{ entity.getAvatar('bigger') }}" style="width:5px;height:55px;float:left;margin-right:15px"/>
 
 
 
@@ -55,8 +55,6 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 
 		
-
-<br class="clear"/>
 
 
 </div>
