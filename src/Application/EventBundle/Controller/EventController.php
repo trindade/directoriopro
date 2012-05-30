@@ -754,6 +754,9 @@ class EventController extends Controller
         }
 
 
+        echo '<pre>';
+        print_r($uids);
+        
         
 
 
