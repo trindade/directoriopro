@@ -745,16 +745,14 @@ class EventController extends Controller
            ->setMaxResults( $limit );
 
 
-        $entities = $qb->getQuery()->getResult();
-        
 
 
         for ( $i = 0; $i < $limit; $i++ ) {
-            $uids[] = md5( 1 );//(int)$entities[$i]->getID()
+            $uids[] = md5(uniqid(mt_rand(), true));
         }
 
 
-        
+        $entities = $qb->getQuery()->getResult();
 
 
 
@@ -822,17 +820,9 @@ class EventController extends Controller
         for ( $i = 0; $i < $limit; $i++ ) {
             $uids[] = md5(uniqid(mt_rand(), true));
         }
-        
-        
-/*
+
+
         $entities = $qb->getQuery()->getResult();
-        
-        for ( $i = 0; $i < $limit; $i++ ) {
-            $uids[] = md5( $entities[$i]->getID() );
-        }
-*/
-
-
 
 
 
