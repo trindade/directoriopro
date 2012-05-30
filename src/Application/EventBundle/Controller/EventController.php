@@ -823,13 +823,18 @@ class EventController extends Controller
            ->setMaxResults( $limit );
 
 
-        for ( $i = 0; $i < $limit; $i++ ) {
-            $uids[] = md5(uniqid(mt_rand(), true));
-        }
+        //for ( $i = 0; $i < $limit; $i++ ) {
+        //    $uids[] = md5(uniqid(mt_rand(), true));
+        //}
 
 
         $entities = $qb->getQuery()->getResult();
 
+        
+        $total = count( $entities );
+        for ( $i = 0; $i < $total; $i++ ) {
+            $uids[] = md5( $entities[$i]->getId() );
+        }
 
 
         //$twig = $this->container->get('twig');
