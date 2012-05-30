@@ -747,17 +747,14 @@ class EventController extends Controller
 
 
 
-        //for ( $i = 0; $i < $limit; $i++ ) {
-        //    $uids[] = md5(uniqid(mt_rand(), true));
-        //}
+        for ( $i = 0; $i < $limit; $i++ ) {
+            $uids[] = md5(uniqid(mt_rand(), true));
+        }
 
 
         $entities = $qb->getQuery()->getResult();
 
 
-        for ( $i = 0; $i < $limit; $i++ ) {
-            $uids[] = md5( $entities[$i]->getId() );
-        }
 
         //$twig = $this->container->get('twig');
         //$twig->addExtension(new \Twig_Extensions_Extension_Text);
@@ -820,16 +817,13 @@ class EventController extends Controller
            ->setMaxResults( $limit );
 
 
-        //for ( $i = 0; $i < $limit; $i++ ) {
-        //    $uids[] = md5(uniqid(mt_rand(), true));
-        //}
+        for ( $i = 0; $i < $limit; $i++ ) {
+            $uids[] = md5(uniqid(mt_rand(), true));
+        }
 
 
         $entities = $qb->getQuery()->getResult();
 
-        for ( $i = 0; $i < $limit; $i++ ) {
-            $uids[] = md5( $entities[$i]->getId() );
-        }
 
 
         //$twig = $this->container->get('twig');
