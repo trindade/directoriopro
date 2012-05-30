@@ -747,9 +747,9 @@ class EventController extends Controller
 
 
 
-        for ( $i = 0; $i < $limit; $i++ ) {
-            $uids[] = md5(uniqid(mt_rand(), true));
-        }
+        //for ( $i = 0; $i < $limit; $i++ ) {
+        //    $uids[] = md5(uniqid(mt_rand(), true));
+        //}
 
 
         $entities = $qb->getQuery()->getResult();
@@ -767,7 +767,7 @@ class EventController extends Controller
             'Content-Type'        => "text/calendar",
             'Content-Disposition' => "inline; filename=calendar.ics"
         );
-        $content = $this->renderView('ApplicationEventBundle:Event:calendar.html.twig', array('entities' => $entities, 'uids' => $uids, 'title' => 'Agenda betabeers'));
+        $content = $this->renderView('ApplicationEventBundle:Event:calendar.html.twig', array('entities' => $entities, 'title' => 'Agenda betabeers')); //'uids' => $uids, 
 
 
         return new Response($content, 200, $headers);
