@@ -754,6 +754,7 @@ class EventController extends Controller
 
         $entities = $qb->getQuery()->getResult();
 
+        var_dump($entities[0]->getId());
 
 
         //$twig = $this->container->get('twig');
