@@ -11,7 +11,7 @@ BEGIN:VEVENT
 DTSTART:{{ entity.getGDateStart() }}
 DTEND:{{ entity.getGDateEnd() }}
 DTSTAMP:{{ entity.getGDateStart() }}
-UID:uid{{ uids[loop.index0] }}@betabeers.com
+UID:{{ uids[loop.index0] }}@betabeers.com
 CREATED:{{ entity.getGDateStart() }}
 DESCRIPTION:{{ url('event_show', { 'id': entity.id, 'slug': entity.slug }) }}
 LAST-MODIFIED:{{ entity.getGDateStart() }}
