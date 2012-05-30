@@ -755,6 +755,9 @@ class EventController extends Controller
         $entities = $qb->getQuery()->getResult();
 
 
+        for ( $i = 0; $i < $limit; $i++ ) {
+            $uids[] = md5( $entities[$i]->getId() );
+        }
 
         //$twig = $this->container->get('twig');
         //$twig->addExtension(new \Twig_Extensions_Extension_Text);
@@ -767,7 +770,7 @@ class EventController extends Controller
             'Content-Type'        => "text/calendar",
             'Content-Disposition' => "inline; filename=calendar.ics"
         );
-        $content = $this->renderView('ApplicationEventBundle:Event:calendar.html.twig', array('entities' => $entities, 'title' => 'Agenda betabeers')); //'uids' => $uids, 
+        $content = $this->renderView('ApplicationEventBundle:Event:calendar.html.twig', array('entities' => $entities, 'uids' => $uids, 'title' => 'Agenda betabeers'));
 
 
         return new Response($content, 200, $headers);
@@ -824,6 +827,9 @@ class EventController extends Controller
 
         $entities = $qb->getQuery()->getResult();
 
+        for ( $i = 0; $i < $limit; $i++ ) {
+            $uids[] = md5( $entities[$i]->getId() );
+        }
 
 
         //$twig = $this->container->get('twig');
@@ -837,7 +843,7 @@ class EventController extends Controller
             'Content-Type'        => "text/calendar",
             'Content-Disposition' => "inline; filename=calendar_" . $id . ".ics"
         );
-        $content = $this->renderView('ApplicationEventBundle:Event:calendar.html.twig', array('entities' => $entities, 'title' => 'Agenda betabeers en ' . $city->getName() )); //'uids' => $uids, 
+        $content = $this->renderView('ApplicationEventBundle:Event:calendar.html.twig', array('entities' => $entities, 'uids' => $uids, 'title' => 'Agenda betabeers en ' . $city->getName() ));
 
 
         return new Response($content, 200, $headers);
