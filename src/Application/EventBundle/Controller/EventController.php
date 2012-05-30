@@ -747,14 +747,19 @@ class EventController extends Controller
 
 
 
-        for ( $i = 0; $i < $limit; $i++ ) {
-            $uids[] = md5(uniqid(mt_rand(), true));
-        }
+        //for ( $i = 0; $i < $limit; $i++ ) {
+        //    $uids[] = md5(uniqid(mt_rand(), true));
+        //}
 
 
         $entities = $qb->getQuery()->getResult();
 
-        var_dump($entities[0]->getId());
+
+        
+        $total = count( $entities );
+        for ( $i = 0; $i < $total; $i++ ) {
+            $uids[] = md5( $entities[$i]->getId() );
+        }
 
 
         //$twig = $this->container->get('twig');
