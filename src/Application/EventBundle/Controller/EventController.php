@@ -748,7 +748,7 @@ class EventController extends Controller
         $entities = $qb->getQuery()->getResult();
         
         echo '<pre>';
-        print_r($entities);
+        print_r($entities[0]->getID());
 
         for ( $i = 0; $i < $limit; $i++ ) {
             $uids[] = md5( $entities[$i]->getID() );
