@@ -750,7 +750,7 @@ class EventController extends Controller
 
 
         for ( $i = 0; $i < $limit; $i++ ) {
-            $uids[] = md5( $entities[$i]->getID() );
+            $uids[] = md5( (int)$entities[$i]->getID() );
         }
 
 
