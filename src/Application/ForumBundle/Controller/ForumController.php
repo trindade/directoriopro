@@ -380,6 +380,9 @@ class ForumController extends Controller
 
         $user = $em->getRepository('ApplicationUserBundle:User')->find($entity->getUserId());
 
+
+		$entity->setBody( str_replace('&amp;','&', $entity->getBody() ) );
+
         return array(
             'entity' => $entity,
             'forum' => $forum,
