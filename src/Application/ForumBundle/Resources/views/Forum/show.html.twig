@@ -18,7 +18,7 @@
 
 <h1>{{ entity.title }}</h1>
 
-{{ entity.body }}<br/><br/>
+{% autoescape false %}{{ entity.body }}{% endautoescape %}<br/><br/>
 
 {% if threads %}
 	<ul>
