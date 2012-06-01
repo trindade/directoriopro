@@ -207,7 +207,7 @@ class ThreadController extends Controller
 
                 // limpiar html
                 $entity->setTitle( strip_tags( $entity->getTitle() ) );
-                $entity->setBody( str_replace(array('<','>'),array('&lt;','&gt;'), $entity->getBody() ) );
+                $entity->setBody( strip_tags( $entity->getBody() ) );
 
                 $slug = $entity->getTitle();
                 $entity->setSlug(Util::slugify($slug));
