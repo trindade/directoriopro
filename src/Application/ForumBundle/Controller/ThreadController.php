@@ -109,7 +109,7 @@ class ThreadController extends Controller
 
             // limpiar html
             $entity->setTitle( strip_tags( $entity->getTitle() ) );
-            $entity->setBody( strip_tags( $entity->getBody() ) );
+            $entity->setBody( htmlentities( $entity->getBody() ) );
 
             $slug = $entity->getTitle();
             $entity->setSlug(Util::slugify($slug));
@@ -207,7 +207,7 @@ class ThreadController extends Controller
 
                 // limpiar html
                 $entity->setTitle( strip_tags( $entity->getTitle() ) );
-                $entity->setBody( strip_tags( $entity->getBody() ) );
+                $entity->setBody( htmlentities( $entity->getBody() ) );
 
                 $slug = $entity->getTitle();
                 $entity->setSlug(Util::slugify($slug));
