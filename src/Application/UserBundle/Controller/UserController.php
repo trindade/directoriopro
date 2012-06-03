@@ -477,6 +477,7 @@ class UserController extends Controller
         // appannie fix
         $entity->setItunesUrl( str_replace(' ','-', strtolower( trim( $entity->getItunesUrl() ) ) ) );
         $entity->setAndroidUrl( str_replace(' ','+', trim( $entity->getAndroidUrl() ) ) );
+        $entity->setTwitterUrl( str_replace(array('http://','twitter.com/','@','www.'),'', trim( $entity->getTwitterUrl() ) ) );
 
         $entity->setSlug(Util::slugify($entity->getName()));
 
