@@ -1,0 +1,27 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Dar badges" %}
+
+{% block content %}
+
+<h1>Dar badges</h1>
+
+<form action="{{ path('test_addbadges') }}" method="post">
+	ID usuario: 
+	<input name="user_id"/> 
+	Test:
+	<select name="test_id">
+		<option value="3">presentar proyecto</option>
+		<option value="2">ponente taller</option>
+	</select>
+	<input type="submit" value="Confirmar"/>
+</form>
+
+{% if entity %}
+	<div class="alert alert-success">
+	has asignado el badge correctamente a <a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a>
+	</div>
+{% endif %}
+
+
+{% endblock %}

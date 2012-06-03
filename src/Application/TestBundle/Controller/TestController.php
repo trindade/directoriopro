@@ -394,4 +394,59 @@ class TestController extends Controller
     }
 
 
+    /**
+     * User add badge
+     *
+     * @Route("/addbadges", name="test_addbadges")
+     * @Template("ApplicationTestBundle:Test:addbadges.html.twig")
+     */
+    public function addbadgesAction()
+    {
+
+        $session = $this->getRequest()->getSession();
+        $can_edit = ( $session->get('admin') OR $session->get('moderator') );
+        if ( !$can_edit ) {
+            return $this->redirect('/');
+        }
+
+		$request = $this->getRequest();
+		if ($request->getMethod() == 'POST') {
+
+
+
+			$form->bindRequest($request);
+			$post = $form->getData();
+
+
+			$user_id = $request->query->get('user_id');
+			$test_id = $request->query->get('test_id');
+
+
+			die($user_id.'--'.$test_id);
+
+
+	        $em = $this->getDoctrine()->getEntityManager();
+	        $entity = $em->getRepository('ApplicationUserBundle:User')->find($user_id);
+	        if (!$entity) {
+	            throw $this->createNotFoundException('Unable to find User entity.');
+	        }
+
+			// añadir test
+			$entity = new TestUser();
+			$entity->setUserId( $user_id );
+			$entity->setTestId( $test_id );
+			$entity->setDate( new \DateTime("now") );
+            $em->persist($entity);
+            $em->flush();
+
+		}else{
+			$entity = false;
+		}
+
+        return array('entity' => $entity);
+
+
+    }
+
+
 }
