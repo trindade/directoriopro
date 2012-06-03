@@ -398,7 +398,7 @@ class TestController extends Controller
      * User add badge
      *
      * @Route("/addbadges", name="test_addbadges")
-     * @Template("ApplicationTestBundle:Test:addbadges.html.twig")
+     * @Template()
      */
     public function addbadgesAction()
     {
