@@ -284,6 +284,9 @@ class EventController extends Controller
         $date_end = $entity->getDateEnd();
         $entity->setDateStart(new \DateTime( $date_start->format('Y-m-d') . ' ' . $h_start . ":" . $m_start . ':00' ) );
         $entity->setDateEnd(new \DateTime( $date_end->format('Y-m-d') . ' ' . $h_end . ":" . $m_end . ':00' ) );
+        
+        // corregir texto
+        $entity->setBody( strip_tags( $entity->getBody() ) );
 
         // corregir hashtag
         $entity->setHashtag( str_replace('#', '', $entity->getHashtag() ) );
@@ -407,6 +410,8 @@ class EventController extends Controller
                 // corregir hashtag
                 $entity->setHashtag( str_replace('#', '', $entity->getHashtag() ) );
 
+                // corregir texto
+		        $entity->setBody( strip_tags( $entity->getBody() ) );
 
                 if ($editForm->isValid()) {
                     $entity->setSlug(Util::slugify($entity->getTitle() . ' ' . $entity->getPrettyDate('%e %B %Y')));

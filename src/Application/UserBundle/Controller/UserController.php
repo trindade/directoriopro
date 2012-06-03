@@ -486,6 +486,9 @@ class UserController extends Controller
 
           $this->fixLocation(&$post, &$entity, &$em);
         }
+        
+        // corregir descripcion
+        $entity->setBody( strip_tags( $entity->getBody() ) );
 
         $em->persist($entity);
         $em->flush();

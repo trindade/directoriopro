@@ -210,6 +210,9 @@ class PostController extends Controller
           }
 
           $entity->setSlug(Util::slugify($slug));
+          
+          // corregir descripcion
+          $entity->setBody( strip_tags( $entity->getBody() ) );
 
 
           // bug corregir location
@@ -315,6 +318,9 @@ class PostController extends Controller
             if( $post->getLocation() != $location ){
               $this->fixLocation(&$post, &$entity, &$em);
             }
+            
+            // corregir descripcion
+	        $entity->setBody( strip_tags( $entity->getBody() ) );
 
             $em->persist($entity);
             $em->flush();
