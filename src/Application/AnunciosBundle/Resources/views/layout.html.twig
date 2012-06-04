@@ -148,6 +148,7 @@
 										<li><a href="{{ path('thread_admin') }}">Administrar temas</a></li>
 										<li class="divider"></li>
 										<li><a href="{{ path('event_emails') }}">Emails eventos</a></li>
+										<li><a href="{{ path('test_addbadges') }}">Dar badges</a></li>
 									{% elseif app.session.get('moderator') %}
 										<li><a href="{{ path('event_emails') }}">Emails eventos</a></li>
 										<li><a href="{{ path('test_addbadges') }}">Dar badges</a></li>
