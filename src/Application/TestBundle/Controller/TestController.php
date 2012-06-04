@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Application\TestBundle\Entity\Test;
+use Application\TestBundle\Entity\TestUser;
 use Application\TestBundle\Form\TestType;
 
 
@@ -428,7 +429,7 @@ class TestController extends Controller
 		            throw $this->createNotFoundException('Unable to find User entity.');
 		        }
 
-				print_r($entity);
+
 
 				// añadir test
 				$entity = new TestUser();
