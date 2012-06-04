@@ -423,8 +423,8 @@ class TestController extends Controller
 			//print_r($request);
 			//die();
 
-			$user_id = $request->query->get('user_id');
-			$test_id = $request->query->get('test_id');
+			$user_id = $request->query->post('user_id');
+			$test_id = $request->query->post('test_id');
 
 
 			die($user_id.'--'.$test_id);
