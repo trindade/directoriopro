@@ -414,12 +414,12 @@ class TestController extends Controller
 
 
 
-			$form->bindRequest($request);
-			$post = $form->getData();
+			//$form->bindRequest($request);
+			//$post = $form->getData();
 	
 
 			echo '<pre>';
-			print_r($post);
+			//print_r($post);
 			print_r($request);
 			die();
 
