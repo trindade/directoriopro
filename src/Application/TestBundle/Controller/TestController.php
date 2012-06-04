@@ -417,7 +417,7 @@ class TestController extends Controller
 			$test_id = $request->request->get('test_id');
 			$action = $request->request->get('action');
 
-			echo $action,'---';
+
 
 			$em = $this->getDoctrine()->getEntityManager();
 
@@ -427,6 +427,8 @@ class TestController extends Controller
 		        if (!$entity) {
 		            throw $this->createNotFoundException('Unable to find User entity.');
 		        }
+
+				print_r($entity);
 
 				// añadir test
 				$entity = new TestUser();
