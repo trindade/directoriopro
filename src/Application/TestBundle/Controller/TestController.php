@@ -417,9 +417,12 @@ class TestController extends Controller
 			$test_id = $request->request->get('test_id');
 			$action = $request->request->get('action');
 
+			echo $action,'---';
+
+			$em = $this->getDoctrine()->getEntityManager();
+
 
 			if( $action == 1 ){
-		        $em = $this->getDoctrine()->getEntityManager();
 		        $entity = $em->getRepository('ApplicationUserBundle:User')->find($user_id);
 		        if (!$entity) {
 		            throw $this->createNotFoundException('Unable to find User entity.');
