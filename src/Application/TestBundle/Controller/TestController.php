@@ -422,14 +422,13 @@ class TestController extends Controller
 
 			$em = $this->getDoctrine()->getEntityManager();
 
+	        $user = $em->getRepository('ApplicationUserBundle:User')->find($user_id);
+	        if (!$user) {
+	            throw $this->createNotFoundException('Unable to find User entity.');
+	        }
+
 
 			if( $action == 1 ){
-		        $entity = $em->getRepository('ApplicationUserBundle:User')->find($user_id);
-		        if (!$entity) {
-		            throw $this->createNotFoundException('Unable to find User entity.');
-		        }
-
-
 
 				// añadir test
 				$entity = new TestUser();
@@ -452,10 +451,10 @@ class TestController extends Controller
 
 
 		}else{
-			$entity = false;
+			$user = false;
 		}
 
-        return array('entity' => $entity, 'action' => $action);
+        return array('user' => $user, 'action' => $action);
 
 
     }
