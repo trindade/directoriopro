@@ -413,42 +413,43 @@ class TestController extends Controller
 		if ($request->getMethod() == 'POST') {
 
 
-
-			//$form->bindRequest($request);
-			//$post = $form->getData();
-	
-
-			//echo '<pre>';
-			//print_r($post);
-			//print_r($request);
-			//die();
-
 			$user_id = $request->request->get('user_id');
 			$test_id = $request->request->get('test_id');
+			$action = $request->request->get('action');
 
 
-			die($user_id.'--'.$test_id);
+			if( $action == 1 ){
+		        $em = $this->getDoctrine()->getEntityManager();
+		        $entity = $em->getRepository('ApplicationUserBundle:User')->find($user_id);
+		        if (!$entity) {
+		            throw $this->createNotFoundException('Unable to find User entity.');
+		        }
+
+				// añadir test
+				$entity = new TestUser();
+				$entity->setUserId( $user_id );
+				$entity->setTestId( $test_id );
+				$entity->setDate( new \DateTime("now") );
+	            $em->persist($entity);
+	            $em->flush();
 
 
-	        $em = $this->getDoctrine()->getEntityManager();
-	        $entity = $em->getRepository('ApplicationUserBundle:User')->find($user_id);
-	        if (!$entity) {
-	            throw $this->createNotFoundException('Unable to find User entity.');
-	        }
+			}else{
 
-			// añadir test
-			$entity = new TestUser();
-			$entity->setUserId( $user_id );
-			$entity->setTestId( $test_id );
-			$entity->setDate( new \DateTime("now") );
-            $em->persist($entity);
-            $em->flush();
+				$query = $em->createQuery("DELETE FROM ApplicationTestBundle:TestUser tu WHERE tu.test_id = :test_id AND tu.user_id = :user_id");
+				$query->setParameter('user_id', $user_id);
+				$query->setParameter('test_id', $test_id);
+				$total = $query->getResult();
+
+			}
+
+
 
 		}else{
 			$entity = false;
 		}
 
-        return array('entity' => $entity);
+        return array('entity' => $entity, 'action' => $action);
 
 
     }

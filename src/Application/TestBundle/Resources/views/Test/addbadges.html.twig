@@ -9,6 +9,14 @@
 <form class="form-horizontal" action="{{ path('test_addbadges') }}" method="post">
 
 	<div class="control-group">
+		<label>Acción:</label>
+		<div class="controls">
+			<input name="action" type="radio" value="1"/> añadir 
+			<input name="action" type="radio" value="0"/> quitar
+		</div>
+	</div>
+
+	<div class="control-group">
 		<label>ID usuario:</label>
 		<div class="controls">
 			<input name="user_id"/>
@@ -31,7 +39,13 @@
 
 {% if entity %}
 	<div class="alert alert-success">
-	has asignado el badge correctamente a <a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a>
+	{% if action == 1 %}
+		has asignado 
+	{% else %}
+		has quitado 
+	{% endif %}
+
+	el badge correctamente a <a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.name }}</a>
 	</div>
 {% endif %}
 
