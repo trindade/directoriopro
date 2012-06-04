@@ -7,14 +7,26 @@
 <h1>Dar badges</h1>
 
 <form action="{{ path('test_addbadges') }}" method="post">
-	ID usuario: 
-	<input name="user_id"/> 
-	Test:
-	<select name="test_id">
-		<option value="3">presentar proyecto</option>
-		<option value="2">ponente taller</option>
-	</select>
-	<input type="submit" value="Confirmar"/>
+
+	<div class="control-group">
+		<label>ID usuario:</label>
+		<div class="controls">
+			<input name="user_id"/>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label>Test:</label>
+		<div class="controls">
+			<select name="test_id">
+				<option value="3">presentar proyecto</option>
+				<option value="2">ponente taller</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-actions">
+		<input type="submit" value="Confirmar" class="btn btn-primary"/>
+	</div>
 </form>
 
 {% if entity %}

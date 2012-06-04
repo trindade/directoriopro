@@ -416,13 +416,18 @@ class TestController extends Controller
 
 			$form->bindRequest($request);
 			$post = $form->getData();
+	
+
+			echo '<pre>';
+			print_r($post);
+			print_r($request);
+			die();
+
+			//$user_id = $request->query->get('user_id');
+			//$test_id = $request->query->get('test_id');
 
 
-			$user_id = $request->query->get('user_id');
-			$test_id = $request->query->get('test_id');
-
-
-			die($user_id.'--'.$test_id);
+			//die($user_id.'--'.$test_id);
 
 
 	        $em = $this->getDoctrine()->getEntityManager();
