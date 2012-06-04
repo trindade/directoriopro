@@ -19,7 +19,7 @@
 	<div class="control-group">
 		<label>ID usuario:</label>
 		<div class="controls">
-			<input name="user_id"/>
+			<input name="user_id" id="user_id"/>
 		</div>
 	</div>
 
@@ -50,4 +50,9 @@
 {% endif %}
 
 
+{% endblock %}
+
+
+{% block script_load %}
+	$('#user_id').focus();
 {% endblock %}
