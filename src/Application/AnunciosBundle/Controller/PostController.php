@@ -473,8 +473,9 @@ class PostController extends Controller
 
           $mensaje = "Este mensaje fue enviado por " . $name . ". \r\n";
           $mensaje .= "Su e-mail es: " . $email . "\r\n";
-          $mensaje .= "Mensaje: " . $body . " \r\n";
-          $mensaje .= "Enviado el " . date('d/m/Y', time());
+          $mensaje .= "Mensaje: " . $body . " \r\n\r\n";
+          $mensaje .= $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
+          //$mensaje .= "Enviado el " . date('d/m/Y', time());
 
 
 
