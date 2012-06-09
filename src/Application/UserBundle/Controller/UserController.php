@@ -979,7 +979,16 @@ class UserController extends Controller
 			        $header .= "Mime-Version: 1.0 \r\n";
 			        $header .= "Content-Type: text/html; charset=utf-8";
 
-			        $mensaje = "Haz clic en el siguiente enlace para ver la recomendación<br/>" . " \r\n";
+
+			        $mensaje = 'Enviado por ';
+
+			        // get perfil usuario
+		          	$url = $this->generateUrl('user_show', array('id' => $user_from->getId(), 'slug' => $user_from->getSlug()), true);
+		          	$mensaje .= '<a href="' . $url . '">' . $name . '</a>';
+		          	$mensaje .= ' (' . $email . ')<br/><br/>';
+
+
+			        $mensaje = "Haz clic en el siguiente enlace para ver la recomendación<br/>";
 			        $mensaje .= '<a href="' . $url . '" target="_blank">' . $url . '</a>';
 
 			        $subject = sprintf( "%s te ha recomendado en betabeers", $user_from->getName() );
