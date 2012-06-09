@@ -608,14 +608,27 @@ class UserController extends Controller
           $header = 'From: ' . $email . " \r\n";
           $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
           $header .= "Mime-Version: 1.0 \r\n";
-          $header .= "Content-Type: text/plain";
+          $header .= "Content-Type: text/html; charset=UTF-8";
 
-          $mensaje = "Este mensaje fue enviado por " . $name . " \r\n";
-          $mensaje .= "Su e-mail es: " . $email . " \r\n";
-          $mensaje .= "Mensaje: " . $body . " \r\n";
-          $mensaje .= "Enviado el " . date('d/m/Y', time());
+          $mensaje = 'Enviado por ';
 
-          $mensaje = utf8_decode($mensaje);
+          // get perfil usuario
+          $user_id = $this->getRequest()->getSession()->get('id');
+          if( $user_id ){
+          	$user = $em->getRepository('ApplicationUserBundle:User')->find( $user_id );
+          	$url = $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()), true);
+          	$mensaje .= '<a href="' . $url . '">' . $name . '</a>';
+          }else{
+          	$mensaje .= $name;
+          }
+          
+          
+          $mensaje .= ' (' . $email . ')<br/><br/>';
+          $mensaje .= $body;
+          
+          //$mensaje .= "Enviado el " . date('d/m/Y', time());
+
+
 
 
           $result = @mail($toEmail, $subject, $mensaje, $header);

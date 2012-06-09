@@ -470,12 +470,13 @@ class PostController extends Controller
           $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
           $header .= "Mime-Version: 1.0 \r\n";
           $header .= "Content-Type: text/html; charset=UTF-8";
+          
 
           $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
-          $mensaje .= 'Anuncio: <a href="' . $url . '">' . $entity->getTitle() . '</a><br/><br/>';
+          $mensaje = 'Anuncio: <a href="' . $url . '">' . $entity->getTitle() . '</a><br/><br/>';
 
 
-          $mensaje .= "Respondido por ";
+          $mensaje .= 'Enviado por ';
 
           // get perfil usuario
           $user_id = $this->getRequest()->getSession()->get('id');
@@ -489,7 +490,7 @@ class PostController extends Controller
 
 
 
-          $mensaje .= "( " . $email . ")<br/><br/>";
+          $mensaje .= ' (' . $email . ')<br/><br/>';
           $mensaje .= $body;
           
           
