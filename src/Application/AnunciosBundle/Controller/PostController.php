@@ -471,7 +471,11 @@ class PostController extends Controller
           $header .= "Mime-Version: 1.0 \r\n";
           $header .= "Content-Type: text/html; charset=UTF-8";
 
-          $mensaje = 'Este mensaje fue enviado por ';
+          $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
+          $mensaje .= 'Anuncio: <a href="' . $url . '">' . $entity->getTitle() . '</a><br/><br/>';
+
+
+          $mensaje .= "Respondido por ";
 
           // get perfil usuario
           $user_id = $this->getRequest()->getSession()->get('id');
@@ -485,11 +489,9 @@ class PostController extends Controller
 
 
 
-          $mensaje .= "\r\nSu e-mail es: " . $email . "\r\n\r\n";
-          $mensaje .= $body . " \r\n\r\n";
+          $mensaje .= "( " . $email . ")<br/><br/>";
+          $mensaje .= $body;
           
-          $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
-          $mensaje .= '<a href="' . $url . '">' . $entity->getTitle() . '</a>';
           
           
           //$mensaje .= "Enviado el " . date('d/m/Y', time());
