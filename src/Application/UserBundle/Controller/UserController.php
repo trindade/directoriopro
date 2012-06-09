@@ -988,7 +988,7 @@ class UserController extends Controller
 		          	$mensaje .= ' (' . $email . ')<br/><br/>';
 
 
-			        $mensaje = "Haz clic en el siguiente enlace para ver la recomendación<br/>";
+			        $mensaje .= "Haz clic en el siguiente enlace para ver la recomendación<br/>";
 			        $mensaje .= '<a href="' . $url . '" target="_blank">' . $url . '</a>';
 
 			        $subject = sprintf( "%s te ha recomendado en betabeers", $user_from->getName() );
