@@ -973,6 +973,7 @@ class UserController extends Controller
 					$user_from = $em->getRepository('ApplicationUserBundle:User')->find($session_id);
 			        $toEmail = $user->getEmail();
 			        $email = $user_from->getEmail();
+			        $name = $user_from->getName();
 
 			        $header = 'From: ' . $email . " \r\n";
 			        $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
