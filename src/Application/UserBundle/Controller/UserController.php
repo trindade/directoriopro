@@ -965,7 +965,7 @@ class UserController extends Controller
 
 		        $user->setVotes( $votes['total'] );
 		        $em->persist($user);
-		        $em->flush();
+		        //$em->flush();
 
 				$url = $this->generateUrl('user_comment', array('user_id' => $id, 'comment_id' => $entity->getId() ),true);
 				if( isset( $new ) ){
