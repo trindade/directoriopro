@@ -927,7 +927,7 @@ class UserController extends Controller
 
 	    // me quiero votar a mi mismo?
 	    if ( $session_id == $id ) {
-	      return $this->redirect($this->generateUrl('user_show', array('id' => $id, 'slug' => $user->getSlug())));
+	      return $this->redirect($this->generateUrl('user_comments', array('id' => $id)));
 	    }
 
 
