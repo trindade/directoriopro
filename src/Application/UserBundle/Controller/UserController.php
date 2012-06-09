@@ -926,9 +926,9 @@ class UserController extends Controller
 		}
 
 	    // me quiero votar a mi mismo?
-	    //if ( $session_id == $id ) {
-	    //  return $this->redirect($this->generateUrl('user_show', array('id' => $id, 'slug' => $user->getSlug())));
-	    //}
+	    if ( $session_id == $id ) {
+	      return $this->redirect($this->generateUrl('user_show', array('id' => $id, 'slug' => $user->getSlug())));
+	    }
 
 
 
@@ -956,7 +956,7 @@ class UserController extends Controller
 		        $entity->setToId( $user->getId() );
 		        $entity->setDate( new \DateTime("now") );
 		        $em->persist($entity);
-		        //$em->flush();
+		        $em->flush();
 
 		        // guardar total recomendaciones
 		        $query = $em->createQuery("SELECT COUNT(c) as total FROM ApplicationUserBundle:Comment c WHERE c.to_id = :id");
@@ -965,7 +965,7 @@ class UserController extends Controller
 
 		        $user->setVotes( $votes['total'] );
 		        $em->persist($user);
-		        //$em->flush();
+		        $em->flush();
 
 				$url_recommend = $this->generateUrl('user_comment', array('user_id' => $id, 'comment_id' => $entity->getId() ),true);
 				if( isset( $new ) ){
