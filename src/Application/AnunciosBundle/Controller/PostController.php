@@ -469,32 +469,43 @@ class PostController extends Controller
           $header = 'From: ' . $email . " \r\n";
           $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
           $header .= "Mime-Version: 1.0 \r\n";
-          $header .= "Content-Type: text/plain";
+          $header .= "Content-Type: text/html; charset=UTF-8";
 
-          $mensaje = "Este mensaje fue enviado por " . $name . ". \r\n";
-          $mensaje .= "Su e-mail es: " . $email . "\r\n";
-          $mensaje .= "Mensaje: " . $body . " \r\n\r\n";
-          $mensaje .= $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true) . " \r\n\r\n";
+          $mensaje = 'Este mensaje fue enviado por ';
+
+          // get perfil usuario
+          $user_id = $this->getRequest()->getSession()->get('id');
+          if( $user_id ){
+          	$user = $em->getRepository('ApplicationUserBundle:User')->find( $user_id );
+          	$url = $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()), true);
+          	$mensaje .= '<a href="' . $url . '">' . $name . '</a>';
+          }else{
+          	$mensaje .= $name;
+          }
+
+
+
+          $mensaje .= "\r\nSu e-mail es: " . $email . "\r\n\r\n";
+          $mensaje .= $body . " \r\n\r\n";
+          
+          $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
+          $mensaje .= '<a href="' . $url . '">' . $entity->getTitle() . '</a>';
+          
+          
           //$mensaje .= "Enviado el " . date('d/m/Y', time());
 
 
 
 
-			// get perfil usuario
-			$session = $this->getRequest()->getSession();
-			$user_id = $session->get('id');
-			if( $user_id ){
-				$user = $em->getRepository('ApplicationUserBundle:User')->find( $user_id );
-				$mensaje .= $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()), true);
-			}
 
 
 
 
-          $result = @mail($toEmail, $subject, utf8_decode($mensaje), $header);
+
+          $result = @mail($toEmail, $subject, $mensaje, $header);
 
           // backup
-          @mail("gafeman@gmail.com", $subject, utf8_decode($mensaje), $header);
+          @mail("gafeman@gmail.com", $subject, $mensaje, $header);
 
 
           // contabilizar contacto
