@@ -967,7 +967,7 @@ class UserController extends Controller
 		        $em->persist($user);
 		        //$em->flush();
 
-				$url = $this->generateUrl('user_comment', array('user_id' => $id, 'comment_id' => $entity->getId() ),true);
+				$url_recommend = $this->generateUrl('user_comment', array('user_id' => $id, 'comment_id' => $entity->getId() ),true);
 				if( isset( $new ) ){
 		        	// enviar email
 					$user_from = $em->getRepository('ApplicationUserBundle:User')->find($session_id);
@@ -990,7 +990,7 @@ class UserController extends Controller
 
 
 			        $mensaje .= "Haz clic en el siguiente enlace para ver la recomendación<br/>";
-			        $mensaje .= '<a href="' . $url . '" target="_blank">' . $url . '</a>';
+			        $mensaje .= '<a href="' . $url_recommend . '" target="_blank">' . $url . '</a>';
 
 			        $subject = sprintf( "%s te ha recomendado en betabeers", $user_from->getName() );
 			        $result = @mail($toEmail, $subject, $mensaje, $header);
@@ -1000,7 +1000,7 @@ class UserController extends Controller
 				}
 	
 				// redirigir al comentario
-		        return $this->redirect($url);
+		        return $this->redirect($url_recommend);
 	          }
 	      }
 
