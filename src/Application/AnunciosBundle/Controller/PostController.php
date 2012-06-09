@@ -474,8 +474,19 @@ class PostController extends Controller
           $mensaje = "Este mensaje fue enviado por " . $name . ". \r\n";
           $mensaje .= "Su e-mail es: " . $email . "\r\n";
           $mensaje .= "Mensaje: " . $body . " \r\n\r\n";
-          $mensaje .= $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
+          $mensaje .= $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true) . " \r\n\r\n";
           //$mensaje .= "Enviado el " . date('d/m/Y', time());
+
+
+
+
+			// get perfil usuario
+			$session = $this->getRequest()->getSession();
+			$user_id = $session->get('id');
+			if( $user_id ){
+				$user = $em->getRepository('ApplicationUserBundle:User')->find( $user_id );
+				$mensaje .= $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()), true);
+			}
 
 
 
