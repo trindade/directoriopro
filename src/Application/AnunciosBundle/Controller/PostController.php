@@ -670,8 +670,9 @@ class PostController extends Controller
     {
 
     $session = $this->getRequest()->getSession();
-    if ( !$session->get('admin') ) {
-      return $this->redirect('/');
+    $can_edit = ( $session->get('admin') OR $session->get('moderator') );
+    if ( !$can_edit ) {
+        return $this->redirect('/');
     }
 
     $em = $this->getDoctrine()->getEntityManager();
