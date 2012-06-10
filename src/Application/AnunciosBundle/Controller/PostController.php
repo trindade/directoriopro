@@ -466,7 +466,7 @@ class PostController extends Controller
 
         if ( filter_var($email, FILTER_VALIDATE_EMAIL) && !strstr( $body, '<a href=' ) ) {
 
-          $header = 'From: ' . $email . " \r\n";
+          $header = 'From: ' . $name . ' <' . $email . "> \r\n";
           $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
           $header .= "Mime-Version: 1.0 \r\n";
           $header .= "Content-Type: text/html; charset=UTF-8";
