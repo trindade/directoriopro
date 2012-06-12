@@ -1033,7 +1033,7 @@ class EventController extends Controller
                 ->add('from', 'ApplicationEventBundle:Event e, ApplicationEventBundle:EventUser eu, ApplicationUserBundle:User u')
                 ->andWhere('e.id = eu.event_id')
                 ->andWhere('u.id = eu.user_id')
-                ->add('orderBy', 'eu.date DESC');
+                ->add('orderBy', 'eu.date ASC');
 
             // es un id?
             if( is_numeric( $search ) ){
