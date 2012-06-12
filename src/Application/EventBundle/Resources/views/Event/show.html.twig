@@ -52,7 +52,7 @@
 		{% if apuntado == false %}
 			<a id="btn_go" class="btn btn-primary" href="{{ path('event_go', { 'id': entity.id, 'value': 1 }) }}">Me apunto</a>
 		{% else %}
-			<a id="btn_go" class="btn btn-danger" href="{{ path('event_go', { 'id': entity.id, 'value': 0 }) }}">No voy a ir</a>
+			<a class="btn btn-danger" href="{{ path('event_go', { 'id': entity.id, 'value': 0 }) }}">No voy a ir</a>
 		{% endif %}
 		
 	{% endif %}
@@ -204,8 +204,8 @@
 {% block script_load %}
 
 
-	// betabeers sevilla
-	{% if entity.id == 283 %}
+	// limite betabeers sevilla
+	{% if entity.hashtag == "bbsvq" and entity.users > 39 %}
 		$('#btn_go').click(function(){
 			alert('no te puedes apuntar, se ha superado el máximo de aforo');
 			return false;
