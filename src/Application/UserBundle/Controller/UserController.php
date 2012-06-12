@@ -625,7 +625,7 @@ class UserController extends Controller
           
           
           $mensaje .= ' (' . $email . ')<br/><br/>';
-          $mensaje .= $body;
+          $mensaje .= nl2br( $body );
           
           //$mensaje .= "Enviado el " . date('d/m/Y', time());
 

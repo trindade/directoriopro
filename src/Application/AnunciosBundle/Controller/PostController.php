@@ -491,7 +491,7 @@ class PostController extends Controller
 
 
           $mensaje .= ' (' . $email . ')<br/><br/>';
-          $mensaje .= $body;
+          $mensaje .= nl2br( $body );
           
           
           
