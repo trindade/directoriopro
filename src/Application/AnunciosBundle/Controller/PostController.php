@@ -627,8 +627,15 @@ class PostController extends Controller
         $entity->setFeatured($value);
         $em->persist($entity);
     $em->flush();
+    
+    
+    if( isset( $_SERVER['HTTP_REFERER'] ) ){
+    	$url = $_SERVER['HTTP_REFERER'];
+    }else{
+	    $url = '/post/admin';
+    }
 
-    return $this->redirect( $_SERVER['HTTP_REFERER'] );
+    return $this->redirect( $url );
     }
 
     /**
