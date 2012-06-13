@@ -611,31 +611,31 @@ class PostController extends Controller
     public function featuredAction($id,$value)
     {
 
-    $session = $this->getRequest()->getSession();
-    if ( !$session->get('admin') ) {
-      return $this->redirect('/');
-    }
-
-    // existe post?
-    $em = $this->getDoctrine()->getEntityManager();
-        $entity = $em->getRepository('ApplicationAnunciosBundle:Post')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        $entity->setFeatured($value);
-        $em->persist($entity);
-    $em->flush();
-    
-    
-    if( isset( $_SERVER['HTTP_REFERER'] ) ){
-    	$url = $_SERVER['HTTP_REFERER'];
-    }else{
-	    $url = '/post/admin';
-    }
-
-    return $this->redirect( $url );
+	    $session = $this->getRequest()->getSession();
+	    if ( !$session->get('admin') ) {
+	      return $this->redirect('/');
+	    }
+	
+	    // existe post?
+	    $em = $this->getDoctrine()->getEntityManager();
+	    $entity = $em->getRepository('ApplicationAnunciosBundle:Post')->find($id);
+	
+	    if (!$entity) {
+	        throw $this->createNotFoundException('Unable to find User entity.');
+	    }
+	
+	    $entity->setFeatured($value);
+	    $em->persist($entity);
+	    $em->flush();
+	    
+	    
+	    if( isset( $_SERVER['HTTP_REFERER'] ) ){
+	    	$url = $_SERVER['HTTP_REFERER'];
+	    }else{
+		    $url = '/post/admin';
+	    }
+	
+	    return $this->redirect( $url );
     }
 
     /**

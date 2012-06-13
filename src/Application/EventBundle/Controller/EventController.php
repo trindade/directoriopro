@@ -630,7 +630,13 @@ class EventController extends Controller
         $em->persist($entity);
         $em->flush();
 
-        return $this->redirect( $_SERVER['HTTP_REFERER'] );
+	    if( isset( $_SERVER['HTTP_REFERER'] ) ){
+	    	$url = $_SERVER['HTTP_REFERER'];
+	    }else{
+		    $url = '/event/admin';
+	    }
+	
+	    return $this->redirect( $url );
     }
 
 
