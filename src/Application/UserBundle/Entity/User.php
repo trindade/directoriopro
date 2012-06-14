@@ -332,7 +332,7 @@ class User
      *
      * @ORM\Column(name="newsletter", type="integer", nullable=true)
      */
-    private $newsletter;
+    private $newsletter = 1;
 
     /**
      * @var string $slug
