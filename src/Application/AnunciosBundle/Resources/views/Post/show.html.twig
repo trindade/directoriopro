@@ -15,12 +15,19 @@
 {% set price = entity.getPrice() %}
 
 {% block sidebar %}
-	{% include "ApplicationAnunciosBundle:Form:contact.html.twig" %}
+
 	
 
 			
 	{% if user.id == app.session.get('id') or app.session.get('admin') == 1 %}
+		
+		<a class="btn btn-large btn-primary" href="{{ path('post_edit', { 'id': entity.id }) }}">Destacar oferta</a>
 		<a class="btn" href="{{ path('post_edit', { 'id': entity.id }) }}">Editar anuncio</a>
+
+	{% else %}
+	
+		{% include "ApplicationAnunciosBundle:Form:contact.html.twig" %}
+		
 	{% endif %}
 	
 
