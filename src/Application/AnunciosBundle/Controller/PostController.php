@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Application\AnunciosBundle\Entity\Post;
+use Application\AnunciosBundle\Entity\PostReplies;
 use Application\UserBundle\Entity\User;
 use Application\UserBundle\Entity\Contact;
 use Application\AnunciosBundle\Form\PostType;
@@ -466,6 +467,8 @@ class PostController extends Controller
 
         if ( filter_var($email, FILTER_VALIDATE_EMAIL) && !strstr( $body, '<a href=' ) ) {
 
+          $user_id = $this->getRequest()->getSession()->get('id');
+
           $header = 'From: ' . $name . ' <' . $email . "> \r\n";
           $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
           $header .= "Mime-Version: 1.0 \r\n";
@@ -479,7 +482,7 @@ class PostController extends Controller
           $mensaje .= 'Enviado por ';
 
           // get perfil usuario
-          $user_id = $this->getRequest()->getSession()->get('id');
+          
           if( $user_id ){
           	$user = $em->getRepository('ApplicationUserBundle:User')->find( $user_id );
           	$url = $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()), true);
@@ -514,7 +517,20 @@ class PostController extends Controller
           // contabilizar contacto
           $entity->setInterested( $entity->getInterested() + 1 );
           $em->persist($entity);
+          
+          // add reply
+          $reply = new PostReplies();
+          $reply->setPostId( $id );
+          $reply->setUserId( $user_id );
+          $reply->setBody( $body );
+          $reply->setName( $name );
+          $reply->setEmail( $email );
+          $reply->setDate( new \DateTime("now") );
+          $em->persist($reply);
+
+
           $em->flush();
+
 
         }else {
           return new Response("SPAM!");
