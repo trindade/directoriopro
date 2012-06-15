@@ -973,7 +973,7 @@ class PostController extends Controller
 	    $query->add('select', 'p')
 	       ->add('from', 'ApplicationAnunciosBundle:Post p')
 	       ->add('orderBy', 'p.visible DESC, p.id DESC')
-	       ->andWhere('p.user_id = :user_id')->setParameter('user_id', $id);
+	       ->andWhere('p.user_id = :user_id')->setParameter('user_id', $user_id);
 		       
 	    $entities = $query->getQuery()->getResult();
 
