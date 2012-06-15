@@ -50,7 +50,7 @@
 					{% if entity.featured %}
 						<span class="label label-success"><i class="icon-ok icon-white"></i> Destacado</span>
 					{% else %}
-						<a href="{{ path('post_promote', { 'id': entity.id }) }}" class="btn">&#9733;</a> 
+						<a href="{{ path('post_promote') }}?id={{ entity.id }}" class="btn">&#9733;</a> 
 					{% endif %}
 					
 					{% if entity.visible == 1 %}

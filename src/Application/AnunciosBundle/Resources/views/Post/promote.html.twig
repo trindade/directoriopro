@@ -26,11 +26,11 @@
 
 {% else %}
 
+
 	<ul class="breadcrumb">
 	  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
 	  <li><a href="{{ path('post_dashboard') }}">Tus anuncios</a></li>
 	</ul>
-	
 	
 	<h1>Destaca una oferta de empleo</h1>
 	
@@ -62,21 +62,31 @@
 		</tbody>
 	</table>
 	
-	<b>Oferta de empleo a destacar</b><br/>
 	
-	<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}" target="_blank">{{ entity.title }}</a> (Referencia: {{ entity.id }}) <a href="{{ path('post_dashboard') }}">¿Otra?</a><br/><br/>
 	
-	<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-	    <input type="hidden" name="cmd" value="_xclick">
-	    <input type="hidden" name="image_url" value="http://betabeers.com/v2/img/logo.png">
-	    <input type="hidden" name="business" value="gafeman@gmail.com">
-	    <input type="hidden" name="currency_code" value="EUR">
-	    <input type="hidden" name="item_name" value="Destacar oferta de empleo betabeers">
-	    <input type="hidden" name="item_number" value="{{ entity.id }}">
-	    <input type="hidden" name="amount" value="30">
-	    <input type="hidden" name="return" value="{{ path('post_promote', { 'id': entity.id }) }}?success=1">
-	    <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-	</form>
+	{% if entity %}
+	
+		<b>Oferta de empleo a destacar</b><br/>
+	
+		<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}" target="_blank">{{ entity.title }}</a> (Referencia: {{ entity.id }}) <a href="{{ path('post_dashboard') }}">¿Otra?</a><br/><br/>
+		
+		<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+		    <input type="hidden" name="cmd" value="_xclick">
+		    <input type="hidden" name="image_url" value="http://betabeers.com/v2/img/logo.png">
+		    <input type="hidden" name="business" value="gafeman@gmail.com">
+		    <input type="hidden" name="currency_code" value="EUR">
+		    <input type="hidden" name="item_name" value="Destacar oferta de empleo betabeers">
+		    <input type="hidden" name="item_number" value="{{ entity.id }}">
+		    <input type="hidden" name="amount" value="30">
+		    <input type="hidden" name="return" value="{{ path('post_promote') }) }}?id={{ entity.id }}&success=1">
+		    <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+		</form>
+
+	{% else %}
+	
+		<a href="{{ path('post_dashboard') }}" class="btn btn-large">Destacar oferta</a> o <a href="{{ path('post_dashboard') }}">Publicar una oferta</a> o 
+	
+	{% endif %}
 
 {% endif %}
 

@@ -659,10 +659,10 @@ class PostController extends Controller
 	    $user_id = $session->get('id');
 	    
 	    if ( $entity->getUserId() != $user_id  ) {
-	      return $this->redirect('/');
+	      return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
 	      
 	    }else if( !$session->get('admin') ){
-		  return $this->redirect('/');  
+		  return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
 	    }
 
         $entity->setVisible($value);
@@ -1001,7 +1001,7 @@ class PostController extends Controller
     /**
      * Post promote
      *
-     * @Route("/promote/{id}", name="post_promote")
+     * @Route("/promote", name="post_promote")
      * @Template()
      */
     public function promoteAction($id)
@@ -1012,24 +1012,25 @@ class PostController extends Controller
         $user_id = $session->get('id');
         
         if( !$user_id ){
-	         $url = $this->generateUrl('post');
-	        return $this->redirect($url);
+	        return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
         }
         
 	    $request = $this->getRequest();
+	    $entity = false;
 	    
 	    // success?
 	    $success = $request->query->get('success');
 	    if( !$success ){
         
 	        // existe oferta?
-		    //$id = $request->query->get('id');
-	        $em = $this->getDoctrine()->getEntityManager();
-	        $entity = $em->getRepository('ApplicationAnunciosBundle:Post')->find($id);
-	        if (!$entity) {
-	            throw $this->createNotFoundException('Unable to find Post entity.');
+		    $id = $request->query->get('id');
+		    if( $id ){
+		        $em = $this->getDoctrine()->getEntityManager();
+		        $entity = $em->getRepository('ApplicationAnunciosBundle:Post')->find($id);
+		        if (!$entity) {
+		            throw $this->createNotFoundException('Unable to find Post entity.');
+		        }
 	        }
-        
         }
 
         return array('entity' => $entity, 'success' => $success );
