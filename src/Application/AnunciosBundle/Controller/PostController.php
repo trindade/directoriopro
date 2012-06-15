@@ -1004,7 +1004,7 @@ class PostController extends Controller
      * @Route("/promote", name="post_promote")
      * @Template()
      */
-    public function promoteAction($id)
+    public function promoteAction()
     {
     
     	// esta logueado?
