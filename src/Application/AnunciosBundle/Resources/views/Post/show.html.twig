@@ -45,7 +45,7 @@
 
 {% block content %}
 
-<a  href="{{ path('post_promote') }}?id={{ entity.id }}" class="alert alert-block hide" id="getfeatured" style="text-align:center">Destaca la oferta para conseguir más visibilidad</a>
+<div class="alert alert-block hide" id="getfeatured"><a href="{{ path('post_promote') }}?id={{ entity.id }}" style="color:black;display:block;text-align:center">Destaca la oferta para conseguir más visibilidad</a></div>
 
 
 <ul class="breadcrumb">
@@ -120,7 +120,7 @@
 
 
 if( document.location.href.indexOf('success') != -1 ){
-	$('#getfeatured').delay(500).show();
+	$('#getfeatured').delay(500).slideDown();
 }
 
 
