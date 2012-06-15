@@ -996,6 +996,44 @@ class PostController extends Controller
 
         return array('entities' => $entities, 'user_id' => $user_id );
     }
+    
+    
+    /**
+     * Post promote
+     *
+     * @Route("/promote/{id}", name="post_promote")
+     * @Template()
+     */
+    public function promoteAction($id)
+    {
+    
+    	// esta logueado?
+        $session = $this->getRequest()->getSession();
+        $user_id = $session->get('id');
+        
+        if( !$user_id ){
+	         $url = $this->generateUrl('post');
+	        return $this->redirect($url);
+        }
+        
+	    $request = $this->getRequest();
+	    
+	    // success?
+	    $success = $request->query->get('success');
+	    if( !$success ){
+        
+	        // existe oferta?
+		    //$id = $request->query->get('id');
+	        $em = $this->getDoctrine()->getEntityManager();
+	        $entity = $em->getRepository('ApplicationAnunciosBundle:Post')->find($id);
+	        if (!$entity) {
+	            throw $this->createNotFoundException('Unable to find Post entity.');
+	        }
+        
+        }
+
+        return array('entity' => $entity, 'success' => $success );
+    }
 
     /**
      * Get post slugs

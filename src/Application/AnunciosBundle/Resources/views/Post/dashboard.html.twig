@@ -54,6 +54,7 @@
 				<td>{{ entity.visits }}</td>
 				<td>{{ entity.date|date('d/m/Y') }}</td>
 				<td nowrap="nowrap">
+					<a href="{{ path('post_promote', { 'id': entity.id }) }}" class="btn {% if entity.featured %}btn-primary{% endif %}">&#9733;</a>
 					<a href="{{ path('post_admin_visible', { 'id': entity.id, 'value': visible }) }}">{% if entity.visible %}visible{% else %}<span style="color:red">oculto</span>{% endif %}</a>
 				</td>
 	        </tr>
@@ -76,9 +77,7 @@
   	<iframe src="http://dir.betabeers.com/post/widget?id={{ user_id }}" width="270" height="320" style="border:1px #666 solid;"></iframe>
   </div>
   <div class="span3">
-  	Añade un widget en tu web con las ofertas de empleo:<br/><br/>
-
-  	Código HTML:<br/>
+  	Código HTML para añadir este widget en tu web:<br/>
 	<textarea readonly="readonly" style="width:230px;height:70px" onclick="this.select()">&lt;iframe src="http://dir.betabeers.com/post/widget?id={{ user_id }}" width="250" height="300"&gt;&lt;/iframe&gt;</textarea>
   </div>
 </div>
