@@ -48,7 +48,7 @@
 				<td>{{ entity.date|date('d/m/Y') }}</td>
 				<td nowrap="nowrap">
 					{% if entity.featured %}
-						<span class="label label-success"><i class="icon-ok icon-white"></i> Destacado</span>
+						<span class="label label-success">Destacado</span>
 					{% else %}
 						<a href="{{ path('post_promote') }}?id={{ entity.id }}" class="btn">&#9733;</a> 
 					{% endif %}
