@@ -674,7 +674,7 @@ class PostController extends Controller
 	    	$url = $_SERVER['HTTP_REFERER'];
 	    }else{
 	    
-	    	if( session->get('admin') ){
+	    	if( $session->get('admin') ){
 	    		$url = $this->generateUrl('post_admin');
 	    	}else{
 		    	$url = $this->generateUrl('post_dashboard');
