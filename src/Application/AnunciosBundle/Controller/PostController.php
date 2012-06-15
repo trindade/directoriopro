@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Application\AnunciosBundle\Entity\Post;
-use Application\AnunciosBundle\Entity\PostReplies;
+use Application\AnunciosBundle\Entity\PostReply;
 use Application\UserBundle\Entity\User;
 use Application\UserBundle\Entity\Contact;
 use Application\AnunciosBundle\Form\PostType;
@@ -519,7 +519,7 @@ class PostController extends Controller
           $em->persist($entity);
           
           // add reply
-          $reply = new PostReplies();
+          $reply = new PostReply();
           $reply->setPostId( $id );
           $reply->setUserId( $user_id );
           $reply->setBody( $body );

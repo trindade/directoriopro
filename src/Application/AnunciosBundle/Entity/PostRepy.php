@@ -5,12 +5,12 @@ namespace Application\AnunciosBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Application\AnunciosBundle\Entity\PostReplies
+ * Application\AnunciosBundle\Entity\PostReply
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class PostReplies
+class PostReply
 {
     /**
      * @var integer $id
