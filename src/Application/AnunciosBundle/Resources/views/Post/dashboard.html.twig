@@ -1,0 +1,89 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Administrar anuncios" %}
+
+
+{% block sidebar %}
+
+	<a href="{{ path('post_new') }}" class="btn btn-large btn-primary">Publicar anuncio</a>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<h1>Administrar anuncios</h1>
+
+
+<ul class="nav nav-tabs">
+  <li><a href="#jobs" data-toggle="tab">Anuncios</a></li>
+  <li><a href="#widget" data-toggle="tab">Widget</a></li>
+</ul>
+
+<div class="tab-content">
+<div class="tab-pane active" id="jobs">
+
+{% if entities %}
+
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Anuncio</th>
+				<th>Interesados</th>
+				<th>Visitas</th>
+				<th>Fecha</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+	    {% for entity in entities %}
+			
+			{% if entity.visible == 1 %}
+				{% set visible = 'NULL' %}
+			{% else %}
+				{% set visible = 1 %}
+			{% endif %}
+
+	        <tr>
+				<td>
+					<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a>
+					<br/><span class="date">{{ entity.date|date('d/m/Y') }} {% if entity.location %}- {{ entity.location }}{% endif %}</span>
+				</td>
+				<td>{{ entity.interested }}</td>
+				<td>{{ entity.visits }}</td>
+				<td>{{ entity.date }}</td>
+				<td nowrap="nowrap">
+					<a href="{{ path('post_admin_visible', { 'id': entity.id, 'value': visible }) }}">{% if entity.visible %}visible{% else %}<span style="color:red">oculto</span>{% endif %}</a>
+				</td>
+	        </tr>
+	    {% endfor %}
+	    </tbody>
+	</table>
+	
+{% else %}
+	sin resultados
+{% endif %}
+
+</div>
+<div class="tab-pane" id="widget">
+
+A–ade un widget en tu web con las ofertas de empleo:<br/><br/>
+
+C—digo HTML:<br/>
+<textarea readonly="readonly" style="width:230px;height:70px" onclick="this.select()">&lt;iframe src="http://dir.betabeers.com/post/widget?id={{ user_id }}" width="250" height="300"&gt;&lt;/iframe&gt;</textarea>
+<br/><br/>
+Previsualizaci—n:<br/>
+<iframe src="http://dir.betabeers.com/post/widget?id={{ user_id }}" width="250" height="300"></iframe>
+
+
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block script_load %}
+	$('.nav').tabs();
+{% endblock %}

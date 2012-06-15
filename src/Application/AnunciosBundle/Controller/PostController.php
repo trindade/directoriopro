@@ -945,6 +945,40 @@ class PostController extends Controller
 
         return array('entities' => $entities );
     }
+    
+    
+    /**
+     * Posts dashboard
+     *
+     * @Route("/dashboard", name="post_dashboard")
+     * @Template()
+     */
+    public function dashboardAction()
+    {
+    
+    	// esta logueado?
+        $session = $this->getRequest()->getSession();
+        $user_id = $session->get('id');
+        
+        if( !$user_id ){
+	         $url = $this->generateUrl('post');
+	        return $this->redirect($url);
+        }
+    
+        // obtener ofertas
+	    $request = $this->getRequest();
+	    $em = $this->getDoctrine()->getEntityManager();
+	
+	    $query = $em->createQueryBuilder();
+	    $query->add('select', 'p')
+	       ->add('from', 'ApplicationAnunciosBundle:Post p')
+	       ->add('orderBy', 'p.visible DESC, p.id DESC')
+	       ->andWhere('p.user_id = :user_id')->setParameter('user_id', $id);
+		       
+	    $entities = $query->getQuery()->getResult();
+
+        return array('entities' => $entities, 'user_id' => $user_id );
+    }
 
     /**
      * Get post slugs
