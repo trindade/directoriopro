@@ -6,7 +6,7 @@
 {% block sidebar %}
 
 	{% if success != 1 %}
-		<a href="/page/faq/" class="btn btn-large btn-primary">Casos de éxito</a>
+		<a href="/page/faq/#companies" target="_blank" class="btn btn-large btn-primary">Casos de éxito</a>
 	{% else %}
 		<a href="{{ path('post_dashboard') }}" class="btn btn-large btn-primary">Ver tus anuncios</a>
 	{% endif %}
@@ -33,21 +33,21 @@
 	
 	<h1>Destaca una oferta de empleo</h1>
 	
-	Por tan sólo <b>30€</b> puedes dar mayor visibilidad a esta oferta en nuestros canales:
+	Por tan sólo 30€ puedes dar mayor visibilidad a esta oferta en nuestros canales:
 	
 	<br/><br/>
 	
 	<ul>
-		<li><b>Web:</b> +2100 usuaros registrados</li>
-		<li><b>Twitter:</b> +1700 followers</li>
-		<li><b>Email:</b> +1000 suscritos a la newsletter</li>
+		<li>+2100 usuaros registrados en la web</li>
+		<li>+1700 seguidores en twitter</li>
+		<li>+1000 suscritos a la newsletter</li>
 	</ul>
 	
 	<br/>
 	
-	Oferta de empleo a destacar<br/><br/>
+	Oferta de empleo a destacar<br/>
 	
-	<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}" target="_blank">{{ entity.title }}</a> (Referencia: {{ entity.id }})<br/><br/>
+	<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}" target="_blank" style="font-weight:bold">{{ entity.title }}</a> (Referencia: {{ entity.id }})<br/><br/>
 	
 	<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 	    <input type="hidden" name="cmd" value="_xclick">
