@@ -1,4 +1,4 @@
-{% set sitename = "Ofertas de empleo Betabeers" %}
+{% set sitename = "Ofertas de empleo" %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +21,8 @@ LI{margin-bottom:10px}
 	<li><a href="{{ url('post_show', { 'id': entity.id, 'slug': entity.slug }) }}" target="_blank">{{ entity.title }}</a></li>
 {% endfor %}
 </ul>
+
+Ofertas de empleo por <a href="http://dir.betabeers.com" target="_blank">betabeers</a>
 	
 </body>
 </html>

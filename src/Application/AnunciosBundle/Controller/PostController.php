@@ -914,19 +914,31 @@ class PostController extends Controller
      */
     public function widgetAction()
     {
-    $request = $this->getRequest();
-    $em = $this->getDoctrine()->getEntityManager();
+	    $request = $this->getRequest();
+	    $em = $this->getDoctrine()->getEntityManager();
+	
 
+	
+	    $query = $em->createQueryBuilder();
+	    $query->add('select', 'p')
+	       ->add('from', 'ApplicationAnunciosBundle:Post p')
+	       ->add('orderBy', 'p.featured DESC, p.id DESC')
+	       ->andWhere('p.visible = 1');
+		       
+	
+	    $id = $request->query->get('id');
+	    if( $id ){
 
-
-    $query = $em->createQueryBuilder();
-    $query->add('select', 'p')
-       ->add('from', 'ApplicationAnunciosBundle:Post p')
-       ->add('orderBy', 'p.featured DESC, p.id DESC')
-       ->andWhere('p.visible = 1')
-       ->andWhere('p.type = 0')
-       ->setMaxResults(10);
-    $entities = $query->getQuery()->getResult();
+		   $query->andWhere('p.user_id = :user_id')->setParameter('user_id', $id);
+	       
+	    }else{
+		   
+		   $query->setMaxResults(10);
+		    
+	    }
+	       
+	       
+	    $entities = $query->getQuery()->getResult();
 
 
 
