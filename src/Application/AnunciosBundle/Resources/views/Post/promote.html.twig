@@ -7,6 +7,7 @@
 
 	{% if success != 1 %}
 		<a href="/page/faq/#companies" target="_blank" class="btn btn-large btn-primary">Casos de éxito</a>
+		<a href="{{ path('post_dashboard') }}" class="btn">Ver tu anuncios</a>
 	{% else %}
 		<a href="{{ path('post_dashboard') }}" class="btn btn-large btn-primary">Ver tus anuncios</a>
 	{% endif %}
