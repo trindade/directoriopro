@@ -6,7 +6,7 @@
 {% block sidebar %}
 
 	{% if success != 1 %}
-		<a href="/page/faq/" class="btn btn-large btn-primary">Casos de éxito</a>
+		<a href="/page/faq/" class="btn btn-large btn-primary">Casos de √©xito</a>
 	{% else %}
 		<a href="{{ path('post_dashboard') }}" class="btn btn-large btn-primary">Ver tus anuncios</a>
 	{% endif %}
@@ -18,10 +18,10 @@
 
 {% if success %}
 
-	<h1>Pago realizado con éxito</h1>
-	Muchas gracias por contratar el servicio, próximamente nos pondremos en contacto contigo.
+	<h1>Pago realizado con √©xito</h1>
+	Muchas gracias por contratar el servicio, pr√≥ximamente nos pondremos en contacto contigo.
 	<br/><br/>
-	Cualquier cosa, no dudes en <a href="<a class="btn" href="/post/279/edit">Editar anuncio</a>">contactar con nosotros</a>
+	Para cualquier cosa, no dudes en <a href="<a class="btn" href="http://betabeers.com/contacto/">contactar con nosotros</a>
 
 {% else %}
 
@@ -33,17 +33,21 @@
 	
 	<h1>Destaca una oferta de empleo</h1>
 	
-	Por tan sólo 30€ puedes dar mayor visibilidad a esta oferta en nuestros canales:
+	Por tan s√≥lo <b>30‚Ç¨</b> puedes dar mayor visibilidad a esta oferta en nuestros canales:
+	
+	<br/><br/>
+	
 	<ul>
 		<li><b>Web:</b> +2100 usuaros registrados</li>
 		<li><b>Twitter:</b> +1700 followers</li>
 		<li><b>Email:</b> +1000 suscritos a la newsletter</li>
 	</ul>
 	
-	<b>Oferta de empleo</b><br/><br/>
+	<br/>
 	
-	Id de referencia: {{ entity.id }}<br/>
-	<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}" target="_blank">{{ entity.title }}</a><br/><br/>
+	Oferta de empleo a destacar<br/><br/>
+	
+	<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}" target="_blank">{{ entity.title }}</a> (Referencia: {{ entity.id }})<br/><br/>
 	
 	<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 	    <input type="hidden" name="cmd" value="_xclick">
