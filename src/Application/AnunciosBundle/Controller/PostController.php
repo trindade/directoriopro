@@ -936,8 +936,8 @@ class PostController extends Controller
 		   $query->setMaxResults(10);
 		    
 	    }
-	       
-	       
+	    
+	    
 	    $entities = $query->getQuery()->getResult();
 
 
