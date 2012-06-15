@@ -55,7 +55,7 @@
 				<td>{{ entity.date|date('d/m/Y') }}</td>
 				<td nowrap="nowrap">
 					<a href="{{ path('post_promote', { 'id': entity.id }) }}" class="btn {% if entity.featured %}btn-primary{% endif %}">&#9733;</a>
-					<a href="{{ path('post_admin_visible', { 'id': entity.id, 'value': visible }) }}">{% if entity.visible %}visible{% else %}<span style="color:red">oculto</span>{% endif %}</a>
+					<a href="{{ path('post_admin_visible', { 'id': entity.id, 'value': visible }) }}">{% if entity.visible %}<span style="color:red">ocultar</span>{% else %}mostrar{% endif %}</a>
 				</td>
 	        </tr>
 	    {% endfor %}
