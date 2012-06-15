@@ -27,27 +27,45 @@
 
 	<ul class="breadcrumb">
 	  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
-	  <li><a href="{{ path('post') }}">Tus anuncios</a></li>
+	  <li><a href="{{ path('post_dashboard') }}">Tus anuncios</a></li>
 	</ul>
 	
 	
 	<h1>Destaca una oferta de empleo</h1>
 	
-	Por tan sólo 30€ puedes dar mayor visibilidad a esta oferta en nuestros canales:
+	Por tan sólo 30€ al mes puedes dar mayor visibilidad una oferta de empleo en nuestros canales:
 	
 	<br/><br/>
 	
-	<ul>
-		<li>+2100 usuaros registrados en la web</li>
-		<li>+1700 seguidores en twitter</li>
-		<li>+1000 suscritos a la newsletter</li>
-	</ul>
 	
-	<br/>
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Se ofrece</th>
+				<th>Alcance</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Destacado por 1 mes en la web: betabeers.com y dir.betabeers.com</td>
+				<td>+2100 usuarios registrados</td>
+			</tr>
+			<tr>
+				<td>Difusión en twitter con la cuenta @betabeers con 2 tweets</td>
+				<td>+1700 seguidores</td>
+			</tr>
+			<tr>
+				<td>Difusión en la newsletter</td>
+				<td>+1000 suscritos</td>
+			</tr>
+		</tbody>
+	</table>
 	
-	Oferta de empleo a destacar<br/>
+	<br/><br/>
 	
-	<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}" target="_blank" style="font-weight:bold">{{ entity.title }}</a> (Referencia: {{ entity.id }})<br/><br/>
+	<b>Oferta de empleo a destacar</b>
+	
+	<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}" target="_blank">{{ entity.title }}</a> (Referencia: {{ entity.id }}) <a href="{{ path('post_dashboard') }}">¿Otra?</a><br/><br/>
 	
 	<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 	    <input type="hidden" name="cmd" value="_xclick">
