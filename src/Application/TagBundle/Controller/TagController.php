@@ -91,27 +91,40 @@ class TagController extends Controller
 			$entity->setSlug( Util::slugify( $title ) );
 			$entity->setDate( new \DateTime("now") );
 			
-			$users = 1;
+			//$entity->setUsers(1);
 			
-		}else{
-			
-			// actualizar
-			$users = $entity->getUsers() + 1;
 		}
 		
-		$entity->setUsers( $users );
         $em->persist($entity);
         $em->flush();
         
         
-        // vincular usuario
-        $link  = new TagUser();
-		$link->setTagId( $entity->getId() );
-		$link->setUserId( $user_id );
-		$link->setDate( new \DateTime("now") );
-		
-        $em->persist($link);
-        $em->flush();
+        // existe vinculo
+        $link = $em->getRepository('ApplicationTagBundle:TagUser')->findOneBy( array('tag_id'=>$entity, 'user_id' => $user_id) );
+        
+        if( !$link ){
+        
+	        // vincular usuario
+	        $link  = new TagUser();
+			$link->setTagId( $entity->getId() );
+			$link->setUserId( $user_id );
+			$link->setDate( new \DateTime("now") );
+			
+	        $em->persist($link);
+	        $em->flush();
+	        
+	        
+	        // recalcular total
+		    $query = "SELECT COUNT(id) AS total FROM TagUser WHERE tag_id = " . $entity->getId();
+		    $db = $this->get('database_connection');
+		    $result = $db->query($query)->fetch();
+		    $total = $result['total'];
+		    
+		    $entity->setUsers( $total );
+	        $em->persist($entity);
+	        $em->flush();
+        
+        }
         
         return array('entity' => $entity);
     }
