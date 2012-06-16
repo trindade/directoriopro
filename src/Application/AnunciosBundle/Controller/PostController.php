@@ -943,10 +943,10 @@ class PostController extends Controller
 	    $em = $this->getDoctrine()->getEntityManager();
 
 	    $query = $em->createQueryBuilder();
-	    $query->add('select', 'r')
-	       ->add('from', 'ApplicationAnunciosBundle:PostReply r')
-	       ->add('orderBy', 'r.id DESC')
-	       ->andWhere('r.post_id = :id')->setParameter('id', $id);
+	    $query->add('select', 'p')
+	       ->add('from', 'ApplicationAnunciosBundle:PostReply p')
+	       ->add('orderBy', 'p.id DESC')
+	       ->andWhere('p.post_id = :post_id')->setParameter('post_id', $entity->id);
 	    $entities = $query->getQuery()->getResult();
 
 	    
