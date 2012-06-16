@@ -18,9 +18,9 @@
 
 	
 	{% for tag in entities %} 
-		<a href="{{ path('tag_show', { 'slug': tag.slug }) }}" style="padding:5px;background:#666;color:white;margin:0 5px 5px 0">{{ tag.title }}</a>
+		<a href="{{ path('tag_show', { 'slug': tag.slug }) }}" style="float:left;border-radius:5px;padding:5px;background:#666;color:white;margin:0 5px 5px 0">{{ tag.title }}</a>
 	{% endfor %}
 
-
+	<br class="clear"/>
 
 {% endblock %}
