@@ -11,8 +11,6 @@ use Application\UserBundle\Entity\Contact;
 use Application\UserBundle\Entity\Comment;
 use Application\CityBundle\Entity\Country;
 use Application\CityBundle\Entity\City;
-use Application\TagBundle\Entity\Tag;
-use Application\TagBundle\Entity\TagUser;
 use Application\UserBundle\Form\UserType;
 use Application\UserBundle\Form\CommentType;
 use Application\UserBundle\Form\ContactType;
@@ -519,7 +517,7 @@ class UserController extends Controller
 
 
     $tags = '';
-    $query = "SELECT t.* FROM ApplicationTagBundle:Tag t, ApplicationTagBundle:TagUser tu WHERE tu.user_id = " . $id . " AND tu.tag_id = t.id ORDER BY t.title ASC";
+    $query = "SELECT t.* FROM Tag t, TagUser tu WHERE tu.user_id = " . $id . " AND tu.tag_id = t.id ORDER BY t.title ASC";
     $db = $this->get('database_connection');
     $users_ref = $db->fetchAll($query);
     	
