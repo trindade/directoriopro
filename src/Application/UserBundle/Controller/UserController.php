@@ -518,7 +518,7 @@ class UserController extends Controller
 
     $query = $em->createQueryBuilder();
     $query->add('select', 't.title')
-       ->add('from', 'ApplicationAnunciosBundle:Tag t, ApplicationAnunciosBundle:TagUser tu')
+       ->add('from', 'ApplicationTagBundle:Tag t, ApplicationTagBundle:TagUser tu')
        ->add('orderBy', 't.title ASC')
        ->andWhere('tu.user_id = :id')->setParameter('id', $id);
     $tags_aux = $query->getQuery()->getResult();
