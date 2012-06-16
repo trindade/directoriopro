@@ -518,6 +518,7 @@ class PostController extends Controller
           $entity->setInterested( $entity->getInterested() + 1 );
           $em->persist($entity);
           
+          /*
           // add reply
           $reply = new PostReply();
           $reply->setPostId( $id );
@@ -527,7 +528,7 @@ class PostController extends Controller
           $reply->setEmail( $email );
           $reply->setDate( new \DateTime("now") );
           $em->persist($reply);
-
+          */
 
           $em->flush();
 
@@ -940,17 +941,17 @@ class PostController extends Controller
 	    }
 	    
 	    
-	    $em = $this->getDoctrine()->getEntityManager();
+/*
 
 	    $query = $em->createQueryBuilder();
-	    $query->add('select', 'p')
-	       ->add('from', 'ApplicationAnunciosBundle:PostReply p')
-	       ->add('orderBy', 'p.id DESC')
-	       ->andWhere('p.post_id = :post_id')->setParameter('post_id', $entity->id);
+	    $query->add('select', 'r')
+	       ->add('from', 'ApplicationAnunciosBundle:PostReply r')
+	       ->add('orderBy', 'r.id DESC')
+	       ->andWhere('r.post_id = :id')->setParameter('id', $id);
 	    $entities = $query->getQuery()->getResult();
-
+*/
 	    
-
+	    $entities = array();
 
         return array('entity' => $entity, 'entities' => $entities);
     }
