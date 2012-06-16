@@ -126,7 +126,8 @@ class TagController extends Controller
         
         }
         
-        return array('entity' => $entity);
+        //return array('entity' => $entity);
+        return new Response('1');
     }
 
     /**
@@ -214,5 +215,27 @@ class TagController extends Controller
 
         die($action);
     }
+    
+    
+    /**
+     * autocomplete
+     *
+     * @Route("/autocomplete", name="tag_autocomplete")
+     * @Template()
+     */
+    public function autocompleteAction()
+    {
+    $request = $this->getRequest();
+    $q = $request->query->get('q');
+    $callback = $request->query->get('callback');
+
+    $em = $this->getDoctrine()->getEntityManager();
+    $query = $em->createQuery("SELECT id, title, users FROM ApplicationTagBundle:Tag WHERE title LIKE '" . addslashes( $q ) . "%' ORDER BY users DESC, title ASC");
+  
+    $query->setMaxResults(5);
+    $results = $query->getResult();
+
+    return array('callback' => $callback, 'result' => json_encode(array('results' => $results)));
+  }
 
 }
