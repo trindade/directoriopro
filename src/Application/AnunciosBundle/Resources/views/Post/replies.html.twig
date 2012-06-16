@@ -17,7 +17,7 @@
 <h1>Respuestas anuncio</h1>
 
 
-Anuncio: <a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a>
+<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}">Anuncio: {{ entity.title }}</a>
 
 <br/><br/>
 
@@ -31,8 +31,11 @@ Anuncio: <a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug })
 			<div class="accordion-group">
 			<div class="accordion-heading group_edit"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion{{ loop.index }}" href="#coll{{ loop.index }}">{{ entity.date|date('d/m/Y') }} - {{ entity.name }}</a></div>
 			<div id="coll1" class="accordion-body collapse {% if loop.index == 1 %}in{% endif %}">
+			<div class="accordion-inner">
+			
 				{{ entity.body|nl2br }}
 				<br/>
+				<p align="right">
 				{% if entity.user_id %}
 				
 					<a href="{{ path('user_show2', { 'id': entity.user_id }) }}">{{ entity.name }}</a> (usuario registrado)
@@ -42,7 +45,8 @@ Anuncio: <a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug })
 					<a href="mailto:{{ entity.email }}">{{ entity.name }}</a> (usuario no registrado)
 				
 				{% endif %}
-				
+				</p>
+			</div>
 			</div>
 			</div>
 	    {% endfor %}
