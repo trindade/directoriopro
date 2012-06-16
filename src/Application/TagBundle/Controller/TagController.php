@@ -53,7 +53,7 @@ class TagController extends Controller
         $entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('slug'=>$slug) );
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Test entity.');
+            throw $this->createNotFoundException('Unable to find Tag entity.');
         }
         
         // get users
@@ -79,12 +79,12 @@ class TagController extends Controller
 		$user_id = $session->get('id');
 		
 		// existe tag?
-		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('slug'=>$id) );
+		$title = $request->request->get('title');
+		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('title'=>$title) );
 		
 		if( !$entity ){
 			
 			// crear tag
-			$title = $request->request->get('title');
 	        $entity  = new Tag();
 			$entity->setUserId( $user_id );
 			$entity->setTitle( $title );
