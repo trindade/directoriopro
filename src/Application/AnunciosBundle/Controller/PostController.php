@@ -545,9 +545,9 @@ class PostController extends Controller
       }
 
         return array(
-      'form' => $form->createView(),
+        	'form' => $form->createView(),
             'entity'      => $entity,
-      'result'      => $result,
+            'result'      => $result,
       );
 
 
