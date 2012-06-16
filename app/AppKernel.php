@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Application\ApiBundle\ApplicationApiBundle(),
             new Application\PageBundle\ApplicationPageBundle(),
             new Application\ForumBundle\ApplicationForumBundle(),
+            new Application\TagBundle\ApplicationTagBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
