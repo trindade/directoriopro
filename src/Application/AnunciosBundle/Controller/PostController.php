@@ -361,6 +361,23 @@ class PostController extends Controller
         if ( ( $entity->getUserId() == $user_id ) || $admin ) {
 
           $em->remove($entity);
+          
+          
+          // borrar respuestas
+          $query = $em->createQueryBuilder();
+          $query->add('select', 'r')
+             ->add('from', 'ApplicationAnunciosBundle:PostReply r')
+             ->andWhere('r.post_id = :id')->setParameter('id', $id)
+             ->add('orderBy', 'r.id ASC');
+          $replies = $query->getQuery()->getResult();
+
+          foreach( $replies as $reply ){
+              $em->remove($reply);
+              //$em->flush(); 
+          }
+          
+          
+          
           $em->flush();
 
           $url = $this->generateUrl('post');

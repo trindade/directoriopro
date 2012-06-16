@@ -1,10 +1,11 @@
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-{% block title "Respuestas anuncio" %}
+{% block title "{{ entity.interested }} Respuestas anuncio" %}
 
 
 {% block sidebar %}
 
+	<a class="btn btn-large btn-primary" href="{{ path('post_promote') }}?id={{ entity.id }}">Destacar oferta</a>
 	<a href="{{ path('post_dashboard') }}" class="btn">Ver tus anuncios</a>
 
 {% endblock %}
@@ -14,7 +15,7 @@
 {% block content %}
 
 
-<h1>Respuestas anuncio</h1>
+<h1>{{ entity.interested }} Respuestas anuncio</h1>
 
 
 Anuncio: <a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a>
