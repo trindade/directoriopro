@@ -931,7 +931,7 @@ class PostController extends Controller
 	    $query->add('select', 'p')
 	       ->add('from', 'ApplicationAnunciosBundle:Post p')
 	       ->add('orderBy', 'p.interested DESC')
-	       ->setMaxResults(10);
+	       ->setMaxResults(5);
 		       
 	    $ranking = $query->getQuery()->getResult();
 
