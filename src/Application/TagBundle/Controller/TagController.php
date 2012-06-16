@@ -138,9 +138,6 @@ class TagController extends Controller
      */
     public function followAction()
     {
-    	return new Response('test');
-    	
-    	/*
         // usuario
 		$session = $this->getRequest()->getSession();
 		$user_id = $session->get('id');
@@ -156,6 +153,10 @@ class TagController extends Controller
 		if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tag entity.');
         }
+        
+    	return new Response('test');
+    	
+    	/*
 		
 		// existe vinculo?
 		$link = $em->getRepository('ApplicationTagBundle:TagUser')->findOneBy( array('tag_id' => $entity->getId(), 'user_id' => $user_id) );
