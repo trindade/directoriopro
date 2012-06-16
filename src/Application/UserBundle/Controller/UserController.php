@@ -11,6 +11,8 @@ use Application\UserBundle\Entity\Contact;
 use Application\UserBundle\Entity\Comment;
 use Application\CityBundle\Entity\Country;
 use Application\CityBundle\Entity\City;
+use Application\TagBundle\Entity\Tag;
+use Application\TagUserBundle\Entity\TagUser;
 use Application\UserBundle\Form\UserType;
 use Application\UserBundle\Form\CommentType;
 use Application\UserBundle\Form\ContactType;
