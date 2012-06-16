@@ -23,10 +23,8 @@ Anuncio: <a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug })
 <br/><br/>
 
 <div class="alert alert-block">
-	A partir del 16 junio serán accesibles desde la web los emails de los candidatos recibidos, emails enviados antes de la fecha no están disponibles, disculpen las molestias.
+	A partir del 16 junio serán accesibles desde la web los emails de los candidatos recibidos, los recibidos antes de la fecha no están disponibles, disculpen las molestias.
 </div>
-
-<br/><br/>
 
 
 {% if entities %}
@@ -60,9 +58,6 @@ Anuncio: <a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug })
 	    {% endfor %}
 	</div>
 
-	
-{% else %}
-	sin resultados
 {% endif %}
 
 
