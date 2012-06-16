@@ -230,7 +230,7 @@ class TagController extends Controller
 	    $callback = $request->query->get('callback');
 	
 	    $em = $this->getDoctrine()->getEntityManager();
-	    $query = $em->createQuery("SELECT * FROM ApplicationTagBundle:Tag WHERE title LIKE '" . addslashes( $q ) . "%' ORDER BY users DESC");
+	    $query = $em->createQuery("SELECT t.id, t.title, t.users FROM ApplicationTagBundle:Tag t WHERE t.title LIKE '" . addslashes( $q ) . "%' ORDER BY t.users DESC, t.title ASC");
 	    $results = $query->setMaxResults(5)->getResult();
 	
 	    return array('callback' => $callback, 'result' => json_encode(array('results' => $results)));
