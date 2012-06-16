@@ -24,19 +24,19 @@ Anuncio: <a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug })
 
 {% if entities %}
 
-	<div class="accordion">
+	<div class="accordion" id="accordion2">
 	    {% for entity in entities %}
 	    
 	    
 			<div class="accordion-group">
-			<div class="accordion-heading group_edit"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion{{ loop.index }}" href="#coll{{ loop.index }}">{{ entity.date|date('d/m/Y') }} - {{ entity.name }}</a></div>
-			<div id="coll{{ loop.index }}" class="accordion-body collapse {% if loop.index == 1 %}in{% endif %}">
+			<div class="accordion-heading group_edit"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll{{ loop.index }}">{{ entity.date|date('d/m/Y') }} - {{ entity.name }}</a></div>
+			<div id="coll{{ loop.index }}" class="accordion-body collapse">
 			<div class="accordion-inner">
 			
 				{{ entity.body|nl2br }}
 				<br/>
 				<p align="right">
-
+				
 				{% if entity.getUserId() %}
 				
 					<a href="{{ path('user_show2', { 'id': entity.getUserId() }) }}">{{ entity.name }}</a> (usuario registrado)
