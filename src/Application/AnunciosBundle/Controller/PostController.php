@@ -521,7 +521,7 @@ class PostController extends Controller
 
           $url = $this->generateUrl('post_replies', array('id' => $entity->getId()), true);
           $subject = 'Nuevo candidato oferta en betabeers';
-          $body = '<a href="' . $url . '">Ver mensaje</a>';
+          $mensaje = $name . ' se ha interesado por la oferta <a href="' . $url . '">Ver mensaje</a>';
           
           
 
