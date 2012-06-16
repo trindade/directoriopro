@@ -13,13 +13,18 @@
 		<br/><br/>
 	{% endif %}
 
-	<b>Estadísticas visitas</b>
-	<br/><br/>
-	Total: {{ entity.visits }}
-	<br/>
-	Buscador: {{ entity.visitsfinder }}
-	<br/>
-	Desde google: {{ entity.visitsgoogle }}
+	{% if events %}
+		<b>Eventos apuntados</b>
+		<ul>
+	    {% for event in events %}
+			<li>
+				{{ event.getPrettyDate('%e %B') }}<br/>
+				<a href="{{ path('event_show', { 'id': event.id, 'slug': event.slug }) }}">{{ event.title }}</a>
+			</li>
+	    {% endfor %}
+	    </ul>
+	{% endif %}
+	
 	
 {% endblock %}
 

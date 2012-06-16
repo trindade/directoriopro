@@ -1495,6 +1495,12 @@ class UserController extends Controller
     $db = $this->get('database_connection');
     $tags = $db->fetchAll($query);
 
+    // eventos
+    $events = $em->createQuery("SELECT e FROM ApplicationEventBundle:Event e, ApplicationEventBundle:EventUser eu WHERE e.id = eu.event_id AND eu.user_id = :id AND e.date_end > :date ORDER BY e.date ASC")
+        ->setParameter('id', $id)
+        ->setParameter('date', date('Y-m-d 00:00:00'))
+        ->setMaxResults(4)
+        ->getResult();
 
     return array(
       'entity'       => $entity,
@@ -1503,7 +1509,8 @@ class UserController extends Controller
       'related_users' => $related_users,
 	  'team_users' => $team_users,
       'badges' => $badges,
-      'tags' => $tags
+      'tags' => $tags,
+      'events' => $events
       );
     }
 
