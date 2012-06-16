@@ -659,6 +659,7 @@ class PostController extends Controller
 	    }
 	
 	    $entity->setFeatured($value);
+	    $entity->setDateFeatured( new \DateTime("now") );
 	    $em->persist($entity);
 	    $em->flush();
 	    

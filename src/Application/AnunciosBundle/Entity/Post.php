@@ -62,6 +62,13 @@ class Post
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
+    
+    /**
+     * @var datetime date_featured
+     *
+     * @ORM\Column(name="date_featured", type="datetime", nullable=true)
+     */
+    private $date_featured;
 
     /**
      * @var integer $featured
@@ -271,6 +278,26 @@ class Post
     public function getDate()
     {
         return $this->date;
+    }
+    
+    /**
+     * Set date_featured
+     *
+     * @param datetime $date_featured
+     */
+    public function setDateFeatured($date_featured)
+    {
+        $this->date_featured = $date_featured;
+    }
+
+    /**
+     * Get date_featured
+     *
+     * @return datetime
+     */
+    public function getDateFeatured()
+    {
+        return $this->date_featured;
     }
 
     /**
