@@ -43,7 +43,13 @@
 				<td>
 					<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a>
 				</td>
-				<td>{{ entity.interested }}</td>
+				<td>
+				{% if entity.interested %}
+					{{ entity.interested }}
+				{% else %}
+					<a href="{{ path('post_replies', { 'id': entity.id }) }}">{{ entity.interested }}</a>
+				{% endif %}
+				</td>
 				<td>{{ entity.visits }}</td>
 				<td>{{ entity.date|date('d/m/Y') }}</td>
 				<td nowrap="nowrap">

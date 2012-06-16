@@ -1,0 +1,52 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Respuestas anuncio" %}
+
+
+{% block sidebar %}
+
+	<a href="{{ path('post_dashboard') }}" class="btn">Ver tus anuncios</a>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<h1>Respuestas anuncio</h1>
+
+
+<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a>
+
+
+{% if entities %}
+
+	<div class="accordion">
+	    {% for entity in entities %}
+	    
+	    
+			<div class="accordion-group">
+			<div class="accordion-heading group_edit"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion{{ loop.index }}" href="#coll{{ loop.index }}">{{ entity.name }} {{ entity.date|date('d/m/Y') }}</a></div>
+			<div id="coll1" class="accordion-body collapse">
+				{{ entity.body }}
+			</div>
+			</div>
+	    {% endfor %}
+	</div>
+
+	
+{% else %}
+	sin resultados
+{% endif %}
+
+
+{% endblock %}
+
+
+
+{% block script_load %}
+
+	$(".accordion").collapse().css('height','auto');
+
+{% endblock %}
