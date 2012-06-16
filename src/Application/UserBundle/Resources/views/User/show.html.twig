@@ -16,7 +16,7 @@
 	{% if events %}
 		<b>Próximos eventos</b>
 	    {% for event in events %}
-			<div style="background:url('/bundles/applicationanuncios/images/calendar.png') no-repeat left top;padding-left:35px;padding-top:15px">
+			<div style="background:url('/bundles/applicationanuncios/images/calendar.png') no-repeat left top;padding-left:35px;padding-top:17px">
 				<a href="{{ path('event_show', { 'id': event.id, 'slug': event.slug }) }}">{{ event.title }}</a><br/>
 				{{ event.getPrettyDate('%e %B') }}
 			</div>
