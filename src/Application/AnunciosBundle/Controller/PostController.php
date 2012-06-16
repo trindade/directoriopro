@@ -224,7 +224,7 @@ class PostController extends Controller
           $em->flush();
 
           return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId(),
-            'slug' => $entity->getSlug()))) . '#success';
+            'slug' => $entity->getSlug())) . '#success');
 
         }
 
