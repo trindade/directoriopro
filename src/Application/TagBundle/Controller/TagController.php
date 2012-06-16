@@ -138,6 +138,9 @@ class TagController extends Controller
      */
     public function followAction()
     {
+    	return new Response('test');
+    	
+    	/*
         // usuario
 		$session = $this->getRequest()->getSession();
 		$user_id = $session->get('id');
@@ -192,6 +195,7 @@ class TagController extends Controller
 		$em->flush();
 
         return new Response($action);
+        */
     }
     
     /**
