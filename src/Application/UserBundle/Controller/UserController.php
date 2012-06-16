@@ -515,16 +515,16 @@ class UserController extends Controller
     if ( $entity->getFacebookId() ) $avatars[AVATAR_FACEBOOK] = "Facebook";
 
 
-
+    // tags
     $tags = '';
     $query = "SELECT t.* FROM Tag t, TagUser tu WHERE tu.user_id = " . $id . " AND tu.tag_id = t.id ORDER BY t.title ASC";
     $db = $this->get('database_connection');
-    $users_ref = $db->fetchAll($query);
+    $tags_aux = $db->fetchAll($query);
     	
     if( $tags_aux ){
 	    foreach( $tags_aux as $k => $tag ){
 	    	if( $k ) $tags .= ',';
-	    	$tags .= $tag->getTitle(); 
+	    	$tags .= $tag['title'];
 	    }
     }
 
