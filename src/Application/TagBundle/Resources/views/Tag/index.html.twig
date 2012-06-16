@@ -1,0 +1,26 @@
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Tags" %}
+
+
+{% block sidebar %}
+
+	
+{% endblock %}
+
+
+
+{% block content %}
+
+
+	<h1>Tags</h1>
+
+
+	
+	{% for tag in entities %} 
+		<a href="{{ path('tag_show', { 'slug': tag.slug }) }}" style="padding:5px;background:#666;color:white;margin:0 5px 5px 0">{{ tag.title }}</a>
+	{% endfor %}
+
+
+
+{% endblock %}
