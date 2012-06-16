@@ -518,7 +518,7 @@ class PostController extends Controller
           $entity->setInterested( $entity->getInterested() + 1 );
           $em->persist($entity);
           
-
+          
           // add reply
           $reply = new PostReply();
           $reply->setPostId( $id );
@@ -940,8 +940,7 @@ class PostController extends Controller
 		  return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
 	    }
 	    
-	    
-/*
+	   
 
 	    $query = $em->createQueryBuilder();
 	    $query->add('select', 'r')
@@ -949,7 +948,7 @@ class PostController extends Controller
 	       ->add('orderBy', 'r.id DESC')
 	       ->andWhere('r.post_id = :id')->setParameter('id', $id);
 	    $entities = $query->getQuery()->getResult();
-*/
+
 	    
 	    $entities = array();
 
