@@ -1491,7 +1491,6 @@ class UserController extends Controller
         
         
     // tags
-    $tags = '';
     $query = "SELECT t.* FROM Tag t, TagUser tu WHERE tu.user_id = " . $id . " AND tu.tag_id = t.id ORDER BY t.title ASC";
     $db = $this->get('database_connection');
     $tags = $db->fetchAll($query);

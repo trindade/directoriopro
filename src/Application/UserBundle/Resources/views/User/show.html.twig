@@ -211,7 +211,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 			
 			<b>Skills</b><br/><br/>
 		
-		    {% for tags in tag %}
+		    {% for tag in tags %}
 				<a href="{{ path('tag_show', { 'slug': tag.slug }) }}" style="padding:5px;background:#666;color:white;margin:0 5px 5px 0">{{ tag.title }}</a> 
 		    {% endfor %}
 		
