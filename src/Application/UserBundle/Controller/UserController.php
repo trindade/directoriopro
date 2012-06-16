@@ -525,8 +525,8 @@ class UserController extends Controller
        ->add('from', 'ApplicationTagBundle:Tag t')
        ->add('from', 'ApplicationTagBundle:TagUser tu')
        ->andWhere('tu.user_id = :id')->setParameter('id', $id)
-       ->andWhere('tu.tag_id = t.id')
-       ->add('orderBy', 't.title ASC');
+       ->andWhere('tu.tag_id = t.id');
+       //->add('orderBy', 't.title ASC');
     $tags_aux = $query->getQuery()->getResult();
 
     	
