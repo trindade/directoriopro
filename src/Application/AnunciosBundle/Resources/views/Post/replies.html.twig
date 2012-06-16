@@ -39,11 +39,11 @@ Anuncio: <a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug })
 				
 				{% if entity.getUserId() %}
 				
-					<a href="{{ path('user_show2', { 'id': entity.getUserId() }) }}">{{ entity.name }}</a> (usuario registrado)
+					<a href="mailto:{{ entity.email }}">{{ entity.email }}</a> | <a href="{{ path('user_show2', { 'id': entity.getUserId() }) }}">Perfil</a>
 				
 				{% else %}
 				
-					<a href="mailto:{{ entity.email }}">{{ entity.name }}</a> (usuario no registrado)
+					<a href="mailto:{{ entity.email }}">{{ entity.email }}</a>
 				
 				{% endif %}
 				</p>
