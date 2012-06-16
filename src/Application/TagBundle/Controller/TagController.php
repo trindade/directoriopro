@@ -169,7 +169,8 @@ class TagController extends Controller
 			
 		}else{
 
-			$em->remove($link);
+			print_r($link);
+			//$em->remove($link);
 			
 		}
 		
