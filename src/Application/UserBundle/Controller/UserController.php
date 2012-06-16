@@ -1488,6 +1488,13 @@ class UserController extends Controller
         ->setParameter('id', $id)
         ->setMaxResults(6)
         ->getResult();
+        
+        
+    // tags
+    $tags = '';
+    $query = "SELECT t.* FROM Tag t, TagUser tu WHERE tu.user_id = " . $id . " AND tu.tag_id = t.id ORDER BY t.title ASC";
+    $db = $this->get('database_connection');
+    $tags = $db->fetchAll($query);
 
 
     return array(
@@ -1496,7 +1503,8 @@ class UserController extends Controller
       'total_users' => $total_users,
       'related_users' => $related_users,
 	  'team_users' => $team_users,
-      'badges' => $badges
+      'badges' => $badges,
+      'tags' => $tags
       );
     }
 
