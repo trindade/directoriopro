@@ -182,9 +182,6 @@ class TagController extends Controller
             throw $this->createNotFoundException('Unable to find Tag entity.');
         }
 		
-		// calcular total usuarios
-		$users = $entity->getUsers();
-		
 		// existe vinculo?
 		$link = $em->getRepository('ApplicationTagBundle:TagUser')->findOneBy( array('tag_id' => $entity->getId(), 'user_id' => $user_id) );
 		
@@ -198,19 +195,28 @@ class TagController extends Controller
 				$link->setUserId( $user_id );
 				$link->setDate( new \DateTime("now") );
 		        $em->persist($link);
-		        $users++;
 			}
 			
 		}else{
 
 			$em->remove($link);
-	        $users--;
 			
 		}
-        
-        $entity->setUsers( $users );
-        $em->persist($entity);
 		
+		
+        // recalcular total
+	    $query = "SELECT COUNT(id) AS total FROM TagUser WHERE tag_id = " . $entity->getId();
+	    $db = $this->get('database_connection');
+	    $result = $db->query($query)->fetch();
+	    $total = $result['total'];
+		
+		if( $total ){
+			$entity->setUsers( $total );
+			$em->persist($entity);
+		}else{
+			$em->remove($entity);
+		}
+
 		$em->flush();
 
         return new Response($action);
