@@ -939,16 +939,18 @@ class PostController extends Controller
 		  return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
 	    }
 	    
-	    /*
+	    
+	    $em = $this->getDoctrine()->getEntityManager();
+
 	    $query = $em->createQueryBuilder();
 	    $query->add('select', 'r')
 	       ->add('from', 'ApplicationAnunciosBundle:PostReply r')
 	       ->add('orderBy', 'r.id DESC')
 	       ->andWhere('r.post_id = :id')->setParameter('id', $id);
 	    $entities = $query->getQuery()->getResult();
-	    */
+
 	    
-	    $entities = array();
+
 
         return array('entity' => $entity, 'entities' => $entities);
     }
