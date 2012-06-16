@@ -518,7 +518,7 @@ class PostController extends Controller
           $entity->setInterested( $entity->getInterested() + 1 );
           $em->persist($entity);
           
-          /*
+
           // add reply
           $reply = new PostReply();
           $reply->setPostId( $id );
@@ -528,7 +528,7 @@ class PostController extends Controller
           $reply->setEmail( $email );
           $reply->setDate( new \DateTime("now") );
           $em->persist($reply);
-          */
+
 
           $em->flush();
 
