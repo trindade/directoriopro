@@ -30,12 +30,13 @@ Anuncio: <a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug })
 	    
 			<div class="accordion-group">
 			<div class="accordion-heading group_edit"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion{{ loop.index }}" href="#coll{{ loop.index }}">{{ entity.date|date('d/m/Y') }} - {{ entity.name }}</a></div>
-			<div id="coll1" class="accordion-body collapse {% if loop.index == 1 %}in{% endif %}">
+			<div id="coll{{ loop.index }}" class="accordion-body collapse {% if loop.index == 1 %}in{% endif %}">
 			<div class="accordion-inner">
 			
 				{{ entity.body|nl2br }}
 				<br/>
 				<p align="right">
+				{{ entity.user_id }}
 				{% if entity.user_id %}
 				
 					<a href="{{ path('user_show2', { 'id': entity.user_id }) }}">{{ entity.name }}</a> (usuario registrado)
