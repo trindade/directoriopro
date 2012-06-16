@@ -99,13 +99,22 @@
 
 
 <div class="tab-pane" id="help">
-	Publicar una oferta de empleo no garantiza recibir candidatos, puede que tu oferta no resulte lo suficientemente interesante, a continuación algunos ejemplos de ofertas de empleo que han recibido más candidatos:
+	<b>¿Por qué no recibo candidatos?</b><br/>
+	Puede que tu oferta no resulte lo suficientemente interesante, a continuación algunos ejemplos de ofertas de empleo que han recibido más candidatos:
 	<br/><br/>
 	<ol>
 		{% for entity in ranking %}
 			<li><a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a> ({{ entity.interested }})</li>
 		{% endfor %}
 	</ol>
+	En cualquier momento puedes modificar la oferta o también puedes contratar el servicio para destacar la oferta.
+	
+	<br/><br/>
+	
+	<b>¿Como borrar una oferta?</b><br/>
+	En principio no se pueden borrar, pero se pueden ocultar en la pantalla principal de Administrar anuncios.
+	
+
 </div>
 
 </div>

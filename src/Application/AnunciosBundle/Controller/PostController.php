@@ -491,7 +491,8 @@ class PostController extends Controller
           $header .= "Mime-Version: 1.0 \r\n";
           $header .= "Content-Type: text/html; charset=UTF-8";
           
-
+          
+          /*
           $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
           $mensaje = 'Anuncio: <a href="' . $url . '">' . $entity->getTitle() . '</a><br/><br/>';
 
@@ -515,15 +516,14 @@ class PostController extends Controller
           
           
           
-          //$mensaje .= "Enviado el " . date('d/m/Y', time());
+          */
 
 
-
-
-
-
-
-
+          $url = $this->generateUrl('post_replies', array('id' => $entity->getId()), true);
+          $subject = 'Nuevo candidato oferta en betabeers';
+          $body = '<a href="' . $url . '">Ver mensaje</a>';
+          
+          
 
           $result = @mail($toEmail, $subject, $mensaje, $header);
 
