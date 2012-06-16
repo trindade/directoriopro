@@ -520,7 +520,7 @@ class UserController extends Controller
 
     $tags = '';
 
-    $query =  $em->createQuery('SELECT t.title FROM ApplicationTagBundle:Tag t, ApplicationTagBundle:TagUser tu WHERE tu.tag_id = t.id AND tu.user_id = :id orderBy t.title ASC')->setParameter('id', $id);
+    $query =  $em->createQuery('SELECT t.title FROM ApplicationTagBundle:Tag t, ApplicationTagBundle:TagUser tu WHERE tu.tag_id = t.id AND tu.user_id = :id ORDER BY t.title ASC')->setParameter('id', $id);
     $tags_aux = $query->getResult();
 
     	
