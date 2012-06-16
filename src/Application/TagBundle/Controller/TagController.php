@@ -10,7 +10,7 @@ use Application\TagBundle\Entity\Tag;
 use Application\TagBundle\Entity\TagUser;
 
 use Application\ApiBundle\Util\Util;
-
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Tag controller.
@@ -141,7 +141,7 @@ class TagController extends Controller
         $em->flush();
         
         //return $this->redirect( $this->generateUrl('tag') );
-        die(1);
+        return new Response('1');
     }
 
 
@@ -172,7 +172,7 @@ class TagController extends Controller
 		$users = $entity->getUsers();
 		
 		// existe vinculo?
-		$link = $em->getRepository('ApplicationTagBundle:TagUser')->find( array('tag_id'=>$entity, 'user_id' => $user_id) );
+		$link = $em->getRepository('ApplicationTagBundle:TagUser')->findOneBy( array('tag_id'=>$entity, 'user_id' => $user_id) );
 		
 		// vincular
 		if( $action == 1 ){
