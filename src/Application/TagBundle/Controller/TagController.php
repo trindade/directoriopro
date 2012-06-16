@@ -167,7 +167,7 @@ class TagController extends Controller
 			$link->setDate( new \DateTime("now") );
 	        $em->persist($link);
 			
-		}else{
+		}else if( $action == 0 && $link){
 
 			$em->remove($link);
 			
