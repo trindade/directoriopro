@@ -933,15 +933,9 @@ class PostController extends Controller
 	    $entities = $query->getQuery()->getResult();
 	    
 
-	    $query = $em->createQueryBuilder();
-	    $query->add('select', 'p')
-	       ->add('from', 'ApplicationAnunciosBundle:Post p')
-	       ->add('orderBy', 'p.interested DESC')
-	       ->setMaxResults(5);
-		       
-	    $ranking = $query->getQuery()->getResult();
 
-        return array('entities' => $entities, 'ranking' => $ranking, 'user_id' => $user_id );
+
+        return array('entities' => $entities, 'user_id' => $user_id );
     }
     
 
