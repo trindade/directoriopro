@@ -23,6 +23,9 @@
 		
 		<a class="btn btn-large btn-primary" href="{{ path('post_promote') }}?id={{ entity.id }}">Destacar oferta</a>
 		<a class="btn" href="{{ path('post_edit', { 'id': entity.id }) }}">Editar anuncio</a>
+		{% if entity.interested %}
+			<a class="btn" href="{{ path('post_replies', { 'id': entity.id }) }}">Ver candidatos ({{ entity.interested }})</a>
+		{% endif %}
 
 	{% else %}
 	
