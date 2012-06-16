@@ -14,15 +14,13 @@
 	{% endif %}
 
 	{% if events %}
-		<b>Eventos apuntados</b>
-		<ul>
+		<b>Próximos eventos</b>
 	    {% for event in events %}
-			<li>
-				{{ event.getPrettyDate('%e %B') }}<br/>
-				<a href="{{ path('event_show', { 'id': event.id, 'slug': event.slug }) }}">{{ event.title }}</a>
-			</li>
+			<div style="background:url('/bundles/applicationanuncios/images/calendar.png') no-repeat left top;padding-left:30px;padding-bottom:15px">
+				<a href="{{ path('event_show', { 'id': event.id, 'slug': event.slug }) }}">{{ event.title }}</a><br/>
+				{{ event.getPrettyDate('%e %B') }}
+			</div>
 	    {% endfor %}
-	    </ul>
 	{% endif %}
 	
 	
