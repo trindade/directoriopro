@@ -1,6 +1,6 @@
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-{% block title %}Tag {{ title entity.title }}{% endblock %}
+{% block title %}Tag {{ entity.title }}{% endblock %}
 
 
 {% block sidebar %}
@@ -13,7 +13,7 @@
 {% block content %}
 
 
-	<h1>Tag {{ title entity.title }}</h1>
+	<h1>Tag {{ entity.title }}</h1>
 
 	<b>{{ entity.users }} Usuarios</b><br/><br/>
 	
