@@ -100,7 +100,7 @@ class TagController extends Controller
         
         
         // existe vinculo
-        $link = $em->getRepository('ApplicationTagBundle:TagUser')->findOneBy( array('tag_id'=>$entity, 'user_id' => $user_id) );
+        $link = $em->getRepository('ApplicationTagBundle:TagUser')->findOneBy( array('tag_id' => $entity->getId(), 'user_id' => $user_id) );
         
         if( !$link ){
         
