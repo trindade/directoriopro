@@ -59,7 +59,7 @@ class TagController extends Controller
         // get users
         $qb = $em->createQueryBuilder();
         $qb->add('select', 'u')
-           ->add('from', 'ApplicationUserBundle:User u, ApplicationTagBundle:TagUser teu')
+           ->add('from', 'ApplicationUserBundle:User u, ApplicationTagBundle:TagUser tu')
            ->andWhere('u.id = tu.user_id')
            ->andWhere('t.id = :id')->setParameter('id', $entity->getId())
            ->add('orderBy', 'ASC');
