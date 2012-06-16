@@ -427,7 +427,7 @@ input.xlarge{width:170px}
 	
 	function onAddTag(tag){
 		
-		$.get('http://dir.betabeers.com/tag/create?title=' + tag, function(data) {
+		$.get('http://dir.betabeers.com/tag/create',{'title':tag}, function(data) {
 			alert(data);
 		});
 	
@@ -435,7 +435,7 @@ input.xlarge{width:170px}
 	
 	function onRemoveTag(tag){
 		
-		$.get('http://dir.betabeers.com/tag/link?action=0&title=' + tag, function(data) {
+		$.get('http://dir.betabeers.com/tag/follow',{'action':0, 'title': tag}, function(data) {
 			alert(data);
 		});
 	

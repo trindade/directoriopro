@@ -134,9 +134,9 @@ class TagController extends Controller
     /**
      * Tag link
      *
-     * @Route("/link", name="tag_link")
+     * @Route("/follow", name="tag_follow")
      */
-    public function linkAction()
+    public function followAction()
     {
         // usuario
 		$session = $this->getRequest()->getSession();
