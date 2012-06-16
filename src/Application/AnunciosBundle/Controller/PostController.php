@@ -486,7 +486,8 @@ class PostController extends Controller
 
           $user_id = $this->getRequest()->getSession()->get('id');
 
-          $header = 'From: ' . $name . ' <' . $email . "> \r\n";
+          //$header = 'From: ' . $name . ' <' . $email . "> \r\n";
+          $header = "From: Betabeers <contacto@betabeers.com> \r\n";
           $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
           $header .= "Mime-Version: 1.0 \r\n";
           $header .= "Content-Type: text/html; charset=UTF-8";
