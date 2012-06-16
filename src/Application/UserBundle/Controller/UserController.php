@@ -516,6 +516,21 @@ class UserController extends Controller
 
 
 
+    $query = $em->createQueryBuilder();
+    $query->add('select', 't.title')
+       ->add('from', 'ApplicationAnunciosBundle:Tag t, ApplicationAnunciosBundle:TagUser tu')
+       ->add('orderBy', 't.title ASC')
+       ->andWhere('tu.user_id = :id')->setParameter('id', $id);
+    $tags_aux = $query->getQuery()->getResult();
+    $tags = '';
+    	
+    if( $tags_aux ){
+	    foreach( $tags_aux as $k => $tag ){
+	    	if( $k ) $tags .= ',';
+	    	$tags .= $tag->getTitle(); 
+	    }
+    }
+
 
         return array(
             'entity'      => $entity,
@@ -523,7 +538,8 @@ class UserController extends Controller
       'total'     => $total,
       'avatars'     => $avatars,
       'updated'     => isset($_GET['updated']),
-      'token'     => $token
+      'token'     => $token,
+      'tags' => $tags
         );
     }
 

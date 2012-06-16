@@ -392,7 +392,7 @@ input.xlarge{width:170px}
 
 
 
-<input name="tags" id="tags" value="php,ruby on rails" />
+Tags: <input name="tags" id="tags" value="{{ tags }}" />
 
 
 
@@ -407,8 +407,7 @@ input.xlarge{width:170px}
 
 {% block load_src %}
 
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>-->
+
 
 <script src="http://xoxco.com/projects/code/tagsinput/jquery.tagsinput.js"></script>
 <link rel="stylesheet" type="text/css" href="http://xoxco.com/projects/code/tagsinput/jquery.tagsinput.css" />
@@ -428,7 +427,7 @@ input.xlarge{width:170px}
 	function onAddTag(tag){
 		
 		$.get('http://dir.betabeers.com/tag/create',{'title':tag}, function(data) {
-			alert(data);
+			//alert(data);
 		});
 	
 	}
@@ -436,7 +435,7 @@ input.xlarge{width:170px}
 	function onRemoveTag(tag){
 		
 		$.get('http://dir.betabeers.com/tag/follow',{'action':0, 'title': tag}, function(data) {
-			alert(data);
+			//alert(data);
 		});
 	
 	
