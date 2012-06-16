@@ -79,8 +79,8 @@ class TagController extends Controller
 		$user_id = $session->get('id');
 		
 		// existe tag?
-		$title = $request->request->get('title');
-		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('title'=>$title) );
+		$title = trim( $request->request->get('title') );
+		$entity = $em->getRepository('ApplicationTagBundle:Tag')->findOneBy( array('title'=>$title) );
 		
 		if( !$entity ){
 			
