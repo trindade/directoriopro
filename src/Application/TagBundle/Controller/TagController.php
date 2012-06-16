@@ -172,12 +172,12 @@ class TagController extends Controller
 		if( !$user_id ) die();
     
         $request = $this->getRequest();
-        $slug = $request->query->get('slug');
+        $title = $request->query->get('title');
         $action = $request->query->get('action');
 		
 		// existe tag?
 		$em = $this->getDoctrine()->getEntityManager();
-		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('slug'=>$slug) );
+		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('title'=>$title) );
 		if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tag entity.');
         }
