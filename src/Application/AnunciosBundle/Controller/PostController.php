@@ -925,8 +925,17 @@ class PostController extends Controller
 	       ->andWhere('p.user_id = :user_id')->setParameter('user_id', $user_id);
 		       
 	    $entities = $query->getQuery()->getResult();
+	    
 
-        return array('entities' => $entities, 'user_id' => $user_id );
+	    $query = $em->createQueryBuilder();
+	    $query->add('select', 'p')
+	       ->add('from', 'ApplicationAnunciosBundle:Post p')
+	       ->add('orderBy', 'p.interested DESC')
+	       ->setMaxResults(10);
+		       
+	    $ranking = $query->getQuery()->getResult();
+
+        return array('entities' => $entities, 'ranking' => $ranking, 'user_id' => $user_id );
     }
     
 

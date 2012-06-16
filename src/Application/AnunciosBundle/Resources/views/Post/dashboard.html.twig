@@ -20,6 +20,7 @@
 <ul class="nav nav-tabs tabs">
   <li class="active"><a href="#jobs" data-toggle="tab">Anuncios</a></li> 
   <li><a href="#widget" data-toggle="tab">Widget</a></li>
+  <li><a href="#help" data-toggle="tab">Ayuda</a></li>
 </ul>
 
 <div class="tab-content">
@@ -88,6 +89,16 @@
   	HTML para añadir este widget en tu web:<br/><br/>
 	<textarea readonly="readonly" style="width:230px;height:70px" onclick="this.select()">&lt;iframe src="http://dir.betabeers.com/post/widget?id={{ user_id }}" width="250" height="300"&gt;&lt;/iframe&gt;</textarea>
   </div>
+</div>
+
+<div class="tab-pane" id="help">
+	Publicar una oferta de empleo no garantiza recibir candidatos, puede que tu oferta no resulte interesante, a continuación algunos ejemplos de ofertas de empleo que han recibido muchos candidatos:
+	<br/><br/>
+	<ol>
+		{% for entity in ranking %}
+			<li><a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}"> ({{ entity.interested }} candidatos)</a></li>
+		{% endfor %}
+	</ol>
 </div>
 
 <br class="clear"/>
