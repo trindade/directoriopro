@@ -67,7 +67,6 @@ class TagController extends Controller
      * Creates a new Tag entity.
      *
      * @Route("/create", name="tag_create")
-     * @Method("post")
      */
     public function createAction()
     {
@@ -77,9 +76,10 @@ class TagController extends Controller
         // usuario
 		$session = $this->getRequest()->getSession();
 		$user_id = $session->get('id');
+		if( !$user_id ) return new Response('error');
 		
 		// existe tag?
-		$title = trim( $request->request->get('title') );
+		$title = trim( $request->query->get('title') );
 		$entity = $em->getRepository('ApplicationTagBundle:Tag')->findOneBy( array('title'=>$title) );
 		
 		if( !$entity ){
@@ -169,7 +169,7 @@ class TagController extends Controller
         // usuario
 		$session = $this->getRequest()->getSession();
 		$user_id = $session->get('id');
-		if( !$user_id ) die();
+		if( !$user_id ) return new Response('error');
     
         $request = $this->getRequest();
         $title = $request->query->get('title');
