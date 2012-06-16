@@ -351,7 +351,7 @@ input.xlarge{width:170px}
 	
 	<div class="tab-pane" id="tags">
 		Introduce tags que definan tus capacidades, por ejemplo: PHP, ruby on rails, python, symfony, seo, social media:<br/><br/>
-		<input name="tags" id="tags" value="{{ tags }}" />
+		<input name="tags" id="txt_tags" value="{{ tags }}" />
 	</div>
 	
 	</div>
@@ -425,7 +425,7 @@ input.xlarge{width:170px}
 {% block script_load %}
 	
 	
-	$('#tags').tagsInput({
+	$('#txt_tags').tagsInput({
 		autocomplete_url:'http://dir.betabeers.com/tag/autocomplete',
 		onAddTag:onAddTag,
 		onRemoveTag:onRemoveTag,
