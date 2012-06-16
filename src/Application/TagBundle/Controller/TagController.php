@@ -226,14 +226,13 @@ class TagController extends Controller
     public function autocompleteAction()
     {
 	    $request = $this->getRequest();
-	    $q = $request->query->get('q');
-	    $callback = $request->query->get('callback');
+	    $q = $request->query->get('term');
 	
 	    $em = $this->getDoctrine()->getEntityManager();
-	    $query = $em->createQuery("SELECT t.id, t.title, t.users FROM ApplicationTagBundle:Tag t WHERE t.title LIKE '" . addslashes( $q ) . "%' ORDER BY t.users DESC, t.title ASC");
+	    $query = $em->createQuery("SELECT t.id, t.title AS label, t.title AS value FROM ApplicationTagBundle:Tag t WHERE t.title LIKE '" . addslashes( $q ) . "%' ORDER BY t.users DESC, t.title ASC");
 	    $results = $query->setMaxResults(5)->getResult();
 	
-	    return array('callback' => $callback, 'result' => json_encode(array('results' => $results)));
+	    return array('result' => json_encode(array('results' => $results)));
 	}
 
 }
