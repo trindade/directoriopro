@@ -232,7 +232,7 @@ class TagController extends Controller
 	    $query = $em->createQuery("SELECT t.id, t.title AS label, t.title AS value FROM ApplicationTagBundle:Tag t WHERE t.title LIKE '" . addslashes( $q ) . "%' ORDER BY t.users DESC, t.title ASC");
 	    $results = $query->setMaxResults(5)->getResult();
 	
-	    return array('result' => json_encode(array('results' => $results)));
+	    return array('result' => json_encode($results));
 	}
 
 }
