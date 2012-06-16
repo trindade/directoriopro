@@ -518,13 +518,15 @@ class UserController extends Controller
 
 
 
+    $tags = '';
+    /*
     $query = $em->createQueryBuilder();
     $query->add('select', 't.title')
        ->add('from', 'ApplicationTagBundle:Tag t, ApplicationTagBundle:TagUser tu')
        ->add('orderBy', 't.title ASC')
        ->andWhere('tu.user_id = :id')->setParameter('id', $id);
     $tags_aux = $query->getQuery()->getResult();
-    $tags = '';
+
     	
     if( $tags_aux ){
 	    foreach( $tags_aux as $k => $tag ){
@@ -532,7 +534,7 @@ class UserController extends Controller
 	    	$tags .= $tag->getTitle(); 
 	    }
     }
-
+*/
 
         return array(
             'entity'      => $entity,
