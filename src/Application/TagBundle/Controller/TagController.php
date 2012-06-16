@@ -130,34 +130,6 @@ class TagController extends Controller
         return new Response('1');
     }
 
-    /**
-     * Deletes a Tag entity.
-     *
-     * @Route("/{id}/delete", name="tag_delete")
-     */
-    public function deleteAction($id)
-    {
-    
-        $session = $this->getRequest()->getSession();
-        $admin = $session->get('admin');
-        
-        // es admin?
-        if( !$admin ) return $this->redirect('/');
-    
-        // existe?
-		$em = $this->getDoctrine()->getEntityManager();
-		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find($id);
-		if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
-        }
-		
-        $em->remove($entity);
-        $em->flush();
-        
-        //return $this->redirect( $this->generateUrl('tag') );
-        return new Response('1');
-    }
-
 
     /**
      * Tag link
@@ -222,6 +194,49 @@ class TagController extends Controller
         return new Response($action);
     }
     
+    /**
+     * Deletes a Tag entity.
+     *
+     * @Route("/{id}/delete", name="tag_delete")
+     */
+    public function deleteAction($id)
+    {
+    
+        $session = $this->getRequest()->getSession();
+        $admin = $session->get('admin');
+        
+        // es admin?
+        if( !$admin ) return $this->redirect('/');
+    
+        // existe?
+		$em = $this->getDoctrine()->getEntityManager();
+		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find($id);
+		if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Post entity.');
+        }
+		
+        $em->remove($entity);
+
+        
+        
+        // eliminar resultados
+          // borrar respuestas
+          $query = $em->createQueryBuilder();
+          $query->add('select', 'u')
+             ->add('from', 'ApplicationTagBundle:TagUser u')
+             ->andWhere('u.tag_id = :id')->setParameter('id', $id)
+             ->add('orderBy', 'u.id ASC');
+          $replies = $query->getQuery()->getResult();
+
+          foreach( $replies as $reply ){
+              $em->remove($reply);
+          }
+        
+        $em->flush();
+        
+        //return $this->redirect( $this->generateUrl('tag') );
+        return new Response('1');
+    }
     
     /**
      * autocomplete
