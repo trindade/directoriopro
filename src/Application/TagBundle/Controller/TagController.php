@@ -149,7 +149,7 @@ class TagController extends Controller
 		
 		// existe tag?
 		$em = $this->getDoctrine()->getEntityManager();
-		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('title'=>$title) );
+		$entity = $em->getRepository('ApplicationTagBundle:Tag')->findOneBy( array('title'=>$title) );
 		if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tag entity.');
         }
@@ -169,14 +169,11 @@ class TagController extends Controller
 			
 		}else{
 
-			print_r($link);
-			//$em->remove($link);
+			$em->remove($link);
 			
 		}
 		
-    	return new Response('test');
-    	
-    	/*
+
 		
         // recalcular total
 	    $query = "SELECT COUNT(id) AS total FROM TagUser WHERE tag_id = " . $entity->getId();
@@ -194,7 +191,7 @@ class TagController extends Controller
 		$em->flush();
 
         return new Response($action);
-        */
+
     }
     
     /**
