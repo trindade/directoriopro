@@ -519,13 +519,9 @@ class UserController extends Controller
 
 
     $tags = '';
-    /*
-    $query = $em->createQueryBuilder();
-    $query->add('select', 't.title')
-       ->add('from', 'ApplicationTagBundle:Tag t, ApplicationTagBundle:TagUser tu')
-       ->add('orderBy', 't.title ASC')
-       ->andWhere('tu.user_id = :id')->setParameter('id', $id);
-    $tags_aux = $query->getQuery()->getResult();
+
+    $query =  $em->createQuery('SELECT t.title FROM ApplicationTagBundle:Tag t, ApplicationTagBundle:TagUser tu WHERE tu.tag_id = t.id AND tu.user_id = :id orderBy t.title ASC')->setParameter('id', $id);
+    $tags_aux = $query->getResult();
 
     	
     if( $tags_aux ){
@@ -534,7 +530,7 @@ class UserController extends Controller
 	    	$tags .= $tag->getTitle(); 
 	    }
     }
-*/
+
 
         return array(
             'entity'      => $entity,
