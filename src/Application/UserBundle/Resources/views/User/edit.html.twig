@@ -369,6 +369,17 @@ input.xlarge{width:170px}
 	
 
 	{{ form_row(edit_form._token) }}
+	
+	
+	
+	
+
+
+
+
+
+
+
 
 </form>
 
@@ -380,8 +391,19 @@ input.xlarge{width:170px}
 
 
 
+{% block load_src %}
+
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>-->
+
+<script src="http://xoxco.com/projects/code/tagsinput/jquery.tagsinput.js"></script>
+<link rel="stylesheet" type="text/css" href="http://xoxco.com/projects/code/tagsinput/jquery.tagsinput.css" />
+
+{% endblock %}
 
 
+
+<input name="tags" id="tags" value="foo,bar,baz" />
 
 
 
@@ -406,6 +428,34 @@ input.xlarge{width:170px}
 
 
 {% block script_load %}
+	
+	
+	$('#tags').tagsInput({
+		autocomplete_url:'http://dir.betabeers.com/tag/autocomplete',
+		onAddTag:onAddTag,
+		onRemoveTag:onRemoveTag,
+	});
+	
+	function onAddTag(tag){
+		
+		$.get('http://dir.betabeers.com/tag/create?title=' + tag, function(data) {
+			alert(data);
+		});
+	
+	}
+	
+	function onRemoveTag(tag){
+		
+		$.get('http://dir.betabeers.com/tag/link?action=0&title=' + tag, function(data) {
+			alert(data);
+		});
+	
+	
+	}
+	
+
+
+
 
 
 	$('#application_userbundle_usertype_body')
