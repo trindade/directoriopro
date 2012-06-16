@@ -949,8 +949,6 @@ class PostController extends Controller
 	       ->andWhere('r.post_id = :id')->setParameter('id', $id);
 	    $entities = $query->getQuery()->getResult();
 
-	    
-	    $entities = array();
 
         return array('entity' => $entity, 'entities' => $entities);
     }
