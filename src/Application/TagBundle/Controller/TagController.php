@@ -50,16 +50,28 @@ class TagController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('slug'=>$slug) );
+        $entity = $em->getRepository('ApplicationTagBundle:Tag')->findOneBy( array('slug'=>$slug) );
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tag entity.');
         }
         
         // get users
+        $qb = $em->createQueryBuilder();
+        $qb->add('select', 'u')
+           ->add('from', 'ApplicationUserBundle:User u, ApplicationTagBundle:TagUser teu')
+           ->andWhere('u.id = tu.user_id')
+           ->andWhere('t.id = :id')->setParameter('id', $entity->getId())
+           ->add('orderBy', 'ASC');
+        $query = $qb->getQuery();
+        $users = $query->getResult();
+        
+        
+        
 
         return array(
-            'entity' => $entity
+            'entity' => $entity,
+            'users' => $users
 		);
     }
 

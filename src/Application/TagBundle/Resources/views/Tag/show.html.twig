@@ -13,8 +13,14 @@
 {% block content %}
 
 
-	tag: {{ title entity.title }}<br/>
-	usuarios: {{ entity.users }}
+	<h1>Tag {{ title entity.title }}</h1>
+
+	<b>{{ entity.users }} Usuarios</b><br/><br/>
+	
+	{% for user in users %} 
+		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}" style="float:left;margin:0 10px 10px 0;width:240px"><img src="/bundles/applicationanuncios/images/search{% if user.searchteam != 1 %}2{% endif %}.png" width="13" height="13" align="absmiddle"/><img src="/bundles/applicationanuncios/images/freelance{% if user.freelance != 1 %}2{% endif %}.png" width="13" height="13" align="absmiddle"/><img src="/bundles/applicationanuncios/images/trabajo{% if user.unemployed != 1 %}2{% endif %}.png" width="13" height="13" align="absmiddle"/> <img src="{{ user.getAvatar('normal') }}" width="24" height="24" style="width:24px;height:24px" align="absmiddle"/> {{ user.getName()|truncate(21) }}</a>
+	{% endfor %}
+
 
 
 {% endblock %}
