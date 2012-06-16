@@ -173,7 +173,7 @@ class TagController extends Controller
 			
 		}
 		
-
+		$em->flush();
 		
         // recalcular total
 	    $query = "SELECT COUNT(id) AS total FROM TagUser WHERE tag_id = " . $entity->getId();
