@@ -692,30 +692,34 @@ class PostController extends Controller
 	    $session = $this->getRequest()->getSession();
 	    $user_id = $session->get('id');
 	    
-	    if ( $entity->getUserId() != $user_id  ) {
-	      return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
+	    if ( $entity->getUserId() == $user_id || $session->get('admin') ) {
+	    
+	    
+	    
+	        $entity->setVisible($value);
+	        $em->persist($entity);
+	        $em->flush();
+	        
+	        
+		    if( isset( $_SERVER['HTTP_REFERER'] ) ){
+		    	$url = $_SERVER['HTTP_REFERER'];
+		    }else{
+		    
+		    	if( $session->get('admin') ){
+		    		$url = $this->generateUrl('post_admin');
+		    	}else{
+			    	$url = $this->generateUrl('post_dashboard');
+			    }
+		    }
+	
+	        return $this->redirect( $url );
+	    
 	      
-	    }else if( !$session->get('admin') ){
+	    }else{
 		  return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
 	    }
 
-        $entity->setVisible($value);
-        $em->persist($entity);
-        $em->flush();
-        
-        
-	    if( isset( $_SERVER['HTTP_REFERER'] ) ){
-	    	$url = $_SERVER['HTTP_REFERER'];
-	    }else{
-	    
-	    	if( $session->get('admin') ){
-	    		$url = $this->generateUrl('post_admin');
-	    	}else{
-		    	$url = $this->generateUrl('post_dashboard');
-		    }
-	    }
 
-        return $this->redirect( $url );
     }
 
     /**
@@ -959,24 +963,28 @@ class PostController extends Controller
 	    $session = $this->getRequest()->getSession();
 	    $user_id = $session->get('id');
 	    
-	    if ( $entity->getUserId() != $user_id  ) {
-	      return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
+	    if ( $entity->getUserId() == $user_id || $session->get('admin') ) {
+	    
+	    
+		    $query = $em->createQueryBuilder();
+		    $query->add('select', 'r')
+		       ->add('from', 'ApplicationAnunciosBundle:PostReply r')
+		       ->add('orderBy', 'r.id DESC')
+		       ->andWhere('r.post_id = :id')->setParameter('id', $id);
+		    $entities = $query->getQuery()->getResult();
+	
+	
+	        return array('entity' => $entity, 'entities' => $entities);
+	    
+
 	      
-	    }else if( !$session->get('admin') ){
+	    }else{
 		  return $this->redirect($this->generateUrl('user_welcome', array('back' => $_SERVER['REQUEST_URI'])));
 	    }
 	    
 	   
 
-	    $query = $em->createQueryBuilder();
-	    $query->add('select', 'r')
-	       ->add('from', 'ApplicationAnunciosBundle:PostReply r')
-	       ->add('orderBy', 'r.id DESC')
-	       ->andWhere('r.post_id = :id')->setParameter('id', $id);
-	    $entities = $query->getQuery()->getResult();
 
-
-        return array('entity' => $entity, 'entities' => $entities);
     }
 
     
