@@ -921,7 +921,6 @@ class PostController extends Controller
     public function repliesAction($id)
     {
     
-    	/*
 	    // existe post?
 	    $em = $this->getDoctrine()->getEntityManager();
         $entity = $em->getRepository('ApplicationAnunciosBundle:Post')->find($id);
@@ -947,7 +946,7 @@ class PostController extends Controller
 	       ->add('orderBy', 'r.id DESC')
 	       ->andWhere('r.post_id = :id')->setParameter('id', $id);
 	    $entities = $query->getQuery()->getResult();
-	    */
+
         return array('entity' => $entity, 'entities' => $entities);
     }
 
