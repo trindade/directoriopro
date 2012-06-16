@@ -172,12 +172,12 @@ class TagController extends Controller
 		if( !$user_id ) die();
     
         $request = $this->getRequest();
-        $tag_id = $request->query->get('tag_id');
+        $slug = $request->query->get('slug');
         $action = $request->query->get('action');
 		
 		// existe tag?
 		$em = $this->getDoctrine()->getEntityManager();
-		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('slug'=>$id) );
+		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find( array('slug'=>$slug) );
 		if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tag entity.');
         }
@@ -186,7 +186,7 @@ class TagController extends Controller
 		$users = $entity->getUsers();
 		
 		// existe vinculo?
-		$link = $em->getRepository('ApplicationTagBundle:TagUser')->findOneBy( array('tag_id'=>$entity, 'user_id' => $user_id) );
+		$link = $em->getRepository('ApplicationTagBundle:TagUser')->findOneBy( array('tag_id' => $entity->getId(), 'user_id' => $user_id) );
 		
 		// vincular
 		if( $action == 1 ){
@@ -213,7 +213,7 @@ class TagController extends Controller
 		
 		$em->flush();
 
-        die($action);
+        return new Response($action);
     }
     
     
