@@ -27,7 +27,7 @@ class PostRepository extends EntityRepository
         $query->add('select', 'p')
            ->add('from', 'ApplicationAnunciosBundle:Post p')
            ->add('where', 'p.visible = 1')
-           ->add('orderBy', 'p.featured DESC, p.id DESC');
+           ->add('orderBy', 'p.featured DESC, p.date_featured ASC, p.id DESC');
 
         // categoria?
         if ( $category_id ) {
