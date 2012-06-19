@@ -516,7 +516,6 @@ class PostController extends Controller
           $reply->setPostId( $id );
           $reply->setUserId( $user_id );
           $reply->setBody( $body );
-          $reply->setLinkedin( $body );
           $reply->setName( $name );
           $reply->setEmail( $email );
           $reply->setDate( new \DateTime("now") );          
