@@ -498,7 +498,7 @@ class PostController extends Controller
           $mensaje = $name . ' se ha interesado por la oferta <a href="' . $url . '">Ver mensaje</a>';
 
           require __DIR__ . '/../../../../app/config/mailjet.php';
-          $mail = mailing($toEmail, $subject, $mensaje);
+          $result = mailing($toEmail, $subject, $mensaje);
 
 
 
