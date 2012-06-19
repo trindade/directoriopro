@@ -89,16 +89,8 @@ class ForumController extends Controller
       $forums = $em->getRepository('ApplicationForumBundle:Forum')->findAll();
 
 
-      if ( $filter == 'latest' ) {
-        $date = new \DateTime("-1 week");
-        $query = "SELECT u.*, COUNT(t.id) AS total FROM Thread t, User u WHERE t.user_id = u.id AND t.date > '" . $date->format('Y-m-d H:i:s') . "' GROUP BY t.user_id ORDER BY total DESC LIMIT 10";
-        $db = $this->get('database_connection');
-        $users_ref = $db->fetchAll($query);
-    }else{
-        $users_ref = array();
-    }
 
-        return array('pager' => $html, 'entities' => $entities, 'forums' => $forums, 'filter' => $filter, 'users_ref' => $users_ref );
+        return array('pager' => $html, 'entities' => $entities, 'forums' => $forums, 'filter' => $filter );
 
 
     }
