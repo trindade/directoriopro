@@ -550,31 +550,38 @@ class UserController extends Controller
     {
       $request = $this->getRequest();
       $search = strip_tags( $request->query->get('q') );
+      
+      if( $search ){
 
-      $em = $this->getDoctrine()->getEntityManager();
-
-      $qb = $em->createQueryBuilder()
-         ->add('select', 'u')
-         ->add('from', 'ApplicationUserBundle:User u')
-         ->add('orderBy', 'u.id DESC');
-
-      if( strpos( $search, '@' ) > 1 ){
-        $qb->add('where', "u.email = :search")->setParameter('search', $search);
-
-      }else if( $search[0] == '@' ){
-        $qb->add('where', "u.twitter_url = :search")->setParameter('search', str_replace( '@', '', $search ) );
-
+	      $em = $this->getDoctrine()->getEntityManager();
+	
+	      $qb = $em->createQueryBuilder()
+	         ->add('select', 'u')
+	         ->add('from', 'ApplicationUserBundle:User u')
+	         ->add('orderBy', 'u.id DESC');
+	
+	      if( strpos( $search, '@' ) > 1 ){
+	        $qb->add('where', "u.email = :search")->setParameter('search', $search);
+	
+	      }else if( $search[0] == '@' ){
+	        $qb->add('where', "u.twitter_url = :search")->setParameter('search', str_replace( '@', '', $search ) );
+	
+	      }else{
+	        $qb->add('where', "u.name like '%".$search."%' or u.body like '%".$search."%'");
+	      }
+	
+	      $query = $qb->getQuery();
+	      $entities = $query->getResult();
+	
+	      if( count( $entities ) == 1 ){
+	        $user = $entities[0];
+	        $url = $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()));
+	        return $this->redirect( $url );
+	      }
+      
       }else{
-        $qb->add('where', "u.name like '%".$search."%' or u.body like '%".$search."%'");
-      }
-
-      $query = $qb->getQuery();
-      $entities = $query->getResult();
-
-      if( count( $entities ) == 1 ){
-        $user = $entities[0];
-        $url = $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()));
-        return $this->redirect( $url );
+	      $entities = $search = false;
+	      
       }
 
       return array('entities' => $entities, 'search' => $search);
