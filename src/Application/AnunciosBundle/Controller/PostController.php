@@ -1057,7 +1057,7 @@ class PostController extends Controller
 
 
         $session = $this->getRequest()->getSession();
-        $contact = new \Application\UserBundle\Entity\Contact;
+        $contact = new \Application\AnunciosBundle\Entity\Contact;
         $id = $session->get('id');
         if ( $id ) {
           $user_login = $em->getRepository('ApplicationUserBundle:User')->find($id);
