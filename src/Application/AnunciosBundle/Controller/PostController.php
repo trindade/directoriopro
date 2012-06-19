@@ -11,7 +11,7 @@ use Application\AnunciosBundle\Entity\PostReply;
 use Application\UserBundle\Entity\User;
 use Application\UserBundle\Entity\Contact;
 use Application\AnunciosBundle\Form\PostType;
-use Application\UserBundle\Form\ContactType;
+use Application\AnunciosBundle\Form\ContactType;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -1087,6 +1087,7 @@ class PostController extends Controller
           $user_login = $em->getRepository('ApplicationUserBundle:User')->find($id);
           $contact->setName( $user_login->getName() );
           $contact->setEmail( $user_login->getEmail() );
+          $contact->setLinkedin( 'http://linkedin.com/in/' . $user_login->getLinkedinUrl() );
         }
         $contact->setSubject( "RE: " . $entity->getTitle() );
         $contact_form = $this->createForm(new ContactType(), $contact);
