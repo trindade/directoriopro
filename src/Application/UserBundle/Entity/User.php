@@ -88,6 +88,20 @@ class User
      * @ORM\Column(name="body", type="text", nullable=true)
      */
     private $body;
+    
+    /**
+     * @var text $portafolio
+     *
+     * @ORM\Column(name="portafolio", type="text", nullable=true)
+     */
+    private $portafolio;
+    
+    /**
+     * @var text $lookingfor
+     *
+     * @ORM\Column(name="lookingfor", type="text", nullable=true)
+     */
+    private $lookingfor;
 
     /**
      * @var string $location
@@ -529,6 +543,46 @@ class User
     public function getBody()
     {
         return $this->body;
+    }
+    
+    /**
+     * Set portafolio
+     *
+     * @param text $portafolio
+     */
+    public function setPortafolio($portafolio)
+    {
+        $this->portafolio = $portafolio;
+    }
+
+    /**
+     * Get portafolio
+     *
+     * @return text
+     */
+    public function getPortafolio()
+    {
+        return $this->portafolio;
+    }
+    
+    /**
+     * Set lookingfor
+     *
+     * @param text $lookingfor
+     */
+    public function setLookingfor($lookingfor)
+    {
+        $this->lookingfor = $lookingfor;
+    }
+
+    /**
+     * Get lookingfor
+     *
+     * @return text
+     */
+    public function getLookingfor()
+    {
+        return $this->lookingfor;
     }
 
     /**

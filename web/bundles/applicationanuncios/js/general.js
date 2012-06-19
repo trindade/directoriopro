@@ -153,7 +153,7 @@ function get_github(){
 				}
 			},
 			type: 'GET',
-			url: 'https://github.com/api/v2/json/repos/show/' + github_user
+			url: 'https://api.github.com/users/' + github_user + '/repos'
 		});
 	}
 }

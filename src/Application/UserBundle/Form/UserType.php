@@ -15,6 +15,8 @@ class UserType extends AbstractType
             ->add('phone')
             ->add('name')
             ->add('body')
+            ->add('portafolio')
+            ->add('lookingfor')
             ->add('location')
             ->add('freelance')
             ->add('url')
