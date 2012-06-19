@@ -39,7 +39,7 @@
 			<div id="coll{{ loop.index }}" class="accordion-body collapse">
 			<div class="accordion-inner">
 			
-				{{ entity.body|nl2br }}
+				{{ entity.body|raw|nl2br }}
 				<br/>
 				<p align="right">
 				
