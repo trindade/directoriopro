@@ -650,22 +650,29 @@ class EventController extends Controller
      */
     public function searchAction()
     {
+	    $em = $this->getDoctrine()->getEntityManager();
         $request = $this->getRequest();
         $search = strip_tags( $request->query->get('q') );
+        
+        if( $search ){
 
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $qb = $em->createQueryBuilder();
-        $qb->add('select', 'e')
-           ->add('from', 'ApplicationEventBundle:Event e')
-           //->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
-           ->add('orderBy', 'e.featured DESC, e.date_start DESC');
-
-        if ( $search ) $qb->andWhere("( e.body LIKE '%".$search."%' OR e.title LIKE '%".$search."%' OR e.hashtag LIKE '%".$search."%' )");
-
-        $entities = $qb->getQuery()->getResult();
-
-
+	        
+	        $qb = $em->createQueryBuilder();
+	        $qb->add('select', 'e')
+	           ->add('from', 'ApplicationEventBundle:Event e')
+	           //->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
+	           ->add('orderBy', 'e.featured DESC, e.date_start DESC');
+	
+	        if ( $search ) $qb->andWhere("( e.body LIKE '%".$search."%' OR e.title LIKE '%".$search."%' OR e.hashtag LIKE '%".$search."%' )");
+	
+	        $entities = $qb->getQuery()->getResult();
+	                
+        }else{
+	        
+	        $entities = $search = false;
+	        
+        }
+    
         $qb = $em->createQueryBuilder();
         $qb->add('select', 'COUNT(e.id) AS total, c.name, c.id')
            ->add('from', 'ApplicationEventBundle:Event e, ApplicationCityBundle:City c')
