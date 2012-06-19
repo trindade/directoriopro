@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\UserBundle\Entity;
+namespace Application\AnunciosBundle\Entity;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
