@@ -486,52 +486,25 @@ class PostController extends Controller
 
           $user_id = $this->getRequest()->getSession()->get('id');
 
-          //$header = 'From: ' . $name . ' <' . $email . "> \r\n";
-          $header = "From: Betabeers <contacto@betabeers.com> \r\n";
-          $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
-          $header .= "Mime-Version: 1.0 \r\n";
-          $header .= "Content-Type: text/html; charset=UTF-8";
+
           
           
 
-          
-          /*
-          $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
-          $mensaje = 'Anuncio: <a href="' . $url . '">' . $entity->getTitle() . '</a><br/><br/>';
-
-
-          $mensaje .= 'Enviado por ';
-
-          // get perfil usuario
-          
-          if( $user_id ){
-          	$user = $em->getRepository('ApplicationUserBundle:User')->find( $user_id );
-          	$url = $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()), true);
-          	$mensaje .= '<a href="' . $url . '">' . $name . '</a>';
-          }else{
-          	$mensaje .= $name;
-          }
-
-
-
-          $mensaje .= ' (' . $email . ')<br/><br/>';
-          $mensaje .= nl2br( $body );
-          
-          
-          
-          */
+         
 
 
           $url = $this->generateUrl('post_replies', array('id' => $entity->getId()), true);
           $subject = 'Nuevo candidato oferta en betabeers';
           $mensaje = $name . ' se ha interesado por la oferta <a href="' . $url . '">Ver mensaje</a>';
           
-          
 
-          $result = @mail($toEmail, $subject, $mensaje, $header);
+          require __DIR__ . '/../../../../app/config/mailjet.php';
+          $mail = mailing($emails, $mensaje);
 
-          // backup
-          @mail("gafeman@gmail.com", $subject, $mensaje, $header);
+
+
+
+
 
 
           // contabilizar contacto
