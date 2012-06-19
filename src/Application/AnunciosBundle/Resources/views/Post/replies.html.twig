@@ -35,7 +35,7 @@
 	    
 	    
 			<div class="accordion-group">
-			<div class="accordion-heading group_edit"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll{{ loop.index }}">{{ entity.date|date('d/m/Y') }} - {{ entity.name }}</a></div>
+			<div class="accordion-heading group_edit"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll{{ loop.index }}">{{ entity.date|date('d/m/Y H:i') }} - {{ entity.name }}</a></div>
 			<div id="coll{{ loop.index }}" class="accordion-body collapse">
 			<div class="accordion-inner">
 			
