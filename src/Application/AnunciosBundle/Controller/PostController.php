@@ -1089,7 +1089,7 @@ class PostController extends Controller
           $contact->setEmail( $user_login->getEmail() );
           $contact->setLinkedin( 'http://linkedin.com/in/' . $user_login->getLinkedinUrl() );
         }
-        $contact->setSubject( "RE: " . $entity->getTitle() );
+        //$contact->setSubject( "RE: " . $entity->getTitle() );
         $contact_form = $this->createForm(new ContactType(), $contact);
         $contact_form_html = $contact_form->createView();
 
