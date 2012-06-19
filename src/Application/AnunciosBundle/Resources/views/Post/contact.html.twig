@@ -22,7 +22,12 @@
 		{{ form_row(form._token) }}
 		{{ form_row(form.name, { 'label': 'Nombre' }) }}
         {{ form_row(form.email, { 'label': 'Email' }) }}
-        {{ form_row(form.subject, { 'label': 'Asunto' }) }}
+        {{ form_row(form.linkedin, { 'label': 'URL Linkedin' }) }}
+        
+		<div class="control-group">
+		   <div class="control-label"></div><div class="controls">Ejemplo: http://linkedin.com/in/miquelcamps</div>
+		</div>
+        
         {{ form_row(form.body, { 'label': 'Mensaje' }) }}
 
 
