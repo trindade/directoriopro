@@ -55,6 +55,13 @@ class PostReply
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
+    
+    /**
+     * @var string $linkedin
+     *
+     * @ORM\Column(name="linkedin", type="string", length=255, nullable=true)
+     */
+    private $linkedin;
 
     /**
      * @var datetime $date
@@ -171,6 +178,26 @@ class PostReply
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set linkedin
+     *
+     * @param string $linkedin
+     */
+    public function setLinkedin($linkedin)
+    {
+        $this->linkedin = $linkedin;
+    }
+
+    /**
+     * Get linkedin
+     *
+     * @return string
+     */
+    public function getLinkedin()
+    {
+        return $this->linkedin;
     }
 
     /**

@@ -493,10 +493,7 @@ class PostController extends Controller
           $header .= "Content-Type: text/html; charset=UTF-8";
           
           
-          if( $linkedin && !$user_id ){
-	          
-	          $body .= "\n\n" . '<a href="' . $linkedin . '" target="_blank">Linkedin</a>';
-          }
+
           
           /*
           $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
@@ -547,9 +544,13 @@ class PostController extends Controller
           $reply->setPostId( $id );
           $reply->setUserId( $user_id );
           $reply->setBody( $body );
+          $reply->setLinkedin( $body );
           $reply->setName( $name );
           $reply->setEmail( $email );
           $reply->setDate( new \DateTime("now") );
+          
+          if( $linkedin && !$user_id ) $reply->setLinkedin( $linkedin );
+          
           $em->persist($reply);
 
 
