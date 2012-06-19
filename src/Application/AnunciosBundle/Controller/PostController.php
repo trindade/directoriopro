@@ -496,10 +496,10 @@ class PostController extends Controller
           $url = $this->generateUrl('post_replies', array('id' => $entity->getId()), true);
           $subject = 'Nuevo candidato oferta en betabeers';
           $mensaje = $name . ' se ha interesado por la oferta <a href="' . $url . '">Ver mensaje</a>';
-
+          $emails = $toEmail;
 
           require __DIR__ . '/../../../../app/config/mailjet.php';
-          $mail = mailing($toEmail, $subject, $mensaje);
+
 
 
 
