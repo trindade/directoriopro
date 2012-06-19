@@ -495,7 +495,7 @@ class PostController extends Controller
           
           if( $linkedin && !$user_id ){
 	          
-	          $body .= "\n\n" . '<a href="http://linkedin.com/in/' . $linkedin . '" target="_blank">Linkedin</a>';
+	          $body .= "\n\n" . '<a href="' . $linkedin . '" target="_blank">Linkedin</a>';
           }
           
           /*
