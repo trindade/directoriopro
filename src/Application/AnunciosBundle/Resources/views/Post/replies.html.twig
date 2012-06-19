@@ -52,6 +52,13 @@
 					<a href="mailto:{{ entity.email }}">{{ entity.email }}</a>
 				
 				{% endif %}
+				
+				
+				{% if entity.getLinkedinUrl() %}
+				 | <a href="http://linkedin.com/in/{{ entity.getLinkedinUrl() }}" target="_blank">Linkedin</a>
+				{% endif %}
+				
+				
 				</p>
 			</div>
 			</div>

@@ -547,10 +547,8 @@ class PostController extends Controller
           $reply->setLinkedin( $body );
           $reply->setName( $name );
           $reply->setEmail( $email );
-          $reply->setDate( new \DateTime("now") );
-          
-          if( $linkedin && !$user_id ) $reply->setLinkedin( $linkedin );
-          
+          $reply->setDate( new \DateTime("now") );          
+          $reply->setLinkedin( $linkedin );
           $em->persist($reply);
 
 
