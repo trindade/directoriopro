@@ -84,14 +84,14 @@ class UserController extends Controller
     $html = $view->render($pagerfanta, $routeGenerator, array('category_id' => (int)$category_id));
 
 
-    $date = new \DateTime("-1 week");
-    $query = "SELECT u.*, (SELECT COUNT(*) FROM User u2 WHERE u2.ref_id = u.id AND u2.date > '" . $date->format('Y-m-d H:i:s') . "') AS total FROM User u GROUP BY u.id HAVING total > 0 ORDER BY total DESC LIMIT 10";
-    $db = $this->get('database_connection');
-        $users_ref = $db->fetchAll($query);
+    //$date = new \DateTime("-1 week");
+    //$query = "SELECT u.*, (SELECT COUNT(*) FROM User u2 WHERE u2.ref_id = u.id AND u2.date > '" . $date->format('Y-m-d H:i:s') . "') AS total FROM User u GROUP BY u.id HAVING total > 0 ORDER BY total DESC LIMIT 10";
+    //$db = $this->get('database_connection');
+    //    $users_ref = $db->fetchAll($query);
 
 
 
-        return array('category_id' => $category_id, 'entities' => $entities, 'pager' => $html, 'nav_user' => 1, 'users_ref' => $users_ref);
+        return array('category_id' => $category_id, 'entities' => $entities, 'pager' => $html, 'nav_user' => 1);//, 'users_ref' => $users_ref
 
     }
 
