@@ -493,6 +493,11 @@ class PostController extends Controller
           $header .= "Content-Type: text/html; charset=UTF-8";
           
           
+          if( $linkedin && !$user_id ){
+	          
+	          $mensaje .= '<br/><br/><a href="http://linkedin.com/in/' . $linkedin . '" target="_blank">Linkedin</a>';
+          }
+          
           /*
           $url = $this->generateUrl('post_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug()), true);
           $mensaje = 'Anuncio: <a href="' . $url . '">' . $entity->getTitle() . '</a><br/><br/>';
