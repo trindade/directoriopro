@@ -212,14 +212,14 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 		
 		
 		{% if entity.portafolio %}
-			<b>Portafolio</a><br/><br/>
-			{{ entity.body|nl2br}}
+			<b>Portafolio</b><br/><br/>
+			{{ entity.portafolio|nl2br}}
 			<br/><br/>
 		{% endif %}
 		
 		{% if entity.lookingfor %}
-			<b>Buscando...</a><br/><br/>
-			{{ entity.lookingfor}}
+			<b>Buscando...</b><br/><br/>
+			{{ entity.lookingfor }}
 			<br/><br/>
 		{% endif %}
 		
