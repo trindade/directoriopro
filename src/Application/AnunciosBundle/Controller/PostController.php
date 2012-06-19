@@ -1086,19 +1086,17 @@ class PostController extends Controller
 
 
         $session = $this->getRequest()->getSession();
+        $contact = new \Application\AnunciosBundle\Entity\Contact;
         $id = $session->get('id');
-        $contact_form_html = '';
         if ( $id ) {
-          $contact = new \Application\AnunciosBundle\Entity\Contact;
           $user_login = $em->getRepository('ApplicationUserBundle:User')->find($id);
           $contact->setName( $user_login->getName() );
           $contact->setEmail( $user_login->getEmail() );
           $contact->setLinkedin( 'http://linkedin.com/in/' . $user_login->getLinkedinUrl() );
-          //$contact->setSubject( "RE: " . $entity->getTitle() );
-    	    $contact_form = $this->createForm(new ContactType(), $contact);
-	        $contact_form_html = $contact_form->createView();
         }
-
+        //$contact->setSubject( "RE: " . $entity->getTitle() );
+        $contact_form = $this->createForm(new ContactType(), $contact);
+        $contact_form_html = $contact_form->createView();
 
 
 
