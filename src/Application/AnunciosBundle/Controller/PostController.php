@@ -499,7 +499,7 @@ class PostController extends Controller
           $emails = array($toEmail, "gafeman@gmail.com");
 
           require __DIR__ . '/../../../../app/config/mailjet.php';
-          $mail = mailing($emails, $mensaje);
+          $mail = mailing($emails, $subject, $mensaje);
 
 
 
