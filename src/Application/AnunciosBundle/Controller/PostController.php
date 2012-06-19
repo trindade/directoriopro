@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Application\AnunciosBundle\Entity\Post;
 use Application\AnunciosBundle\Entity\PostReply;
 use Application\UserBundle\Entity\User;
-use Application\UserBundle\Entity\Contact;
+use Application\AnunciosBundle\Entity\Contact;
 use Application\AnunciosBundle\Form\PostType;
 use Application\AnunciosBundle\Form\ContactType;
 use Symfony\Component\HttpFoundation\Cookie;
