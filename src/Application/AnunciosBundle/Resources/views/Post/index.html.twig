@@ -63,7 +63,9 @@
 				{% if entity.company %}
 					{{ entity.company }} - 
 				{% endif %}
-				<a href="{{ path('post_city', { 'id': entity.getCityId() }) }}" style="color:black">{{ entity.location }}</a>
+				{% if entity.getCityId() %}
+					<a href="{{ path('post_city', { 'id': entity.getCityId() }) }}" style="color:black">{{ entity.location }}</a>
+				{% endif %}
 			</div>
 			
 			<div style="float:right;width:100px;">
