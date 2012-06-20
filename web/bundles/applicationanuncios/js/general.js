@@ -115,11 +115,11 @@ function get_github(){
 		$.ajax({
 			//data: options,
 			dataType: 'jsonp',
-			success: function(data){
+			success: function(info){
 				$('#loader').hide();
 				
-				if( data.repositories.length ){
-				    $.each(data.repositories, function(i,item){
+				if( info.data.length ){
+				    $.each(info.data, function(i,item){
 					  
 					  if( item.language ){
 						  if( github_langs_values[item.language] ){
