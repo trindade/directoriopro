@@ -65,6 +65,8 @@
 				{% endif %}
 				{% if entity.getCityId() %}
 					<a href="{{ path('post_city', { 'id': entity.getCityId() }) }}" style="color:black">{{ entity.location }}</a>
+				{% else %}
+					{{ entity.location }}
 				{% endif %}
 			</div>
 			
