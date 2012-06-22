@@ -638,7 +638,7 @@ class UserController extends Controller
           if( $user_id ){
           	$user = $em->getRepository('ApplicationUserBundle:User')->find( $user_id );
           	$url = $this->generateUrl('user_show', array('id' => $user->getId(), 'slug' => $user->getSlug()), true);
-          	$mensaje .= '<a href="' . $url . '">' . $name . '</a>';
+          	$mensaje .= '<a href="' . $url . '">' . $user->getName() . '</a>';
           }else{
           	$mensaje .= $name;
           }

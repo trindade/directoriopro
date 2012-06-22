@@ -1048,7 +1048,7 @@ class PostController extends Controller
 
         $entity = $em->getRepository('ApplicationAnunciosBundle:Post')->find($id);
 
-        if (!$entity) {
+        if (!$entity || !$entity->getVisible() ) {
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
