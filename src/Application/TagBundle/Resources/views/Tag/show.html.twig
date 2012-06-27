@@ -8,27 +8,18 @@
 
     <a href="{{ path('user_edit') }}#tags" class="btn btn-large btn-primary">Mis comunidades</a>
     
+    {% if test %}
+		{% if test.enabled %}
+			<a href="{{ path('test_take', { 'id': test.id }) }}" class="btn btn-large btn-primary">Hacer test</a>
+			<br/>
+		{% endif %}
+		<div class="alert" style="padding:14px 0;width:179px;text-align:center">
+			<b>¡Supera el test y<br/>desbloquea el mérito!</b><br/><br/>
+			<img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ test.id }}.png" width="70" height="70"/>
+		</div>
+	{% endif %}
     
-    {% if jobs %}
-		
-		
-			<br/><br/><b>Empleo</b><br/><br/>
 
-			{% for job in jobs %}
-				
-				<div style="color:black">
-				<a href="{{ path('post_show', { 'id': job.id, 'slug': job.slug }) }}" style="font-weight:bold;">{{ job.title }}</a><br/>
-				{% if job.company %}
-					{{ job.company }} - 
-				{% endif %}
-				<a href="{{ path('post_city', { 'id': job.getCityId() }) }}" style="color:black" style="color:black">{{ job.location }}</a>
-				</div>
-				<br/>
-			
-			{% endfor %}
-
-    
-    {% endif %}
 	
 {% endblock %}
 
@@ -44,9 +35,31 @@
 		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}"><img src="{{ user.getAvatar('normal') }}" rel="twipsy" data-original-title="{{ user.name }}" alt="{{ user.name }}" width="48" height="48" style="width:48px;height:48px"/></a>
 	{% endfor %}
 	
-	<br/><br/>
 	
-	<b>Discusiones en twitter</b><br/><br/>
+    {% if jobs %}
+		
+		
+		<br/><br/><b>Ofertas de empleo</b><br/><br/>
+
+		<ul>
+		{% for job in jobs %}
+			
+			
+			<li style="color:black"><a href="{{ path('post_show', { 'id': job.id, 'slug': job.slug }) }}">{{ job.title }}</a><br/>
+			{% if job.company %}
+				{{ job.company }} - 
+			{% endif %}
+			<a href="{{ path('post_city', { 'id': job.getCityId() }) }}" style="color:black" style="color:black">{{ job.location }}</a>
+			</li>
+			
+		{% endfor %}
+		</ul>
+
+    
+    {% endif %}
+	
+	
+	<br/><br/><b>Discusiones en twitter</b><br/><br/>
 	
 	
 	<div id="tweets">cargando...</div>
