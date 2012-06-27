@@ -6,6 +6,7 @@
 
 {% block sidebar %}
 
+	{{ entity.users }} Usuarios
 	
 {% endblock %}
 
@@ -15,8 +16,6 @@
 
 
 	<h1>Tag {{ entity.title }}</h1>
-
-	<b>{{ entity.users }} Usuarios</b><br/><br/>
 	
 
 	{% for user in users %} 
