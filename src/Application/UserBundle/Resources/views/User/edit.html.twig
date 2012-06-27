@@ -101,7 +101,7 @@ input.xlarge{width:170px}
 	<li class="active"><a href="#info" data-toggle="tab" style="font-weight:bold">Completa tu perfil</a></li>
 	<li><a href="#networks" data-toggle="tab" style="font-weight:bold">Perfiles</a></li>
 	<li><a href="#options" data-toggle="tab" style="font-weight:bold">Opciones</a></li>
-	<li><a href="#tags" data-toggle="tab" style="font-weight:bold">Tags</a></li>
+	<li><a href="#tags" id="tab_tags" data-toggle="tab" style="font-weight:bold">Tags</a></li>
 	<li><a href="#contact" data-toggle="tab">Contacto</a></li>
 </ul>
 
@@ -499,7 +499,11 @@ input.xlarge{width:170px}
 		
 	}else if( document.location.href.indexOf('#register') != -1 ){
 		mpq.track("register complete");
+		
+	}else if( document.location.href.indexOf('#tags') != -1 ){
+		$('.tabs a[id=tab_tags]').tab('show');
 	}
+	
 	
 	
 
