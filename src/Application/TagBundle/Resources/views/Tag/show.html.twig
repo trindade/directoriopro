@@ -10,7 +10,7 @@
     
     {% if test %}
 		{% if test.enabled %}
-			<a href="{{ path('test_take', { 'id': test.id }) }}" class="btn btn-large btn-primary">Hacer test</a>
+			<a href="{{ path('test_take', { 'id': test.id }) }}" class="btn btn-large">Hacer test</a>
 			<br/>
 		{% endif %}
 		<div class="alert" style="padding:14px 0;width:179px;text-align:center">
@@ -28,18 +28,22 @@
 {% block content %}
 
 
-	<h1>Comunidad {{ entity.title }} - {{ entity.users }} Usuarios</h1>
+	<h1>Comunidad {{ entity.title }}</h1>
+	
+	{{ entity.users }} Usuarios<br/><br/>
 	
 
 	{% for user in users %} 
 		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}"><img src="{{ user.getAvatar('normal') }}" rel="twipsy" data-original-title="{{ user.name }}" alt="{{ user.name }}" width="48" height="48" style="width:48px;height:48px"/></a>
 	{% endfor %}
 	
+	<br/><br/>
+	
 	
     {% if jobs %}
 		
 		
-		<br/><br/><b>Ofertas de empleo</b><br/><br/>
+		<b>Ofertas de empleo de {{ entity.title }}</b><br/><br/>
 
 		<ul>
 		{% for job in jobs %}
@@ -59,7 +63,7 @@
     {% endif %}
 	
 	
-	<br/><br/><b>Discusiones en twitter</b><br/><br/>
+	<b>Discusiones en twitter sobre #{{ entity.slug|replace({'-': ''}) }}</b><br/><br/>
 	
 	
 	<div id="tweets">cargando...</div>
