@@ -217,9 +217,9 @@ class TagController extends Controller
     /**
      * Deletes a Tag entity.
      *
-     * @Route("/{id}/delete", name="tag_delete")
+     * @Route("/{slug}/delete", name="tag_delete")
      */
-    public function deleteAction($id)
+    public function deleteAction($slug)
     {
     
         $session = $this->getRequest()->getSession();
@@ -230,7 +230,7 @@ class TagController extends Controller
     
         // existe?
 		$em = $this->getDoctrine()->getEntityManager();
-		$entity = $em->getRepository('ApplicationTagBundle:Tag')->find($id);
+		$entity = $em->getRepository('ApplicationTagBundle:Tag')->findOneBy( array('slug'=>$slug) );
 		if (!$entity) {
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
