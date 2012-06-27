@@ -1,12 +1,12 @@
 {% set share_url = url('tag_show', { 'slug': entity.slug }) %}
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-{% block title %}Tag {{ entity.title }}{% endblock %}
+{% block title %}Comunidad {{ entity.title }}{% endblock %}
 
 
 {% block sidebar %}
 
-	{{ entity.users }} Usuarios
+	
 	
 {% endblock %}
 
@@ -15,11 +15,11 @@
 {% block content %}
 
 
-	<h1>Tag {{ entity.title }}</h1>
+	<h1>Comunidad {{ entity.title }} - {{ entity.users }} Usuarios</h1>
 	
 
 	{% for user in users %} 
-		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}"><img src="{{ user.getAvatar('normal') }}" width="48" height="48" style="width:48px;height:48px"/></a>
+		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}"><img src="{{ user.getAvatar('normal') }}" rel="twipsy" data-original-title="{{ user.name }}" alt="{{ user.name }}" width="48" height="48" style="width:48px;height:48px"/></a>
 	{% endfor %}
 	
 	<br/><br/>
@@ -34,6 +34,9 @@
 
 
 {% block script_load %}
+
+	$("*[rel=twipsy]").tooltip({placement:'bottom',animation:false});
+
 	$.ajax({
 		dataType: 'jsonp',
 		success: function(data){
@@ -48,6 +51,6 @@
 			}
 		},
 		type: 'GET',
-		url: 'http://search.twitter.com/search.json?rpp=10&q={{ entity.title }}'
+		url: 'http://search.twitter.com/search.json?lang=es&rpp=10&q={{ entity.title }}'
 	});
 {% endblock %}
