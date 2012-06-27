@@ -7,6 +7,28 @@
 {% block sidebar %}
 
     <a href="{{ path('user_edit') }}#tags" class="btn btn-large btn-primary">Mis comunidades</a>
+    
+    
+    {% if jobs %}
+		
+		
+			<br/><br/><b>Empleo</b><br/><br/>
+
+			{% for job in jobs %}
+				
+				<div style="color:black">
+				<a href="{{ path('post_show', { 'id': job.id, 'slug': job.slug }) }}" style="font-weight:bold;color:black">{{ job.title }}</a><br/>
+				{% if job.company %}
+					{{ job.company }} - 
+				{% endif %}
+				<a href="{{ path('post_city', { 'id': job.getCityId() }) }}" style="color:black" style="color:black">{{ job.location }}</a>
+				</div>
+				<br/><br/>
+			
+			{% endfor %}
+
+    
+    {% endif %}
 	
 {% endblock %}
 

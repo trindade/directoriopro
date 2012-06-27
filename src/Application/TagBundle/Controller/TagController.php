@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Application\TagBundle\Entity\Tag;
 use Application\TagBundle\Entity\TagUser;
+use Application\AnunciosBundle\Entity\Post;
 
 use Application\ApiBundle\Util\Util;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,12 +66,15 @@ class TagController extends Controller
            ->add('orderBy', 'u.name ASC');
         $users = $query->getQuery()->getResult();
         
-        
-        
+        // get jobs
+        $jobs = $em->getRepository('ApplicationAnunciosBundle:Post')
+          ->search($entity->getTitle(), false, false, false, 5);
+                  
 
         return array(
             'entity' => $entity,
-            'users' => $users
+            'users' => $users,
+            'jobs' => $jobs
 		);
     }
 
