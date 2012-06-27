@@ -17,13 +17,13 @@
 			{% for job in jobs %}
 				
 				<div style="color:black">
-				<a href="{{ path('post_show', { 'id': job.id, 'slug': job.slug }) }}" style="font-weight:bold;color:black">{{ job.title }}</a><br/>
+				<a href="{{ path('post_show', { 'id': job.id, 'slug': job.slug }) }}" style="font-weight:bold;">{{ job.title }}</a><br/>
 				{% if job.company %}
 					{{ job.company }} - 
 				{% endif %}
 				<a href="{{ path('post_city', { 'id': job.getCityId() }) }}" style="color:black" style="color:black">{{ job.location }}</a>
 				</div>
-				<br/><br/>
+				<br/>
 			
 			{% endfor %}
 
