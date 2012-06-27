@@ -51,6 +51,6 @@
 			}
 		},
 		type: 'GET',
-		url: 'http://search.twitter.com/search.json?lang=es&rpp=10&q={{ entity.title }}'
+		url: 'http://search.twitter.com/search.json?lang=es&rpp=10&q=%23{{ entity.slug }}'
 	});
 {% endblock %}
