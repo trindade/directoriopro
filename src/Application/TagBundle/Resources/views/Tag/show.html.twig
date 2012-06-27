@@ -60,9 +60,13 @@
 				{{ job.company }} - 
 			{% endif %}
 			<a href="{{ path('post_city', { 'id': job.getCityId() }) }}" style="color:black" style="color:black">{{ job.location }}</a>
+			<br/><br/>
 			</li>
 			
 		{% endfor %}
+		<li>
+			<a href="{{ path('post_search') }}?q={{ entity.title }}">Ver más ofertas de {{ entity.title }}</a>
+		</li>
 		</ul>
 		<br/>
 
