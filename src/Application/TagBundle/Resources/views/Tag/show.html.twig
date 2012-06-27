@@ -28,6 +28,12 @@
 {% block content %}
 
 
+	<ul class="breadcrumb">
+	  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
+	  <li><a href="{{ path('tag') }}">Comunidades</a> <span class="divider">/</span></li>
+	  <li class="active">{{ entity.title }}</li>
+	</ul>
+
 	<h1>Comunidad {{ entity.title }}</h1>
 	
 	{{ entity.users }} Usuarios<br/><br/>
