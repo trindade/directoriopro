@@ -1,3 +1,4 @@
+{% set share_url = url('tag_show', { 'slug': entity.slug }) %}
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
 {% block title %}Tag {{ entity.title }}{% endblock %}
@@ -17,11 +18,37 @@
 
 	<b>{{ entity.users }} Usuarios</b><br/><br/>
 	
-	<ul>
+
 	{% for user in users %} 
-		<li><a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}">{{ user.name }}</a></li>
+		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}"><img src="{{ user.getAvatar('normal') }}" width="48" height="48" style="width:48px;height:48px"/></a>
 	{% endfor %}
-	</ul>
+	
+	<br/><br/>
+	
+	<b>Tweets</b>	
+	
+	
+	<div id="tweets">cargando...</div>
 
 
+{% endblock %}
+
+
+{% block script_load %}
+	$.ajax({
+		dataType: 'jsonp',
+		success: function(data){
+			html = '';
+			if( data.results.length ){
+			    $.each(data.results, function(i,item){
+					html += '<a href="http://twitter.com/' + item.from_user + '" target="_blank" style="width:35px;height:35px;float:left;margin-right:15px"><img src="' + item.profile_image_url + '"></a><div style="float:left;width:500px">' + replaceURLWithHTMLLinks( item.text ) + '</div><br class="clear"/><br/></li>';
+			    });
+				$("#tweets").html(html);
+			}else{
+				$('#tweets').html('sin resultados');
+			}
+		},
+		type: 'GET',
+		url: 'http://search.twitter.com/search.json?rpp=10&q={{ entity.title }}' )
+	});
 {% endblock %}
