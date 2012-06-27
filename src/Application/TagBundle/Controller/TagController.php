@@ -72,7 +72,7 @@ class TagController extends Controller
           ->search($entity->getTitle(), false, false, false, 5);
           
         // test
-        $test = $em->getRepository('ApplicationTestBundle:Tag')->findOneBy( array('tag'=>$slug) );
+        $test = $em->getRepository('ApplicationTestBundle:Test')->findOneBy( array('tag'=>$slug) );
                   
 
         return array(
