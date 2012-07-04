@@ -1079,10 +1079,20 @@ class EventController extends Controller
 	        $mensaje = $request->request->get('template');
 	        $toEmail = explode("\n", trim($request->request->get('emails')));
 	        
-	        require __DIR__ . '/../../../../app/config/mailjet.php';
-	        $result = mailing($toEmail, $subject, $mensaje);
+	        if( $subject && $mensaje && $toEmail ){
 	        
-	        return array('sent' => true);
+		        require __DIR__ . '/../../../../app/config/mailjet.php';
+		        $result = mailing($toEmail, $subject, $mensaje);
+		        return array('sent' => true);
+	        
+	        }else{
+		        
+		        
+		        return $this->redirect($this->generateUrl('event_emails'));
+		        
+	        }
+	        
+	        
         }
         
 
