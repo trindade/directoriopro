@@ -868,7 +868,7 @@ class PostController extends Controller
     $query = $em->createQueryBuilder();
     $query->add('select', 'p')
        ->add('from', 'ApplicationAnunciosBundle:Post p')
-       ->add('orderBy', 'p.visits DESC')
+       ->add('orderBy', 'p.interested DESC')
        ->setMaxResults(10);
     $top_posts = $query->getQuery()->getResult();
 
