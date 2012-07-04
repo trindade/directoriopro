@@ -68,7 +68,7 @@
 		
 		<div style="float:right;width:100px;">
 		
-		<!--
+		{% if search %}
 			{% if entity.type == 0 %}
 				<span class="label label-success">Empleo</span>
 			{% elseif entity.type == 1 %}
@@ -78,7 +78,7 @@
 			{% else %}
 				<span class="label label-important">Socio</span>
 			{% endif %}<br/>
-		-->	
+		{% endif %}
 		
 			<span class="date">{{ entity.date|date('d/m/Y') }}</span>
 		</div>
