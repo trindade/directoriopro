@@ -794,10 +794,10 @@ class PostController extends Controller
     
 
     
-    echo '<pre>';
-    print_r($interested);
-    print_r($jobs);
-    print_r($users);
+    //echo '<pre>';
+    //print_r($interested);
+    //print_r($jobs);
+    //print_r($users);
 
 
 
