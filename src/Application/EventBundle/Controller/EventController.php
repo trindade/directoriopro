@@ -1060,7 +1060,7 @@ class EventController extends Controller
 	
 	            // es un id?
 	            if( strstr( $search, ',' ) ){
-	            	$qb->andWhere('e.id IN (:id)')->setParameter('id', $search);
+	            	$qb->andWhere('e.id IN (' . $search . ')');
 	            
 	            }else if( is_numeric( $search ) ){
 	                $qb->andWhere('e.id = :id')->setParameter('id', $search);
