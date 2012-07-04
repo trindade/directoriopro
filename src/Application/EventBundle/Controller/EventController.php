@@ -1059,7 +1059,10 @@ class EventController extends Controller
 	                ->add('orderBy', 'eu.date ASC');
 	
 	            // es un id?
-	            if( is_numeric( $search ) ){
+	            if( strstr( $search, ',' ) ){
+	            	$qb->andWhere('e.id IN (:id)')->setParameter('id', $search);
+	            
+	            }else if( is_numeric( $search ) ){
 	                $qb->andWhere('e.id = :id')->setParameter('id', $search);
 	    
 	            // es un hashtag?
