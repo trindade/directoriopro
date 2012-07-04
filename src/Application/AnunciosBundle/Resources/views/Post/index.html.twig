@@ -57,7 +57,7 @@
 
 <ul class="nav nav-tabs">
 	<li class="active"><a href="{{ path('post') }}">Empleo</a></li>
-	<li><a href="{{ path('post_search') }}?t=3">Socio-Colaboración</a></li>
+	<li><a href="{{ path('post_search') }}?t=3">Socio</a></li>
 	<li><a href="{{ path('post_search') }}?t=1">Freelance</a></li>
 	<li><a href="{{ path('post_search') }}?t=2">Prácticas</a></li>
 </ul>
@@ -87,7 +87,7 @@
 				{% elseif entity.type == 2 %}
 					<span class="label label-warning">Prácticas</span>
 				{% else %}
-					<span class="label label-important">Socio-colaboración</span>
+					<span class="label label-important">Socio</span>
 				{% endif %}<br/>
 				<span class="date">{{ entity.date|date('d/m/Y') }}</span>
 			</div>

@@ -32,13 +32,24 @@
 </form>
 
 
-
+<!--
 <ul class="nav nav-tabs">
 	<li class="active"><a href="{{ path('post_search') }}?q={{ search }}">Empleo</a></li>
 	<li><a href="{{ path('user_search') }}?q={{ search }}">Profesionales</a></li>
 	<li><a href="{{ path('event_search') }}?q={{ search }}">Eventos</a></li>
 	<li><a href="{{ path('forum_search') }}?q={{ search }}">Foro</a></li>
 </ul>
+-->
+
+
+
+<ul class="nav nav-tabs">
+	<li><a href="{{ path('post') }}">Empleo</a></li>
+	<li {% if form_type == 3 %} class="active"{% endif %}><a href="{{ path('post_search') }}?t=3">Socio</a></li>
+	<li {% if form_type == 1 %} class="active"{% endif %}><a href="{{ path('post_search') }}?t=1">Freelance</a></li>
+	<li {% if form_type == 2 %} class="active"{% endif %}><a href="{{ path('post_search') }}?t=2">Prácticas</a></li>
+</ul>
+
 
 
 {% if entities %}
