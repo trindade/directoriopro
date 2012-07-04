@@ -34,7 +34,7 @@
 
 <br/>
 	
-<textarea name="emails" style="width:600px;height:50px" required="required">
+<textarea name="emails" style="width:400px;height:50px" required="required">
 {% for entity in entities %}
 {{ entity.email }}
 {% endfor %}
@@ -42,7 +42,7 @@
 		
 <br/>
 		
-<textarea name="template" id="template" style="width:400px;height:200px" required="required" onkeyup="previewTemplate()">
+<textarea name="template" id="template" style="width:600px;height:200px" required="required" onkeyup="previewTemplate()">
 <table width="600" cellpadding="0" cellspacing="0" style="font-size:16px;font-family:arial;border:1px #ccc solid;color:black">
 <tr>
 <td colspan="2" style="background:#CD2800;text-align:center;padding:13px">
@@ -85,6 +85,8 @@ function previewTemplate()
 {
 	$('#preview_body').html($('#template').val());
 	$('.preview_subject').html($('#subject').val());
+	$('#template').val($('#preview_body').html());
+	
 }
 </script>
 
