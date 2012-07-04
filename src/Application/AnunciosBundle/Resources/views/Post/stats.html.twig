@@ -54,50 +54,12 @@
 
 
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-  google.load("visualization", "1", {packages:["corechart"]});
-  google.setOnLoadCallback(drawChart);
-  function drawChart() {
-
-	// users
-
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Fecha');
-    data.addColumn('number', 'Usuarios');
-    data.addRows({{ users_month|length  }});
 
 
-    {% for key, value in users_month %}
-       data.setValue({{loop.index0}}, 0, '{{key}}');
-       data.setValue({{loop.index0}}, 1, {{value}});
-    {% endfor %}
+<div id="graph"></div>
 
 
-    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-    chart.draw(data, {width: 580, height: 240, title: 'Usuarios registrados 30 días'});
 
-	// posts
-
-    var data2 = new google.visualization.DataTable();
-    data2.addColumn('string', 'Fecha');
-    data2.addColumn('number', 'Anuncios');
-    data2.addRows({{ posts_month|length  }});
-
-
-    {% for key, value in posts_month %}
-       data2.setValue({{loop.index0}}, 0, '{{key}}');
-       data2.setValue({{loop.index0}}, 1, {{value}});
-    {% endfor %}
-
-
-    var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
-    chart2.draw(data2, {width: 580, height: 240, title: 'Ofertas publicadas 30 días', colors:['red'] });
-
-  }
-</script>
-<div id="chart_div"></div>
-<div id="chart_div2"></div>
 
 <b>Top ofertas</b><br/><br/>
 
@@ -112,3 +74,120 @@
 </ul>
 
 {% endblock %}
+
+
+
+
+
+{% block load_src %}
+	<script src="http://betabeers.com/infografia/highcharts.js"></script>
+{% endblock %}
+
+
+{% block script_load %}
+
+    
+    
+	var graph = new Highcharts.Chart({
+            chart: {
+                renderTo: 'graph',
+                type: 'area'
+            },
+            title: {
+                text: false
+            },
+            subtitle: {
+                text: false
+            },
+            xAxis: {
+                categories: [
+                                'Dec 2011',
+                                'Jan 2012',
+                                'Feb 2012',
+                                'Mar 2012',
+                                'Apr 2012',
+                                'May 2012',
+                                ],
+                tickmarkPlacement: 'on',
+                title: {
+                    enabled: false
+                }
+            },
+            yAxis: {
+                title: {
+                    text: false
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value;
+                    }
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                    return ''+
+                        this.x +': '+ this.y;
+                }
+            },
+            plotOptions: {
+                area: {
+                    stacking: 'normal',
+                    lineColor: '#666666',
+                    lineWidth: 1,
+                    marker: {
+                        lineWidth: 1,
+                        lineColor: '#666666'
+                    }
+                }
+            },
+            series: [
+            
+            	{
+                name: 'Total',
+                data: [
+                                34,
+                                36,
+                                327,
+                                339,
+                                217,
+                                293,
+                                ]
+                },
+                
+                {
+                name: 'Madrid',
+                data: [
+                                30,
+                                26,
+                                141,
+                                108,
+                                85,
+                                102,
+                                ]
+                },
+                
+                {
+                name: 'Barcelona',
+                data: [
+                                4,
+                                10,
+                                91,
+                                110,
+                                50,
+                                81,
+                                ]
+                },
+ 
+                
+                
+            ]
+        });
+        
+
+    
+    
+
+{% endblock %}
+
+
+
