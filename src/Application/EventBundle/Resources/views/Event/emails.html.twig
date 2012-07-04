@@ -17,11 +17,11 @@
 	
 		<form>
 	
-		<textarea name="emails" style="width:400px;height:100px" required="required">
-		{% for entity in entities %}
-			{{ entity.email }}<br/>
-		{% endfor %}
-		</textarea>
+<textarea name="emails" style="width:400px;height:100px" required="required">
+{% for entity in entities %}
+{{ entity.email }}
+{% endfor %}
+</textarea>
 		
 		<br/><br/>
 		
@@ -29,11 +29,25 @@
 		
 		<br/><br/>
 		
-		<textarea name="template" style="width:400px;height:100px" required="required">
-		
-		%3Ctable+width%3D%22600%22+cellpadding%3D%220%22+cellspacing%3D%220%22+style%3D%22font-size%3A16px%3Bfont-family%3Aarial%3Bborder%3A1px+%23ccc+solid%3Bcolor%3Ablack%22%3E%0A%3Ctr%3E%0A%09%3Ctd+colspan%3D%222%22+style%3D%22background%3A%23CD2800%3Btext-align%3Acenter%3Bpadding%3A13px%22%3E%0A%09%09%3Ca+href%3D%22http%3A%2F%2Fbetabeers.com%2F%22+target%3D%22_blank%22+style%3D%22font-size%3A35px%3Bcolor%3Awhite%3Btext-decoration%3Anone%22%3E%26szlig%3Betabeers%3C%2Fa%3E%0A%09%3C%2Ftd%3E%0A%3C%2Ftr%3E%0A%3Ctd+colspan%3D%222%22+style%3D%22padding%3A20px%3B%22%3E%0A%0A%3Cb+style%3D%22font-size%3A25px%22%3EAsunto%3C%2Fb%3E%0A%3Cbr%2F%3E%3Cbr%2F%3E%0A%0Aesto+es+una+prueba%0A%0A%0A%3C%2Ftd%3E%0A%3C%2Ftr%3E%0A%3C%2Ftable%3E
-		
-		</textarea>
+<textarea name="template" style="width:400px;height:100px" required="required">
+<table width="600" cellpadding="0" cellspacing="0" style="font-size:16px;font-family:arial;border:1px #ccc solid;color:black">
+<tr>
+	<td colspan="2" style="background:#CD2800;text-align:center;padding:13px">
+		<a href="http://betabeers.com/" target="_blank" style="font-size:35px;color:white;text-decoration:none">&szlig;etabeers</a>
+	</td>
+</tr>
+<td colspan="2" style="padding:20px;">
+
+<b style="font-size:25px">Asunto</b>
+<br/><br/>
+
+esto es una prueba
+
+
+</td>
+</tr>
+</table>
+</textarea>
 		
 		<br/><br/>
 		
