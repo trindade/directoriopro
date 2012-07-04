@@ -30,7 +30,7 @@
 	
 		<form method="post">
 
-<input name="subject" id="subject" value="Asunto" required="required" style="width:400px;" onkeyup="previewTemplate()"/>
+<input name="subject" id="subject" value="Asunto" required="required" style="width:400px;" onkeyup="previewTemplate(true)"/>
 
 <br/>
 	
@@ -42,7 +42,7 @@
 		
 <br/>
 		
-<textarea name="template" id="template" style="width:600px;height:200px" required="required" onkeyup="previewTemplate()">
+<textarea name="template" id="template" style="width:600px;height:200px" required="required" onkeyup="previewTemplate(false)">
 <table width="600" cellpadding="0" cellspacing="0" style="font-size:16px;font-family:arial;border:1px #ccc solid;color:black">
 <tr>
 <td colspan="2" style="background:#CD2800;text-align:center;padding:13px">
@@ -81,11 +81,12 @@ esto es una prueba
 
 
 <script>
-function previewTemplate()
+function previewTemplate(changetitle)
 {
 	$('#preview_body').html($('#template').val());
 	$('.preview_subject').html($('#subject').val());
-	$('#template').val($('#preview_body').html());
+	
+	if( changetitle ) $('#template').val($('#preview_body').html());
 	
 }
 </script>
@@ -96,5 +97,5 @@ function previewTemplate()
 
 
 {% block script_load %}
-	previewTemplate();
+	previewTemplate(false);
 {% endblock %}
