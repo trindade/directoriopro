@@ -1076,10 +1076,24 @@ class EventController extends Controller
         }else{
 	        
 	        $subject = $request->request->get('subject');
-	        $emails = $request->request->get('emails');
 	        $template = $request->request->get('template');
 	        
+	        $emails_aux = explode("\n", $request->request->get('emails'));
+	        $emails = array();
+	        foreach( $emails_aux as $email ){
+		        if( $email ){   
+			    	$emails[] = $email;    
+		        }
+	        }
 	        
+	        
+	        echo $subject,'--',$template;
+	        
+	        echo '<pre>';
+	        print_r($emails);
+	        
+	        //require __DIR__ . '/../../../../app/config/mailjet.php';
+	        //$result = mailing($toEmail, $subject, $mensaje);
 	        
 	        
 	        return array('sent' => true);
