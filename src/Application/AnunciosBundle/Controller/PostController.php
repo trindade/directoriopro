@@ -775,16 +775,16 @@ class PostController extends Controller
 	
 
 	
-    $interested_aux = $db->fetchAll("SELECT date, COUNT(id) as total FROM PostReply WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6");
-    $jobs = array_reverse($db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
-    $users = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
-    $events = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM Event WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
-    $users_events = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM EventUser WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
+    $interested_aux = $db->fetchAll("SELECT date, COUNT(id) as total FROM PostReply WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 12");
+    $jobs = array_reverse($db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 12"));
+    $users = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 12"));
+    $events = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM Event WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 12"));
+    $users_events = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM EventUser WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 12"));
 
     $total = count( $interested_aux );
-    if( $total < 6 ){
+    if( $total < 12 ){
     	$blank = array();
-    	for( $i = 0; $i < ( 6 - $total ); $i++){
+    	for( $i = 0; $i < ( 12 - $total ); $i++){
     		$blank[] = array('total' => 0, 'date' => false);
     	}
     	$interested = array_merge($blank, array_reverse($interested_aux));
