@@ -100,7 +100,7 @@
             xAxis: {
                 categories: [
                 	{% for item in jobs %}
-                        '{{ item.date|date('My') }}',
+                        '{{ item.date|date('M Y') }}',
                 	{% endfor %}
                             ],
                 tickmarkPlacement: 'on',
