@@ -19,15 +19,17 @@
 	
 		<form>
 
-<input name="subject" placeholder="Asunto" required="required" style="width:400px;"/>
+<input name="subject" id="subject" placeholder="Asunto" required="required" style="width:400px;"/>
 
-<br/><br/>
+<br/>
 	
 <textarea name="emails" style="width:400px;height:50px" required="required">
-{% for entity in entities %}{{ entity.email }}
-{% endfor %}</textarea>
+{% for entity in entities %}
+{{ entity.email }}
+{% endfor %}
+</textarea>
 		
-<br/><br/>
+<br/>
 		
 <textarea name="template" id="template" style="width:400px;height:200px" required="required" onkeyup="previewTemplate()">
 <table width="600" cellpadding="0" cellspacing="0" style="font-size:16px;font-family:arial;border:1px #ccc solid;color:black">
@@ -38,7 +40,7 @@
 </tr>
 <td colspan="2" style="padding:20px;">
 
-<b style="font-size:25px">Asunto</b>
+<b style="font-size:25px" id="preview_subject">Asunto</b>
 <br/><br/>
 
 esto es una prueba
@@ -50,9 +52,9 @@ esto es una prueba
 		
 		<br/><br/>
 		
-		<div id="preview"></div>
+		<div id="preview_body"></div>
 		
-		<br/><br/>
+		<br/>
 		
 		<input type="submit" value="Enviar mails" class="btn btn-primary"/> <a href="#" class="btn">Vista previa</a>
 		
@@ -68,7 +70,8 @@ esto es una prueba
 <script>
 function previewTemplate()
 {
-	$('#preview').html($('#template').val());
+	$('#preview_body').html($('#template').val());
+	$('#preview_subject').html($('#subject').val());
 }
 </script>
 
