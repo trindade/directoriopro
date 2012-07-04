@@ -12,7 +12,7 @@
 	{% for entity in entities %}
 
 		<item>
-			<title>{% if entity.type == 0 %}Empleo{% elseif entity.type == 1 %}Freelance{% elseif entity.type == 2 %}Prácticas{% else %}Socio-Colaboración{% endif %}: {{ entity.title }}</title>
+			<title>{% if entity.type == 0 %}Empleo{% elseif entity.type == 1 %}Freelance{% elseif entity.type == 2 %}Prácticas{% else %}Socio{% endif %}: {{ entity.title }}</title>
 			<link>{{ url('post_show', { 'id': entity.id, 'slug': entity.slug }) }}</link>
 			<pubDate>{{ entity.date|date('D, d M Y H:i:s O') }}</pubDate>
 			<category><![CDATA[{{ categories[ entity.getCategoryId() ] }}]]></category>
