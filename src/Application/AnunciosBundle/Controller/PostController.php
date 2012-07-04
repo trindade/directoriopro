@@ -783,9 +783,10 @@ class PostController extends Controller
     	for( $i = 0; $i < ( 6 - count( $interested ) ); $i++){
     		$blank[] = date('total' => 0, 'date' => false);
     	}
+    	$interested = array_merge($blank,$interested_aux);
     }
     
-    $interested = array_merge($blank,$interested);
+
     
     echo '<pre>';
     print_r($interested);
