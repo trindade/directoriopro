@@ -778,6 +778,11 @@ class PostController extends Controller
     $interested = $db->fetchAll("SELECT date, COUNT(id) as total FROM PostReply WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
     $jobs = $db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
     $users = $db->fetchAll("SELECT date, COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
+    
+    echo '<pre>';
+    print_r($interested);
+    print_r($jobs);
+    print_r($users);
 
 
 
