@@ -775,9 +775,9 @@ class PostController extends Controller
 	
 
 	
-    $interested_aux = $db->fetchAll("SELECT date, COUNT(id) as total FROM PostReply WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
-    $jobs = $db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
-    $users = $db->fetchAll("SELECT date, COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
+    $interested_aux = $db->fetchAll("SELECT date, COUNT(id) as total FROM PostReply WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6");
+    $jobs = array_reverse($db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
+    $users = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
     
 
     $total = count( $interested_aux );
@@ -786,9 +786,9 @@ class PostController extends Controller
     	for( $i = 0; $i < ( 6 - $total ); $i++){
     		$blank[] = array('total' => 0, 'date' => false);
     	}
-    	$interested = array_merge($blank, $interested_aux);
+    	$interested = array_merge($blank, array_reverse($interested_aux));
     }else{
-	    $interested = $interested_aux;
+	    $interested = array_reverse($interested_aux);
 	    
     }
     
