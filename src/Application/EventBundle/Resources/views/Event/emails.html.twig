@@ -19,7 +19,7 @@
 	
 		<form>
 
-<input name="subject" id="subject" placeholder="Asunto" required="required" style="width:400px;"/>
+<input name="subject" id="subject" placeholder="Asunto" required="required" style="width:400px;" onkeyup="previewTemplate()"/>
 
 <br/>
 	
@@ -40,7 +40,7 @@
 </tr>
 <td colspan="2" style="padding:20px;">
 
-<b style="font-size:25px" id="preview_subject">Asunto</b>
+<b style="font-size:25px" class="preview_subject">Asunto</b>
 <br/><br/>
 
 esto es una prueba
@@ -71,7 +71,7 @@ esto es una prueba
 function previewTemplate()
 {
 	$('#preview_body').html($('#template').val());
-	$('#preview_subject').html($('#subject').val());
+	$('.preview_subject').html($('#subject').val());
 }
 </script>
 
