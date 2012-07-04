@@ -766,7 +766,7 @@ class PostController extends Controller
 
 
 	$year = date('Y');
-	$month = date('m') - 1;
+	$month = date('m');
 	//if( $month == 0 ){
 	//	$month = 12;
 	//	$year--;
@@ -775,9 +775,9 @@ class PostController extends Controller
 	
 
 	
-    $interested_aux = $db->fetchAll("SELECT date, COUNT(id) as total FROM PostReply WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6");
-    $jobs = array_reverse($db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
-    $users = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
+    $interested_aux = $db->fetchAll("SELECT date, COUNT(id) as total FROM PostReply WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6");
+    $jobs = array_reverse($db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
+    $users = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
     
 
     $total = count( $interested_aux );
