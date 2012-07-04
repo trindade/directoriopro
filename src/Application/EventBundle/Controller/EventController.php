@@ -1036,31 +1036,55 @@ class EventController extends Controller
         }
 
         $request = $this->getRequest();
-        $search = $request->query->get('q');
-        $entities = false;
+        
+        
+        
+        
+        
+        $request = $this->getRequest();
 
-        if( $search ){
-            $em = $this->getDoctrine()->getEntityManager();
-            $qb = $em->createQueryBuilder();
-            $qb->add('select', 'DISTINCT u.email')
-                ->add('from', 'ApplicationEventBundle:Event e, ApplicationEventBundle:EventUser eu, ApplicationUserBundle:User u')
-                ->andWhere('e.id = eu.event_id')
-                ->andWhere('u.id = eu.user_id')
-                ->add('orderBy', 'eu.date ASC');
-
-            // es un id?
-            if( is_numeric( $search ) ){
-                $qb->andWhere('e.id = :id')->setParameter('id', $search);
-    
-            // es un hashtag?
-            }else{
-                $qb->andWhere('e.hashtag = :hashtag')->setParameter('hashtag', str_replace('#','',$search));
-            }
+        if ($request->getMethod() != 'POST') {
+        
             
-            $entities = $qb->getQuery()->getResult();
+	        $search = $request->query->get('q');
+	        $entities = false;
+	
+	        if( $search ){
+	            $em = $this->getDoctrine()->getEntityManager();
+	            $qb = $em->createQueryBuilder();
+	            $qb->add('select', 'DISTINCT u.email')
+	                ->add('from', 'ApplicationEventBundle:Event e, ApplicationEventBundle:EventUser eu, ApplicationUserBundle:User u')
+	                ->andWhere('e.id = eu.event_id')
+	                ->andWhere('u.id = eu.user_id')
+	                ->add('orderBy', 'eu.date ASC');
+	
+	            // es un id?
+	            if( is_numeric( $search ) ){
+	                $qb->andWhere('e.id = :id')->setParameter('id', $search);
+	    
+	            // es un hashtag?
+	            }else{
+	                $qb->andWhere('e.hashtag = :hashtag')->setParameter('hashtag', str_replace('#','',$search));
+	            }
+	            
+	            $entities = $qb->getQuery()->getResult();
+	        }
+	
+	        return array('search' => $search, 'entities' => $entities);
+        
+        
+        }else{
+	        
+	        $subject = $request->request->get('subject');
+	        $emails = $request->request->get('emails');
+	        $template = $request->request->get('template');
+	        
+	        
+	        
+	        
+	        return array('sent' => true);
         }
-
-        return array('search' => $search, 'entities' => $entities);
+        
 
 
     }

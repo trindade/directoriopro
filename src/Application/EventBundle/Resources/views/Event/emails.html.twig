@@ -11,13 +11,19 @@
 <form action="{{ path('event_emails') }}">
 	ID evento o hashtag: 
 	<input name="q" value="{{ search }}"/> 
-	<input type="submit" value="Buscar"/>
+	<input type="submit" value="Buscar" class="btn"/>
 </form>
 
-{% if search %}
+
+
+{% if sent %}
+
+email enviado
+
+{% elseif search %}
 	{% if entities %}
 	
-		<form>
+		<form method="post">
 
 <input name="subject" id="subject" value="Asunto" required="required" style="width:400px;" onkeyup="previewTemplate()"/>
 
@@ -56,7 +62,7 @@ esto es una prueba
 		
 		<br/>
 		
-		<input type="submit" value="Enviar mails" class="btn btn-primary"/> <a href="#" class="btn">Vista previa</a>
+		<input type="submit" value="Enviar mails" class="btn btn-primary"/>
 		
 		</form>
 		
