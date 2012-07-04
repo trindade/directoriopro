@@ -45,7 +45,7 @@
 
 
 
-
+<!--
 <div style="padding: 6px 0 9px 16px;border-top: 1px #efefef solid;background:#F6F6F6">
 	<a href="{{ path('post') }}?c=2" style="color:black;margin-right:20px">Backend</a>
 	<a href="{{ path('post') }}?c=1" style="color:black;margin-right:20px">Frontend</a>
@@ -53,6 +53,15 @@
 	<a href="{{ path('post_internship') }}" style="color:black;margin-right:20px">Prácticas</a>
 	<a href="{{ path('post_search') }}?t=1" style="color:black;margin-right:20px">Freelance</a>
 </div>
+-->
+
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{{ path('post') }}">Empleo</a></li>
+	<li><a href="{{ path('post') }}?t=3">Socio-Colaboración</a></li>
+	<li><a href="{{ path('post') }}?t=1">Freelance</a></li>
+	<li><a href="{{ path('post') }}?t=2">Prácticas</a></li>
+</ul>
+
 
 
     {% for entity in entities %}
@@ -75,8 +84,10 @@
 					<span class="label label-success">Empleo</span>
 				{% elseif entity.type == 1 %}
 					<span class="label label-info">Freelance</span>
-				{% else %}
+				{% elseif entity.type == 2 %}
 					<span class="label label-warning">Prácticas</span>
+				{% else %}
+					<span class="label label-important">Socio-colaboración</span>
 				{% endif %}<br/>
 				<span class="date">{{ entity.date|date('d/m/Y') }}</span>
 			</div>

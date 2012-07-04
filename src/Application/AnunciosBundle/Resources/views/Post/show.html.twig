@@ -65,8 +65,10 @@
 	<span class="label label-success">Empleo</span>
 {% elseif entity.type == 1 %}
 	<span class="label label-info">Freelance</span>
-{% else %}
+{% elseif entity.type == 2 %}
 	<span class="label label-warning">Prácticas</span>
+{% else %}
+	<span class="label label-important">Socio-colaboración</span>
 {% endif %}
 
 <br/>

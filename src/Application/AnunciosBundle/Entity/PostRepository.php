@@ -52,6 +52,7 @@ class PostRepository extends EntityRepository
             ->add('from', 'ApplicationAnunciosBundle:Post p')
             ->andWhere('p.city_id = :city_id')->setParameter('city_id', intval($city_id))
             ->andWhere('p.visible = 1')
+            ->andWhere('p.type = 0')
             ->add('orderBy', 'p.featured DESC, p.id DESC');
 
         // categoria?

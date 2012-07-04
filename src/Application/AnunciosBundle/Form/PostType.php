@@ -16,7 +16,7 @@ class PostType extends AbstractType
 
 			->add('type', 'choice', array(
 			  	'expanded' => true,
-			    'choices'   => array('Empleo', 'Freelance', 'Prácticas')//, 'Colaboración'
+			    'choices'   => array('Empleo', 'Freelance', 'Prácticas', 'Socio-colaboración')//, 'Colaboración'
 			))
 
 
