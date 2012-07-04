@@ -23,6 +23,11 @@
 {% elseif search %}
 	{% if entities %}
 	
+	
+		{{ entities|length }} emails encontrados<br/><br/>
+		
+		
+	
 		<form method="post">
 
 <input name="subject" id="subject" value="Asunto" required="required" style="width:400px;" onkeyup="previewTemplate()"/>
