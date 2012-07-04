@@ -101,13 +101,10 @@
             },
             xAxis: {
                 categories: [
-                                'Dec 2011',
-                                'Jan 2012',
-                                'Feb 2012',
-                                'Mar 2012',
-                                'Apr 2012',
-                                'May 2012',
-                                ],
+                	{% for item in dates %}
+                        '{{ item.date|date('M Y') }}',
+                	{% endfor %}
+                            ],
                 tickmarkPlacement: 'on',
                 title: {
                     enabled: false
@@ -143,39 +140,30 @@
             series: [
             
             	{
-                name: 'Total',
+                name: 'Interesados ofertas',
                 data: [
-                                34,
-                                36,
-                                327,
-                                339,
-                                217,
-                                293,
-                                ]
+	                	{% for item in interested %}
+	                        {% item.total %},
+	                	{% endfor %}
+		              ]
                 },
                 
                 {
-                name: 'Madrid',
+                name: 'Anuncios',
                 data: [
-                                30,
-                                26,
-                                141,
-                                108,
-                                85,
-                                102,
-                                ]
+	                	{% for item in jobs %}
+	                        {% item.total %},
+	                	{% endfor %}
+		              ]
                 },
                 
                 {
-                name: 'Barcelona',
+                name: 'Usuarios',
                 data: [
-                                4,
-                                10,
-                                91,
-                                110,
-                                50,
-                                81,
-                                ]
+	                	{% for item in users %}
+	                        {% item.total %},
+	                	{% endfor %}
+		              ]
                 },
  
                 

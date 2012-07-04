@@ -716,6 +716,13 @@ class PostController extends Controller
 
     $em = $this->getDoctrine()->getEntityManager();
 
+
+
+
+
+
+	/*    
+
     // usuarios registrados mes
     $query = $em->createQueryBuilder();
     $query->add('select', 'COUNT(u.id) AS total, u.date')
@@ -749,8 +756,30 @@ class PostController extends Controller
         else $posts_month[$k] += $item['total'];
       }
     }
+    
+    */
+    
+    
 
     $db = $this->get('database_connection');
+
+
+
+	$year = date('Y');
+	$month = date('m') - 1;
+	if( $month == 0 ){
+		$month = 12;
+		$year--;
+	}
+	
+	
+
+	
+    $interested = $db->fetchAll("SELECT date, SUM(users) as total FROM PostReply WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
+    $jobs = $db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
+    $users = $db->fetchAll("SELECT COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
+
+
 
     // usuarios registrados
     $query = "SELECT COUNT(u.id) AS total FROM User u";
@@ -831,9 +860,12 @@ class PostController extends Controller
 
 
         return array(
-      'total_places' => $total_places, 'total_events' => $total_events, 'total_joined' => $total_joined, 'posts_month' => $posts_month, 'cities' => $cities, 'top_posts' => $top_posts, 'users_month' => $users_month, 'total_users' => $total_users, 'total_ref' => $total_ref, 'total_fb' => $total_fb, 'total_unemployed' => $total_unemployed,
-          'total_freelance' => $total_freelance, 'total_comments' => $total_comments, 'total_posts' => $total_posts, 'total_posts_freelance' => $total_posts_freelance, 'total_posts_internship' => $total_posts_internship
+        	'total_places' => $total_places, 'total_events' => $total_events, 'total_joined' => $total_joined, 'cities' => $cities, 'top_posts' => $top_posts, 'total_users' => $total_users, 'total_ref' => $total_ref, 'total_fb' => $total_fb, 'total_unemployed' => $total_unemployed,
+        	'total_freelance' => $total_freelance, 'total_comments' => $total_comments, 'total_posts' => $total_posts, 'total_posts_freelance' => $total_posts_freelance, 'total_posts_internship' => $total_posts_internship,
+        	'interested' => $interested, 'jobs' => $jobs, 'users' => $users
         );
+        
+        //'users_month' => $users_month, 'posts_month' => $posts_month, 
     }
 
     /**
