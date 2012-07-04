@@ -143,7 +143,7 @@
                 name: 'Interesados ofertas',
                 data: [
 	                	{% for item in interested %}
-	                        {% item.total %},
+	                        {{ item.total }},
 	                	{% endfor %}
 		              ]
                 },
@@ -152,7 +152,7 @@
                 name: 'Anuncios',
                 data: [
 	                	{% for item in jobs %}
-	                        {% item.total %},
+	                        {{ item.total }},
 	                	{% endfor %}
 		              ]
                 },
@@ -161,7 +161,7 @@
                 name: 'Usuarios',
                 data: [
 	                	{% for item in users %}
-	                        {% item.total %},
+	                        {{ item.total }},
 	                	{% endfor %}
 		              ]
                 },
