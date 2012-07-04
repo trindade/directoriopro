@@ -26,7 +26,8 @@ class PostRepository extends EntityRepository
         $query = $this->_em->createQueryBuilder();
         $query->add('select', 'p')
            ->add('from', 'ApplicationAnunciosBundle:Post p')
-           ->add('where', 'p.visible = 1')
+           ->andWhere('p.visible = 1')
+           ->andWhere('p.type = 0')
            ->add('orderBy', 'p.featured DESC, p.date_featured ASC, p.id DESC');
 
         // categoria?
@@ -52,7 +53,6 @@ class PostRepository extends EntityRepository
             ->add('from', 'ApplicationAnunciosBundle:Post p')
             ->andWhere('p.city_id = :city_id')->setParameter('city_id', intval($city_id))
             ->andWhere('p.visible = 1')
-            ->andWhere('p.type = 0')
             ->add('orderBy', 'p.featured DESC, p.id DESC');
 
         // categoria?
