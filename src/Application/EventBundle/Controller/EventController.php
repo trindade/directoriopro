@@ -1078,13 +1078,8 @@ class EventController extends Controller
 	        $subject = $request->request->get('subject');
 	        $template = $request->request->get('template');
 	        
-	        $emails_aux = explode("\n", $request->request->get('emails'));
-	        $emails = array();
-	        foreach( $emails_aux as $email ){
-		        if( $email ){   
-			    	$emails[] = $email;    
-		        }
-	        }
+	        $emails = explode("\n", trim($request->request->get('emails')));
+
 	        
 	        
 	        echo $subject,'--',$template;
