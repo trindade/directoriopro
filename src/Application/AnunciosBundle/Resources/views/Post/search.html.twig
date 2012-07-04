@@ -44,7 +44,7 @@
 
 
 <ul class="nav nav-tabs">
-	<li><a href="{{ path('post') }}">Empleo</a></li>
+	<li {% if form_type == false %} class="active"{% endif %}><a href="{{ path('post') }}">Empleo</a></li>
 	<li {% if form_type == 3 %} class="active"{% endif %}><a href="{{ path('post_search') }}?t=3">Socio</a></li>
 	<li {% if form_type == 1 %} class="active"{% endif %}><a href="{{ path('post_search') }}?t=1">Freelance</a></li>
 	<li {% if form_type == 2 %} class="active"{% endif %}><a href="{{ path('post_search') }}?t=2">Prácticas</a></li>
