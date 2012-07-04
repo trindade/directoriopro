@@ -24,7 +24,7 @@
 	{% if entities %}
 	
 	
-		{{ entities|length }} emails encontrados<br/><br/>
+		<span style="color:green">{{ entities|length }} emails encontrados</span><br/><br/>
 		
 		
 	
@@ -34,7 +34,7 @@
 
 <br/>
 	
-<textarea name="emails" style="width:400px;height:50px" required="required">
+<textarea name="emails" style="width:600px;height:50px" required="required">
 {% for entity in entities %}
 {{ entity.email }}
 {% endfor %}
