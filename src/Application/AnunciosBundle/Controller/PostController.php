@@ -787,10 +787,10 @@ class PostController extends Controller
     
     $interested = array_merge($blank,$interested);
     
-    //echo '<pre>';
-    //print_r($interested);
-    //print_r($jobs);
-    //print_r($users);
+    echo '<pre>';
+    print_r($interested);
+    print_r($jobs);
+    print_r($users);
 
 
 
