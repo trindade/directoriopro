@@ -767,10 +767,10 @@ class PostController extends Controller
 
 	$year = date('Y');
 	$month = date('m') - 1;
-	if( $month == 0 ){
-		$month = 12;
-		$year--;
-	}
+	//if( $month == 0 ){
+	//	$month = 12;
+	//	$year--;
+	//}
 	
 	
 
