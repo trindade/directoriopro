@@ -140,7 +140,7 @@
             series: [
             
             	{
-                name: 'Interesados ofertas',
+                name: 'Candidatos',
                 data: [
 	                	{% for item in interested %}
 	                        {{ item.total }},
@@ -165,10 +165,19 @@
 	                	{% endfor %}
 		              ]
                 },
+
                 
+                {
+                name: 'Eventos',
+                data: [
+	                	{% for item in events %}
+	                        {{ item.total }},
+	                	{% endfor %}
+		              ]
+                },                
                 
-{
-                name: 'Apuntados eventos',
+                {
+                name: 'Apuntados',
                 data: [
 	                	{% for item in users_events %}
 	                        {{ item.total }},

@@ -778,6 +778,7 @@ class PostController extends Controller
     $interested_aux = $db->fetchAll("SELECT date, COUNT(id) as total FROM PostReply WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6");
     $jobs = array_reverse($db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
     $users = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
+    $events = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM Event WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
     $users_events = array_reverse($db->fetchAll("SELECT date, COUNT(id) as total FROM EventUser WHERE date < '" . $year . '-' . $month . '-31 23:59:59' . "' GROUP BY YEAR(date), MONTH(date) ORDER BY date DESC LIMIT 6"));
 
     $total = count( $interested_aux );
@@ -882,7 +883,7 @@ class PostController extends Controller
         return array(
         	'total_places' => $total_places, 'total_events' => $total_events, 'total_joined' => $total_joined, 'cities' => $cities, 'top_posts' => $top_posts, 'total_users' => $total_users, 'total_ref' => $total_ref, 'total_fb' => $total_fb, 'total_unemployed' => $total_unemployed,
         	'total_freelance' => $total_freelance, 'total_comments' => $total_comments, 'total_posts' => $total_posts, 'total_posts_freelance' => $total_posts_freelance, 'total_posts_internship' => $total_posts_internship,
-        	'interested' => $interested, 'jobs' => $jobs, 'users' => $users, 'users_events' => $users_events
+        	'interested' => $interested, 'jobs' => $jobs, 'users' => $users, 'events' => $events, 'users_events' => $users_events
         );
         
         //'users_month' => $users_month, 'posts_month' => $posts_month, 
