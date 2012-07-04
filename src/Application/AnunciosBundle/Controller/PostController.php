@@ -782,10 +782,14 @@ class PostController extends Controller
 
     $total = count( $interested_aux );
     if( $total < 6 ){
+    	$blank = array();
     	for( $i = 0; $i < ( 6 - $total ); $i++){
     		$blank[] = date('total' => 0, 'date' => false);
     	}
     	$interested = array_merge($blank, $interested_aux);
+    }else{
+	    $interested = $interested_aux;
+	    
     }
     
 
