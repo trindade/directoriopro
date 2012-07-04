@@ -779,18 +779,19 @@ class PostController extends Controller
     $jobs = $db->fetchAll("SELECT date, SUM(interested) as total FROM Post WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
     $users = $db->fetchAll("SELECT date, COUNT(id) as total FROM User WHERE date < '" . $year . '-' . $month . '-31' . "' GROUP BY YEAR(date), MONTH(date) LIMIT 6");
     
-    /*
-    if( count( $interested ) < 6 ){
-    	for( $i = 0; $i < ( 6 - count( $interested ) ); $i++){
+
+    $total = count( $interested_aux );
+    if( $total < 6 ){
+    	for( $i = 0; $i < ( 6 - $total ); $i++){
     		$blank[] = date('total' => 0, 'date' => false);
     	}
-    	$interested = array_merge($blank,$interested_aux);
-    }*/
+    	$interested = array_merge($blank, $interested_aux);
+    }
     
 
     
     echo '<pre>';
-    print_r($interested_aux);
+    print_r($interested);
     print_r($jobs);
     print_r($users);
 
