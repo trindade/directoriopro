@@ -4,13 +4,13 @@
 
 {% block content %}
 
-<div id="preview" style="position:absolute;margin-left: 395px;width: 400px;"></div>
+
 
 <h1>Emails eventos</h1>
 
 <form action="{{ path('event_emails') }}">
 	ID evento o hashtag: 
-	<input name="q" value="{{ search }}" style="width:170px"/> 
+	<input name="q" value="{{ search }}"/> 
 	<input type="submit" value="Buscar"/>
 </form>
 
@@ -19,7 +19,7 @@
 	
 		<form>
 
-<input name="subject" placeholder="Asunto" required="required" style="width:350px;"/>
+<input name="subject" placeholder="Asunto" required="required" style="width:400px;"/>
 
 <br/><br/>
 	
@@ -30,7 +30,7 @@
 		
 <br/><br/>
 		
-<textarea name="template" id="template" style="width:350px;height:200px" required="required" onchange="previewTemplate()">
+<textarea name="template" id="template" style="width:400px;height:200px" required="required" onchange="previewTemplate()">
 <table width="600" cellpadding="0" cellspacing="0" style="font-size:16px;font-family:arial;border:1px #ccc solid;color:black">
 <tr>
 <td colspan="2" style="background:#CD2800;text-align:center;padding:13px">
@@ -48,6 +48,10 @@ esto es una prueba
 </td>
 </tr>
 </table></textarea>
+		
+		<br/><br/>
+		
+		<div id="preview" style="border:1px black solid"></div>
 		
 		<br/><br/>
 		
