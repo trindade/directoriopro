@@ -12,7 +12,7 @@
 	<a href="{{ path('post_new') }}{% if form_type == 1 %}?type=1{% endif %}" class="btn btn-large btn-primary">Publicar empleo</a>
 
 
-	<b>Filtrar por categoría</b><br/><br/>
+	<br/>
 	<ul>
 	{% for category in categories %}
 		<li><a href="{{ path('post_search') }}?c={{loop.index0}}&t={{ form_type }}">{{category}}</a></li>
