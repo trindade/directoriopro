@@ -8,6 +8,12 @@
 
 {% block sidebar %}
 
+	{% if entity.id == app.session.get('id') %}
+		<a class="btn btn-large btn-primary" href="{{ path('user_invite') }}">Invitar contactos</a>
+	{% endif %}
+	
+
+
 	{% if entity.twitterurl %}
 		<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @{{ entity.twitterurl }}</a>
 		<br/><br/>
