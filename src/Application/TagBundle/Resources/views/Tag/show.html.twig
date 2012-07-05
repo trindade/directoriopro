@@ -36,48 +36,67 @@
 
 	<h1>Comunidad {{ entity.title }}</h1>
 	
-	{{ entity.users }} Usuarios<br/><br/>
 	
+	<ul class="nav nav-tabs tabs">
+		<li class="active"><a href="#info" data-toggle="tab">{{ entity.users }} Usuarios</a></li>
+		{% if jobs %}<li><a href="#jobs" data-toggle="tab" id="tab_jobs">Empleo</a></li>{% endif %}
+		<li><a href="#tweets" data-toggle="tab" id="tab_tweets">Tweets</a></li>
+	</ul>
+
+
+	
+	
+	
+	
+	<div class="tab-content">
+
+	<div class="tab-pane active" id="info">
 
 	{% for user in users %} 
 		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}"><img src="{{ user.getAvatar('normal') }}" rel="twipsy" data-original-title="{{ user.name }}" alt="{{ user.name }}" width="48" height="48" style="width:48px;height:48px"/></a>
 	{% endfor %}
 	
-	<br/><br/>
+	</div>
+	
+	
 	
 	
     {% if jobs %}
-		
-		
-		<b>Ofertas de empleo de {{ entity.title }}</b><br/><br/>
+    
+    	<div class="tab-pane" id="info">		
 
-		<ul>
-		{% for job in jobs %}
-			
-			
-			<li style="color:black"><a href="{{ path('post_show', { 'id': job.id, 'slug': job.slug }) }}">{{ job.title }}</a><br/>
-			{% if job.company %}
-				{{ job.company }} - 
-			{% endif %}
-			<a href="{{ path('post_city', { 'id': job.getCityId() }) }}" style="color:black" style="color:black">{{ job.location }}</a>
-			<br/><br/>
+
+			<ul>
+			{% for job in jobs %}
+				
+				
+				<li style="color:black"><a href="{{ path('post_show', { 'id': job.id, 'slug': job.slug }) }}">{{ job.title }}</a><br/>
+				{% if job.company %}
+					{{ job.company }} - 
+				{% endif %}
+				<a href="{{ path('post_city', { 'id': job.getCityId() }) }}" style="color:black" style="color:black">{{ job.location }}</a>
+				<br/><br/>
+				</li>
+				
+			{% endfor %}
+			<li>
+				<a href="{{ path('post_search') }}?q={{ entity.title }}">Ver más ofertas de {{ entity.title }}</a>
 			</li>
-			
-		{% endfor %}
-		<li>
-			<a href="{{ path('post_search') }}?q={{ entity.title }}">Ver más ofertas de {{ entity.title }}</a>
-		</li>
-		</ul>
-		<br/>
+			</ul>
+		
+		</div>
 
     
     {% endif %}
+    
+    <div class="tab-pane" id="tweets">		
+	
+		<div id="tweets">cargando...</div>
+	
+	</div>
 	
 	
-	<b>Discusiones en twitter sobre #{{ entity.slug|replace({'-': ''}) }}</b><br/><br/>
-	
-	
-	<div id="tweets">cargando...</div>
+	</div>
 
 
 {% endblock %}
@@ -86,21 +105,32 @@
 {% block script_load %}
 
 	$("*[rel=twipsy]").tooltip({placement:'bottom',animation:false});
-
-	$.ajax({
-		dataType: 'jsonp',
-		success: function(data){
-			html = '';
-			if( data.results.length ){
-			    $.each(data.results, function(i,item){
-					html += '<a href="http://twitter.com/' + item.from_user + '" target="_blank" style="width:35px;height:35px;float:left;margin-right:15px"><img src="' + item.profile_image_url + '"></a><div style="float:left;width:500px">' + replaceURLWithHTMLLinks( item.text ) + '</div><br class="clear"/><br/></li>';
-			    });
-				$("#tweets").html(html);
-			}else{
-				$('#tweets').html('sin resultados');
-			}
-		},
-		type: 'GET',
-		url: 'http://search.twitter.com/search.json?lang=es&rpp=10&q=%23{{ entity.slug|replace({'-': ''}) }}%20-RT%20'
+	
+	
+	$('#tab_tweets').click(function(){
+		if( $('#tweets').html() == '' ){
+			$("#tweets").html( 'cargando...' );
+			$.ajax({
+				dataType: 'jsonp',
+				success: function(data){
+					html = '';
+					if( data.results.length ){
+					    $.each(data.results, function(i,item){
+							html += '<a href="http://twitter.com/' + item.from_user + '" target="_blank" style="width:35px;height:35px;float:left;margin-right:15px"><img src="' + item.profile_image_url + '"></a><div style="float:left;width:500px">' + replaceURLWithHTMLLinks( item.text ) + '</div><br class="clear"/><br/></li>';
+					    });
+						$("#tweets").html(html);
+					}else{
+						$('#tweets').html('sin resultados');
+					}
+				},
+				type: 'GET',
+				url: 'http://search.twitter.com/search.json?lang=es&rpp=10&q=%23{{ entity.slug|replace({'-': ''}) }}%20-RT%20'
+			});
+		}
 	});
+	
+	
+	
+	
+
 {% endblock %}
