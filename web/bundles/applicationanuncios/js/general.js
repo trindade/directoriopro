@@ -129,7 +129,7 @@ function get_github(){
 						  }
 					  }
 					
-					  html = '<li><a href="' + item.url + '" target="_blank">' + item.name;
+					  html = '<li><a href="' + item.url + '" target="_blank" style="padding:0">' + item.name;
 					  if( item.language ) html += ' (' + item.language + ')';
 					  html += '</a></li>';
 
