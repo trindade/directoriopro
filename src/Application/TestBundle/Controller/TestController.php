@@ -80,15 +80,15 @@ class TestController extends Controller
 
 		$posts = false;
 		if( $entity->getEnabled() ){
-			$search = $entity->getTag();
-			$query = $em->createQueryBuilder();
-			$query->add('select', 'p')
-			   ->add('from', 'ApplicationAnunciosBundle:Post p')
-			   ->andWhere("( p.body LIKE '%".$search."%' OR p.title LIKE '%".$search."%' )")
-			   ->add('orderBy', 'p.date DESC')
-			   ->setMaxResults(5);
-			$posts = $query->getQuery()->getResult();
+			
+			// get jobs
+			$posts = $em->getRepository('ApplicationAnunciosBundle:Post')
+			->search($entity->getTag(), false, false, false, 20);
 		}
+		
+		
+		
+
 		
 
 		$query = $em->createQueryBuilder();

@@ -116,6 +116,9 @@
 			</li>
 			
 		{% endfor %}
+			<li>
+				<a href="{{ path('post_search') }}?q={{ entity.tag }}">Ver más ofertas de {{ entity.tag }}</a>
+			</li>
 		</ul>
 
 	</div>
@@ -128,7 +131,6 @@
 
 	<div class="tab-pane" id="users">
 
-	<b>¿Quien ha conseguido el mérito?</b><br/><br/>
 	{% for user in users %}
 		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}" title="<b>{{ categories[ user.getCategoryId() ] }}</b><br/>{{ user.getName() }}" rel="twipsy" style="float:left;margin-right:5px"><img src="{{ user.getAvatar('normal') }}" width="38" height="38"/></a>
 	{% endfor %}

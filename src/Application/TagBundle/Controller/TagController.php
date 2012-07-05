@@ -69,7 +69,7 @@ class TagController extends Controller
         
         // get jobs
         $jobs = $em->getRepository('ApplicationAnunciosBundle:Post')
-          ->search($entity->getTitle(), false, false, false, 5);
+          ->search($entity->getTitle(), false, false, false, 20);
           
         // test
         $test = $em->getRepository('ApplicationTestBundle:Test')->findOneBy( array('tag'=>$slug) );
