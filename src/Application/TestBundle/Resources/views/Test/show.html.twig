@@ -78,7 +78,7 @@
 
 <ul class="nav nav-tabs tabs">
 	<li class="active"><a href="#info" data-toggle="tab">Información</a></li>
-	{% if entity.enabled %}<li><a href="#jobs" data-toggle="tab" id="tab_jobs">Empleo</a></li>{% endif %}
+	{% if posts %}<li><a href="#jobs" data-toggle="tab" id="tab_jobs">Empleo</a></li>{% endif %}
 	{% if users %}<li><a href="#users" data-toggle="tab">Usuarios</a></li>{% endif %}
 </ul>
 
@@ -97,21 +97,30 @@
 
 
 
-{% if entity.enabled %}
+{% if posts %}
 
 	<div class="tab-pane" id="jobs">
 	
 
-	{% if posts %}
-		<b>Ofertas de empleo donde se requiere {{ entity.tag }}</b><br/><br/>
-		<ul>
-		{% for post in posts %}
-			<li><a href="{{ url('post_show', { 'id': post.id, 'slug': post.slug }) }}">{{ post.title }}</a></li>
+
+		<ul>		
+		{% for job in posts %}
+			
+			
+			<li style="color:black"><a href="{{ path('post_show', { 'id': job.id, 'slug': job.slug }) }}">{{ job.title }}</a><br/>
+			{% if job.company %}
+				{{ job.company }} - 
+			{% endif %}
+			<a href="{{ path('post_city', { 'id': job.getCityId() }) }}" style="color:black" style="color:black">{{ job.location }}</a>
+			<br/><br/>
+			</li>
+			
 		{% endfor %}
 		</ul>
-	{% endif %}
-	
+
 	</div>
+	
+
 	
 {% endif %}
 
