@@ -282,7 +282,7 @@ function get_twitterstatus(){
 					html = '<div style="float:left;padding-right:40px"><b>Tweets</b><br/><span style="font-size:30px">' + data[0].user.statuses_count + '</span></div>';
 					html += '<div style="float:left;padding-right:40px"><b>Seguidores</b><br/><span style="font-size:30px">' + data[0].user.followers_count + '</span></div>';
 					html += '<div style="float:left;padding-right:40px"><b>Amigos</b><br/><span style="font-size:30px">' + data[0].user.friends_count + '</span></div>';
-					html += '<div style="float:left;padding-right:40px"><b>Favoritos</b><br/><span style="font-size:30px">' + data[0].user.favourites_count + '</span></div>';
+					//html += '<div style="float:left;padding-right:40px"><b>Favoritos</b><br/><span style="font-size:30px">' + data[0].user.favourites_count + '</span></div>';
 					html += '<br class="clear"/><br/><br/><b>Ultimos estados</b><br/><br/>';
 					$("#twitterstatus_info").html(html);
 					

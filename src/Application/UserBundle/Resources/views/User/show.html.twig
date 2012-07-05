@@ -129,17 +129,9 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 
 <ul id="tabs" class="nav nav-tabs">
-	<li class="dropdown active" data-dropdown="dropdown">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Información <b class="caret"></b></a>
-		<ul class="dropdown-menu">
-			<li><a href="#info" data-toggle="tab"><img src="/bundles/applicationanuncios/images/portafolio.png" align="absmiddle"> Descripción</a></li>
-			{% if entity.pinboardurl or entity.deliciousurl %}
-				<li id="tab_delicious" style="display:none"><a href="#delicious" data-toggle="tab" onclick="get_delicious();"><img src="/bundles/applicationanuncios/images/delicious.png" align="absmiddle"> Delicious</a></li>
-				<li id="tab_pinboard" style="display:none"><a href="#pinboard" data-toggle="tab" onclick="get_pinboard();"><img src="/bundles/applicationanuncios/images/pinboard.png" align="absmiddle"> Pinboard</a></li>
-			{% endif %}
-			{% if entity.url %}<li><a href="{{ entity.url }}" target="_blank"><img src="/bundles/applicationanuncios/images/portafolio.png" align="absmiddle"> Portafolio</a></li>{% endif %}
-		</ul>
-	</li>
+
+
+	<li><a href="#info" data-toggle="tab">Perfil</a></li>
 	
 	{% if entity.twitterurl %}
 		<li id="tab_twitterstatus"><a href="#twitterstatus" data-toggle="tab" onclick="get_twitterstatus();">Twitter</a></li>
@@ -174,15 +166,20 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 		</li>
 	{% endif %}
 	
-	{% if entity.youtubeurl or entity.vimeourl %}
+
+	{% if entity.url %}
 		<li class="dropdown" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Social <b class="caret"></b></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Otros <b class="caret"></b></a>
 			<ul class="dropdown-menu">
+				<li><a href="{{ entity.url }}" target="_blank"><img src="/bundles/applicationanuncios/images/portafolio.png" align="absmiddle"> Portafolio</a></li>			
+				<li id="tab_delicious" style="display:none"><a href="#delicious" data-toggle="tab" onclick="get_delicious();"><img src="/bundles/applicationanuncios/images/delicious.png" align="absmiddle"> Delicious</a></li>
+				<li id="tab_pinboard" style="display:none"><a href="#pinboard" data-toggle="tab" onclick="get_pinboard();"><img src="/bundles/applicationanuncios/images/pinboard.png" align="absmiddle"> Pinboard</a></li>
 				<li id="tab_youtube" style="display:none"><a href="#youtube" data-toggle="tab" onclick="get_youtube();"><img src="/bundles/applicationanuncios/images/youtube.png" align="absmiddle"> Youtube</a></li>
 				<li id="tab_vimeo" style="display:none"><a href="#vimeo" data-toggle="tab" onclick="get_vimeo();"><img src="/bundles/applicationanuncios/images/vimeo.png" align="absmiddle"> Vimeo</a></li>
 			</ul>
 		</li>
 	{% endif %}
+
 	
 
 	
