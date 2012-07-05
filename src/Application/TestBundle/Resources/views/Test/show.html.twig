@@ -75,11 +75,32 @@
 
 <h1>{{ entity.title }}</h1>
 
+
+<ul class="nav nav-tabs tabs">
+	<li class="active"><a href="#info" data-toggle="tab">Información</a></li>
+	{% if entity.enabled %}<li><a href="#jobs" data-toggle="tab" id="tab_jobs">Empleo</a></li>{% endif %}
+	{% if users %}<li><a href="#users" data-toggle="tab">Usuarios</a></li>{% endif %}
+</ul>
+
+
+<div class="tab-content">
+
+<div class="tab-pane active" id="info">
+
 {{ entity.body|raw|nl2br }}
 
-<br/><br/>
+<br class="clear"/><br/>
+
+<span class="date">{{ entity.visits }} visitas</span>
+
+</div>
+
+
 
 {% if entity.enabled %}
+
+	<div class="tab-pane" id="jobs">
+	
 
 	{% if posts %}
 		<b>Ofertas de empleo donde se requiere {{ entity.tag }}</b><br/><br/>
@@ -90,20 +111,24 @@
 		</ul>
 	{% endif %}
 	
+	</div>
+	
 {% endif %}
 
 {% if users %}
+
+	<div class="tab-pane" id="users">
+
 	<b>¿Quien ha conseguido el mérito?</b><br/><br/>
 	{% for user in users %}
 		<a href="{{ path('user_show', { 'id': user.id, 'slug': user.slug }) }}" title="<b>{{ categories[ user.getCategoryId() ] }}</b><br/>{{ user.getName() }}" rel="twipsy" style="float:left;margin-right:5px"><img src="{{ user.getAvatar('normal') }}" width="38" height="38"/></a>
 	{% endfor %}
+	
+	</div>
+	
 {% endif %}
 
-<br class="clear"/><br/>
-
-
-
-<span class="date">{{ entity.visits }} visitas</span>
+</div>
 
 
 
