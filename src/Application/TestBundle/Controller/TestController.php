@@ -83,7 +83,7 @@ class TestController extends Controller
 			
 			// get jobs
 			$posts = $em->getRepository('ApplicationAnunciosBundle:Post')
-			->search($entity->getTag(), false, false, false, 20);
+			->search($entity->getTag(), false, false, false, 10);
 		}
 		
 		
