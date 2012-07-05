@@ -15,7 +15,12 @@
 
 	<h1>Comunidades</h1>
 
-
+	<ul class="nav nav-tabs">
+		<li><a href="{{ path('user') }}">Profesionales</a></li>
+		<li><a href="{{ path('user_freelance') }}">Freelance</a></li>
+		<li class="active"><a href="{{ path('tag') }}">Comunidades</a></li>
+		<li><a href="{{ path('user_comments_all') }}">Recomendaciones</a></li>
+	</ul>
 	
 	{% for tag in entities %} 
 		<a href="{{ path('tag_show', { 'slug': tag.slug }) }}" style="float:left;border-radius:5px;padding:2px 5px;background:#666;color:white;margin:0 5px 5px 0">{{ tag.title }} ({{ tag.users }})</a>
