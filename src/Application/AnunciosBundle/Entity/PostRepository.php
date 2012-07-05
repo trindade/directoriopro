@@ -28,7 +28,7 @@ class PostRepository extends EntityRepository
            ->add('from', 'ApplicationAnunciosBundle:Post p')
            ->andWhere('p.visible = 1')
            ->andWhere('p.type = 0')
-           ->add('orderBy', 'p.featured DESC, p.date_featured ASC, p.id DESC');
+           ->add('orderBy', 'p.featured DESC, p.interested ASC, p.id DESC');
 
         // categoria?
         if ( $category_id ) {
@@ -53,7 +53,7 @@ class PostRepository extends EntityRepository
             ->add('from', 'ApplicationAnunciosBundle:Post p')
             ->andWhere('p.city_id = :city_id')->setParameter('city_id', intval($city_id))
             ->andWhere('p.visible = 1')
-            ->add('orderBy', 'p.featured DESC, p.id DESC');
+            ->add('orderBy', 'p.featured DESC, p.interested ASC, p.id DESC');
 
         // categoria?
         if ( $category_id ) {
@@ -79,7 +79,7 @@ class PostRepository extends EntityRepository
         $qb->add('select', 'p')
           ->add('from', 'ApplicationAnunciosBundle:Post p')
           ->add('where', 'p.visible = 1')
-          ->add('orderBy', 'p.featured DESC, p.id DESC')
+          ->add('orderBy', 'p.featured DESC, p.interested ASC, p.id DESC')
           ->setMaxResults($limit);
 
         if ( $search ) $qb->andWhere("( p.body LIKE '%".$search."%' OR p.title LIKE '%".$search."%' )");
