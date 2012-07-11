@@ -251,8 +251,8 @@
 				dataType: 'jsonp',
 				success: function(data){
 					html = '';
-					if( data.results.length ){
-					    $.each(data.results, function(i,item){
+					if( data.length ){
+					    $.each(data, function(i,item){
 							html += '<a href="' + item.url_details + '" target="_blank" style="float:left;margin:0 10px 10px 0" rel="twipsy" data-original-title="' + item.title + '"><img src="' + item.cover + '" alt="' + item.title + '"></a>';
 					    });
 					    
