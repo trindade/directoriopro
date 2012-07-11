@@ -15,6 +15,17 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CompanyController extends Controller
 {
+
+    /**
+     * Lists all Company entities.
+     *
+     * @Route("/", name="company")
+     * @Template()
+     */
+    public function indexAction()
+    {
+    	return $this->render('ApplicationCompanyBundle:Company:index.html.twig');
+    }
 	
     /**
      * static company

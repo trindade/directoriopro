@@ -17,12 +17,19 @@
 
 {% block content %}
 
+
+<ul class="breadcrumb">
+  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
+  <li><a href="{{ path('company') }}">Empresas</a> <span class="divider">/</span></li>
+  <li>24 symbols</li>
+</ul>
+
 <h1>24symbols</h1>
 
 24symbols es una plataforma web para leer y compartir libros digitales.<br/><br/>
 
 <ul class="nav nav-tabs tabs">
-	<li class="active"><a href="#video" data-toggle="tab">Video</a></li>
+	<li class="active"><a href="#videos" data-toggle="tab">Video</a></li>
 	<li><a href="#slides" data-toggle="tab">Slides</a></li>
 	<li><a href="#tweets" data-toggle="tab" id="tab_tweets">Tweets</a></li>
 	<li><a href="#map" data-toggle="tab" id="tab_map">Mapa</a></li>
@@ -41,7 +48,7 @@
 <div class="tab-pane" id="tweets"></div>
 
 <div class="tab-pane" id="map">
-	<div id="address">Princesa 29, planta 4.D, 28008, Madrid, España</div><br/>
+	<div id="address">Calle Princesa 29, planta 4.D, 28008, Madrid, España</div><br/>
 	<div id="map_canvas" style="width:500px;height:300px"></div>
 </div>
 
