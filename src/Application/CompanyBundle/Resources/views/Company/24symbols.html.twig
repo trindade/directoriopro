@@ -1,15 +1,81 @@
+share
+
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-{% block title "test" %}
+{% block title "24symbols" %}
 
 {% block sidebar %}
 
-test1
+	<a href="http://24symbols.com" class="btn">Visitar web</a>
+	
+	<br/><br/>
+
+	<b>Ofertas de empleo</b><br/><br/>
+	<a href="/post/programadores-ror-ios-android-madrid-24symbols-245/">Programadores en RoR, iOS y ANDROID</a>
 
 {% endblock %}
 
 {% block content %}
 
-test2
+<h1>24symbols</h1>
 
+24symbols es una plataforma web para leer y compartir libros digitales.
+
+<ul class="nav nav-tabs tabs">
+	<li class="active"><a href="#video" data-toggle="tab">Video</a></li>
+	<li><a href="#slides" data-toggle="tab">Slides</a></li>
+	<li><a href="#tweets" data-toggle="tab" id="tab_tweets">Tweets</a></li>
+	<li><a href="#map" data-toggle="tab" id="tab_map">Mapa</a></li>
+</ul>
+
+<div class="tab-content">
+
+<div class="tab-pane active" id="videos">
+	<iframe width="560" height="315" src="http://www.youtube.com/embed/yELXsf24pho" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div class="tab-pane" id="slides">
+	<script async class="speakerdeck-embed" data-id="4fc0ea9b34e76d001f00d3dc" data-ratio="1.4143646408839778" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
+
+<div class="tab-pane" id="tweets"></div>
+
+<div class="tab-pane" id="map">
+	<div id="address">Princesa 29, planta 4.D, 28008, Madrid, España</div><br/>
+	<div id="map_canvas" style="width:500px;height:300px"></div>
+</div>
+
+{% endblock %}
+
+
+{% block script_load %}
+	
+	$('#tab_map').click(function(){
+		getMap();
+	});
+	
+	$('#tab_tweets').click(function(){
+		if( $('#tweets').html() == '' ){
+			$("#tweets").html( 'cargando...' );
+			$.ajax({
+				dataType: 'jsonp',
+				success: function(data){
+					html = '';
+					if( data.results.length ){
+					    $.each(data.results, function(i,item){
+							html += '<a href="http://twitter.com/' + item.from_user + '" target="_blank" style="width:35px;height:35px;float:left;margin-right:15px"><img src="' + item.profile_image_url + '"></a><div style="float:left;width:500px">' + replaceURLWithHTMLLinks( item.text ) + '</div><br class="clear"/><br/></li>';
+					    });
+						$("#tweets").html(html);
+					}else{
+						$('#tweets').html('sin resultados');
+					}
+				},
+				type: 'GET',
+				url: 'http://search.twitter.com/search.json?rpp=10&q=from%3A24symbols'
+			});
+		}
+	});
+
+
+	
 {% endblock %}
