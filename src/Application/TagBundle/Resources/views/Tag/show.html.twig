@@ -38,9 +38,11 @@
 	
 	
 	<ul class="nav nav-tabs tabs">
-		<li class="active"><a href="#info" data-toggle="tab">{{ entity.users }} Usuarios</a></li>
-		{% if jobs %}<li><a href="#jobs" data-toggle="tab" id="tab_jobs">Empleo</a></li>{% endif %}
+		<li class="active"><a href="#info" data-toggle="tab">{{ entity.users }} Miembros</a></li>
+		{% if jobs %}<li><a href="#jobs" data-toggle="tab">Empleo</a></li>{% endif %}
+		{% if events %}<li><a href="#events" data-toggle="tab">Eventos</a></li>{% endif %}
 		<li><a href="#tweets" data-toggle="tab" id="tab_tweets">Tweets</a></li>
+		<li><a href="#books" data-toggle="tab" id="tab_books">Libros</a></li>
 	</ul>
 
 
@@ -89,7 +91,35 @@
     
     {% endif %}
     
+    
+    {% if events %}
+    
+    	<div class="tab-pane" id="events">		
+
+
+			<ul>
+			{% for event in events %}
+				
+				
+				<li style="color:black"><a href="{{ path('event_show', { 'id': event.id, 'slug': event.slug }) }}">{{ event.title }}</a><br/>
+				{{ event.location }}
+				<br/><br/>
+				</li>
+				
+			{% endfor %}
+			<li>
+				<a href="{{ path('event_search') }}?q={{ entity.title }}">Ver más eventos sobre {{ entity.title }}</a>
+			</li>
+			</ul>
+		
+		</div>
+
+    
+    {% endif %}
+    
     <div class="tab-pane" id="tweets"></div>
+    
+    <div class="tab-pane" id="books"></div>
 	
 	
 	</div>
@@ -99,6 +129,10 @@
 
 
 {% block script_load %}
+
+
+	var tag = '{{ entity.title }}';
+	
 
 	$("*[rel=twipsy]").tooltip({placement:'bottom',animation:false});
 	
@@ -126,7 +160,114 @@
 	});
 	
 	
+	$('#tab_books').click(function(){
 	
+		url_api = 'http://www.etnassoft.com/api/v1/get/?criteria=most_viewed&num_items=10&order=newest&callback=?';
+		
+		category_id = false;
+		
+		switch( slug ){
+			case 'php'
+				category_id = 226;
+				break;
+			case 'mysql'
+				category_id = 204;
+				break;
+			case 'nosql'
+				category_id = 205;
+				break;
+			case 'postgresql':
+				category_id = 254;
+				break;
+			case 'git':
+				category_id = 210;
+				break;
+			case 'mercurial':
+				category_id = 398;
+				break;
+			case 'svn':
+				category_id = 211;
+				break;
+			case 'css':
+			case 'css3':
+				category_id = 213;
+				break;
+			case 'html':
+			case 'html5':
+				category_id = 215;
+				break;
+			case 'scrum':
+				category_id = 386;
+				break;
+			case 'tdd':
+				category_id = 219;
+				break;
+			case 'net':
+				category_id = 305;
+				break;
+			case 'c':
+				category_id = 271;
+				break;
+			case 'c++':
+				category_id = 855;
+				break;
+			case 'haskel':
+				category_id = 417;
+				break;
+			case 'javascript':
+				category_id = 223;
+				break;
+			case 'java':
+				category_id = 222;
+				break;
+			case 'jquery':
+				category_id = 329;
+				break;
+			case 'python':
+				category_id = 227;
+				break;
+			case 'ruby':
+				category_id = 228;
+				break;
+			case 'ruby on rails':
+				category_id = 763;
+				break;
+			case 'scala':
+				category_id = 359;
+				break;
+		}
+		
+		if( category_id ){
+			url_api += '&category_id=' + category_id;
+		}else{
+			url_api += '&keyword=' + tag;
+		}
+		
+		
+	
+		if( $('#books').html() == '' ){
+			$("#books").html( 'cargando...' );
+			$.ajax({
+				dataType: 'jsonp',
+				success: function(data){
+					html = '';
+					if( data.results.length ){
+					    $.each(data.results, function(i,item){
+							html += '<a href="' + item.url_details + '" target="_blank" style="float:left;margin:0 10px 10px 0" rel="twipsy" data-original-title="' + item.title + '"><img src="' + item.cover + '" alt="' + item.title + '"></a>';
+					    });
+					    
+					    html += '<br class="clear"/><br/><a href="http://openlibra.org" target="_blank">Libros extraidos de openlibra</a>';
+					    
+						$("#books").html(html);
+					}else{
+						$('#books').html('sin resultados');
+					}
+				},
+				type: 'GET',
+				url: url_api
+			});
+		}
+	});
 	
 
 {% endblock %}

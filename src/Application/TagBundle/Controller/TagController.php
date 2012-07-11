@@ -71,6 +71,17 @@ class TagController extends Controller
         $jobs = $em->getRepository('ApplicationAnunciosBundle:Post')
           ->search($entity->getTitle(), false, false, false, 10);
           
+        // get events
+        $search = $entity->getTitle();
+        $qb = $em->createQueryBuilder();
+        $qb->add('select', 'e')
+           ->add('from', 'ApplicationEventBundle:Event e')
+           ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
+           ->add('orderBy', 'e.featured DESC, e.date_start DESC')
+           ->andWhere("( e.title LIKE '%".$search."%' OR e.hashtag LIKE '%".$search."%' )");
+        $events = $qb->getQuery()->setMaxResults(5)->getResult();
+        
+          
         // test
         $test = $em->getRepository('ApplicationTestBundle:Test')->findOneBy( array('tag'=>$slug) );
                   
@@ -79,7 +90,8 @@ class TagController extends Controller
             'entity' => $entity,
             'users' => $users,
             'jobs' => $jobs,
-            'test' => $test
+            'test' => $test,
+            'events' => $events
 		);
     }
 
