@@ -19,7 +19,7 @@
 
 <h1>24symbols</h1>
 
-24symbols es una plataforma web para leer y compartir libros digitales.
+24symbols es una plataforma web para leer y compartir libros digitales.<br/><br/>
 
 <ul class="nav nav-tabs tabs">
 	<li class="active"><a href="#video" data-toggle="tab">Video</a></li>
@@ -45,10 +45,15 @@
 	<div id="map_canvas" style="width:500px;height:300px"></div>
 </div>
 
+</div>
+
 {% endblock %}
 
 
 
+{% block load_src %}
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+{% endblock %}
 
 {% block script_load %}
 	
