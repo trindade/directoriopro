@@ -1,0 +1,108 @@
+{% set share_url = url('company_show', { 'id': 'floqq' }) %}
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Floqq" %}
+
+{% block sidebar %}
+
+<a href="http://floqq.com" class="btn">Visitar web</a>
+
+<br/><br/>
+
+<b>Ofertas de empleo</b><br/><br/>
+
+<ul>
+	<li><a href="/post/python-web-developer-madrid-floqq-238/">Python Web Developer</a></li>
+</ul>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<ul class="breadcrumb">
+  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
+  <li><a href="{{ path('company') }}">Empresas</a> <span class="divider">/</span></li>
+  <li>Floqq</li>
+</ul>
+
+<h1>Floqq</h1>
+
+Plataforma que pone en contacto profesores con alumnos para impartir píldoras de formación
+
+<ul class="nav nav-tabs tabs">
+	<li class="active"><a href="#videos" data-toggle="tab">Video</a></li>
+	<li><a href="#slides" data-toggle="tab">Presentación</a></li>
+	<li><a href="#tweets" data-toggle="tab" id="tab_tweets">Tweets</a></li>
+	<li><a href="#map" data-toggle="tab" id="tab_map">Mapa</a></li>
+</ul>
+
+<div class="tab-content">
+
+<div class="tab-pane active" id="videos">
+
+	<div style="float:right;width:150px;padding-top:10px">
+		<iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/floqq&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;locale=es_ES" style="border:0;overflow:hidden;width:140px" class="fblike"></iframe>
+	</div>
+
+	Floqq - Carlos González @villaumbrosia y Oscar del Río @oscardesigns<br/>
+	Betabeers Madrid, 25 de Mayo de 2012.<br/><br/>
+	
+	<iframe width="560" height="315" src="http://www.youtube.com/embed/KurNo03odTQ" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div class="tab-pane" id="slides">
+	<iframe src="http://docs.google.com/viewer?url=https%3A%2F%2Fspeakerd.s3.amazonaws.com%2Fpresentations%2F4fc0c41024e6c6001f009c5e%2F3_floqq.pdf&embedded=true" width="560" height="450" style="border: none;"></iframe>
+</div>
+
+<div class="tab-pane" id="tweets"></div>
+
+<div class="tab-pane" id="map">
+	<div id="address" style="display:none">40.454222,-3.495184</div>
+	Avenida de Castilla 33, 28830 San Fernando de Henares, Madrid<br/><br/>
+	<div id="map_canvas" style="width:500px;height:300px"></div>
+</div>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block load_src %}
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+{% endblock %}
+
+{% block script_load %}
+	
+	$('#tab_map').click(function(){
+		getMap();
+	});
+	
+	$('#tab_tweets').click(function(){
+		if( $('#tweets').html() == '' ){
+			$("#tweets").html( 'cargando...' );
+			$.ajax({
+				dataType: 'jsonp',
+				success: function(data){
+					html = '';
+					if( data.results.length ){
+					    $.each(data.results, function(i,item){
+							html += '<a href="http://twitter.com/' + item.from_user + '" target="_blank" style="width:35px;height:35px;float:left;margin-right:15px"><img src="' + item.profile_image_url + '"></a><div style="float:left;width:500px">' + replaceURLWithHTMLLinks( item.text ) + '</div><br class="clear"/><br/></li>';
+					    });
+						$("#tweets").html(html);
+					}else{
+						$('#tweets').html('sin resultados');
+					}
+				},
+				type: 'GET',
+				url: 'http://search.twitter.com/search.json?rpp=10&q=from%3A24symbols'
+			});
+		}
+	});
+
+
+	
+{% endblock %}
