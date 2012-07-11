@@ -78,7 +78,7 @@ class TagController extends Controller
            ->add('from', 'ApplicationEventBundle:Event e')
            ->andWhere('e.date_start > :date')->setParameter('date', date('Y-m-d H:i:s'))
            ->add('orderBy', 'e.featured DESC, e.date_start DESC')
-           ->andWhere("( e.title LIKE '%".$search."%' OR e.hashtag LIKE '%".$search."%' )");
+           ->andWhere("( e.body LIKE '%".$search."%' OR e.title LIKE '%".$search."%' OR e.hashtag LIKE '%".$search."%' )");
         $events = $qb->getQuery()->setMaxResults(5)->getResult();
         
           
