@@ -56,6 +56,11 @@ ApplicationTagBundle:
     resource: "@ApplicationTagBundle/Controller/"
     type:     annotation
     prefix:   /
+    
+ApplicationCompanyBundle:
+    resource: "@ApplicationCompanyBundle/Controller/"
+    type:     annotation
+    prefix:   /
 
 # Internal routing configuration to handle ESI
 #_internal:
