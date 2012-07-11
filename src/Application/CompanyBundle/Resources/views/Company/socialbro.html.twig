@@ -1,18 +1,20 @@
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-{% block title "Softonic" %}
+{% block title "SocialBro" %}
 
 {% block sidebar %}
 
-<a href="http://softonic.com" class="btn">Visitar web</a>
+<a href="http://es.socialbro.com" class="btn">Visitar web</a>
 
 <br/><br/>
 
 <b>Ofertas de empleo</b><br/><br/>
 
 <ul>
-	<li><a href="/post/php-web-developer-softonic-394/">PHP Web Developer</a></li>
-	<li><a href="/post/javascript-developer-barcelona-softonic-367/">Javascript Developer</a></li>
+	<li><a href="/post/mysql-database-engineer-cordoba-socialbrocom-378/">MySQL Database Engineer</a></li>
+	<li><a href="/post/backend-senior-software-engineer-cordoba-socialbro-ltd-329/">Backend Senior Software Engineer</a></li>
+	<li><a href="/post/software-engineer-web-applications-cordoba-socialbro-ltd-331/">Software Engineer - Web Applications</a></li>
+	<li><a href="/post/designer-cordoba-socialbro-ltd-330/">Designer</a></li>
 </ul>
 
 {% endblock %}
@@ -25,15 +27,16 @@
 <ul class="breadcrumb">
   <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
   <li><a href="{{ path('company') }}">Empresas</a> <span class="divider">/</span></li>
-  <li>Softonic</li>
+  <li>SocialBro</li>
 </ul>
 
-<h1>Softonic</h1>
+<h1>SocialBro</h1>
 
-La misión de softonic consiste en ayudar a las personas a encontrar y a disfrutar el software que necesitan para mejorar sus vidas.<br/><br/>
+Con SocialBro puedes gestionar y analizar tu comunidad de Twitter. Rompe las barreras que hay entre tú y tu comunidad.<br/><br/>
 
 <ul class="nav nav-tabs tabs">
 	<li class="active"><a href="#videos" data-toggle="tab">Video</a></li>
+	<li><a href="#slides" data-toggle="tab">Slides</a></li>
 	<li><a href="#tweets" data-toggle="tab" id="tab_tweets">Tweets</a></li>
 	<li><a href="#map" data-toggle="tab" id="tab_map">Mapa</a></li>
 </ul>
@@ -42,19 +45,21 @@ La misión de softonic consiste en ayudar a las personas a encontrar y a disfrut
 
 <div class="tab-pane active" id="videos">
 
-	Softonic - Jose Armesto @fiunchinho<br/>
-	Betabeers Barcelona, 28 de junio de 2012.<br/><br/>
+	SocialBro - Alfredo Artiles @aartiles24<br/>
+	Betabeers Madrid, 28 de febrero de 2012.<br/><br/>
 	
-	<iframe width="560" height="315" src="http://www.youtube.com/embed/ttkUWT9fU1c" frameborder="0" allowfullscreen></iframe>
+	<iframe width="560" height="315" src="http://www.youtube.com/embed/n-D4Ckd-m8w" frameborder="0" allowfullscreen></iframe>
 </div>
 
-
+<div class="tab-pane" id="slides">
+	<script async class="speakerdeck-embed" data-id="4f4bb7a6dc1039002101c5f4" data-ratio="1.2945638432364097" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
 
 <div class="tab-pane" id="tweets"></div>
 
 <div class="tab-pane" id="map">
-	<div id="address" style="display:none">41.436921,2.180642</div>
-	Calle Rosselló i Porcel, 21 / 17, 08016 Barcelona, España<br/><br/>
+	<div id="address" style="display:none">37.884025,-4.782021</div>
+	San Felipe 9, 3ro izq, 14003 Córdoba<br/><br/>
 	<div id="map_canvas" style="width:500px;height:300px"></div>
 </div>
 
@@ -91,7 +96,7 @@ La misión de softonic consiste en ayudar a las personas a encontrar y a disfrut
 					}
 				},
 				type: 'GET',
-				url: 'http://search.twitter.com/search.json?rpp=10&q=from%3ASoftonic'
+				url: 'http://search.twitter.com/search.json?rpp=10&q=from%3Asocialbro'
 			});
 		}
 	});

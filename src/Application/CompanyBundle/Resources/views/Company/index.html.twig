@@ -21,6 +21,15 @@
 
 <h1>Empresas</h1>
 
+
+<ul class="nav nav-tabs">
+	<li><a href="{{ path('post') }}">Empleo</a></li>
+	<li class="active"><a href="{{ path('company') }}">Empresas</a></li>
+	<li><a href="{{ path('post_search') }}?t=3">Socio</a></li>
+	<li><a href="{{ path('post_search') }}?t=1">Freelance</a></li>
+	<li><a href="{{ path('post_search') }}?t=2">Prácticas</a></li>
+</ul>
+
 <div style="padding:10px 0;border-top:1px #efefef solid;">
 	<div style="float:left;width:340px;padding-left:15px">
 		<a href="/company/24symbols/" class="title" style="font-size:15px;line-height:16px;">24symbols</a><br>
@@ -43,6 +52,26 @@
 	<br class="clear">
 </div>
 
+<div style="padding:10px 0;border-top:1px #efefef solid;">
+	<div style="float:left;width:340px;padding-left:15px">
+		<a href="/company/touristeye/" class="title" style="font-size:15px;line-height:16px;">touristeye</a><br>
+		Madrid, España
+	</div>		
+	<div style="float:right;width:100px;">
+		<span class="date">11/07/2012</span>
+	</div>
+	<br class="clear">
+</div>
 
+<div style="padding:10px 0;border-top:1px #efefef solid;background:#F6F6F6">
+	<div style="float:left;width:340px;padding-left:15px">
+		<a href="/company/socialbro/" class="title" style="font-size:15px;line-height:16px;">SocialBro</a><br>
+		Córdoba, España
+	</div>		
+	<div style="float:right;width:100px;">
+		<span class="date">11/07/2012</span>
+	</div>
+	<br class="clear">
+</div>
 
 {% endblock %}
