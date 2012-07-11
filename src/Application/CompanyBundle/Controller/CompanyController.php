@@ -30,9 +30,9 @@ class CompanyController extends Controller
     /**
      * static company
      *
-     * @Route("/{id}/", name="company_static")
+     * @Route("/{id}/", name="company_show")
      */
-    public function staticAction($id)
+    public function showAction($id)
     {
         return $this->render('ApplicationCompanyBundle:Company:'.$id.'.html.twig');
 	}
