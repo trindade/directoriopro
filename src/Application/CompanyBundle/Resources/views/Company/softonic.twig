@@ -1,17 +1,18 @@
 {% extends "ApplicationAnunciosBundle::layout.html.twig" %}
 
-{% block title "24symbols" %}
+{% block title "Softonic" %}
 
 {% block sidebar %}
 
-<a href="http://24symbols.com" class="btn">Visitar web</a>
+<a href="http://careers.softonic.com" class="btn">Visitar web</a>
 
 <br/><br/>
 
 <b>Ofertas de empleo</b><br/><br/>
 
 <ul>
-	<li><a href="/post/programadores-ror-ios-android-madrid-24symbols-245/">Programadores en RoR, iOS y ANDROID</a></li>
+	<li><a href="/post/php-web-developer-softonic-394/">PHP Web Developer</a></li>
+	<li><a href="/post/javascript-developer-barcelona-softonic-367/">Javascript Developer</a></li>
 </ul>
 
 {% endblock %}
@@ -24,16 +25,15 @@
 <ul class="breadcrumb">
   <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
   <li><a href="{{ path('company') }}">Empresas</a> <span class="divider">/</span></li>
-  <li>24 symbols</li>
+  <li>Softonic</li>
 </ul>
 
-<h1>24symbols</h1>
+<h1>Softonic</h1>
 
-24symbols es una plataforma web para leer y compartir libros digitales.<br/><br/>
+La misión de softonic consiste en ayudar a las personas a encontrar y a disfrutar el software que necesitan para mejorar sus vidas.<br/><br/>
 
 <ul class="nav nav-tabs tabs">
 	<li class="active"><a href="#videos" data-toggle="tab">Video</a></li>
-	<li><a href="#slides" data-toggle="tab">Slides</a></li>
 	<li><a href="#tweets" data-toggle="tab" id="tab_tweets">Tweets</a></li>
 	<li><a href="#map" data-toggle="tab" id="tab_map">Mapa</a></li>
 </ul>
@@ -42,21 +42,19 @@
 
 <div class="tab-pane active" id="videos">
 
-	24symbols - Angel Luengo y Javier Fernández<br/>
-	Betabeers Madrid, 25 de Mayo de 2012.<br/><br/>
+	Softonic - Jose Armesto @fiunchinho<br/>
+	Betabeers Barcelona, 28 de junio de 2012.<br/><br/>
 	
-	<iframe width="560" height="315" src="http://www.youtube.com/embed/yELXsf24pho" frameborder="0" allowfullscreen></iframe>
+	<iframe width="560" height="315" src="http://www.youtube.com/embed/ttkUWT9fU1c" frameborder="0" allowfullscreen></iframe>
 </div>
 
-<div class="tab-pane" id="slides">
-	<script async class="speakerdeck-embed" data-id="4fc0ea9b34e76d001f00d3dc" data-ratio="1.4143646408839778" src="//speakerdeck.com/assets/embed.js"></script>
-</div>
+
 
 <div class="tab-pane" id="tweets"></div>
 
 <div class="tab-pane" id="map">
-	<div id="address" style="display:none">40.427674,-3.714366</div>
-	Calle Princesa 29, planta 4.D, 28008, Madrid, España<br/><br/>
+	<div id="address" style="display:none">41.436921,2.180642</div>
+	Calle Rosselló i Porcel, 21 / 17, 08016 Barcelona, España<br/><br/>
 	<div id="map_canvas" style="width:500px;height:300px"></div>
 </div>
 
@@ -93,7 +91,7 @@
 					}
 				},
 				type: 'GET',
-				url: 'http://search.twitter.com/search.json?rpp=10&q=from%3A24symbols'
+				url: 'http://search.twitter.com/search.json?rpp=10&q=from%3ASoftonic'
 			});
 		}
 	});
