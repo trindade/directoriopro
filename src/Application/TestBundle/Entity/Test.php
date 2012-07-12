@@ -94,7 +94,7 @@ class Test
     /**
      * @var integer $order
      *
-     * @ORM\Column(name="order", type="integer")
+     * @ORM\Column(name="order", type="integer", nullable=true)
      */
     private $order;
 
