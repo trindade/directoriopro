@@ -92,11 +92,11 @@ class Test
     private $enabled = 1;
     
     /**
-     * @var integer $order
+     * @var integer $position
      *
-     * @ORM\Column(name="order", type="integer", nullable=true)
+     * @ORM\Column(name="position", type="integer", nullable=true)
      */
-    private $order;
+    private $position;
 
 
     /**
@@ -312,22 +312,22 @@ class Test
     }
     
     /**
-     * Set order
+     * Set position
      *
-     * @param integer $order
+     * @param integer $position
      */
-    public function setOrder($order)
+    public function setPosition($position)
     {
-        $this->order = $order;
+        $this->position = $position;
     }
 
     /**
-     * Get order
+     * Get position
      *
      * @return integer 
      */
-    public function getOrder()
+    public function getPosition()
     {
-        return $this->order;
+        return $this->position;
     }
 }

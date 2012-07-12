@@ -15,7 +15,7 @@ class TestType extends AbstractType
             ->add('body')
             ->add('questions')
             ->add('replies')
-            ->add('order')
+            ->add('position')
         ;
     }
 
