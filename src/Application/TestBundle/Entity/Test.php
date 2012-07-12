@@ -90,6 +90,13 @@ class Test
      * @ORM\Column(name="enabled", type="integer")
      */
     private $enabled = 1;
+    
+    /**
+     * @var integer $order
+     *
+     * @ORM\Column(name="order", type="integer")
+     */
+    private $order;
 
 
     /**
@@ -302,5 +309,25 @@ class Test
     public function getEnabled()
     {
         return $this->enabled;
+    }
+    
+    /**
+     * Set order
+     *
+     * @param integer $order
+     */
+    public function setEnabled($order)
+    {
+        $this->order = $order;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer 
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

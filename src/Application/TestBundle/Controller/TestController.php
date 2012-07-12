@@ -40,7 +40,7 @@ class TestController extends Controller
 		$query = $em->createQueryBuilder();
 		$query->add('select', 't')
 		   ->add('from', 'ApplicationTestBundle:Test t')
-		   ->add('orderBy', 't.featured DESC, t.id DESC');
+		   ->add('orderBy', 't.featured DESC, t.order ASC, t.id DESC');
 		
         $adapter = new DoctrineORMAdapter($query);
 		$pagerfanta = new Pagerfanta($adapter);
