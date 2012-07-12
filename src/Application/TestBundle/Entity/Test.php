@@ -316,7 +316,7 @@ class Test
      *
      * @param integer $order
      */
-    public function setEnabled($order)
+    public function setOrder($order)
     {
         $this->order = $order;
     }
