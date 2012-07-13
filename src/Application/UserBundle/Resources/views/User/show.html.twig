@@ -152,7 +152,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 	{% endif %}
 
 	
-	{% if entity.bitbucketurl or entity.stackoverflowurl or entity.chromeurl or entity.androidurl or entity.itunesurl or entity.dribbbleurl or entity.forrsturl or entity.flickrurl or entity.url %}
+	{% if entity.bitbucketurl or entity.stackoverflowurl or entity.androidurl or entity.itunesurl or entity.dribbbleurl or entity.forrsturl or entity.flickrurl or entity.url %}
 		<li class="dropdown" data-dropdown="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Cuentas <b class="caret"></b></a>
 			<ul class="dropdown-menu">
@@ -389,10 +389,7 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 	{% endif %}
 
 
-	{% if entity.chromeurl %}
-		chrome_user = '{{ entity.chromeurl }}';
-		$('#tab_chrome').show();
-	{% endif %}
+
 
 
 	{% if entity.twitterurl %}
