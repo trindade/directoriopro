@@ -138,46 +138,35 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 
 	<li class="active"><a href="#info" data-toggle="tab">Perfil</a></li>
-	
-	{% if entity.twitterurl %}
-		<li id="tab_twitterstatus"><a href="#twitterstatus" data-toggle="tab" onclick="get_twitterstatus();">Twitter</a></li>
+
+	{% if entity.githuburl %}
+		<li id="tab_github"><a href="#linkedin" data-toggle="tab" onclick="get_github();">Github</a></li>
 	{% endif %}
 	
 	{% if entity.linkedinurl %}
 		<li id="tab_linkedin"><a href="#linkedin" data-toggle="tab" onclick="get_linkedin();">Linkedin</a></li>
 	{% endif %}
 	
-	{% if entity.githuburl or entity.bitbucketurl or entity.stackoverflowurl or entity.chromeurl or entity.androidurl or entity.itunesurl %}
+	{% if entity.twitterurl %}
+		<li id="tab_twitterstatus"><a href="#twitterstatus" data-toggle="tab" onclick="get_twitterstatus();">Twitter</a></li>
+	{% endif %}
+
+	
+	{% if entity.bitbucketurl or entity.stackoverflowurl or entity.chromeurl or entity.androidurl or entity.itunesurl or entity.dribbbleurl or entity.forrsturl or entity.flickrurl or  %}
 		<li class="dropdown" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Programador <b class="caret"></b></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Cuentas <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li id="tab_github" style="display:none"><a href="#github" data-toggle="tab" onclick="get_github();"><img src="/bundles/applicationanuncios/images/github.png" align="absmiddle"> Github</a></li>
 				<li id="tab_bitbucket" style="display:none"><a href="#bitbucket" data-toggle="tab" onclick="get_bitbucket();"><img src="/bundles/applicationanuncios/images/social/bitbucket.png" width="16" height="16" align="absmiddle"> Bitbucket</a></li>
 				<li id="tab_stackoverflow" style="display:none"><a href="#stackoverflow" data-toggle="tab" onclick="get_stackoverflow();"><img src="/bundles/applicationanuncios/images/stackoverflow.png" align="absmiddle"> Stackoverflow</a></li>
 				<li id="tab_itunes" style="display:none"><a href="#itunes" data-toggle="tab" onclick="get_itunes();"><img src="/bundles/applicationanuncios/images/itunes.png" align="absmiddle"> iPhone / iPad</a></li>
 				<li id="tab_android" style="display:none"><a href="#android" data-toggle="tab" onclick="get_android();"><img src="/bundles/applicationanuncios/images/android.png" align="absmiddle"> Android</a></li>
 				<li id="tab_chrome" style="display:none"><a href="#chrome" data-toggle="tab" onclick="get_chrome();"><img src="/bundles/applicationanuncios/images/chrome.png" align="absmiddle"> Chrome</a></li>
-			</ul>
-		</li>
-	{% endif %}
-	
-	{% if entity.dribbbleurl or entity.forrsturl or entity.flickrurl %}
-		<li class="dropdown" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Diseñador <b class="caret"></b></a>
-			<ul class="dropdown-menu">
+
 				<li id="tab_flickr" style="display:none"><a href="#flickr" data-toggle="tab" onclick="get_flickr();"><img src="/bundles/applicationanuncios/images/flickr.png" align="absmiddle"> Flickr</a></li>
 				<li id="tab_dribbble" style="display:none"><a href="#dribbble" data-toggle="tab" onclick="get_dribbble();"><img src="/bundles/applicationanuncios/images/dribbble.png" align="absmiddle"> Dribbble</a></li>
 				<li id="tab_forrst" style="display:none"><a href="#forrst" data-toggle="tab" onclick="get_forrst();"><img src="/bundles/applicationanuncios/images/forrst.png" align="absmiddle"> Forrst</a></li>
-			</ul>
-		</li>
-	{% endif %}
-	
 
-	{% if entity.url %}
-		<li class="dropdown" data-dropdown="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Otros <b class="caret"></b></a>
-			<ul class="dropdown-menu">
-				<li><a href="{{ entity.url }}" target="_blank"><img src="/bundles/applicationanuncios/images/portafolio.png" align="absmiddle"> Portafolio</a></li>			
+				{% if entity.url %}<li><a href="{{ entity.url }}" target="_blank"><img src="/bundles/applicationanuncios/images/portafolio.png" align="absmiddle"> Portafolio</a></li>{% endif %}
 				<li id="tab_delicious" style="display:none"><a href="#delicious" data-toggle="tab" onclick="get_delicious();"><img src="/bundles/applicationanuncios/images/delicious.png" align="absmiddle"> Delicious</a></li>
 				<li id="tab_pinboard" style="display:none"><a href="#pinboard" data-toggle="tab" onclick="get_pinboard();"><img src="/bundles/applicationanuncios/images/pinboard.png" align="absmiddle"> Pinboard</a></li>
 				<li id="tab_youtube" style="display:none"><a href="#youtube" data-toggle="tab" onclick="get_youtube();"><img src="/bundles/applicationanuncios/images/youtube.png" align="absmiddle"> Youtube</a></li>
@@ -185,15 +174,8 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 			</ul>
 		</li>
 	{% endif %}
-
 	
 
-	
-
-	
-
-	
-	
 	
 
 	
