@@ -27,23 +27,14 @@
 
 
 
-<ul style="list-style-type:none;margin:0;padding:0;width:480px">
-    {% for entity in entities %}
-        <li style="margin-bottom:20px;" {% if entity.featured == 1 %}class="featured"{% endif %}">
 
-          <img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ entity.id }}.png" width="35" height="35" style="float:left;margin-right:13px"/>
-          <div style="float:left;width:425px">
-              <a href="{{ path('test_show', { 'id': entity.id }) }}" class="title">{{ entity.title }}</a><br/>
-              {{ entity.body|truncate(200) }}
-          </div>
-          <br class="clear"/>
+{% for entity in entities %}
+	<a href="{{ path('test_show', { 'id': entity.id }) }}" rel="twipsy" data-original-title="{{ entity.title }}" style="float:left;margin:0 20px 20px 0"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ entity.id }}.png" width="100" height="100"/></a><br/>
+{% endfor %}
 
-        </li>
-    {% endfor %}
-</ul>
+<br class="clear"/>
 
 
-{{ pager|raw }}
 
 
 
