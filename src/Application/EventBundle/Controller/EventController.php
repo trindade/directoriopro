@@ -208,7 +208,7 @@ class EventController extends Controller
     public function cityAction($id)
     {
         $request = $this->getRequest();
-        $type = $request->query->get('t',false);
+        $type = $request->query->get('t',0);
         $page = $request->query->get('page',1);
 
         $em = $this->getDoctrine()->getEntityManager();
