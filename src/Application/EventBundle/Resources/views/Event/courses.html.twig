@@ -1,0 +1,91 @@
+{% set nav_event = 1 %}
+{% extends "ApplicationAnunciosBundle::layout.html.twig" %}
+
+{% block title "Cursos" %}
+
+
+{% block sidebar %}
+	<a href="{{ path('event_new') }}" class="btn btn-large btn-primary">Publicar evento</a>
+
+
+
+	
+	
+	<b>Top ciudades</b><br/><br/>
+
+	<ul>
+    {% for city in cities %}
+		<li><a style="display:inline" href="{{ path('event_city', { 'id': city.id }) }}">{{ city.name }}</a> ({{ city.total }})</li>
+    {% endfor %}
+	</ul>
+	
+	<b>Suscribirse</b><br/><br/>
+	<ul>
+		<li><a style="display:inline" href="http://feeds.feedburner.com/AgendaBetabeers" target="_blank">RSS</a></li>
+		<li><a style="display:inline" href="{{ path('event_calendar') }}">iCal</a></li>
+		<li><a style="display:inline" href="http://twitter.com/betabeers" target="_blank">Twitter</a></li>
+	</ul>
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<ul class="breadcrumb">
+  <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
+  <li class="active">Cursos</li>
+</ul>
+
+<h1>Cursos</h1>
+
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{{ path('event') }}">Próximos</a></li>
+	<!--<li><a href="{{ path('event_search') }}?q=betabeers">Betabeers</a></li>-->
+	<li><a href="{{ path('event_courses') }}">Cursos</a></li>
+	<li><a href="{{ path('event_archive') }}">Pasados</a></li>
+</ul>
+
+
+<ul style="clear:both;list-style-type:none;margin:0">
+    {% for entity in entities %}
+        	
+			{% if entity.date_now %}
+				<li style="margin-bottom:10px;background:url('{{ asset('bundles/applicationanuncios/images/calendar.png') }}') no-repeat left center;padding:10px;padding-left:41px;font-weight:bold;font-size:15px;color:#404040">{{ entity.date_now }}</li>
+			{% endif %}
+			
+			
+			<li style="margin-bottom:20px;margin-left:39px" {% if entity.featured == 1 %}class="featured"{% endif %}">
+				
+	            <a href="{{ path('event_show', { 'id': entity.id, 'slug': entity.slug }) }}" class="title">{{ entity.title }}</a><br/>
+				<b>{{ entity.datestart|date('H:i') }}</b><br/>
+	            {{ entity.body|truncate(200) }}
+				<br/>
+				<a href="{{ path('event_city', { 'id': entity.getCityId() }) }}" class="date">{{ entity.location }}</a>
+				
+				{% if entity.users %}
+					<div style="padding-top:5px">
+						<span class="users" style="margin-left:0;width:34px;height:34px;background-color:#efefef;float:left;margin-right:5px;background-position:10px center"><span style="position:relative;top:7px;left:10px;">{{ entity.users }}</span></span>
+						{% for user in entity.users_list %}
+							<img src="{{ user.getAvatar('normal') }}" width="34" height="34" data-original-title="<b>{{ categories[ user.getCategoryId() ] }}</b><br/>{{ user.getName() }}" rel="twipsy" style="float:left;margin-right:5px"/>
+						{% endfor %}
+						<br class="clear"/>
+					</div>
+				{% endif %}
+				
+
+        </li>
+    {% endfor %}
+</ul>
+
+
+
+
+
+{{ pager|raw }}
+
+
+
+
+{% endblock %}
