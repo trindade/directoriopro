@@ -127,6 +127,13 @@ class Event
      * @ORM\Column(name="slug", type="string", nullable=true, length=255)
      */
     private $slug;
+    
+    /**
+     * @var integer $type
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type = 0;
 
     /**
      * Get id
@@ -463,6 +470,26 @@ class Event
     public function getSlug()
     {
         return $this->slug;
+    }
+    
+    /**
+     * Set type
+     *
+     * @param integer $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**

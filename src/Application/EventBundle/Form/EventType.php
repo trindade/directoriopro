@@ -12,6 +12,12 @@ class EventType extends AbstractType
         $builder
             //->add('user_id')
             ->add('title')
+            
+			->add('type', 'choice', array(
+			  	'expanded' => true,
+			    'choices'   => array('Reunión', 'Curso', 'Conferencia')
+			))
+            
             ->add('body')
             ->add('date_start','date', array( 
 			            //'attr' => array('class' => 'somedatefield'), 

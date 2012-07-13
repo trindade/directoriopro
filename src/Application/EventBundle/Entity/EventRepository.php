@@ -73,10 +73,11 @@ class EventRepository extends EntityRepository
      *
      * @param \DateTime $from
      * @param \DateTime $to
+     * @param int $type
      * @access public
      * @return Doctrine DQL
      */
-    public function findEventsDQL($from, $to = NULL)
+    public function findEventsDQL($from, $to = NULL, $type = 0)
     {
         $query = $this->_em->createQueryBuilder()
             ->add('select', 'e')
@@ -88,6 +89,10 @@ class EventRepository extends EntityRepository
         }else if( $to ){
             $query->andWhere('e.date_start < :date')->setParameter('date', $to->format('Y-m-d'))
                   ->add('orderBy', 'e.date_start DESC');
+        }
+        
+        if( !is_bool( $type ) ){
+	        $query->andWhere('e.type < :type')->setParameter('type', $type);
         }
 
         return $query;
