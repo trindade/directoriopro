@@ -105,9 +105,9 @@ class EventController extends Controller
 
         $entities = Util::eventsDetailsGenerator($entities, $repo);
 
-        $cities = $repo->findEventCities(new \DateTime('now'));
 
-        return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
+
+        return array('pager' => $html, 'entities' => $entities);
     }
 
     /**
@@ -237,6 +237,11 @@ class EventController extends Controller
         }
 
         $entity = new Event();
+        
+        
+        $type = $request->query->get('type');
+        if( $type ) $entity->setType( $type );
+
 
         // ical
         $request = $this->getRequest();
