@@ -166,11 +166,13 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 			<li id="tab_dribbble" style="display:none"><a href="#dribbble" data-toggle="tab" onclick="get_dribbble();"><img src="/bundles/applicationanuncios/images/dribbble.png" align="absmiddle"> Dribbble</a></li>
 			<li id="tab_forrst" style="display:none"><a href="#forrst" data-toggle="tab" onclick="get_forrst();"><img src="/bundles/applicationanuncios/images/forrst.png" align="absmiddle"> Forrst</a></li>
 
-			{% if entity.url %}<li><a href="{{ entity.url }}" target="_blank"><img src="/bundles/applicationanuncios/images/portafolio.png" align="absmiddle"> Portafolio</a></li>{% endif %}
+
 			<li id="tab_delicious" style="display:none"><a href="#delicious" data-toggle="tab" onclick="get_delicious();"><img src="/bundles/applicationanuncios/images/delicious.png" align="absmiddle"> Delicious</a></li>
 			<li id="tab_pinboard" style="display:none"><a href="#pinboard" data-toggle="tab" onclick="get_pinboard();"><img src="/bundles/applicationanuncios/images/pinboard.png" align="absmiddle"> Pinboard</a></li>
 			<li id="tab_youtube" style="display:none"><a href="#youtube" data-toggle="tab" onclick="get_youtube();"><img src="/bundles/applicationanuncios/images/youtube.png" align="absmiddle"> Youtube</a></li>
 			<li id="tab_vimeo" style="display:none"><a href="#vimeo" data-toggle="tab" onclick="get_vimeo();"><img src="/bundles/applicationanuncios/images/vimeo.png" align="absmiddle"> Vimeo</a></li>
+			
+			{% if entity.url %}<li><a href="{{ entity.url }}" target="_blank"><img src="/bundles/applicationanuncios/images/portafolio.png" align="absmiddle"> Portafolio</a></li>{% endif %}
 		</ul>
 	</li>
 
