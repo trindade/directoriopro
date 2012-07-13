@@ -12,7 +12,7 @@
 
 	<ul>
     {% for city in cities %}
-		<li><a style="display:inline" href="{{ path('event_city', { 'id': city.id }) }}?type=1">{{ city.name }}</a> ({{ city.total }})</li>
+		<li><a style="display:inline" href="{{ path('event_city', { 'id': city.id }) }}?t=1">{{ city.name }}</a> ({{ city.total }})</li>
     {% endfor %}
 	</ul>
 

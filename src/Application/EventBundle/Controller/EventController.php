@@ -201,7 +201,7 @@ class EventController extends Controller
 
         $entities = Util::eventsDetailsGenerator($entities, $eventRepo);
 
-        $cities = $eventRepo->findEventCities(new \DateTime('now'));
+        $cities = $eventRepo->findEventCities(new \DateTime('now'), 13, $type);
 
         return array('cities' => $cities, 'city' => $city, 'country' => $country, 'pager' => $html, 'entities' => $entities, 'users' => $users);
     }
