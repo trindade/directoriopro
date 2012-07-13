@@ -121,11 +121,10 @@ class EventRepository extends EntityRepository
             
         $query->add('groupBy', 'c.id')
             ->add('orderBy', 'total DESC')
-            ->setMaxResults($max)
-            ->getQuery()
-            ->getResult();
+            ->setMaxResults($max);
             
-        return $query;
+            
+        return $query->getQuery()->getResult();
     }
 
     /**
