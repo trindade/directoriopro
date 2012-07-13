@@ -74,7 +74,7 @@ class EventController extends Controller
      * @Route("/courses/", name="event_courses")
      * @Template()
      */
-    public function indexAction()
+    public function coursesAction()
     {
 
         $request = $this->getRequest();
