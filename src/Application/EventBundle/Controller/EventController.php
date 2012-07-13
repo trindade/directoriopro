@@ -229,7 +229,8 @@ class EventController extends Controller
      */
     public function newAction()
     {
-
+    
+        $request = $this->getRequest();
         $session = $this->getRequest()->getSession();
         $session_id = $session->get('id');
         if ( !$session_id ) {
@@ -244,7 +245,6 @@ class EventController extends Controller
 
 
         // ical
-        $request = $this->getRequest();
         $ical = $request->query->get('ical');
         $date_start = $date_end = false;
         
