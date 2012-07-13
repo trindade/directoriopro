@@ -42,7 +42,7 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $repo = $em->getRepository('ApplicationEventBundle:Event');
-        $query = $repo->findEventsDQL(new \DateTime('now'), 0);
+        $query = $repo->findEventsDQL(new \DateTime('now'), false, 0);
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -84,7 +84,7 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $repo = $em->getRepository('ApplicationEventBundle:Event');
-        $query = $repo->findEventsDQL(new \DateTime('now'), 1);
+        $query = $repo->findEventsDQL(new \DateTime('now'), false, 1);
 
         $adapter = new DoctrineORMAdapter($query);
 
