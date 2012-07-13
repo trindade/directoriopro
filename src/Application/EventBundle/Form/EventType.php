@@ -15,7 +15,7 @@ class EventType extends AbstractType
             
 			->add('type', 'choice', array(
 			  	'expanded' => true,
-			    'choices'   => array('Reunión', 'Curso', 'Conferencia')
+			    'choices'   => array('Reunion', 'Curso', 'Conferencia')
 			))
             
             ->add('body')
