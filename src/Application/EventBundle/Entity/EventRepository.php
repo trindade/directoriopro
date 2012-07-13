@@ -77,7 +77,7 @@ class EventRepository extends EntityRepository
      * @access public
      * @return Doctrine DQL
      */
-    public function findEventsDQL($from, $to = NULL, $type = 0)
+    public function findEventsDQL($from, $to = NULL, $type = false)
     {
         $query = $this->_em->createQueryBuilder()
             ->add('select', 'e')
@@ -103,21 +103,29 @@ class EventRepository extends EntityRepository
      *
      * @param \DateTime $date
      * @param int $max
+     * @param int $type
      * @access public
      * @return Doctrine\Common\ArrayCollection
      */
-    public function findEventCities(\DateTime $date, $max=13)
+    public function findEventCities(\DateTime $date, $max=13, $type = false)
     {
-        return $this->_em->createQueryBuilder()
+        $query = $this->_em->createQueryBuilder()
             ->add('select', 'COUNT(e.id) AS total, c.name, c.id')
             ->add('from', 'ApplicationEventBundle:Event e, ApplicationCityBundle:City c')
             ->andWhere('e.city_id = c.id')
             ->andWhere('e.date_start > :date')->setParameter('date', $date->format('Y-m-d'))
             ->add('groupBy', 'c.id')
-            ->add('orderBy', 'total DESC')
-            ->setMaxResults($max)
+            ->add('orderBy', 'total DESC');
+            
+        if( is_numeric( $type ) ){
+	        $query->andWhere('e.type = :type')->setParameter('type', $type);
+        }
+            
+        $query->setMaxResults($max)
             ->getQuery()
             ->getResult();
+            
+        return $query;
     }
 
     /**
@@ -125,17 +133,24 @@ class EventRepository extends EntityRepository
      *
      * @param \DateTime $date
      * @param \Application\CityBundle\Entity\City $city
+     * @param int $type
      * @access public
      * @return Doctrine DQL
      */
-    public function findEventsByCityDQL(\DateTime $date, \Application\CityBundle\Entity\City $city)
+    public function findEventsByCityDQL(\DateTime $date, \Application\CityBundle\Entity\City $city, $type = false)
     {
-        return $this->_em->createQueryBuilder()
+        $query = $this->_em->createQueryBuilder()
             ->add('select', 'e')
             ->add('from', 'ApplicationEventBundle:Event e')
             ->andWhere('e.date_start > :date')->setParameter('date', $date->format('Y-m-d'))
-            ->andWhere('e.city_id = :city_id')->setParameter('city_id', $city->getId())
-            ->add('orderBy', 'e.featured DESC, e.date_start ASC');
+            ->andWhere('e.city_id = :city_id')->setParameter('city_id', $city->getId());
+        
+        if( is_numeric( $type ) ){
+	        $query->andWhere('e.type = :type')->setParameter('type', $type);
+        }
+            
+        $query->add('orderBy', 'e.featured DESC, e.date_start ASC');
+        return $query;
     }
 
 }

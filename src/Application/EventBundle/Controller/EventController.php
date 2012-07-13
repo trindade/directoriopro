@@ -63,7 +63,7 @@ class EventController extends Controller
 
         $entities = Util::eventsDetailsGenerator($entities, $repo);
 
-        $cities = $repo->findEventCities(new \DateTime('now'));
+        $cities = $repo->findEventCities(new \DateTime('now'), 13, 0);
 
         return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
     }
@@ -71,10 +71,10 @@ class EventController extends Controller
     /**
      * Lists all courses entities.
      *
-     * @Route("/courses/", name="event_courses")
+     * @Route("/course/", name="event_course")
      * @Template()
      */
-    public function coursesAction()
+    public function courseAction()
     {
 
         $request = $this->getRequest();
@@ -107,7 +107,9 @@ class EventController extends Controller
 
 
 
-        return array('pager' => $html, 'entities' => $entities);
+        $cities = $repo->findEventCities(new \DateTime('now'), 13, 1);
+
+        return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
     }
 
     /**

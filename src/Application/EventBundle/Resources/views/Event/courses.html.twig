@@ -8,7 +8,13 @@
 	<a href="{{ path('event_new') }}?type=1" class="btn btn-large btn-primary">Publicar curso</a>
 
 
+	<b>Top ciudades</b><br/><br/>
 
+	<ul>
+    {% for city in cities %}
+		<li><a style="display:inline" href="{{ path('event_city', { 'id': city.id }) }}?type=1">{{ city.name }}</a> ({{ city.total }})</li>
+    {% endfor %}
+	</ul>
 
 
 {% endblock %}
@@ -27,7 +33,7 @@
 <ul class="nav nav-tabs">
 	<li><a href="{{ path('event') }}">Próximos</a></li>
 	<!--<li><a href="{{ path('event_search') }}?q=betabeers">Betabeers</a></li>-->
-	<li class="active"><a href="{{ path('event_courses') }}">Cursos</a></li>
+	<li class="active"><a href="{{ path('event_course') }}">Cursos</a></li>
 	<li><a href="{{ path('event_archive') }}">Pasados</a></li>
 </ul>
 
