@@ -161,6 +161,7 @@ class EventController extends Controller
     public function cityAction($id)
     {
         $request = $this->getRequest();
+        $type = $request->query->get('t',false);
         $page = $request->query->get('page',1);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -172,7 +173,7 @@ class EventController extends Controller
 
         $country = $em->getRepository('ApplicationCityBundle:Country')->findOneBy(array('code'=>$city->getCode()));
 
-        $query = $eventRepo->findEventsByCityDQL(new \DateTime('now'), $city);
+        $query = $eventRepo->findEventsByCityDQL(new \DateTime('now'), $city, $type);
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -184,7 +185,7 @@ class EventController extends Controller
         $entities = $pagerfanta->getCurrentPageResults();
         $routeGenerator = function($page) {//, $category_id
             $url = '?page='.$page;
-            //if( $category_id ) $url .= '&c=' . $category_id;
+            if( is_numeric( $type ) ) $url .= '&t=' . $type;
             return $url;
         };
 
