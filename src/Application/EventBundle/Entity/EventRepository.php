@@ -113,15 +113,15 @@ class EventRepository extends EntityRepository
             ->add('select', 'COUNT(e.id) AS total, c.name, c.id')
             ->add('from', 'ApplicationEventBundle:Event e, ApplicationCityBundle:City c')
             ->andWhere('e.city_id = c.id')
-            ->andWhere('e.date_start > :date')->setParameter('date', $date->format('Y-m-d'))
-            ->add('groupBy', 'c.id')
-            ->add('orderBy', 'total DESC');
+            ->andWhere('e.date_start > :date')->setParameter('date', $date->format('Y-m-d'));
             
         if( is_numeric( $type ) ){
 	        $query->andWhere('e.type = :type')->setParameter('type', $type);
         }
             
-        $query->setMaxResults($max)
+        $query->add('groupBy', 'c.id')
+            ->add('orderBy', 'total DESC')
+            ->setMaxResults($max)
             ->getQuery()
             ->getResult();
             
