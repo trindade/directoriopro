@@ -91,8 +91,8 @@ class EventRepository extends EntityRepository
                   ->add('orderBy', 'e.date_start DESC');
         }
         
-        if( !is_bool( $type ) ){
-	        $query->andWhere('e.type < :type')->setParameter('type', $type);
+        if( !is_numeric( $type ) ){
+	        $query->andWhere('e.type = :type')->setParameter('type', $type);
         }
 
         return $query;
