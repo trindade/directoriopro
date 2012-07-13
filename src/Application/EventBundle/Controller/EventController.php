@@ -34,7 +34,8 @@ class EventController extends Controller
      */
     public function indexAction()
     {
-
+	    
+	    $type = 0;
         $request = $this->getRequest();
         $page = $request->query->get('page');
         if ( !$page ) $page = 1;
@@ -42,7 +43,7 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $repo = $em->getRepository('ApplicationEventBundle:Event');
-        $query = $repo->findEventsDQL(new \DateTime('now'), false, 0);
+        $query = $repo->findEventsDQL(new \DateTime('now'), false, $type);
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -63,7 +64,7 @@ class EventController extends Controller
 
         $entities = Util::eventsDetailsGenerator($entities, $repo);
 
-        $cities = $repo->findEventCities(new \DateTime('now'), 13, 0);
+        $cities = $repo->findEventCities(new \DateTime('now'), 13, $type);
 
         return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
     }
@@ -76,7 +77,8 @@ class EventController extends Controller
      */
     public function courseAction()
     {
-
+    
+	    $type = 1;
         $request = $this->getRequest();
         $page = $request->query->get('page');
         if ( !$page ) $page = 1;
@@ -84,7 +86,7 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $repo = $em->getRepository('ApplicationEventBundle:Event');
-        $query = $repo->findEventsDQL(new \DateTime('now'), false, 1);
+        $query = $repo->findEventsDQL(new \DateTime('now'), false, $type);
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -107,7 +109,7 @@ class EventController extends Controller
 
 
 
-        $cities = $repo->findEventCities(new \DateTime('now'), 13, 1);
+        $cities = $repo->findEventCities(new \DateTime('now'), 13, $type);
 
         return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
     }
@@ -121,6 +123,7 @@ class EventController extends Controller
     public function conferenceAction()
     {
 
+	    $type = 2;
         $request = $this->getRequest();
         $page = $request->query->get('page');
         if ( !$page ) $page = 1;
@@ -128,7 +131,7 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $repo = $em->getRepository('ApplicationEventBundle:Event');
-        $query = $repo->findEventsDQL(new \DateTime('now'), false, 1);
+        $query = $repo->findEventsDQL(new \DateTime('now'), false, $type);
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -151,7 +154,7 @@ class EventController extends Controller
 
 
 
-        $cities = $repo->findEventCities(new \DateTime('now'), 13, 2);
+        $cities = $repo->findEventCities(new \DateTime('now'), 13, $type);
 
         return array('cities' => $cities, 'pager' => $html, 'entities' => $entities);
     }
