@@ -29,7 +29,7 @@
 
 
 {% for entity in entities %}
-	<a href="{{ path('test_show', { 'id': entity.id }) }}" rel="twipsy" data-original-title="{{ entity.title }}" style="float:left;margin:0 20px 20px 0"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ entity.id }}.png" width="100" height="100"/></a><br/>
+	<a href="{{ path('test_show', { 'id': entity.id }) }}" rel="twipsy" data-original-title="{{ entity.title }}" style="float:left;margin:0 20px 20px 0"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ entity.id }}.png" width="100" height="100"/></a>
 {% endfor %}
 
 <br class="clear"/>
@@ -41,3 +41,10 @@
 
 {% endblock %}
 
+
+{% block script_load %}
+
+$('#content .span6:first').removeClass('span6').addClass('span8');
+$('#content .span6:span2').hide();
+
+{% endblock %}
