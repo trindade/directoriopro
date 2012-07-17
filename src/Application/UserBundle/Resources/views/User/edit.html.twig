@@ -46,7 +46,7 @@
 </div>
 
 <style>
-TEXTAREA.xlarge{width:430px}
+TEXTAREA.xlarge{width:430px;height:80px}
 .filters{border:0}
 .span3 a{padding-top:0;display:inline}
 input.xlarge{width:170px}
@@ -59,7 +59,12 @@ input.xlarge{width:170px}
 <h1>Editar perfil</h1>
 
 
-
+<div class="alert alert-info">
+	<ul style="margin:0 0 0 15px">
+		<li>Tu perfil será más visible en los listados y busquedas</li>
+		<li>Si buscas trabajo, serás más interesante para las empresas</li>
+	</ul>
+</div>
 
 
 
@@ -155,10 +160,7 @@ input.xlarge{width:170px}
 						{{ form_row(edit_form.url, { 'label': 'URL portafolio' }) }}
 						<span class="help_edit">Ejemplo: miquelcamps</span>
 						{{ form_row(edit_form.linkedin_url, { 'label': 'Linkedin' }) }}
-						<span class="help_edit">Ejemplo: viciao2k3</span>
-						{{ form_row(edit_form.youtube_url, { 'label': 'Youtube' }) }}
-						<span class="help_edit">Ejemplo: user820547</span>
-						{{ form_row(edit_form.vimeo_url, { 'label': 'Vimeo' }) }}
+
 					
 						<span class="help_edit">Ejemplo: miquelcamps</span>
 						{{ form_row(edit_form.github_url, { 'label': 'Github' }) }}
@@ -168,10 +170,10 @@ input.xlarge{width:170px}
 						
 
 						
-						<a href="http://dirbeta.tumblr.com/post/11528134993/eres-desarrollador-de-android-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
+						<!--<a href="http://dirbeta.tumblr.com/post/11528134993/eres-desarrollador-de-android-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>-->
 						{{ form_row(edit_form.android_url, { 'label': 'Android market' }) }}
 
-						<a href="http://dirbeta.tumblr.com/post/11506524530/eres-desarrollador-de-ios-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
+						<!--<a href="http://dirbeta.tumblr.com/post/11506524530/eres-desarrollador-de-ios-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>-->
 						{{ form_row(edit_form.itunes_url, { 'label': 'Appstore iOS' }) }}
 						
 						<span class="help_edit">Ejemplo: ftp2nuke</span>
@@ -179,12 +181,18 @@ input.xlarge{width:170px}
 						<span class="help_edit">Ejemplo: miquelcamps</span>
 						{{ form_row(edit_form.dribbble_url, { 'label': 'Dribbble' }) }}
 						
+						
+						<span class="help_edit">Ejemplo: viciao2k3</span>
+						{{ form_row(edit_form.youtube_url, { 'label': 'Youtube' }) }}
+						<span class="help_edit">Ejemplo: user820547</span>
+						{{ form_row(edit_form.vimeo_url, { 'label': 'Vimeo' }) }}
 
 						
 						<span class="help_edit">Ejemplo: miquelcamps</span>
 						{{ form_row(edit_form.delicious_url, { 'label': 'Delicious' }) }}
 						<span class="help_edit">Ejemplo: miquelcamps</span>
 						{{ form_row(edit_form.pinboard_url, { 'label': 'Pinboard' }) }}
+						
 						
 					</div>
 				</div>
