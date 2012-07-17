@@ -97,20 +97,6 @@ input.xlarge{width:170px}
 
 
 
-<ul class="nav nav-tabs tabs">
-	<li class="active"><a href="#info" data-toggle="tab" style="font-weight:bold">Completa tu perfil</a></li>
-	<li><a href="#networks" data-toggle="tab" style="font-weight:bold">Perfiles</a></li>
-	<li><a href="#options" data-toggle="tab" style="font-weight:bold">Opciones</a></li>
-	<li><a href="#tags" id="tab_tags" data-toggle="tab" style="font-weight:bold">Tags</a></li>
-	<li><a href="#contact" data-toggle="tab">Contacto</a></li>
-</ul>
-
-
-
-
-
-
-
 
 
 <form class="form-horizontal" id="tabs_content" action="{{ path('user_edit') }}" method="post" {{ form_enctype(edit_form) }}>
@@ -121,75 +107,6 @@ input.xlarge{width:170px}
 {{ form_errors(edit_form) }}
 	
 
-<div class="tab-content">
-
-	<div id="info" class="tab-pane active">
-
-		<div class="alert alert-info">
-
-
-			<ul style="margin:0 0 0 15px">
-				<li>Tu perfil será más visible en los listados y busquedas</li>
-				<li>Si buscas trabajo, serás más interesante para las empresas</li>
-				<li>Serás más relevante en tu sector y más visible en los buscadores</li>
-			</ul>
-		</div>
-	
-		{{ form_row(edit_form.body, { 'label': 'Descripción' }) }}
-		{{ form_row(edit_form.portafolio, { 'label': 'Portafolio' }) }}
-		{{ form_row(edit_form.lookingfor, { 'label': '¿Que quieres encontrar en betabeers?' }) }}
-		
-
-		
-		<div class="control-group">
-			<label>Especialidad</label>
-			<div class="controls">
-				<select id="application_userbundle_usertype_category_id" name="application_userbundle_usertype[category_id]">
-					{% for category in categories %}
-						{% if loop.index0 > 0 %}
-							<option value="{{loop.index0}}" {% if loop.index0 == entity.getCategoryId() %}selected="selected"{% endif %} >{{category}}</a>
-						{% endif %}
-					{% endfor %}
-				</select>
-			</div>
-		</div>
-
-
-		
-		
-		<div id="geo">
-			{{ form_row(edit_form.location, { 'label': 'Localidad' }) }}
-			<div class="hide">
-				{{ form_row(edit_form.country_id, { 'label': 'country' }) }}
-				{{ form_row(edit_form.city_id, { 'label': 'city' }) }}
-			</div>
-		</div>
-		
-		{{ form_row(edit_form.name, { 'label': 'Nombre y apellidos' }) }}
-
-
-		<div class="control-group">
-			<label for="application_userbundle_usertype_avatar_type">Avatar</label>
-			<div class="controls">
-				<select id="application_userbundle_usertype_avatar_type" name="application_userbundle_usertype[avatar_type]">
-					{% for key, value in avatars %}
-						<option value="{{key}}" {% if key == entity.getAvatarType() %}selected="selected"{% endif %} >{{value}}</a>
-					{% endfor %}
-				</select> 
-				<img src="" id="user_avatar" width="45" height="45" style="display:none;position:absolute;margin:-10px 0 0 10px"/>
-			</div>
-		</div>
-
-	</div>
-
-
-	
-	<div class="tab-pane" id="networks">
-	
-		<div class="alert alert-info" style="text-align:center">
-			Demuestra tus conocimientos y trabajos, indica tus perfiles en la red - <a href="{{ path('user_show', { 'id': entity.getId(), 'slug': entity.getSlug() }) }}" target="_blank">Ejemplo</a><br/>
-		</div>
-
 
 		<div class="accordion" id="accordion2">
 		
@@ -199,16 +116,103 @@ input.xlarge{width:170px}
 				</div>
 				<div id="coll1" class="accordion-body collapse in">
 					<div class="accordion-inner">
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.twitter_url, { 'label': 'Twitter' }) }}
-						<span class="help_edit">Ej: http://miquelcamps.com</span>
-						{{ form_row(edit_form.url, { 'label': 'URL portafolio' }) }}
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.linkedin_url, { 'label': 'Linkedin' }) }}
-						<span class="help_edit">Ejemplo: viciao2k3</span>
-						{{ form_row(edit_form.youtube_url, { 'label': 'Youtube' }) }}
-						<span class="help_edit">Ejemplo: user820547</span>
-						{{ form_row(edit_form.vimeo_url, { 'label': 'Vimeo' }) }}
+
+						{{ form_row(edit_form.body, { 'label': 'Descripción' }) }}
+						{{ form_row(edit_form.portafolio, { 'label': 'Portafolio' }) }}
+						{{ form_row(edit_form.lookingfor, { 'label': '¿Que quieres encontrar en betabeers?' }) }}
+						
+				
+						
+						<div class="control-group">
+							<label>Especialidad</label>
+							<div class="controls">
+								<select id="application_userbundle_usertype_category_id" name="application_userbundle_usertype[category_id]">
+									{% for category in categories %}
+										{% if loop.index0 > 0 %}
+											<option value="{{loop.index0}}" {% if loop.index0 == entity.getCategoryId() %}selected="selected"{% endif %} >{{category}}</a>
+										{% endif %}
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+				
+				
+						
+						
+						<div id="geo">
+							{{ form_row(edit_form.location, { 'label': 'Localidad' }) }}
+							<div class="hide">
+								{{ form_row(edit_form.country_id, { 'label': 'country' }) }}
+								{{ form_row(edit_form.city_id, { 'label': 'city' }) }}
+							</div>
+						</div>
+						
+						{{ form_row(edit_form.name, { 'label': 'Nombre y apellidos' }) }}
+				
+				
+						<div class="control-group">
+							<label for="application_userbundle_usertype_avatar_type">Avatar</label>
+							<div class="controls">
+								<select id="application_userbundle_usertype_avatar_type" name="application_userbundle_usertype[avatar_type]">
+									{% for key, value in avatars %}
+										<option value="{{key}}" {% if key == entity.getAvatarType() %}selected="selected"{% endif %} >{{value}}</a>
+									{% endfor %}
+								</select> 
+								<img src="" id="user_avatar" width="45" height="45" style="display:none;position:absolute;margin:-10px 0 0 10px"/>
+							</div>
+						</div>
+						
+						<div class="controls">
+						    <ul style="margin-left:0;list-style-type:none">
+					        <li>
+					          <label for="application_userbundle_usertype_unemployed" class=" required">
+					            <input type="checkbox" {% if entity.getUnemployed() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_unemployed" name="application_userbundle_usertype[unemployed]" value="1">
+					            <span>¿Estás abierto a ofertas laborales?</span>
+					          </label><br/>
+					        </li>
+					        <li>
+					          <label for="application_userbundle_usertype_freelance" class=" required">
+					            <input type="checkbox" {% if entity.getFreelance() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_freelance" name="application_userbundle_usertype[freelance]" value="1">
+					            <span>¿Eres freelance?</span>
+					          </label><br/>
+					        </li>
+					        <li>
+					          <label for="application_userbundle_usertype_search_team" class=" required">
+					            <input type="checkbox" {% if entity.getSearchTeam() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_search_team" name="application_userbundle_usertype[search_team]" value="1">
+					            <span>¿Estas buscando equipo?</span>
+					          </label><br/>
+					        </li>
+					        <li>
+					          <label for="application_userbundle_usertype_newsletter" class=" required">
+					            <input type="checkbox" {% if entity.getNewsletter() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_newsletter" name="application_userbundle_usertype[newsletter]" value="1">
+					            <span>Suscribirme a la newsletter</span>
+					          </label>
+					        </li>
+					      </ul>
+					    </div>
+					
+						<br/>
+					
+						<div class="control-group">
+							<label>Contraseña</label>
+							<div class="controls">
+								<a href="{{ path('user_forgotpass', { 'token': token, 'id': entity.id }) }}">Cambiar contraseña</a>
+							</div>
+						</div>
+						
+						{{ form_row(edit_form.email, { 'label': 'Email' }) }}
+						{{ form_row(edit_form.phone, { 'label': 'Telefono' }) }}
+						
+						<div class="controls">
+						    <ul style="margin-left:0;list-style-type:none">
+					        <li>
+					          <label for="application_userbundle_usertype_can_contact" class=" required">
+					            <input type="checkbox" {% if entity.getCanContact() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_can_contact" name="application_userbundle_usertype[can_contact]" value="1">
+					            <span>Permitir que contacten conmigo</span>
+					          </label>
+							</li>
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -219,6 +223,18 @@ input.xlarge{width:170px}
 				</div>
 				<div id="coll2" class="accordion-body collapse">
 					<div class="accordion-inner">
+					
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.twitter_url, { 'label': 'Twitter' }) }}
+						<span class="help_edit">Ej: http://miquelcamps.com</span>
+						{{ form_row(edit_form.url, { 'label': 'URL portafolio' }) }}
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.linkedin_url, { 'label': 'Linkedin' }) }}
+						<span class="help_edit">Ejemplo: viciao2k3</span>
+						{{ form_row(edit_form.youtube_url, { 'label': 'Youtube' }) }}
+						<span class="help_edit">Ejemplo: user820547</span>
+						{{ form_row(edit_form.vimeo_url, { 'label': 'Vimeo' }) }}
+					
 						<span class="help_edit">Ejemplo: miquelcamps</span>
 						{{ form_row(edit_form.github_url, { 'label': 'Github' }) }}
 						<span class="help_edit">Ejemplo: miquelcamps</span>
@@ -227,6 +243,25 @@ input.xlarge{width:170px}
 						{{ form_row(edit_form.stackoverflow_url, { 'label': 'Id stackoverflow' }) }}
 						<a href="http://dirbeta.tumblr.com/post/11547225386/desarrollas-extensiones-de-chrome-muestra-tus" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
 						{{ form_row(edit_form.chrome_url, { 'label': 'Chrome web store' }) }}
+						
+						<a href="http://dirbeta.tumblr.com/post/11528134993/eres-desarrollador-de-android-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
+						{{ form_row(edit_form.android_url, { 'label': 'Android market' }) }}
+
+						<a href="http://dirbeta.tumblr.com/post/11506524530/eres-desarrollador-de-ios-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
+						{{ form_row(edit_form.itunes_url, { 'label': 'Appstore iOS' }) }}
+						
+						<span class="help_edit">Ejemplo: ftp2nuke</span>
+						{{ form_row(edit_form.flickr_url, { 'label': 'Flickr' }) }}
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.dribbble_url, { 'label': 'Dribbble' }) }}
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.forrst_url, { 'label': 'Forrst' }) }}
+						
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.delicious_url, { 'label': 'Delicious' }) }}
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.pinboard_url, { 'label': 'Pinboard' }) }}
+						
 					</div>
 				</div>
 			</div>
@@ -237,136 +272,27 @@ input.xlarge{width:170px}
 				</div>
 				<div id="coll3" class="accordion-body collapse">
 					<div class="accordion-inner">
-						<a href="http://dirbeta.tumblr.com/post/11528134993/eres-desarrollador-de-android-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
-						{{ form_row(edit_form.android_url, { 'label': 'Android market' }) }}
 
-						<a href="http://dirbeta.tumblr.com/post/11506524530/eres-desarrollador-de-ios-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
-						{{ form_row(edit_form.itunes_url, { 'label': 'Appstore iOS' }) }}
-					</div>
-				</div>
-			</div>
+						Introduce tags que definan tus capacidades, por ejemplo: PHP, ruby on rails, python, symfony, seo, social media:<br/><br/>
+						<input name="tags" id="txt_tags" value="{{ tags }}" />
 
-			<div class="accordion-group">
-				<div class="accordion-heading group_edit">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll4">¿Diseñas?</a>
-				</div>
-				<div id="coll4" class="accordion-body collapse">
-					<div class="accordion-inner">
-						<span class="help_edit">Ejemplo: ftp2nuke</span>
-						{{ form_row(edit_form.flickr_url, { 'label': 'Flickr' }) }}
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.dribbble_url, { 'label': 'Dribbble' }) }}
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.forrst_url, { 'label': 'Forrst' }) }}
-					</div>
-				</div>
-			</div>
-
-			<div class="accordion-group">
-				<div class="accordion-heading group_edit">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll5">Favoritos</a>
-				</div>
-				<div id="coll5" class="accordion-body collapse">
-					<div class="accordion-inner">
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.delicious_url, { 'label': 'Delicious' }) }}
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.pinboard_url, { 'label': 'Pinboard' }) }}
 					</div>
 				</div>
 			</div>
 
 
 
+
+
+
+
 		</div>
 
 
-
-
-	</div>
-
-	<div class="tab-pane" id="options">
-	
-		<div class="alert alert-info" style="text-align:center">
-			Ayúdanos a conocerte mejor para ofrecerte un mejor servicio
-		</div>
-		
-		<div class="controls">
-		    <ul style="margin-left:0;list-style-type:none">
-	        <li>
-	          <label for="application_userbundle_usertype_unemployed" class=" required">
-	            <input type="checkbox" {% if entity.getUnemployed() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_unemployed" name="application_userbundle_usertype[unemployed]" value="1">
-	            <span>¿Estás abierto a ofertas laborales?</span>
-	          </label><br/>
-	        </li>
-	        <li>
-	          <label for="application_userbundle_usertype_freelance" class=" required">
-	            <input type="checkbox" {% if entity.getFreelance() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_freelance" name="application_userbundle_usertype[freelance]" value="1">
-	            <span>¿Eres freelance?</span>
-	          </label><br/>
-	        </li>
-	        <li>
-	          <label for="application_userbundle_usertype_search_team" class=" required">
-	            <input type="checkbox" {% if entity.getSearchTeam() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_search_team" name="application_userbundle_usertype[search_team]" value="1">
-	            <span>¿Estas buscando equipo?</span>
-	          </label><br/>
-	        </li>
-	        <li>
-	          <label for="application_userbundle_usertype_newsletter" class=" required">
-	            <input type="checkbox" {% if entity.getNewsletter() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_newsletter" name="application_userbundle_usertype[newsletter]" value="1">
-	            <span>Suscribirme a la newsletter</span>
-	          </label>
-	        </li>
-	      </ul>
-	    </div>
-	
-		<br/>
-	
-		<div class="control-group">
-			<label>Contraseña</label>
-			<div class="controls">
-				<a href="{{ path('user_forgotpass', { 'token': token, 'id': entity.id }) }}">Cambiar contraseña</a>
-			</div>
-		</div>
-	
-	
-	</div>
-	
-	<div class="tab-pane" id="contact">		
-		{{ form_row(edit_form.email, { 'label': 'Email' }) }}
-		{{ form_row(edit_form.phone, { 'label': 'Telefono' }) }}
-		
-		<div class="controls">
-		    <ul style="margin-left:0;list-style-type:none">
-	        <li>
-	          <label for="application_userbundle_usertype_can_contact" class=" required">
-	            <input type="checkbox" {% if entity.getCanContact() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_can_contact" name="application_userbundle_usertype[can_contact]" value="1">
-	            <span>Permitir que contacten conmigo</span>
-	          </label>
-			</li>
-		</div>
-	</div>
-	
-	
-	<div class="tab-pane" id="tags">
-		Introduce tags que definan tus capacidades, por ejemplo: PHP, ruby on rails, python, symfony, seo, social media:<br/><br/>
-		<input name="tags" id="txt_tags" value="{{ tags }}" />
-	</div>
-	
-	</div>
 
 
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">Guardar cambios</button> &nbsp;
-
-		<!--
-		{% if updated == 1 %}
-			<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}" class="btn btn-success">¡Actualizado! Visitar mi perfil</a>
-		{% else %}
-			<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}" class="btn">Visitar mi perfil</a>
-		{% endif %}
-		-->
-		
 		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}" class="btn">Visitar mi perfil</a>
     </div>
 
