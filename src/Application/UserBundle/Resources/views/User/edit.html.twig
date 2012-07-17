@@ -59,7 +59,7 @@ input.xlarge{width:170px}
 <h1>Editar perfil</h1>
 
 
-<div class="alert alert-info">
+<div class="alert alert-warning">
 	<ul style="margin:0 0 0 15px">
 		<li>Tu perfil será más visible en los listados y busquedas</li>
 		<li>Si buscas trabajo, serás más interesante para las empresas</li>
@@ -81,7 +81,7 @@ input.xlarge{width:170px}
 		
 			<div class="accordion-group">
 				<div class="accordion-heading group_edit">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll1">Perfil</a>
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll1">Información</a>
 				</div>
 				<div id="coll1" class="accordion-body collapse in">
 					<div class="accordion-inner">
@@ -149,7 +149,7 @@ input.xlarge{width:170px}
 			
 			<div class="accordion-group">
 				<div class="accordion-heading group_edit">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll2">Cuentas</a>
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll2">Perfiles</a>
 				</div>
 				<div id="coll2" class="accordion-body collapse">
 					<div class="accordion-inner">
@@ -171,9 +171,11 @@ input.xlarge{width:170px}
 
 						
 						<!--<a href="http://dirbeta.tumblr.com/post/11528134993/eres-desarrollador-de-android-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>-->
+						<span class="help_edit">Ejemplo: Miquel+Camps+Orteza</span>
 						{{ form_row(edit_form.android_url, { 'label': 'Android market' }) }}
 
 						<!--<a href="http://dirbeta.tumblr.com/post/11506524530/eres-desarrollador-de-ios-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>-->
+						<span class="help_edit">Ejemplo: miquel-camps-orteza</span>
 						{{ form_row(edit_form.itunes_url, { 'label': 'Appstore iOS' }) }}
 						
 						<span class="help_edit">Ejemplo: ftp2nuke</span>
