@@ -7,48 +7,6 @@
 {% block sidebar %}
 
 
-<!--
-
-	<div class="alert" style="padding-right:0">
-
-
-	{% if entity.categoryid != 0 and entity.name != '' and entity.body != '' and entity.location != '' and entity.url != '' and entity.twitterurl != '' %}
-
-		<b>Descarga gratis</b><br/><br/>
-		<a href="http://bit.ly/wvVBdl" target="_blank">Libro entrevistas</a>
-		
-	
-	{% else %}
-	
-		<b>Descarga gratis</b><br/><br/>
-		<a href="javascript:$('#todo').slideDown('fast');" class="btn" style="padding:10px;">eBook con entrevistas</a>
-		<br/><br/>
-
-		<div id="todo" style="display:none;padding-top:10px;margin:0;line-height:normal">
-
-			<span style="color:red">Antes tienes que indicar ;)</span><br/>	
-			<ul style="margin:10px 0 0 15px">
-				<li>Especialidad</li>
-				<li>Nombre y apellidos</li>
-				<li>Descripción</li>
-				<li>Localidad</li>
-				<li>URL portafolio</li>
-				<li>Twitter</li>
-			</ul>
-		</div>
-	
-	{% endif %}
-
-
-	
-
-	
-
-	
-	</div>
-
--->
-
 
 {% endblock %}
 
@@ -215,9 +173,7 @@ input.xlarge{width:170px}
 						<span class="help_edit">Ejemplo: 543644</span>
 						{{ form_row(edit_form.stackoverflow_url, { 'label': 'Id stackoverflow' }) }}
 						
-						<!--
-						<a href="http://dirbeta.tumblr.com/post/11547225386/desarrollas-extensiones-de-chrome-muestra-tus" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
-						{{ form_row(edit_form.chrome_url, { 'label': 'Chrome web store' }) }}-->
+
 						
 						<a href="http://dirbeta.tumblr.com/post/11528134993/eres-desarrollador-de-android-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
 						{{ form_row(edit_form.android_url, { 'label': 'Android market' }) }}
@@ -230,9 +186,7 @@ input.xlarge{width:170px}
 						<span class="help_edit">Ejemplo: miquelcamps</span>
 						{{ form_row(edit_form.dribbble_url, { 'label': 'Dribbble' }) }}
 						
-						<!--
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.forrst_url, { 'label': 'Forrst' }) }}-->
+
 						
 						<span class="help_edit">Ejemplo: miquelcamps</span>
 						{{ form_row(edit_form.delicious_url, { 'label': 'Delicious' }) }}
