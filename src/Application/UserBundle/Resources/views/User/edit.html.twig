@@ -7,6 +7,8 @@
 {% block sidebar %}
 
 
+<!--
+
 	<div class="alert" style="padding-right:0">
 
 
@@ -45,6 +47,7 @@
 	
 	</div>
 
+-->
 
 
 {% endblock %}
@@ -112,7 +115,7 @@ input.xlarge{width:170px}
 		
 			<div class="accordion-group">
 				<div class="accordion-heading group_edit">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll1">Comunicación</a>
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll1">Perfil</a>
 				</div>
 				<div id="coll1" class="accordion-body collapse in">
 					<div class="accordion-inner">
@@ -150,6 +153,9 @@ input.xlarge{width:170px}
 						{{ form_row(edit_form.name, { 'label': 'Nombre y apellidos' }) }}
 				
 				
+						{{ form_row(edit_form.email, { 'label': 'Email' }) }}
+						<!--{{ form_row(edit_form.phone, { 'label': 'Telefono' }) }}-->
+				
 						<div class="control-group">
 							<label for="application_userbundle_usertype_avatar_type">Avatar</label>
 							<div class="controls">
@@ -162,6 +168,102 @@ input.xlarge{width:170px}
 							</div>
 						</div>
 						
+
+					
+
+						
+
+						
+
+						
+						
+						<br/>
+					
+						<div class="control-group">
+							<label>Contraseña</label>
+							<div class="controls">
+								<a href="{{ path('user_forgotpass', { 'token': token, 'id': entity.id }) }}">Cambiar contraseña</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
+			<div class="accordion-group">
+				<div class="accordion-heading group_edit">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll2">Cuentas</a>
+				</div>
+				<div id="coll2" class="accordion-body collapse">
+					<div class="accordion-inner">
+					
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.twitter_url, { 'label': 'Twitter' }) }}
+						<span class="help_edit">Ej: http://miquelcamps.com</span>
+						{{ form_row(edit_form.url, { 'label': 'URL portafolio' }) }}
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.linkedin_url, { 'label': 'Linkedin' }) }}
+						<span class="help_edit">Ejemplo: viciao2k3</span>
+						{{ form_row(edit_form.youtube_url, { 'label': 'Youtube' }) }}
+						<span class="help_edit">Ejemplo: user820547</span>
+						{{ form_row(edit_form.vimeo_url, { 'label': 'Vimeo' }) }}
+					
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.github_url, { 'label': 'Github' }) }}
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.bitbucket_url, { 'label': 'Bitbucket' }) }}
+						<span class="help_edit">Ejemplo: 543644</span>
+						{{ form_row(edit_form.stackoverflow_url, { 'label': 'Id stackoverflow' }) }}
+						
+						<!--
+						<a href="http://dirbeta.tumblr.com/post/11547225386/desarrollas-extensiones-de-chrome-muestra-tus" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
+						{{ form_row(edit_form.chrome_url, { 'label': 'Chrome web store' }) }}-->
+						
+						<a href="http://dirbeta.tumblr.com/post/11528134993/eres-desarrollador-de-android-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
+						{{ form_row(edit_form.android_url, { 'label': 'Android market' }) }}
+
+						<a href="http://dirbeta.tumblr.com/post/11506524530/eres-desarrollador-de-ios-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
+						{{ form_row(edit_form.itunes_url, { 'label': 'Appstore iOS' }) }}
+						
+						<span class="help_edit">Ejemplo: ftp2nuke</span>
+						{{ form_row(edit_form.flickr_url, { 'label': 'Flickr' }) }}
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.dribbble_url, { 'label': 'Dribbble' }) }}
+						
+						<!--
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.forrst_url, { 'label': 'Forrst' }) }}-->
+						
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.delicious_url, { 'label': 'Delicious' }) }}
+						<span class="help_edit">Ejemplo: miquelcamps</span>
+						{{ form_row(edit_form.pinboard_url, { 'label': 'Pinboard' }) }}
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-group">
+				<div class="accordion-heading group_edit">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll3">Comunidades</a>
+				</div>
+				<div id="coll3" class="accordion-body collapse">
+					<div class="accordion-inner">
+
+						Introduce tags que definan tus capacidades, por ejemplo: PHP, ruby on rails, python, symfony, seo, social media:<br/><br/>
+						<input name="tags" id="txt_tags" value="{{ tags }}" />
+
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-group">
+				<div class="accordion-heading group_edit">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll4">Notificaciones</a>
+				</div>
+				<div id="coll4" class="accordion-body collapse">
+					<div class="accordion-inner">
+
 						<div class="controls">
 						    <ul style="margin-left:0;list-style-type:none">
 					        <li>
@@ -188,100 +290,18 @@ input.xlarge{width:170px}
 					            <span>Suscribirme a la newsletter</span>
 					          </label>
 					        </li>
-					      </ul>
-					    </div>
-					
-						<br/>
-					
-						<div class="control-group">
-							<label>Contraseña</label>
-							<div class="controls">
-								<a href="{{ path('user_forgotpass', { 'token': token, 'id': entity.id }) }}">Cambiar contraseña</a>
-							</div>
-						</div>
-						
-						{{ form_row(edit_form.email, { 'label': 'Email' }) }}
-						{{ form_row(edit_form.phone, { 'label': 'Telefono' }) }}
-						
-						<div class="controls">
-						    <ul style="margin-left:0;list-style-type:none">
 					        <li>
 					          <label for="application_userbundle_usertype_can_contact" class=" required">
 					            <input type="checkbox" {% if entity.getCanContact() == 1 %}checked="checked"{% endif %} id="application_userbundle_usertype_can_contact" name="application_userbundle_usertype[can_contact]" value="1">
 					            <span>Permitir que contacten conmigo</span>
 					          </label>
 							</li>
-						</div>
+					      </ul>
+					    </div>
 
 					</div>
 				</div>
 			</div>
-			
-			<div class="accordion-group">
-				<div class="accordion-heading group_edit">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll2">¿Programas?</a>
-				</div>
-				<div id="coll2" class="accordion-body collapse">
-					<div class="accordion-inner">
-					
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.twitter_url, { 'label': 'Twitter' }) }}
-						<span class="help_edit">Ej: http://miquelcamps.com</span>
-						{{ form_row(edit_form.url, { 'label': 'URL portafolio' }) }}
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.linkedin_url, { 'label': 'Linkedin' }) }}
-						<span class="help_edit">Ejemplo: viciao2k3</span>
-						{{ form_row(edit_form.youtube_url, { 'label': 'Youtube' }) }}
-						<span class="help_edit">Ejemplo: user820547</span>
-						{{ form_row(edit_form.vimeo_url, { 'label': 'Vimeo' }) }}
-					
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.github_url, { 'label': 'Github' }) }}
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.bitbucket_url, { 'label': 'Bitbucket' }) }}
-						<span class="help_edit">Ejemplo: 543644</span>
-						{{ form_row(edit_form.stackoverflow_url, { 'label': 'Id stackoverflow' }) }}
-						<a href="http://dirbeta.tumblr.com/post/11547225386/desarrollas-extensiones-de-chrome-muestra-tus" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
-						{{ form_row(edit_form.chrome_url, { 'label': 'Chrome web store' }) }}
-						
-						<a href="http://dirbeta.tumblr.com/post/11528134993/eres-desarrollador-de-android-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
-						{{ form_row(edit_form.android_url, { 'label': 'Android market' }) }}
-
-						<a href="http://dirbeta.tumblr.com/post/11506524530/eres-desarrollador-de-ios-muestra-tus-apps-en-tu" target="_blank" class="help_a">¿Cómo saber tu usuario?</a>
-						{{ form_row(edit_form.itunes_url, { 'label': 'Appstore iOS' }) }}
-						
-						<span class="help_edit">Ejemplo: ftp2nuke</span>
-						{{ form_row(edit_form.flickr_url, { 'label': 'Flickr' }) }}
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.dribbble_url, { 'label': 'Dribbble' }) }}
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.forrst_url, { 'label': 'Forrst' }) }}
-						
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.delicious_url, { 'label': 'Delicious' }) }}
-						<span class="help_edit">Ejemplo: miquelcamps</span>
-						{{ form_row(edit_form.pinboard_url, { 'label': 'Pinboard' }) }}
-						
-					</div>
-				</div>
-			</div>
-
-			<div class="accordion-group">
-				<div class="accordion-heading group_edit">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll3">¿Programas aplicaciones móviles?</a>
-				</div>
-				<div id="coll3" class="accordion-body collapse">
-					<div class="accordion-inner">
-
-						Introduce tags que definan tus capacidades, por ejemplo: PHP, ruby on rails, python, symfony, seo, social media:<br/><br/>
-						<input name="tags" id="txt_tags" value="{{ tags }}" />
-
-					</div>
-				</div>
-			</div>
-
-
-
 
 
 
