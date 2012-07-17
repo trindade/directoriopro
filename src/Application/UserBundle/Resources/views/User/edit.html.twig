@@ -6,6 +6,9 @@
 
 {% block sidebar %}
 
+	<a href="#" onclick="$('#tabs_content').submit();return false" class="btn btn-large btn-primary">Guardar cambios</a>
+	<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}" class="btn">Ver perfil</a>
+
 
 
 {% endblock %}
@@ -255,7 +258,7 @@ input.xlarge{width:170px}
 
 
 
-    <div class="form-actions">
+    <div class="form-actions" style="display:none">
         <button type="submit" class="btn btn-primary">Guardar cambios</button> &nbsp;
 		<a href="{{ path('user_show', { 'id': entity.id, 'slug': entity.slug }) }}" class="btn">Visitar mi perfil</a>
     </div>
