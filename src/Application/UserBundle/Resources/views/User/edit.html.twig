@@ -83,7 +83,7 @@ input.xlarge{width:170px}
 				<div class="accordion-heading group_edit">
 					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#coll1">Información</a>
 				</div>
-				<div id="coll1" class="accordion-body collapse in">
+				<div id="coll1" class="accordion-body collapse">
 					<div class="accordion-inner">
 
 						{{ form_row(edit_form.body, { 'label': 'Descripción' }) }}
@@ -363,7 +363,7 @@ input.xlarge{width:170px}
 
 	autoGeo();
 
-	$(".accordion").collapse().css('height','auto');
+
 	
 	// avatar preview
 	gravatar_id = '{{ entity.getGravatarId() }}';
@@ -403,10 +403,10 @@ input.xlarge{width:170px}
 		
 	}else if( document.location.href.indexOf('#tags') != -1 ){
 		//$('.tabs a[id=tab_tags]').tab('show');
-		$('#coll3').collapse('show');
+		$('#coll3').addClass('in');
 	}
 	
-	
+	$(".accordion").collapse().css('height','auto');
 	
 
 	$('#btn_close').click(function(){
