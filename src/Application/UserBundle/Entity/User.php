@@ -358,7 +358,7 @@ class User
     /**
      * @var integer $karma
      *
-     * @ORM\Column(name="kama", type="integer", nullable=true)
+     * @ORM\Column(name="kama", type="integer", nullable=true, options={"default" = 0})
      */
     private $karma = 0;
 
