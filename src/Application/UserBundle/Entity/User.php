@@ -354,6 +354,13 @@ class User
      * @ORM\Column(name="slug", type="string", nullable=true, length=255)
      */
     private $slug;
+    
+    /**
+     * @var integer $karma
+     *
+     * @ORM\Column(name="kama", type="integer", nullable=true)
+     */
+    private $karma = 0;
 
     /**
      * Get id
@@ -1326,6 +1333,26 @@ class User
     public function getGravatarId()
     {
         return md5( $this->getEmail() );
+    }
+    
+    /**
+     * Set karma
+     *
+     * @param int $karma
+     */
+    public function setKarma($karma)
+    {
+        $this->karma = $karma;
+    }
+
+    /**
+     * Get karma
+     *
+     * @return int
+     */
+    public function getKarma()
+    {
+        return $this->karma;
     }
 
     /**
