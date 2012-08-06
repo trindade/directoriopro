@@ -57,8 +57,7 @@
 	        <tr>
 				<td>
 					<a href="{{ path('post_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.title }}</a><br/>
-					<span class="date">
-					
+
 					{% if entity.company %}
 						{{ entity.company }} - 
 					{% endif %}
@@ -68,7 +67,6 @@
 						{{ entity.location }}
 					{% endif %}
 					
-					</span>
 				</td>
 				<td>{{ entity.interested }}</td>
 				<td>{{ entity.visits }}</td>
