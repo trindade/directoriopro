@@ -11,7 +11,7 @@
 	<ul>
 	{% for category in categories_aux %}
 		{% if category.category_id != 0 and category.category_id != 13 %}
-			<li><a href="{{ path('post_admin') }}?c={{ category.category_id }}"><b>{{ category.total }}</b> &nbsp;{{ categories[ category.category_id ] }}</a></li>
+			<li><a href="{{ path('post_admin') }}?c={{ category.category_id }}"><b>{{ category.total }}</b> &nbsp;{{ categories2[ category.category_id ] }}</a></li>
 		{% endif %}
 	{% endfor %}
 	</ul>
