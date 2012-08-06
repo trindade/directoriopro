@@ -9,7 +9,7 @@
 {% set pretty_date2 = entity.getPrettyDate('%e %B %Y') %}
 
 {% block title %}
-	{{ entity.title }} - {{ pretty_date }}{% if entity.hashtag %}{{ entity.hashtag }}{% endif %}
+	{{ entity.title }} - {{ pretty_date }}{% if entity.hashtag %} #{{ entity.hashtag }}{% endif %}
 {% endblock %}
 
 {% block sidebar %}
