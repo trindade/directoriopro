@@ -8,9 +8,9 @@
 	<a href="{{ path('post_new') }}" class="btn btn-large btn-primary">Publicar empleo</a>
 
 
-	<b>Filtrar por categoría</b><br/><br/>
+
 	<ul>
-	{% for category in categories %}
+	{% for category in categories2 %}
 		<li><a href="{{ path('post') }}?c={{loop.index0}}">{{category}}</a></li>
 	{% endfor %}
 	</ul>
@@ -60,7 +60,7 @@
 
 
 
-		<!--<b>{{ categories[ entity.getCategoryId() ] }}</b>-->
+
 		<br class="clear"/>
         
     </div>

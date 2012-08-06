@@ -13,7 +13,7 @@
 	<br/>
 	
 	<ul>
-	{% for category in categories %}
+	{% for category in categories2 %}
 		{% if loop.index0 != 0 and loop.index0 != 13 %}
 			<li><a href="{{ path('post') }}?c={{loop.index0}}">{{category}}</a></li>
 		{% endif %}
@@ -94,7 +94,7 @@
 
 
 
-			<!--<b>{{ categories[ entity.getCategoryId() ] }}</b>-->
+
 			<br class="clear"/>
             
         </div>

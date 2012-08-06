@@ -14,7 +14,7 @@
 
 	<br/>
 	<ul>
-	{% for category in categories %}
+	{% for category in categories2 %}
 		<li><a href="{{ path('post_search') }}?c={{loop.index0}}&t={{ form_type }}">{{category}}</a></li>
 	{% endfor %}
 	</ul>

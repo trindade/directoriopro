@@ -35,7 +35,7 @@ TEXTAREA.xlarge{width:430px}
 		<label class="control-label">Perfil</label>
 		<div class="controls">
 			<select id="application_anunciosbundle_posttype_category_id" name="application_anunciosbundle_posttype[category_id]">
-				{% for category in categories %}
+				{% for category in categories2 %}
 					{% if loop.index0 > 0 %}
 						<option value="{{loop.index0}}">{{category}}</a>
 					{% endif %}
