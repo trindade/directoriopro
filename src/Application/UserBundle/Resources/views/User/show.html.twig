@@ -11,14 +11,14 @@
 
 	<div style="background:#E3F0FD;padding:8px;margin-bottom:20px">
 		<img src="{{ entity.getAvatar('bigger') }}" style="width:30px;height:30px;float:right;margin-left:5px"/>
-		<div style="float:left;width:134px">
+		<div style="float:left;width:134px;padding-bottom:15px">
 			<b>{{ entity.name }}</b><br>
 			{{ categories[ entity.categoryid ] }}<br>
 			{{ entity.location }}
 		</div>
 		{% if entity.twitterurl %}
-			<br class="clear"><br>
-			<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-lang="es">Follow</a>
+			<br class="clear">
+			<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow</a>
 		{% endif %}
 	</div>
 
