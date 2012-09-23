@@ -9,31 +9,31 @@
 {% block sidebar %}
 
 
-	<div style="background:#E3F0FD;padding:10px;margin-bottom:20px">
+	<div style="background:#E3F0FD;padding:10px 0 10px 10px;margin-bottom:20px">
 		<img src="{{ entity.getAvatar('bigger') }}" style="width:30px;height:30px;float:left;margin-right:10px"/>
-		<div style="float:left">
-			<b>{{ entity.name }}</b><br><br>
+		<div style="float:left;width:140px">
+			<b>{{ entity.name }}</b><br>
 			{{ categories[ entity.categoryid ] }}<br>
 			{{ entity.location }}
 		</div>
 		{% if entity.twitterurl %}
 			<br class="clear"><br>
-			<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @{{ entity.twitterurl }}</a>
+			<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-lang="es">Follow</a>
 		{% endif %}
 	</div>
 
 
 	<div style="background:#EEEEEE;padding:10px 10px 0 10px;margin-bottom:20px" id="widget_contact">
 		<b>Contactar</b>
-		<div style="border-top:1px #CDDAE3 solid;padding:10px 0;{% if entity.freelance == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Trabajos freelance</div>
-		<div style="border-top:1px #CDDAE3 solid;padding:10px 0;{% if entity.unemployed == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Ofertas de empleo</div>	
-		<div style="border-top:1px #CDDAE3 solid;padding:10px 0;{% if entity.searchteam == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Busca equipo</div>	
+		<div style="margin-top:10px;border-top:1px #CDDAE3 solid;padding:5px 0;{% if entity.freelance == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Trabajos freelance</div>
+		<div style="border-top:1px #CDDAE3 solid;padding:5px 0;{% if entity.unemployed == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Ofertas de empleo</div>	
+		<div style="margin-bottom:10px;border-top:1px #CDDAE3 solid;padding:5px 0;{% if entity.searchteam == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Busca equipo</div>	
 		{% include "ApplicationUserBundle:Form:contact.html.twig" %}
 	</div>
 
 
 
-	<div style="background:#EEEEEE;padding:10px;margin-bottom:20px" id="widget_contact">
+	<div style="background:#EEEEEE;padding:10px 10px 0 10px;margin-bottom:20px" id="widget_contact">
 	
 		<b style="">
 		{% if entity.votes %}
@@ -53,7 +53,7 @@
 
 	{% if events %}
 		<div style="background:#EEEEEE;padding:10px;margin-bottom:20px" id="widget_contact">
-			<b>Próximos eventos</b>
+			<b>Eventos</b>
 		    {% for event in events %}
 				<div style="background:url('/bundles/applicationanuncios/images/calendar.png') no-repeat left 17px;padding-left:35px;padding-top:15px">
 					<a href="{{ path('event_show', { 'id': event.id, 'slug': event.slug }) }}">{{ event.title }}</a><br/>
@@ -72,6 +72,7 @@
 
 
 <style>
+#sidebar{position:relative}
 #btn_contact{font-size:13px;padding:4px 14px;width:100%;margin-bottom:15px}
 .tabs > li > a{padding:0 10px}
 </style>
