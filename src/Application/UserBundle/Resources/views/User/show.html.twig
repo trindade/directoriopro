@@ -33,7 +33,7 @@
 
 
 
-	<div style="background:#EEEEEE;padding:10px;margin-bottom:20px" id="widget_contact">
+	<div style="background:#EEEEEE;padding:10px;" id="widget_contact">
 	
 		<b style="">
 		{% if entity.votes %}
@@ -46,6 +46,8 @@
 		<br><br>
 
 		<a href="{{ path('user_comments', { 'id': entity.id }) }}" class="btn" style="display:block">Recomendar</a>
+		
+		<br class="clear">
 	
 	</div>
 
