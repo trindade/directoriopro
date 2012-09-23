@@ -8,25 +8,56 @@
 
 {% block sidebar %}
 
-	{% if entity.id == app.session.get('id') %}
-		<a class="btn btn-large btn-primary" href="{{ path('user_invite') }}">Invitar contactos</a>
-	{% endif %}
+
+	<div style="background:#E3F0FD;padding:10px;margin-bottom:20px">
+		<img src="{{ entity.getAvatar('bigger') }}" style="width:50px;height:50px;float:left;margin:0 15px 15px 0"/>
+		<h1 style="margin-bottom:0;font-size:12px;">{{ entity.name }}</h1>
+		{{ categories[ entity.categoryid ] }}<br>
+		{{ entity.location }}<br>
+		{% if entity.twitterurl %}
+			<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @{{ entity.twitterurl }}</a>
+		{% endif %}		
+	</div>
+
+
+	<div style="background:#EEEEEE;padding:10px;margin-bottom:20px" id="widget_contact">
+		<b>Contactar</b>
+		<div style="border-top:1px #CDDAE3 solid;padding-bottom:10px;{% if entity.freelance == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Trabajos freelance</div>
+		<div style="border-top:1px #CDDAE3 solid;padding-bottom:10px;{% if entity.unemployed == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Ofertas de empleo</div>	
+		<div style="border-top:1px #CDDAE3 solid;padding-bottom:10px;{% if entity.searchteam == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Busca equipo</div>	
+		{% include "ApplicationUserBundle:Form:contact.html.twig" %}
+	</div>
+
+
+
+	<div style="background:#EEEEEE;padding:10px;margin-bottom:20px" id="widget_contact">
 	
+		<b style="font-size:50px;display:block;padding:25px 0 5px 0;text-align:center;">
+		{% if entity.votes %}
+			{{ entity.votes }}
+		{% else %}
+			0
+		{% endif %} 
+		Recomendaciones
+		</b>
 
 
-	{% if entity.twitterurl %}
-		<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @{{ entity.twitterurl }}</a>
-		<br/><br/>
-	{% endif %}
+		<a href="{{ path('user_comments', { 'id': entity.id }) }}" style="text-decoration:none;color:black;display:block;text-align:center">
+	
+	</div>
+
+
 
 	{% if events %}
-		<b>Próximos eventos</b>
-	    {% for event in events %}
-			<div style="background:url('/bundles/applicationanuncios/images/calendar.png') no-repeat left 17px;padding-left:35px;padding-top:15px">
-				<a href="{{ path('event_show', { 'id': event.id, 'slug': event.slug }) }}">{{ event.title }}</a><br/>
-				{{ event.getPrettyDate('%e %B') }}
-			</div>
-	    {% endfor %}
+		<div style="background:#EEEEEE;padding:10px;margin-bottom:20px" id="widget_contact">
+			<b>Próximos eventos</b>
+		    {% for event in events %}
+				<div style="background:url('/bundles/applicationanuncios/images/calendar.png') no-repeat left 17px;padding-left:35px;padding-top:15px">
+					<a href="{{ path('event_show', { 'id': event.id, 'slug': event.slug }) }}">{{ event.title }}</a><br/>
+					{{ event.getPrettyDate('%e %B') }}
+				</div>
+		    {% endfor %}
+		</div>
 	{% endif %}
 	
 	
@@ -37,99 +68,30 @@
 
 
 
+<style>
+#btn_contact{font-size:13px;padding:4px 14px;width:100%;margin-bottom:15px}
+.tabs > li > a{padding:0 10px}
+</style>
+
+
 <script>
 var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forrst_user, stackoverflow_user, youtube_user, vimeo_user, android_user, itunes_user, chrome_user, twitter_user, delicious_user, pinboard_user;
 </script>
 
-<style>
-.tabs > li > a{padding:0 10px}
-</style>
 
+<!--
 <ul class="breadcrumb">
   <li><a href="{{ path('post') }}">Inicio</a> <span class="divider">/</span></li>
   <li><a href="{{ path('user') }}">Profesionales</a> <span class="divider">/</span></li>
   <li><a href="{{ path('user_search') }}?c={{ entity.categoryid }}">{{ categories[ entity.categoryid ] }}</a></li>
 </ul>
-
-<div style="font-size:15px;padding-bottom:15px">
-
-
-	
-
-<img src="{{ entity.getAvatar('bigger') }}" style="width:55px;height:55px;float:left;margin-right:15px"/>
+-->
 
 
 
-<h1 style="margin-bottom:0;font-size:25px;">{{ entity.name }}</h1>
-<div style="padding-bottom:10px">{{ entity.location }}</div>
 
 
-		
 
-
-</div>
-
-
-<style>
-#btn_contact{font-size:13px;padding:4px 14px;width:100%;margin-bottom:15px}
-</style>
-
-<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 120px;" id="widget_contact">
-
-	{% include "ApplicationUserBundle:Form:contact.html.twig" %}
-
-	<br/>
-
-	
-	<div style="padding-bottom:10px;{% if entity.freelance == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Trabajos freelance</div>
-	
-	<div style="padding-bottom:10px;{% if entity.unemployed == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Ofertas de empleo</div>
-
-	<div style="padding-bottom:10px;{% if entity.searchteam == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Busca equipo</div>
-	
-</div>
-
-<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 120px;">
-	<a href="{{ path('test') }}" class="btn" style="display:block">Ver retos</a>
-
-	<br/>
-	
-	{% if badges %}
-	    {% for badge in badges %}
-			<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
-	    {% endfor %}
-		
-	{% else %}
-
-		<a href="{{ path('test_show', { 'id': 2 }) }}" data-original-title="Ponente taller betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/2.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
-	    <a href="{{ path('test_show', { 'id': 3 }) }}" data-original-title="Presentar proyecto betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/3.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
-	    <a href="{{ path('test_show', { 'id': 1 }) }}" data-original-title="Test PHP" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/4.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
-
-	{% endif %}
-	<br class="clear"/>
-</div>
-
-<div style="background:#F0F0F0;padding:8px;width:150px;float:left;margin-right:20px;height: 120px;">
-	<a href="{{ path('user_recommend', { 'id': entity.id }) }}" class="btn" style="display:block">Recomendar</a>
-	
-	
-
-	<a href="{{ path('user_comments', { 'id': entity.id }) }}" style="text-decoration:none;color:black;display:block;text-align:center">
-
-	<b style="font-size:50px;display:block;padding:25px 0 5px 0;text-align:center;">
-	{% if entity.votes %}
-		{{ entity.votes }}
-	{% else %}
-		0
-	{% endif %}
-	</b>
-	
-	<br/>
-
-	Recomendaciones
-	</a>
-
-</div>
 
 <br class="clear"/><br/>
 
@@ -190,6 +152,24 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 
 
+		{% if badges %}
+		    {% for badge in badges %}
+				<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
+		    {% endfor %}
+			
+		{% else %}
+	
+			<a href="{{ path('test_show', { 'id': 2 }) }}" data-original-title="Ponente taller betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/2.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 3 }) }}" data-original-title="Presentar proyecto betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/3.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 6 }) }}" data-original-title="Colaborador betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/6.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 5 }) }}" data-original-title="Hackathon Opensource" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/5.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 4 }) }}" data-original-title="Test PHP" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/4.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 1 }) }}" data-original-title="Test Javascript" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/1.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+
+	
+		{% endif %}
+
+		<br><br>
 
 		{% if entity.body %}
 			{{ entity.body|nl2br}}
