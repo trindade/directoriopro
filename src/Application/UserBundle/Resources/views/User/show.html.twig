@@ -10,21 +10,24 @@
 
 
 	<div style="background:#E3F0FD;padding:10px;margin-bottom:20px">
-		<img src="{{ entity.getAvatar('bigger') }}" style="width:50px;height:50px;float:left;margin:0 15px 15px 0"/>
-		<h1 style="margin-bottom:0;font-size:12px;">{{ entity.name }}</h1>
-		{{ categories[ entity.categoryid ] }}<br>
-		{{ entity.location }}<br>
+		<img src="{{ entity.getAvatar('bigger') }}" style="width:30px;height:30px;float:left;margin-right:10px"/>
+		<div style="float:left">
+			<b>{{ entity.name }}</b><br><br>
+			{{ categories[ entity.categoryid ] }}<br>
+			{{ entity.location }}
+		</div>
 		{% if entity.twitterurl %}
+			<br class="clear"><br>
 			<a href="https://twitter.com/{{ entity.twitterurl }}" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @{{ entity.twitterurl }}</a>
-		{% endif %}		
+		{% endif %}
 	</div>
 
 
-	<div style="background:#EEEEEE;padding:10px;margin-bottom:20px" id="widget_contact">
+	<div style="background:#EEEEEE;padding:10px 10px 0 10px;margin-bottom:20px" id="widget_contact">
 		<b>Contactar</b>
-		<div style="border-top:1px #CDDAE3 solid;padding-bottom:10px;{% if entity.freelance == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Trabajos freelance</div>
-		<div style="border-top:1px #CDDAE3 solid;padding-bottom:10px;{% if entity.unemployed == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Ofertas de empleo</div>	
-		<div style="border-top:1px #CDDAE3 solid;padding-bottom:10px;{% if entity.searchteam == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Busca equipo</div>	
+		<div style="border-top:1px #CDDAE3 solid;padding:10px 0;{% if entity.freelance == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Trabajos freelance</div>
+		<div style="border-top:1px #CDDAE3 solid;padding:10px 0;{% if entity.unemployed == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Ofertas de empleo</div>	
+		<div style="border-top:1px #CDDAE3 solid;padding:10px 0;{% if entity.searchteam == false %}opacity:0.3;{% endif %}"><img src="/bundles/applicationanuncios/images/check.png" align="absmiddle" width="13" height="13"/> Busca equipo</div>	
 		{% include "ApplicationUserBundle:Form:contact.html.twig" %}
 	</div>
 
@@ -32,7 +35,7 @@
 
 	<div style="background:#EEEEEE;padding:10px;margin-bottom:20px" id="widget_contact">
 	
-		<b style="font-size:50px;display:block;padding:25px 0 5px 0;text-align:center;">
+		<b style="">
 		{% if entity.votes %}
 			{{ entity.votes }}
 		{% else %}
@@ -40,9 +43,9 @@
 		{% endif %} 
 		Recomendaciones
 		</b>
+		<br><br>
 
-
-		<a href="{{ path('user_comments', { 'id': entity.id }) }}" style="text-decoration:none;color:black;display:block;text-align:center">
+		<a href="{{ path('user_comments', { 'id': entity.id }) }}" class="btn" style="display:block">Recomendar</a>
 	
 	</div>
 
@@ -91,9 +94,6 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 
 
-
-
-<br class="clear"/><br/>
 
 
 <ul id="tabs" class="nav nav-tabs">
