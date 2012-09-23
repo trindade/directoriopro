@@ -9,8 +9,8 @@
 {% block sidebar %}
 
 
-	<div style="background:#E3F0FD;padding:10px 0 10px 10px;margin-bottom:20px">
-		<img src="{{ entity.getAvatar('bigger') }}" style="width:30px;height:30px;float:left;margin-right:10px"/>
+	<div style="background:#E3F0FD;padding:8px;margin-bottom:20px">
+		<img src="{{ entity.getAvatar('bigger') }}" style="width:30px;height:30px;float:right;margin-left:5px"/>
 		<div style="float:left;width:140px">
 			<b>{{ entity.name }}</b><br>
 			{{ categories[ entity.categoryid ] }}<br>
@@ -33,7 +33,7 @@
 
 
 
-	<div style="background:#EEEEEE;padding:10px 10px 0 10px;margin-bottom:20px" id="widget_contact">
+	<div style="background:#EEEEEE;padding:10px;margin-bottom:20px" id="widget_contact">
 	
 		<b style="">
 		{% if entity.votes %}
@@ -155,22 +155,22 @@ var linkedin_user, dribbble_user, flickr_user, github_user, bitbucket_user, forr
 
 		{% if badges %}
 		    {% for badge in badges %}
-				<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="40" height="40" style="margin: 0 5px 5px 0;"/></a>
+				<a href="{{ path('test_show', { 'id': badge.id }) }}" data-original-title="{{ badge.title }}" rel="twipsy"><img src="{{ asset('bundles/applicationanuncios/images/badges/') }}{{ badge.id }}.png" width="50" height="50" style="margin: 0 5px 5px 0;"/></a>
 		    {% endfor %}
 			
 		{% else %}
 	
-			<a href="{{ path('test_show', { 'id': 2 }) }}" data-original-title="Ponente taller betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/2.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
-		    <a href="{{ path('test_show', { 'id': 3 }) }}" data-original-title="Presentar proyecto betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/3.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
-		    <a href="{{ path('test_show', { 'id': 6 }) }}" data-original-title="Colaborador betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/6.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
-		    <a href="{{ path('test_show', { 'id': 5 }) }}" data-original-title="Hackathon Opensource" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/5.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
-		    <a href="{{ path('test_show', { 'id': 4 }) }}" data-original-title="Test PHP" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/4.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
-		    <a href="{{ path('test_show', { 'id': 1 }) }}" data-original-title="Test Javascript" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/1.png" width="40" height="40" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+			<a href="{{ path('test_show', { 'id': 2 }) }}" data-original-title="Ponente taller betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/2.png" width="50" height="50" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 3 }) }}" data-original-title="Presentar proyecto betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/3.png" width="50" height="50" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 6 }) }}" data-original-title="Colaborador betabeers" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/6.png" width="50" height="50" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 5 }) }}" data-original-title="Hackathon Opensource" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/5.png" width="50" height="50" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 4 }) }}" data-original-title="Test PHP" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/4.png" width="50" height="50" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
+		    <a href="{{ path('test_show', { 'id': 1 }) }}" data-original-title="Test Javascript" rel="twipsy"><img src="/bundles/applicationanuncios/images/badges/1.png" width="50" height="50" style="margin: 0 5px 5px 0;opacity:0.2"/></a>
 
 	
 		{% endif %}
 
-		<br><br>
+		<br>
 
 		{% if entity.body %}
 			{{ entity.body|nl2br}}
