@@ -361,6 +361,14 @@ class User
      * @ORM\Column(name="kama", type="integer", nullable=true)
      */
     private $karma = 0;
+    
+    
+    /**
+     * @var string $banned
+     *
+     * @ORM\Column(name="banned", type="integer", nullable=true)
+     */
+    private $banned = 0;
 
     /**
      * Get id
@@ -1353,6 +1361,26 @@ class User
     public function getKarma()
     {
         return $this->karma;
+    }
+    
+    /**
+     * Set banned
+     *
+     * @param int $banned
+     */
+    public function setBanned($banned)
+    {
+        $this->banned = $banned;
+    }
+
+    /**
+     * Get banned
+     *
+     * @return int
+     */
+    public function getBanned()
+    {
+        return $this->banned;
     }
 
     /**
