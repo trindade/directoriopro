@@ -4,8 +4,8 @@ Instalación de directoriopro
 Configurar servidor local
 -------------------------
 
-* [Primeros pasos con symfony2 usando MAMP en mac](http://miquelcamps.com/symfony/primeros-pasos-con-symfony2-usando-mamp-en-mac/)
-* [Subiendo symfony2 a producción](http://miquelcamps.com/symfony/subiendo-symfony2-a-produccion/)
+* [Primeros pasos con symfony2 usando MAMP en mac](http://miquelcamps.tumblr.com/post/27139339894/primeros-pasos-con-symfony2-usando-mamp-en-mac)
+* [Subiendo symfony2 a producción](http://miquelcamps.tumblr.com/post/27138741527/subiendo-symfony2-a-produccion)
 
 Instalación
 -----------
